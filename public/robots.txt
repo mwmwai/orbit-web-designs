@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://orbitwebdesigns.co.ke/sitemap-index.xml
