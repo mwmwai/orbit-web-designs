@@ -158,3 +158,15 @@ body {
 	}
 }
 
+.tilt {
+	transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+	transform-style: preserve-3d;
+	transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	will-change: transform;
+}
+
+.tilt.is-tilting {
+	transition: transform 0.06s linear;
+	box-shadow: 0 20px 50px rgb(0 200 255 / 0.12);
+}
+

@@ -47,7 +47,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 					["98%", "Client satisfaction"],
 					["< 3s", "Average load time"],
 				].map(([value, label]) => (
-					<div class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
+					<div class="glow-border rounded-2xl px-6 py-5" data-tilt>
 						<dt class="text-gradient text-2xl font-extrabold">{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>
@@ -56,5 +56,6 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		</dl>
 	</div>
 </section>
+
 
 
