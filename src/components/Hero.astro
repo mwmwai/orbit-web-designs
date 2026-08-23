@@ -67,7 +67,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 					["24h", "Reply time"],
 				].map(([value, label]) => (
 					<div data-tilt class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
-						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl">{value}</dt>
+						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>
 				))

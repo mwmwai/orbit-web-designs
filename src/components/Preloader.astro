@@ -1,0 +1,27 @@
+<div id="preloader" class="fixed inset-0 z-[100] grid place-items-center bg-ink transition-opacity duration-500">
+	<div class="flex items-center gap-4">
+		<img src="/logo-mark.png" alt="" width={44} height={44} class="animate-pulse" />
+		<span class="bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-lg font-black tracking-[0.3em] text-transparent">ORBIT</span>
+	</div>
+</div>
+
+<script is:inline>
+	(function () {
+		var el = document.getElementById("preloader");
+		if (!el) return;
+		var seen = sessionStorage.getItem("orbitSeen");
+		var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		if (seen || reduced) {
+			el.remove();
+			return;
+		}
+		sessionStorage.setItem("orbitSeen", "1");
+		function hide() {
+			el.style.opacity = "0";
+			setTimeout(function () { el.remove(); }, 550);
+		}
+		if (document.readyState === "complete") setTimeout(hide, 650);
+		else window.addEventListener("load", function () { setTimeout(hide, 650); });
+		setTimeout(hide, 2200);
+	})();
+</script>
