@@ -52,7 +52,7 @@ const plans = [
 
 <section id="pricing" class="border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="mb-14 max-w-xl">
+		<div class="reveal mb-14 max-w-xl">
 			<h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Packages & Pricing</h2>
 			<p class="mt-4 text-slate-400">
 				Honest, one-time pricing. No surprises.
@@ -61,14 +61,18 @@ const plans = [
 
 		<div class="grid items-stretch gap-6 lg:grid-cols-3">
 			{
-				plans.map((p) => (
+				plans.map((p, i) => (
 					<article
-						class={`relative flex flex-col rounded-2xl p-8 ${
-							p.featured
-								? "border border-transparent bg-gradient-to-b from-electric/15 to-neon/10 shadow-2xl shadow-electric/20 ring-1 ring-electric/50"
-								: "glow-border"
-						}`}
+						class="reveal"
+						style={`transition-delay:${i * 90}ms`}
 					>
+						<div
+							class={`relative flex flex-col rounded-2xl p-8 ${
+								p.featured
+									? "border border-transparent bg-gradient-to-b from-electric/15 to-neon/10 shadow-2xl shadow-electric/20 ring-1 ring-electric/50 h-full"
+									: "glow-border h-full"
+							}`}
+						>
 						{p.featured && (
 							<span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-electric to-neon px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-neon/30">
 								Most Popular
@@ -100,6 +104,7 @@ const plans = [
 						>
 							{p.cta}
 						</a>
+						</div>
 					</article>
 				))
 			}
@@ -109,7 +114,7 @@ const plans = [
 
 <section id="payments" class="border-t border-white/5 pb-8 pt-4">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="glow-border flex flex-col items-start gap-6 rounded-2xl px-8 py-10">
+		<div class="glow-border reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-10">
 			<h3 class="text-xl font-semibold text-white">Secure & Flexible Payments</h3>
 			<p class="max-w-xl text-sm text-slate-400">
 				Pay the way that works for you — we accept all major payment methods with secure, verified transactions.
@@ -135,6 +140,7 @@ const plans = [
 		</div>
 	</div>
 </section>
+
 
 
 

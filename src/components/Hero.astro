@@ -9,21 +9,21 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 	</div>
 
 	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
-		<p class="mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300">
+		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
 			<span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
 			Trusted by growing brands
 		</p>
 
-		<h1 class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
 			We Build High-Performance Websites &
 			<span class="text-gradient">Drive Real Growth.</span>
 		</h1>
 
-		<p class="mt-6 max-w-2xl text-lg text-slate-400">
+		<p class="hero-anim mt-6 max-w-2xl text-lg text-slate-400" style="animation-delay:200ms">
 			Professional web design, custom development, and targeted digital marketing to scale your brand.
 		</p>
 
-		<div class="mt-10 flex flex-wrap items-center gap-4">
+		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
 			<a
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
@@ -40,14 +40,14 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			</a>
 		</div>
 
-		<dl class="mt-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3">
+		<dl class="hero-anim mt-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3" style="animation-delay:420ms">
 			{
 				[
 					["50+", "Projects delivered"],
 					["98%", "Client satisfaction"],
 					["< 3s", "Average load time"],
 				].map(([value, label]) => (
-					<div class="glow-border rounded-2xl px-6 py-5">
+					<div class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
 						<dt class="text-gradient text-2xl font-extrabold">{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>

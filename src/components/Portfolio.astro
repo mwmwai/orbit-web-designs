@@ -4,45 +4,85 @@ const projects = [
 		name: "Genthub Barbershop",
 		type: "Business Website + Booking",
 		description:
-			"A sleek booking site with gallery and M-Pesa deposit payments for a Nairobi barbershop.",
-		gradient: "from-electric/40 via-electric/10 to-transparent",
-		initial: "G",
+			"A sleek booking site with gallery and deposit payments for a Nairobi barbershop.",
+		image:
+			"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=70&w=900&auto=format&fit=crop",
+		alt: "Barber at work in a barbershop",
 	},
 	{
 		name: "Sokoni Fresh",
 		type: "E-commerce Store",
 		description:
 			"Farm-to-door grocery store with M-Pesa checkout, live inventory, and delivery zones.",
-		gradient: "from-neon/40 via-neon/10 to-transparent",
-		initial: "S",
+		image:
+			"https://images.unsplash.com/photo-1542838132-92c53300491e?q=70&w=900&auto=format&fit=crop",
+		alt: "Fresh produce on a market stall",
 	},
 	{
 		name: "Zawadi Crafts",
-		type: "Brand Page",
+		type: "Brand Storefront",
 		description:
-			"An artisan brand showcase that tripled wholesale inquiries within two months of launch.",
-		gradient: "from-cyan-500/40 via-cyan-500/10 to-transparent",
-		initial: "Z",
+			"An artisan goods storefront that tripled wholesale inquiries within two months.",
+		image:
+			"https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=70&w=900&auto=format&fit=crop",
+		alt: "Minimal product shot of a wristwatch",
+	},
+	{
+		name: "Tatu Heights Properties",
+		type: "Real Estate Site",
+		description:
+			"Property listings with filters, agent profiles, and WhatsApp viewing requests.",
+		image:
+			"https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=70&w=900&auto=format&fit=crop",
+		alt: "Modern apartment building exterior",
+	},
+	{
+		name: "Mama Oliech Restaurant",
+		type: "Restaurant Website + Menu",
+		description:
+			"Digital menu, reservations, and Google Maps integration for a busy eatery.",
+		image:
+			"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=70&w=900&auto=format&fit=crop",
+		alt: "Warm restaurant interior with set tables",
+	},
+	{
+		name: "FitZone Gym",
+		type: "Landing Page + Memberships",
+		description:
+			"High-converting landing page with class schedules and membership sign-up.",
+		image:
+			"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=70&w=900&auto=format&fit=crop",
+		alt: "Modern gym with weights and equipment",
 	},
 ];
 ---
 
 <section id="work" class="border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="mb-14 max-w-xl">
+		<div class="reveal mb-14 max-w-xl">
 			<h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Featured Projects</h2>
 			<p class="mt-4 text-slate-400">
-				Real results for real businesses.
+				A selection of recent builds — every one fast, mobile-first, and made to convert.
 			</p>
 		</div>
 
-		<div class="grid gap-6 md:grid-cols-3">
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
-				projects.map((p) => (
-					<article class="glow-border group overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-neon/10">
-						<div class={`relative flex h-44 items-center justify-center bg-gradient-to-br ${p.gradient}`}>
-							<span class="text-6xl font-black text-white/15 transition duration-300 group-hover:scale-110">{p.initial}</span>
-							<span class="absolute left-4 top-4 rounded-full bg-ink/70 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur">
+				projects.map((p, i) => (
+					<article
+						class="glow-border group overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/15"
+						style={`transition-delay:${(i % 3) * 80}ms`}
+						data-reveal-stagger
+					>
+						<div class="relative h-52 overflow-hidden">
+							<img
+								src={p.image}
+								alt={p.alt}
+								loading="lazy"
+								class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div>
+							<span class="absolute left-4 top-4 rounded-full bg-ink/70 px-3 py-1 text-xs font-medium text-slate-200 backdrop-blur">
 								{p.type}
 							</span>
 						</div>
@@ -56,3 +96,19 @@ const projects = [
 		</div>
 	</div>
 </section>
+
+<script>
+	document.querySelectorAll("[data-reveal-stagger]").forEach((el) => el.classList.add("reveal"));
+	const io = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("is-visible");
+					io.unobserve(entry.target);
+				}
+			}
+		},
+		{ threshold: 0.1 }
+	);
+	document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>

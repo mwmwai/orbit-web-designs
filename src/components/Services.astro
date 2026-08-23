@@ -26,7 +26,7 @@ const services = [
 
 <section id="services" class="border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="mb-14 max-w-xl">
+		<div class="reveal mb-14 max-w-xl">
 			<h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">What We Do</h2>
 			<p class="mt-4 text-slate-400">
 				End-to-end digital services designed to grow your business.
@@ -35,8 +35,11 @@ const services = [
 
 		<div class="grid gap-6 md:grid-cols-3">
 			{
-				services.map((s) => (
-					<article class="glow-border group relative overflow-hidden rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/10">
+				services.map((s, i) => (
+					<article
+						class="reveal glow-border group relative overflow-hidden rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/10"
+						style={`transition-delay:${i * 80}ms`}
+					>
 						<div class="mb-6 inline-flex rounded-xl bg-gradient-to-br from-electric/20 to-neon/20 p-3.5 ring-1 ring-electric/30">
 							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
 								<path d={s.icon} stroke="#8fb8ff" />
@@ -55,3 +58,4 @@ const services = [
 		</div>
 	</div>
 </section>
+
