@@ -1,0 +1,38 @@
+---
+import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
+
+interface Props {
+	title?: string;
+	text?: string;
+}
+
+const {
+	title = "Ready to grow your business online?",
+	text = "Get a free quote today — we reply within minutes on WhatsApp.",
+} = Astro.props;
+---
+
+<section class="border-t border-white/5 py-20">
+	<div class="reveal glow-border mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 rounded-2xl px-8 py-12 md:flex-row md:items-center md:px-14">
+		<div>
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">{title}</h2>
+			<p class="mt-3 max-w-lg text-slate-400">{text}</p>
+		</div>
+		<div class="flex flex-wrap gap-4">
+			<a
+				href={whatsappLink(DEFAULT_WA_MESSAGE)}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-full bg-gradient-to-r from-electric to-neon px-7 py-3 font-semibold text-white shadow-xl shadow-electric/30 transition hover:brightness-110"
+			>
+				Get a Free Quote
+			</a>
+			<a
+				href="/contact"
+				class="rounded-full border border-edge bg-panel px-7 py-3 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
+			>
+				Contact Us
+			</a>
+		</div>
+	</div>
+</section>

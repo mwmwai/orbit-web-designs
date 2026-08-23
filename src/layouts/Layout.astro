@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER } from "../config";
 import "../styles/global.css";
 
 interface Props {
@@ -7,39 +9,67 @@ interface Props {
 }
 
 const {
-	title = "Orbit Web Designs & Marketing — Web Design for Kenyan Businesses",
-	description = "Professional web design, custom development, and digital marketing for brands in Kenya. Fast, mobile-responsive websites at affordable prices.",
+	title = `${SITE_NAME} — Web Design & Digital Marketing`,
+	description = "Professional web design, custom development, and targeted digital marketing to scale your brand. Fast, mobile-responsive websites at affordable prices.",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	name: SITE_NAME,
+	url: SITE_URL,
+	email: SITE_EMAIL,
+	telephone: `+${WHATSAPP_NUMBER}`,
+	description,
+	areaServed: "KE",
+	priceRange: "KES 15,000 - KES 60,000",
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+		<title>{title}</title>
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
 		<meta name="generator" content={Astro.generator} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
-		<title>{title}</title>
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={new URL("/logo.svg", SITE_URL).href} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="robots" content="index, follow" />
+		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
 		<slot />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
-			const io = new IntersectionObserver(
-				(entries) => {
-					for (const entry of entries) {
-						if (entry.isIntersecting) {
-							entry.target.classList.add("is-visible");
-							io.unobserve(entry.target);
+			function initReveal() {
+				const io = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("is-visible");
+								io.unobserve(entry.target);
+							}
 						}
-					}
-				},
-				{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-			);
-			document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+					},
+					{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+				);
+				document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+			}
+			document.addEventListener("astro:page-load", initReveal);
 		</script>
 	</body>
 </html>

@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<Layout
+	title="Contact Us — Get a Free Quote | Orbit Web Designs & Marketing"
+	description="Get a free quote for your website or marketing project. Chat with us on WhatsApp or send a message through our contact form — we reply within minutes."
+>
+	<Navbar client:load />
+	<main>
+		<Contact />
+	</main>
+	<Footer />
+</Layout>

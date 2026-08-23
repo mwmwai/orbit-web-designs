@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { DEFAULT_WA_MESSAGE, whatsappLink } from "../../config";
-
-const links = [
-	{ href: "#services", label: "Services" },
-	{ href: "#work", label: "Our Work" },
-	{ href: "#pricing", label: "Pricing" },
-	{ href: "#payments", label: "Payments" },
-	{ href: "#contact", label: "Contact" },
-];
+import { useEffect, useState } from "react";
+import { DEFAULT_WA_MESSAGE, whatsappLink, NAV_LINKS } from "../../config";
 
 export default function Navbar() {
 	const [open, setOpen] = useState(false);
+	const [path, setPath] = useState("/");
+
+	useEffect(() => {
+		const update = () => setPath(window.location.pathname);
+		update();
+		document.addEventListener("astro:page-load", update);
+		return () => document.removeEventListener("astro:page-load", update);
+	}, []);
 
 	return (
 		<header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur-md">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-				<a href="#top" className="flex items-center gap-3">
+				<a href="/" className="flex items-center gap-3">
 					<img src="/logo.svg" alt="Orbit logo" width={38} height={38} />
 					<span className="leading-none">
 						<span className="block text-base font-extrabold tracking-[0.22em] text-slate-200">
@@ -27,16 +27,23 @@ export default function Navbar() {
 					</span>
 				</a>
 
-				<nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-					{links.map((l) => (
-						<a
-							key={l.href}
-							href={l.href}
-							className="text-sm text-slate-300 transition hover:text-white"
-						>
-							{l.label}
-						</a>
-					))}
+				<nav className="hidden items-center gap-7 md:flex" aria-label="Main">
+					{NAV_LINKS.map((l) => {
+						const active = path === l.href;
+						return (
+							<a
+								key={l.href}
+								href={l.href}
+								className={`text-sm transition ${
+									active
+										? "font-semibold text-gradient"
+										: "text-slate-300 hover:text-white"
+								}`}
+							>
+								{l.label}
+							</a>
+						);
+					})}
 				</nav>
 
 				<div className="flex items-center gap-3">
@@ -68,12 +75,12 @@ export default function Navbar() {
 
 			{open && (
 				<nav className="border-t border-white/5 px-5 pb-4 pt-2 md:hidden" aria-label="Mobile">
-					{links.map((l) => (
+					{NAV_LINKS.map((l) => (
 						<a
 							key={l.href}
 							href={l.href}
 							onClick={() => setOpen(false)}
-							className="block py-2.5 text-slate-300 transition hover:text-white"
+							className={`block py-2.5 transition ${path === l.href ? "font-semibold text-white" : "text-slate-300 hover:text-white"}`}
 						>
 							{l.label}
 						</a>

@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import Portfolio from "../components/Portfolio.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+
+<Layout
+	title="Our Work — Recent Web Design Projects | Orbit Web Designs & Marketing"
+	description="Recent web design builds and digital projects by Orbit Web Designs & Marketing — fast, mobile-first websites made to convert visitors into customers."
+>
+	<Navbar client:load />
+	<main>
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<h1 class="hero-anim max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Work that <span class="text-gradient">speaks for itself.</span>
+				</h1>
+				<p class="hero-anim mt-5 max-w-2xl text-lg text-slate-400" style="animation-delay:120ms">
+					A selection of recent web builds and digital projects — every one fast, mobile-first, and designed to grow the business behind it.
+				</p>
+			</div>
+		</section>
+
+		<Portfolio />
+
+		<CtaBand title="Want results like these?" text="Tell us about your project and we'll show you what's possible." />
+	</main>
+	<Footer />
+</Layout>

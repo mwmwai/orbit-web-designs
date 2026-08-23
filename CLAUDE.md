@@ -8,6 +8,16 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Deployment
+
+After every change to the site:
+
+1. Verify with `npm run build`.
+2. Commit and push to GitHub (`origin/main`, repo: mwmwai/orbit-web-designs).
+3. Vercel auto-deploys the push and serves orbitwebdesigns.co.ke.
+
+Use full paths for git/gh if they are not on PATH: `C:\Program Files\Git\bin\git.exe` and `C:\Program Files\GitHub CLI\gh.exe`.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
