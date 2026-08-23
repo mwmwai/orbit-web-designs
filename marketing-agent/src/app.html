@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<link rel="icon" href="/icons/icon-192.png">
+<title>Marketing Agent</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px; background: #0b0f1a; color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  h1 { font-size: 26px; margin: 0; }
+  h1 span { color: #ffd60a; }
+  .btn {
+    border: 2px solid #ffd60a; background: transparent; color: #ffd60a;
+    padding: 10px 18px; border-radius: 999px; font-weight: 700; cursor: pointer; font-size: 14px;
+  }
+  .btn:hover { background: #ffd60a; color: #0b0f1a; }
+  .btn.solid { background: #ffd60a; color: #0b0f1a; }
+  .btn.small { padding: 6px 12px; font-size: 12px; }
+  .btn.ghost { border-color: #4cc9f0; color: #4cc9f0; }
+  .btn.ghost:hover { background: #4cc9f0; color: #0b0f1a; }
+  .btn.danger { border-color: #ef476f; color: #ef476f; }
+  .btn.danger:hover { background: #ef476f; color: #fff; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tab { padding: 8px 16px; border-radius: 999px; cursor: pointer; color: #93a1bd; font-weight: 600; }
+  .tab.active { background: #1c2742; color: #fff; }
+  .card {
+    background: #121a30; border: 1px solid #223055; border-radius: 16px;
+    padding: 18px 20px; margin-bottom: 14px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 17px; }
+  .meta { color: #93a1bd; font-size: 13px; margin-bottom: 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+  .badge { background: #ffd60a; color: #0b0f1a; font-size: 11px; font-weight: 800; border-radius: 6px; padding: 3px 8px; }
+  .badge.blue { background: #4cc9f0; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+  .step { background: #0e1526; border: 1px solid #223055; border-radius: 10px; padding: 6px 10px; font-size: 12px; }
+  .step b { color: #ffd60a; margin-right: 6px; }
+  textarea {
+    width: 100%; min-height: 64px; background: #0e1526; color: #fff; border: 1px solid #223055;
+    border-radius: 10px; padding: 10px; font: inherit; font-size: 13px;
+  }
+  video { width: 260px; border-radius: 12px; display: block; margin-top: 10px; }
+  .empty { color: #93a1bd; text-align: center; padding: 40px 0; }
+  #jobs { position: fixed; bottom: 20px; right: 20px; width: 420px; max-height: 300px; overflow: auto; z-index: 5; }
+  .job { background: #10182d; border: 1px solid #223055; border-left: 4px solid #4cc9f0; border-radius: 10px; padding: 10px 12px; margin-top: 8px; font-family: Consolas, monospace; font-size: 11px; white-space: pre-wrap; max-height: 120px; overflow: auto; }
+  .job.done { border-left-color: #06d6a0; }
+  .job.failed { border-left-color: #ef476f; }
+  .toast { position: fixed; top: 20px; right: 20px; background: #06d6a0; color: #04110c; padding: 10px 18px; border-radius: 999px; font-weight: 700; opacity: 0; transition: opacity .3s; }
+  #install { display: none; border-color: #06d6a0; color: #06d6a0; }
+  #install:hover { background: #06d6a0; color: #04110c; }
+  @media (max-width: 640px) {
+    body { padding: 14px; padding-bottom: env(safe-area-inset-bottom); }
+    header { flex-direction: column; align-items: stretch; gap: 12px; text-align: center; }
+    header div { display: flex; gap: 10px; justify-content: center; }
+    .btn { min-height: 44px; flex: 1; }
+    video { width: 100%; }
+    #jobs { position: static; width: auto; max-height: none; }
+    .card { padding: 14px; }
+    textarea { min-height: 80px; font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>marketing<span>agent</span></h1>
+  <div style="display:flex;gap:10px;">
+    <button class="btn" id="install">install</button>
+    <button class="btn" onclick="generate(1)">+ 1 draft</button>
+    <button class="btn solid" onclick="generate(3)">generate 3</button>
+  </div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+<div id="list"></div>
+<div id="jobs"></div>
+<div class="toast" id="toast">saved</div>
+
+<script>
+let TAB = 'pending';
+let cache = {};
+
+const TABS = [
+  ['pending', 'Pending review'],
+  ['approved', 'Approved / rendered'],
+  ['posted', 'Posted'],
+  ['rejected', 'Rejected']
+];
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = 1;
+  setTimeout(() => (t.style.opacity = 0), 1400);
+}
+
+async function api(path, body) {
+  const res = await fetch(path, body ? {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)} : undefined);
+  return res.json();
+}
+
+async function generate(count) {
+  await api('/api/generate', {count});
+  toast('generating...');
+  setTimeout(refresh, 2500);
+}
+
+async function act(endpoint, id) {
+  const out = await api(endpoint, {id});
+  if (out.error) return alert(out.error);
+let deferredPrompt = null;
+const installBtn = document.getElementById('install');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBtn.style.display = 'none';
+});
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
+refresh();
+}
+
+async function saveCaption(id, value) {
+  await api('/api/edit', {id, patch: {caption: value}});
+  toast('caption saved');
+}
+
+function card(d) {
+  const v = d.video || {};
+  const stepsHtml = (v.steps || []).map(s => `<div class="step"><b>${s.key}</b>${s.title}</div>`).join('');
+  const vid = d.status === 'rendered' || d.status === 'posted'
+    ? `<video controls src="/video/${d.id}.mp4"></video>` : '';
+  let actions = '';
+  if (TAB === 'pending') actions = `
+      <button class="btn small ghost" onclick="act('/api/approve','${d.id}')">approve</button>
+      <button class="btn small danger" onclick="act('/api/reject','${d.id}')">reject</button>`;
+  if (TAB === 'approved') actions = d.status === 'rendered'
+      ? `<button class="btn small solid" onclick="act('/api/publish','${d.id}')">publish / package</button>`
+      : `<button class="btn small solid" onclick="act('/api/render','${d.id}')">render mp4</button>`;
+  return `
+  <div class="card">
+    <h3><span class="badge ${d.source === 'llm' ? '' : 'blue'}">${d.source || ''}</span> ${d.title}</h3>
+    <div class="meta">${v.hookStat ? '<b style="color:#ffd60a">' + v.hookStat + '</b> — ' + v.hookLine : ''}</div>
+    <div class="steps">${stepsHtml}</div>
+    <div class="meta">example: ${v.example || ''}</div>
+    <textarea onchange="saveCaption('${d.id}', this.value)">${(d.caption || '').replace(/</g,'&lt;')}</textarea>
+    <div class="row">${actions}
+      <span class="meta" style="margin:0">${d.status}${d.postedTo ? ' → ' + d.postedTo.join(', ') : ''}</span>
+    </div>
+    ${vid}
+  </div>`;
+}
+
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = TABS.map(([k, label]) =>
+    `<div class="tab ${k === TAB ? 'active' : ''}" onclick="switchTab('${k}')">${label} (${(cache[k] || []).length})</div>`
+  ).join('');
+}
+
+function switchTab(k) { TAB = k; renderTabs(); renderList(); }
+
+function renderList() {
+  const items = cache[TAB] || [];
+  document.getElementById('list').innerHTML = items.length
+    ? items.map(card).join('')
+    : `<div class="empty">nothing here yet</div>`;
+}
+
+async function refresh() {
+  try {
+    cache = await api('/api/drafts');
+    renderTabs();
+    renderList();
+    const jobs = await api('/api/jobs');
+    document.getElementById('jobs').innerHTML = jobs.map(j =>
+      `<div class="job ${j.status}">${j.label} [${j.status}]\\n${j.log.slice(-400)}</div>`
+    ).join('');
+    const running = jobs.some(j => j.status === 'running');
+    setTimeout(refresh, running ? 2000 : 6000);
+  } catch {}
+}
+
+refresh();
+</script>
+</body>
+</html>

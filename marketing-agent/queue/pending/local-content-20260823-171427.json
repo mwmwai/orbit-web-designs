@@ -1,0 +1,49 @@
+{
+  "id": "local-content-20260823-171427",
+  "createdAt": "2026-08-23T14:14:27.743Z",
+  "status": "pending",
+  "source": "template",
+  "title": "How local businesses win customers with simple content",
+  "caption": "You don't need viral. You need the RIGHT 500 locals to know you exist. Run P.O.S.T. on your next piece of content.",
+  "hashtags": [
+    "#localbusiness",
+    "#contentmarketing",
+    "#smallbusinessowner",
+    "#marketing"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "handle": "@orbitwebdesigns",
+  "video": {
+    "hookStat": "76%",
+    "hookLine": "of people who search for a local service on their phone visit a business within a day.",
+    "credibility": "This is the exact content plan we run for our own web design studio.",
+    "frameworkName": "POST",
+    "steps": [
+      {
+        "key": "P",
+        "title": "Pick",
+        "point": "Choose one problem your customer actually googles."
+      },
+      {
+        "key": "O",
+        "title": "Offer",
+        "point": "Give one useful answer. No fluff, no hard sell."
+      },
+      {
+        "key": "S",
+        "title": "Show",
+        "point": "Prove it with a real example from your own work."
+      },
+      {
+        "key": "T",
+        "title": "Tag",
+        "point": "Name your city and your niche so the right people find it."
+      }
+    ],
+    "example": "A plumber we know books most jobs from five simple how-to videos.",
+    "ctaQuestion": "What does your ideal customer search for?",
+    "ctaOffer": "Follow for one local marketing play every week."
+  }
+}

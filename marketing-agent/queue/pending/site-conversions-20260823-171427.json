@@ -1,0 +1,49 @@
+{
+  "id": "site-conversions-20260823-171427",
+  "createdAt": "2026-08-23T14:14:27.728Z",
+  "status": "pending",
+  "source": "template",
+  "title": "Why your website gets traffic but no customers",
+  "caption": "Your website has 3 seconds to prove your business is legit. Run the FAST check on yours today and thank me later.",
+  "hashtags": [
+    "#webdesign",
+    "#conversionrate",
+    "#smallbusinesstips",
+    "#website"
+  ],
+  "platforms": [
+    "youtube"
+  ],
+  "handle": "@orbitwebdesigns",
+  "video": {
+    "hookStat": "3 sec",
+    "hookLine": "is all you get before a visitor decides if your business feels legit or not.",
+    "credibility": "We rebuild websites for a living and these four fixes come up on almost every project.",
+    "frameworkName": "FAST",
+    "steps": [
+      {
+        "key": "F",
+        "title": "Fast",
+        "point": "If the page takes longer than 3 seconds, people leave."
+      },
+      {
+        "key": "A",
+        "title": "Answer",
+        "point": "Kill their objections right on the page. Price, trust, timing."
+      },
+      {
+        "key": "S",
+        "title": "Show",
+        "point": "Real photos, real reviews. Proof beats promises."
+      },
+      {
+        "key": "T",
+        "title": "Tell",
+        "point": "One page, one job. Say exactly what to do next."
+      }
+    ],
+    "example": "One client doubled enquiries by just moving reviews above the fold.",
+    "ctaQuestion": "Does your site pass the FAST check?",
+    "ctaOffer": "Follow for a free site teardown every Friday."
+  }
+}
