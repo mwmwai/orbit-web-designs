@@ -23,7 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-business-card.html
 flick-output/
 flick-app/
 marketing-agent/
+
+flick-app/higgsfield.local.json
+flick-output/
+FlickStudio.exe

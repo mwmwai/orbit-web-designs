@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Orbit Web Designs — Business Card (Print-Ready)</title>
+	<style>
+		:root {
+			--ink: #0a0a0f;
+			--panel: #14141f;
+			--edge: #23233a;
+			--electric: #00c8ff;
+			--neon: #2f7bff;
+			--slate-300: #cbd5e1;
+			--slate-400: #94a3b8;
+			--slate-500: #64748b;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body {
+			background: #1c1c26;
+			font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.toolbar {
+			max-width: 60rem;
+			margin: 0 auto;
+			padding: 1.25rem 1rem 0.5rem;
+			color: var(--slate-300);
+			font-size: 0.85rem;
+			line-height: 1.6;
+		}
+		.toolbar strong { color: #fff; }
+		.toolbar kbd {
+			background: #2a2a3a; border: 1px solid #3a3a52; border-radius: 4px;
+			padding: 0.05rem 0.4rem; font-size: 0.78rem;
+		}
+		.cards { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; padding: 2rem 1rem 3rem; }
+		.cardwrap { text-align: center; }
+		.cardwrap .label { color: var(--slate-400); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.75rem; }
+
+		/* ===== Card canvas: exact 3.5in x 2in ===== */
+		.card {
+			width: 3.5in;
+			height: 2in;
+			position: relative;
+			overflow: hidden;
+			background: var(--ink);
+			color: #e7e9f2;
+			box-shadow: 0 18px 45px rgb(0 0 0 / 0.55);
+		}
+
+		/* --- shared decor --- */
+		.grid-bg {
+			position: absolute; inset: 0; opacity: 0.07;
+			background-image:
+				linear-gradient(to right, var(--edge) 1px, transparent 1px),
+				linear-gradient(to bottom, var(--edge) 1px, transparent 1px);
+			background-size: 0.28in 0.28in;
+		}
+		.glow-a, .glow-b { position: absolute; border-radius: 50%; filter: blur(0.35in); }
+		.glow-a { width: 2.4in; height: 2.4in; background: rgb(0 200 255 / 0.16); top: -1.2in; left: -0.6in; }
+		.glow-b { width: 1.8in; height: 1.8in; background: rgb(47 123 255 / 0.14); bottom: -0.9in; right: -0.5in; }
+		.ring { position: absolute; border: 1px solid rgb(0 200 255 / 0.14); border-radius: 50%; }
+
+		/* ================= FRONT ================= */
+		.front { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+		.front .ring-1 { width: 3.4in; height: 5.2in; top: -1.6in; left: 0.05in; transform: rotate(-14deg); }
+		.front .ring-2 { width: 3.4in; height: 5.2in; top: -1.6in; right: 0.05in; left: auto; transform: rotate(14deg); border-color: rgb(47 123 255 / 0.12); }
+		.front img.mark { width: 0.62in; height: 0.62in; display: block; }
+		.wordmark {
+			margin-top: 0.09in;
+			font-size: 21pt; font-weight: 900; letter-spacing: 0.32em; line-height: 1;
+			background: linear-gradient(90deg, #f1f5f9, #cbd5e1 55%, #94a3b8);
+			-webkit-background-clip: text; background-clip: text; color: transparent;
+			text-indent: 0.32em; /* balance tracking */
+		}
+		.divider {
+			width: 1.15in; height: 2px; margin: 0.10in auto 0.09in; border-radius: 2px;
+			background: linear-gradient(90deg, var(--electric), var(--neon));
+		}
+		.subtitle {
+			font-size: 7pt; font-weight: 600; letter-spacing: 0.30em; text-transform: uppercase;
+			color: var(--slate-400); text-indent: 0.30em;
+		}
+
+		/* ================= BACK ================= */
+		.back { padding: 0.22in 0.26in; }
+		.back .strip { position: absolute; left: 0; top: 0; bottom: 0; width: 0.06in; background: linear-gradient(180deg, var(--electric), var(--neon)); }
+		.back .ring-b { width: 2.6in; height: 4in; bottom: -2.2in; left: 1.4in; transform: rotate(24deg); }
+		.back-inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.18in; }
+		.contacts { display: flex; flex-direction: column; gap: 0.115in; min-width: 0; }
+		.contact-row { display: flex; align-items: center; gap: 0.11in; }
+		.contact-row .ico {
+			flex: none; width: 0.20in; height: 0.20in; border-radius: 0.05in;
+			display: flex; align-items: center; justify-content: center;
+			background: linear-gradient(135deg, rgb(0 200 255 / 0.16), rgb(47 123 255 / 0.16));
+			border: 1px solid rgb(0 200 255 / 0.35);
+		}
+		.contact-row .ico svg { width: 0.12in; height: 0.12in; stroke: var(--electric); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+		.contact-row .txt { font-size: 7.6pt; color: var(--slate-300); white-space: nowrap; }
+		.contact-row .txt b { color: #fff; font-weight: 700; }
+		.qr-side { flex: none; display: flex; flex-direction: column; align-items: center; gap: 0.06in; }
+		.qr-tile {
+			width: 0.72in; height: 0.72in; background: #fff; border-radius: 0.07in; padding: 0.045in;
+			box-shadow: 0 0 0 1px rgb(0 200 255 / 0.35), 0 4px 14px rgb(0 200 255 / 0.15);
+		}
+		.qr-tile svg { width: 100%; height: 100%; display: block; }
+		.scan-hint { font-size: 5.6pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate-500); white-space: nowrap; }
+		.brandline { position: absolute; right: 0.26in; top: 0.17in; font-size: 6pt; letter-spacing: 0.28em; text-transform: uppercase; color: var(--slate-500); }
+
+		/* ===== Print: one card per page, zero margins ===== */
+		@page { size: 3.5in 2in; margin: 0; }
+		@media print {
+			body { background: #fff; }
+			.toolbar, .cardwrap .label { display: none !important; }
+			.cards { display: block; padding: 0; gap: 0; }
+			.cardwrap { page-break-after: always; break-after: page; }
+			.card { box-shadow: none; }
+		}
+	</style>
+</head>
+<body>
+	<div class="toolbar">
+		<strong>Print-ready business card</strong> — actual size 3.5&#8243; &times; 2&#8243; (front + back).
+		Print to PDF with margins <kbd>None</kbd> and <kbd>Background graphics</kbd> enabled, then send both PDF pages to your printer (print double-sided, flip on short edge).
+	</div>
+
+	<div class="cards">
+		<!-- FRONT -->
+		<div class="cardwrap">
+			<div class="label">Front</div>
+			<div class="card front">
+				<div class="grid-bg"></div>
+				<div class="glow-a"></div>
+				<div class="glow-b"></div>
+				<div class="ring ring-1"></div>
+				<div class="ring ring-2"></div>
+				<img class="mark" src="/logo-mark.png" alt="" />
+				<div class="wordmark">ORBIT</div>
+				<div class="divider"></div>
+				<div class="subtitle">Web Designs &amp; Marketing</div>
+			</div>
+		</div>
+
+		<!-- BACK -->
+		<div class="cardwrap">
+			<div class="label">Back</div>
+			<div class="card back">
+				<div class="grid-bg"></div>
+				<div class="glow-b"></div>
+				<div class="ring ring-b"></div>
+				<div class="strip"></div>
+				<div class="brandline">orbitwebdesigns.co.ke</div>
+				<div class="back-inner">
+					<div class="contacts">
+						<div class="contact-row">
+							<span class="ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+							<span class="txt"><b>+254 741 992 308</b></span>
+						</div>
+						<div class="contact-row">
+							<span class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+							<span class="txt">WhatsApp <b>+254 741 992 308</b></span>
+						</div>
+						<div class="contact-row">
+							<span class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+							<span class="txt"><b>mwmwai@gmail.com</b></span>
+						</div>
+						<div class="contact-row">
+							<span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+							<span class="txt"><b>orbitwebdesigns.co.ke</b></span>
+						</div>
+					</div>
+					<div class="qr-side">
+						<div class="qr-tile">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h29v29H0z"/><path stroke="#0a0a0f" d="M0 0.5h7m2 0h2m4 0h2m2 0h2m1 0h7M0 1.5h1m5 0h1m2 0h1m2 0h1m4 0h2m3 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h2m6 0h4m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h3m1 0h4m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m2 0h7m2 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h4m1 0h1m1 0h1m2 0h3M0 8.5h1m1 0h5m5 0h1m1 0h2m1 0h1m4 0h5M0 9.5h4m5 0h3m3 0h2m1 0h3m1 0h3m3 0h1M0 10.5h1m5 0h2m1 0h1m2 0h1m4 0h2m1 0h1m2 0h2M0 11.5h4m3 0h1m2 0h1m1 0h1m1 0h1m1 0h1m4 0h1m3 0h1m1 0h1M1 12.5h1m1 0h4m3 0h2m4 0h2m1 0h1m5 0h2M0 13.5h2m1 0h2m2 0h2m1 0h2m1 0h3m1 0h4m1 0h3m3 0h1M0 14.5h1m3 0h3m1 0h2m1 0h1m1 0h5m2 0h1m4 0h2M1 15.5h1m2 0h1m2 0h3m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m2 0h1M1 16.5h3m2 0h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h1m4 0h2M0 17.5h2m2 0h2m2 0h1m2 0h2m2 0h10m1 0h1m1 0h1M0 18.5h1m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1m5 0h1m2 0h1m5 0h1M0 19.5h1m2 0h1m4 0h4m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1M0 20.5h1m1 0h1m3 0h1m1 0h2m2 0h1m3 0h2m2 0h5m1 0h3M8 21.5h1m1 0h1m1 0h4m1 0h2m1 0h1m3 0h5M0 22.5h7m2 0h3m1 0h8m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m1 0h4m1 0h1m3 0h2m3 0h1M0 24.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h5m1 0h1m1 0h1M0 25.5h1m1 0h3m1 0h1m1 0h6m1 0h2m1 0h1m4 0h1m1 0h2M0 26.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m5 0h1m1 0h7M0 27.5h1m5 0h1m9 0h1m3 0h2m1 0h1m1 0h1m1 0h1M0 28.5h7m1 0h2m4 0h1m3 0h2m1 0h3m2 0h1"/></svg>
+						</div>
+						<div class="scan-hint">Scan to visit</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

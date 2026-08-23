@@ -1,0 +1,82 @@
+---
+import { SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_DISPLAY, WHATSAPP_NUMBER } from "../config";
+import Layout from "../layouts/Layout.astro";
+
+const telHref = `tel:+${WHATSAPP_NUMBER}`;
+const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+	"Hi Orbit Web Designs & Marketing! I got your card and I'd like to inquire about your services."
+)}`;
+const mailHref = `mailto:${SITE_EMAIL}`;
+---
+
+<Layout title={`${SITE_NAME} — Digital Business Card`} description="Save our contact details — web design & digital marketing that grows your business.">
+	<main class="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-14">
+		<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+			<div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(70% 60% at 50% 30%, black, transparent 75%)"></div>
+			<div class="absolute -top-40 left-1/2 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-electric/20 blur-[130px]" style="animation: floaty 10s ease-in-out infinite"></div>
+			<div class="absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-neon/15 blur-[120px]" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
+		</div>
+
+		<div class="glow-border relative w-full max-w-sm rounded-3xl p-8 text-center shadow-2xl shadow-electric/10">
+			<img src="/logo-mark.png" alt="Orbit logo" width={72} height={72} class="mx-auto h-18 w-18" />
+			<h1 class="mt-4 bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-3xl font-black tracking-[0.3em] text-transparent">ORBIT</h1>
+			<p class="mt-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-500">Web Designs &amp; Marketing</p>
+
+			<div class="mx-auto mt-4 h-0.5 w-24 rounded-full btn-gradient"></div>
+
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">
+				High-performance websites &amp; targeted digital marketing that grow your business.
+			</p>
+
+			<a href="/orbit-contact.vcf" download class="btn-gradient mt-7 block rounded-full px-6 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 transition hover:-translate-y-0.5 hover:shadow-electric/50">
+				Save Contact
+			</a>
+
+			<div class="mt-4 grid grid-cols-4 gap-2">
+				<a href={telHref} aria-label={`Call ${SITE_PHONE_DISPLAY}`} class="flex flex-col items-center gap-1.5 rounded-2xl border border-edge bg-panel py-3 text-slate-400 transition hover:border-electric/60 hover:text-white">
+					<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+					<span class="text-[10px] font-medium uppercase tracking-wider">Call</span>
+				</a>
+				<a href={waHref} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="flex flex-col items-center gap-1.5 rounded-2xl border border-edge bg-panel py-3 text-slate-400 transition hover:border-electric/60 hover:text-white">
+					<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+					<span class="text-[10px] font-medium uppercase tracking-wider">WhatsApp</span>
+				</a>
+				<a href={mailHref} aria-label={`Email ${SITE_EMAIL}`} class="flex flex-col items-center gap-1.5 rounded-2xl border border-edge bg-panel py-3 text-slate-400 transition hover:border-electric/60 hover:text-white">
+					<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+					<span class="text-[10px] font-medium uppercase tracking-wider">Email</span>
+				</a>
+				<a href={SITE_URL} target="_blank" rel="noopener noreferrer" aria-label="Visit our website" class="flex flex-col items-center gap-1.5 rounded-2xl border border-edge bg-panel py-3 text-slate-400 transition hover:border-electric/60 hover:text-white">
+					<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+					<span class="text-[10px] font-medium uppercase tracking-wider">Website</span>
+				</a>
+			</div>
+
+			<div class="mt-7 flex flex-col items-center gap-2 border-t border-white/5 pt-6">
+				<img src="/orbit-qr.svg" alt="QR code linking to orbitwebdesigns.co.ke" width={96} height={96} class="h-24 w-24 rounded-lg border border-edge bg-white p-1.5" />
+				<p class="text-[11px] uppercase tracking-[0.22em] text-slate-500">{SITE_PHONE_DISPLAY}</p>
+			</div>
+		</div>
+
+		<button id="share-btn" type="button" class="fixed right-5 bottom-5 inline-flex h-12 w-12 items-center justify-center rounded-full btn-gradient text-white shadow-xl shadow-electric/40 transition hover:-translate-y-0.5" aria-label="Share this card">
+			<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98"/></svg>
+		</button>
+	</main>
+
+	<script>
+		const btn = document.getElementById("share-btn");
+		btn?.addEventListener("click", async () => {
+			const data = {
+				title: "Orbit Web Designs & Marketing",
+				text: "Orbit Web Designs & Marketing — web design & digital marketing",
+				url: "https://orbitwebdesigns.co.ke/card",
+			};
+			if (navigator.share) {
+				try { await navigator.share(data); } catch {}
+			} else if (navigator.clipboard) {
+				await navigator.clipboard.writeText(data.url);
+				btn.setAttribute("aria-label", "Link copied!");
+				setTimeout(() => btn.setAttribute("aria-label", "Share this card"), 2000);
+			}
+		});
+	</script>
+</Layout>
