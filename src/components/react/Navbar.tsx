@@ -16,7 +16,7 @@ export default function Navbar() {
 		<header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur-md">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
 				<a href="/" className="flex items-center gap-3">
-					<img src="/logo.png" alt="Orbit logo" width={38} height={38} />
+					<img src="/logo-mark.png" alt="Orbit logo" width={38} height={38} />
 					<span className="leading-none">
 						<span className="block text-base font-extrabold tracking-[0.22em] text-slate-200">
 							ORBIT
@@ -98,4 +98,5 @@ export default function Navbar() {
 		</header>
 	);
 }
+
 
