@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 
 business-card.html
+flick-output/
+flick-app/
+marketing-agent/

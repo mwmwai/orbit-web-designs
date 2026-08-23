@@ -1,5 +1,0 @@
-file 'scenes/wasted-first-impression/wasted-first-impression.mp4'
-file 'scenes/three-second-exit/three-second-exit.mp4'
-file 'scenes/orbit-builds-better/orbit-builds-better.mp4'
-file 'scenes/design-speed-seo/design-speed-seo.mp4'
-file 'scenes/orbit-outro/orbit-outro.mp4'

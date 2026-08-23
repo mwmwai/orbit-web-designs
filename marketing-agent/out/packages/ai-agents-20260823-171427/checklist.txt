@@ -1,4 +1,0 @@
-1. YouTube Shorts: upload ai-agents-20260823-171427.mp4 as a Short
-2. TikTok / Instagram Reels: these require an approved developer app for auto-posting;
-   until then post manually using caption.txt
-3. Keep vertical format 1080x1920, under 60s (ai-agents-20260823-171427.mp4)
