@@ -33,32 +33,36 @@ const testimonials = [
 ];
 ---
 
-<section id="testimonials" class="border-t border-white/5 py-24">
+<section id="testimonials" class="section-glow border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="reveal mb-14 max-w-2xl">
-			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Client words</p>
-			<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-				What clients say after launch.
-			</h2>
-			<p class="mt-4 flex items-center gap-3 text-slate-400">
-				<span class="text-metal" aria-hidden>★★★★★</span>
-				<span>5.0 average across verified reviews</span>
-			</p>
-		</div>
+		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Signals</p>
+		<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+			Signals from clients, after launch.
+		</h2>
+		<p class="mt-4 flex items-center gap-3 text-slate-400">
+			<span class="text-metal" aria-hidden>★★★★★</span>
+			<span>5.0 average across verified reviews</span>
+		</p>
+	</div>
 
-		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-			{
-				testimonials.map((t, i) => (
-					<figure class="reveal card-shine glow-border flex flex-col rounded-2xl p-8" style={`transition-delay:${(i % 3) * 70}ms`}>
-						<div class="text-metal" aria-label="5 out of 5 stars">★★★★★</div>
-						<blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-300">"{t.quote}"</blockquote>
-						<figcaption class="mt-6 border-t border-edge/60 pt-4">
-							<div class="text-sm font-semibold text-white">{t.name}</div>
-							<div class="mt-0.5 font-mono text-xs uppercase tracking-widest text-stone">{t.role}</div>
-						</figcaption>
-					</figure>
-				))
-			}
+	<div class="drift-row reveal" data-tilt-ignore>
+		<div class="drift-track px-3">
+			{[0, 1].map(() => (
+				<div class="flex shrink-0 gap-6">
+					{testimonials.map((t) => (
+						<figure class="card-shine glow-border flex w-[340px] shrink-0 flex-col rounded-2xl p-7">
+							<div class="text-metal" aria-label="5 out of 5 stars">★★★★★</div>
+							<blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-300">"{t.quote}"</blockquote>
+							<figcaption class="mt-6 border-t border-edge/60 pt-4">
+								<div class="text-sm font-semibold text-white">{t.name}</div>
+								<div class="mt-0.5 font-mono text-xs uppercase tracking-widest text-stone">{t.role}</div>
+							</figcaption>
+						</figure>
+					))}
+				</div>
+			))}
 		</div>
 	</div>
 </section>
+
+
