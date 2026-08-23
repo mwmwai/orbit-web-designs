@@ -17,22 +17,28 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg)"></div>
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(28deg)"></div>
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(-28deg); border-color: rgb(47 123 255 / 0.14)"></div>
+			<span class="glow-dot" style="--radius: 280px; --dur: 18s; top: 50%; left: 50%"></span>
+			<span class="glow-dot" style="--radius: 200px; --dur: 26s; top: 50%; left: 50%; animation-delay: -8s"></span>
 		</div>
 	</div>
 
-	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
+	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-20 md:pt-32">
 		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
-			<span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
-			Trusted by growing brands
+			<span class="relative flex h-2 w-2">
+				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-60"></span>
+				<span class="relative inline-flex h-2 w-2 rounded-full bg-electric"></span>
+			</span>
+			Available for new projects
 		</p>
 
-		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
-			We Build High-Performance Websites &
-			<span class="text-gradient">Drive Real Growth.</span>
+		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
+			Websites that win attention
+			<span class="text-gradient">&amp; convert it into revenue.</span>
 		</h1>
 
-		<p class="hero-anim mt-6 max-w-2xl text-lg text-slate-400" style="animation-delay:200ms">
-			Professional web design, custom development, and targeted digital marketing to scale your brand.
+		<p class="hero-anim mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" style="animation-delay:200ms">
+			Orbit Web Designs &amp; Marketing is a web design, development and digital
+			growth partner for ambitious brands — worldwide, fully remote.
 		</p>
 
 		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
@@ -42,33 +48,56 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 				rel="noopener noreferrer"
 				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50"
 			>
-				Get a Free Quote
+				Start your project
 			</a>
 			<a
 				href="/packages"
 				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
 			>
-				View Our Packages
+				View pricing
 			</a>
 		</div>
 
-		<dl class="hero-anim mt-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3" style="animation-delay:420ms">
+		<dl class="hero-anim mt-16 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4" style="animation-delay:420ms">
 			{
 				[
-					["50+", "Projects delivered"],
-					["98%", "Client satisfaction"],
-					["< 3s", "Average load time"],
+					["50+", "Websites shipped"],
+					["25+", "M-Pesa stores"],
+					["10+", "Industries served"],
+					["24h", "Reply time"],
 				].map(([value, label]) => (
 					<div data-tilt class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
-						<dt class="text-gradient text-2xl font-extrabold">{value}</dt>
+						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl">{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>
 				))
 			}
 		</dl>
+
+		<div class="hero-anim mt-12 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4" style="animation-delay:500ms">
+			{
+				["PageSpeed 95+", "Core Web Vitals Pass", "SEO Ready", "Mobile 100"].map((b) => (
+					<div class="flex items-center gap-2 border border-edge/70 bg-charcoal/60 px-3 py-2.5 font-mono text-xs text-slate-300">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+						{b}
+					</div>
+				))
+			}
+		</div>
 	</div>
 </section>
 
-
-
-
+<div class="marquee bg-charcoal/40" aria-hidden="true">
+	<div class="marquee-track">
+		{[0, 1].map(() => (
+			<div class="flex shrink-0 items-center gap-14 font-mono text-xs uppercase tracking-[0.3em] text-stone">
+				{["Web Design", "E-commerce", "M-Pesa", "SEO", "Branding", "Web Apps", "Care Plans"].map((t) => (
+					<span class="flex items-center gap-14">
+						{t}
+						<span class="text-electric">✦</span>
+					</span>
+				))}
+			</div>
+		))}
+	</div>
+</div>

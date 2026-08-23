@@ -214,3 +214,67 @@ body {
 	.film-grain, .light-streak { display: none; }
 }
 
+.marquee {
+	overflow: hidden;
+	border-block: 1px solid var(--color-edge);
+	padding-block: 1.1rem;
+	mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+	display: flex;
+	gap: 3.5rem;
+	width: max-content;
+	animation: marquee 26s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+	to { transform: translateX(-50%); }
+}
+
+.glow-dot {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 9999px;
+	background: rgb(0 200 255 / 0.8);
+	box-shadow: 0 0 12px 3px rgb(0 200 255 / 0.45);
+	animation: orbitTravel var(--dur, 24s) linear infinite;
+}
+@keyframes orbitTravel {
+	from { transform: rotate(0deg) translateX(var(--radius, 260px)) rotate(0deg); }
+	to { transform: rotate(360deg) translateX(var(--radius, 260px)) rotate(-360deg); }
+}
+
+.scanline {
+	position: absolute;
+	inset-inline: 0;
+	height: 120px;
+	background: linear-gradient(to bottom, transparent, rgb(0 200 255 / 0.05), transparent);
+	animation: scan 7s linear infinite;
+}
+@keyframes scan {
+	from { top: -15%; }
+	to { top: 110%; }
+}
+
+.counter-num {
+	font-variant-numeric: tabular-nums;
+}
+
+.card-shine {
+	position: relative;
+	overflow: hidden;
+}
+.card-shine::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(105deg, transparent 40%, rgb(231 233 242 / 0.07) 50%, transparent 60%);
+	transform: translateX(-120%);
+	transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+	pointer-events: none;
+}
+.card-shine:hover::before {
+	transform: translateX(120%);
+}
+

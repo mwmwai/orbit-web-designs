@@ -1,0 +1,57 @@
+---
+const faqs = [
+	{
+		q: "How much does a website cost?",
+		a: "Three packages: Starter at KES 15,000 (landing page), Business at KES 25,000 (up to 6 pages) and Commerce/Custom from KES 35,000 (full store or web app). Fully custom platforms are quoted individually.",
+	},
+	{
+		q: "How long does a project take?",
+		a: "A focused landing page goes live in about 5 days. Business builds run 10–14 days; commerce and custom builds typically 3–4 weeks end-to-end.",
+	},
+	{
+		q: "Do you handle hosting & domains?",
+		a: "Yes — we set up fast, secure hosting and manage DNS, email and SSL so you only deal with one person.",
+	},
+	{
+		q: "Will my site rank on Google?",
+		a: "Every build ships with technical SEO, schema markup and Core Web Vitals optimisation. Business and Commerce include deeper on-page work, with ongoing SEO retainers on request.",
+	},
+	{
+		q: "Can you integrate M-Pesa?",
+		a: "Absolutely — STK push, Paybill and Till are supported, alongside Pesapal/Flutterwave card payments. We've wired 25+ stores.",
+	},
+	{
+		q: "What happens after launch?",
+		a: "Every package includes 1–6 months of maintenance, training and documentation. After that, optional care plans cover updates, backups, security and edits.",
+	},
+];
+---
+
+<section id="faq" class="border-t border-white/5 py-24">
+	<div class="mx-auto max-w-7xl px-5">
+		<div class="grid gap-12 lg:grid-cols-5">
+			<div class="reveal lg:col-span-2">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ FAQ</p>
+				<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+					Answers to the questions we get every week.
+				</h2>
+				<p class="mt-4 max-w-md text-slate-400">
+					Still unsure? Ask on WhatsApp — honest advice, no pitch.
+				</p>
+			</div>
+			<div class="grid content-start gap-4 lg:col-span-3">
+				{
+					faqs.map((f, i) => (
+						<details class="reveal group border border-edge/70 bg-charcoal/50 px-6 py-5 open:border-electric/30" style={`transition-delay:${i * 50}ms`}>
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-white [&::-webkit-details-marker]:hidden">
+								{f.q}
+								<span class="font-mono text-electric transition duration-300 group-open:rotate-45">＋</span>
+							</summary>
+							<p class="mt-4 text-sm leading-relaxed text-slate-400">{f.a}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>

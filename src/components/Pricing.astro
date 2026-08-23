@@ -1,50 +1,49 @@
 ---
 const plans = [
 	{
-		name: "Basic Package",
+		name: "Starter",
 		price: "KES 15,000",
-		blurb: "Perfect for clean landing pages, portfolio sites, and simple local business profiles.",
+		blurb: "For new businesses going online.",
 		features: [
-			"One polished, high-converting page",
+			"One polished landing page",
 			"Mobile-responsive design",
 			"WhatsApp & contact integration",
 			"Basic on-page SEO",
-			"Delivered in 5 days",
-			"1 month free support",
+			"1 round of revisions",
+			"1 month of maintenance",
 		],
-		cta: "Start with Basic",
+		cta: "Choose Starter",
 		featured: false,
 	},
 	{
-		name: "Full Business Package",
+		name: "Business",
 		price: "KES 25,000",
-		blurb: "Comprehensive multi-page websites, custom layouts, and advanced features.",
+		blurb: "For growing brands ready to scale.",
 		features: [
 			"Up to 6 custom pages",
 			"Custom layouts & animations",
-			"Advanced features & integrations",
 			"Advanced SEO setup",
-			"Delivered in 10–14 days",
-			"3 months free support",
+			"Integrations (Maps, socials)",
+			"3 rounds of revisions",
+			"3 months of maintenance",
 			"Free domain setup",
 		],
-		cta: "Get Business Site",
+		cta: "Choose Business",
 		featured: true,
 	},
 	{
-		name: "E-commerce / Custom Package",
+		name: "Commerce / Custom",
 		price: "KES 35,000+",
-		blurb: "Full online store setup with product management and local checkout solutions.",
+		blurb: "For brands going all in.",
 		features: [
-			"Full online store",
-			"M-Pesa checkout integration",
+			"Full online store or web app",
+			"M-Pesa & card checkout",
 			"Product & inventory management",
-			"Order notifications via WhatsApp/email",
+			"Order notifications",
 			"Custom features on request",
-			"Delivered in 3–4 weeks",
-			"6 months free support",
+			"6 months of support",
 		],
-		cta: "Launch My Store",
+		cta: "Choose Commerce",
 		featured: false,
 	},
 ];
@@ -52,98 +51,82 @@ const plans = [
 
 <section id="pricing" class="border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="reveal mb-14 max-w-xl">
-			<h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Packages & Pricing</h2>
-			<p class="mt-4 text-slate-400">
-				Honest, one-time pricing. No surprises.
+		<div class="reveal mb-14 max-w-2xl">
+			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pricelist</p>
+			<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+				Transparent pricing. No surprises.
+			</h2>
+			<p class="mt-4 max-w-xl text-slate-400">
+				Three packages built for growing businesses — one-time payment, delivered fast.
 			</p>
 		</div>
 
 		<div class="grid items-stretch gap-6 lg:grid-cols-3">
 			{
 				plans.map((p, i) => (
-					<article
-						class="reveal"
-						style={`transition-delay:${i * 90}ms`}
-					>
+					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
 						<div
 							data-tilt
-							class={`relative flex flex-col rounded-2xl p-8 ${
+							class={`relative flex h-full flex-col rounded-2xl p-8 ${
 								p.featured
-									? "border border-transparent bg-gradient-to-b from-electric/15 to-neon/10 shadow-2xl shadow-electric/20 ring-1 ring-electric/50 h-full"
-									: "glow-border h-full"
+									? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10"
+									: "glow-border"
 							}`}
 						>
-						{p.featured && (
-							<span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-electric to-neon px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-neon/30">
-								Most Popular
-							</span>
-						)}
-						<h3 class="text-lg font-semibold text-white">{p.name}</h3>
-						<p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
-						<p class="mt-6">
-							<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
-							<span class="ml-1 text-sm text-slate-500">one-time</span>
-						</p>
-						<ul class="mt-8 grid flex-1 content-start gap-3.5">
-							{p.features.map((f) => (
-								<li class="flex items-start gap-3 text-sm text-slate-300">
-									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0">
-										<path d="M20 6L9 17l-5-5" />
-									</svg>
-									{f}
-								</li>
-							))}
-						</ul>
-						<a
-							href="/contact"
-							class={`mt-8 block rounded-full py-3 text-center font-semibold transition ${
-								p.featured
-									? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
-									: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
-							}`}
-						>
-							{p.cta}
-						</a>
+							{p.featured && (
+								<span class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">
+									Most popular
+								</span>
+							)}
+							<h3 class="text-lg font-semibold text-white">{p.name}</h3>
+							<p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
+							<p class="mt-6">
+								<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
+							</p>
+							<ul class="mt-8 grid flex-1 content-start gap-3">
+								{p.features.map((f) => (
+									<li class="flex items-start gap-3 text-sm text-slate-300">
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-1 shrink-0">
+											<path d="M20 6L9 17l-5-5" />
+										</svg>
+										{f}
+									</li>
+								))}
+							</ul>
+							<a
+								href="/contact"
+								class={`mt-8 block rounded-full py-3 text-center font-semibold transition ${
+									p.featured
+										? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
+										: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
+								}`}
+							>
+								{p.cta}
+							</a>
 						</div>
 					</article>
 				))
 			}
 		</div>
+
+		<p class="reveal mt-8 text-sm text-slate-500">
+			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — or browse care plans on request.
+		</p>
 	</div>
 </section>
 
 <section id="payments" class="border-t border-white/5 pb-8 pt-4">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="glow-border reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-10">
-			<h3 class="text-xl font-semibold text-white">Secure & Flexible Payments</h3>
-			<p class="max-w-xl text-sm text-slate-400">
-				Pay the way that works for you — we accept all major payment methods with secure, verified transactions.
-			</p>
-			<div class="flex flex-wrap items-center gap-4">
-				<span class="inline-flex items-center gap-2 rounded-full bg-[#43b02a]/10 px-5 py-2.5 text-sm font-semibold text-[#7ed957] ring-1 ring-[#43b02a]/40">
-					<span class="text-lg" aria-hidden="true">📲</span> M-Pesa
-				</span>
-				<span class="inline-flex items-center gap-2 rounded-full bg-electric/10 px-5 py-2.5 text-sm font-semibold text-blue-300 ring-1 ring-electric/40">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-						<path d="M2 8h20M2 12h20M6 17h4" />
-						<rect x="2" y="5" width="20" height="14" rx="2.5" />
-					</svg>
-					Card (Visa / Mastercard)
-				</span>
-				<span class="inline-flex items-center gap-2 rounded-full bg-neon/10 px-5 py-2.5 text-sm font-semibold text-sky-300 ring-1 ring-neon/40">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-						<path d="M7.1 21.2h-3l1.9-12h3zM5.5 7.4A1.75 1.75 0 115.5 4a1.75 1.75 0 010 3.4zm11.6 13.8H14l1.7-10.7c.1-.9-.2-1.3-.9-1.3-.9 0-1.9.7-2.6 2L10.6 21.2h-3l1.9-12h2.6l-.2 1.6c1-1.3 2.5-2 4-2 2 0 3.3 1.2 3 3.5z" transform="translate(2 -1)" />
-					</svg>
-					PayPal
-				</span>
+		<div class="glow-border reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-8 md:flex-row md:items-center md:justify-between">
+			<div>
+				<h3 class="text-lg font-semibold text-white">Payments, handled quietly.</h3>
+				<p class="mt-1 max-w-md text-sm text-slate-400">M-Pesa, cards and PayPal — secure, verified, no drama.</p>
+			</div>
+			<div class="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest">
+				<span class="border border-edge px-4 py-2 text-stone">M-Pesa</span>
+				<span class="border border-edge px-4 py-2 text-stone">Card</span>
+				<span class="border border-edge px-4 py-2 text-stone">PayPal</span>
 			</div>
 		</div>
 	</div>
 </section>
-
-
-
-
-
-
