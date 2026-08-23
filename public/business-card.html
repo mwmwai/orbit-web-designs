@@ -15,7 +15,7 @@
 			--slate-400: #94a3b8;
 			--slate-500: #64748b;
 		}
-		* { margin: 0; padding: 0; box-sizing: border-box; }
+		* { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 		body {
 			background: #1c1c26;
 			font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -112,7 +112,6 @@
 		}
 		.qr-tile svg { width: 100%; height: 100%; display: block; }
 		.scan-hint { font-size: 5.6pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate-500); white-space: nowrap; }
-		.brandline { position: absolute; right: 0.26in; top: 0.17in; font-size: 6pt; letter-spacing: 0.28em; text-transform: uppercase; color: var(--slate-500); }
 
 		/* ===== Print: one card per page, zero margins ===== */
 		@page { size: 3.5in 2in; margin: 0; }
@@ -156,7 +155,6 @@
 				<div class="glow-b"></div>
 				<div class="ring ring-b"></div>
 				<div class="strip"></div>
-				<div class="brandline">orbitwebdesigns.co.ke</div>
 				<div class="back-inner">
 					<div class="contacts">
 						<div class="headline">Get Your Business <span class="grad">Online</span></div>
