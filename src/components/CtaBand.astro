@@ -1,17 +1,40 @@
 ---
 import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
-interface Props { title?: string; text?: string; }
-const { title = "Ready to grow?", text = "A short conversation. A clear quote. No pitch." } = Astro.props;
+
+interface Props {
+	title?: string;
+	text?: string;
+}
+
+const {
+	title = "Ready to grow your business online?",
+	text = "Get a free quote today — we reply within minutes on WhatsApp.",
+} = Astro.props;
 ---
 
-<section class="border-t border-edge/40 py-20 md:py-28">
-	<div class="reveal mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 border border-edge bg-panel px-8 py-12 md:flex-row md:items-center md:px-12">
+<section class="border-t border-white/5 py-20">
+	<div class="reveal glow-border reveal mx-auto flex max-w-7xl flex-col items-start gap-10 rounded-2xl px-8 py-12 md:flex-row md:px-14">
 		<div>
-			<h2 class="font-display text-2xl leading-none tracking-tight text-cream md:text-3xl">{title}</h2>
-			<p class="mt-3 max-w-lg leading-relaxed text-stone">{text}</p>
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">{title}</h2>
+			<p class="mt-3 max-w-lg text-slate-400">{text}</p>
 		</div>
-		<a href={whatsappLink(DEFAULT_WA_MESSAGE)} target="_blank" rel="noopener noreferrer" class="link-underline">
-			Get a free quote <span aria-hidden>→</span>
-		</a>
+		<div class="flex flex-wrap gap-4">
+			<a
+				href={whatsappLink(DEFAULT_WA_MESSAGE)}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="btn-gradient rounded-full px-7 py-3 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5"
+			>
+				Get a Free Quote
+			</a>
+			<a
+				href="/contact"
+				class="rounded-full border border-edge bg-panel px-7 py-3 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
+			>
+				Contact Us
+			</a>
+		</div>
 	</div>
 </section>
+
+

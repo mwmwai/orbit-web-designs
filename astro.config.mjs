@@ -6,11 +6,10 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://www.orbitwebdesigns.co.ke',
+	site: 'https://orbitwebdesigns.co.ke',
 	integrations: [react(), sitemap()],
 	vite: {
 		plugins: [tailwindcss()],
 	},
 });
-
 

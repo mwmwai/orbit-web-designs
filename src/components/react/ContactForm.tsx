@@ -23,29 +23,58 @@ export default function ContactForm() {
 	}
 
 	const inputCls =
-		"w-full border border-edge bg-transparent px-4 py-3.5 font-sans text-sm text-cream placeholder:text-stone outline-none transition focus:border-metal";
+		"w-full rounded-xl border border-edge bg-charcoal px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric focus:ring-2 focus:ring-electric/30";
 
 	return (
-		<form onSubmit={handleSubmit} className="grid gap-6 sm:grid-cols-2">
-			<label className="grid gap-2">
-				<span className="font-mono text-xs uppercase tracking-widest text-stone">Name</span>
-				<input type="text" required value={name} onInput={(e) => setName((e.target as HTMLInputElement).value)} placeholder="Jane Wanjiku" className={inputCls} />
+		<form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+			<label className="grid gap-1.5">
+				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Name</span>
+				<input
+					type="text"
+					required
+					value={name}
+					onInput={(e) => setName((e.target as HTMLInputElement).value)}
+					placeholder="Jane Wanjiku"
+					className={inputCls}
+				/>
 			</label>
-			<label className="grid gap-2">
-				<span className="font-mono text-xs uppercase tracking-widest text-stone">Email</span>
-				<input type="email" value={email} onInput={(e) => setEmail((e.target as HTMLInputElement).value)} placeholder="jane@company.co.ke" className={inputCls} />
+			<label className="grid gap-1.5">
+				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Email</span>
+				<input
+					type="email"
+					value={email}
+					onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
+					placeholder="jane@company.co.ke"
+					className={inputCls}
+				/>
 			</label>
-			<label className="grid gap-2 sm:col-span-2">
-				<span className="font-mono text-xs uppercase tracking-widest text-stone">Phone</span>
-				<input type="tel" value={phone} onInput={(e) => setPhone((e.target as HTMLInputElement).value)} placeholder="+254 7XX XXX XXX" className={inputCls} />
+			<label className="grid gap-1.5 sm:col-span-2">
+				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Phone Number</span>
+				<input
+					type="tel"
+					value={phone}
+					onInput={(e) => setPhone((e.target as HTMLInputElement).value)}
+					placeholder="+254 7XX XXX XXX"
+					className={inputCls}
+				/>
 			</label>
-			<label className="grid gap-2 sm:col-span-2">
-				<span className="font-mono text-xs uppercase tracking-widest text-stone">Project details</span>
-				<textarea rows={4} value={details} onInput={(e) => setDetails((e.target as HTMLTextAreaElement).value)} placeholder="What does your business do, and what do you need?" className={`${inputCls} resize-y`} />
+			<label className="grid gap-1.5 sm:col-span-2">
+				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Project Details</span>
+				<textarea
+					rows={4}
+					value={details}
+					onInput={(e) => setDetails((e.target as HTMLTextAreaElement).value)}
+					placeholder="Tell us about your project — what does your business do, and what do you need?"
+					className={`${inputCls} resize-y`}
+				/>
 			</label>
-			<button type="submit" className="link-underline justify-self-start sm:col-span-2">
-				Send via WhatsApp <span aria-hidden>→</span>
+			<button
+				type="submit"
+				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2"
+			>
+				Send via WhatsApp
 			</button>
 		</form>
 	);
 }
+
