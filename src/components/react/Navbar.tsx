@@ -15,50 +15,50 @@ export default function Navbar() {
 	return (
 		<header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur-md">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-				<a href="/" className="flex items-center gap-3.5">
-					<img src="/logo-mark.png" alt="Orbit logo" width={48} height={48} />
-					<span className="leading-none">
-						<span className="block bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-xl font-black tracking-[0.3em] text-transparent">
-							ORBIT
+				<div className="flex items-center gap-10">
+					<a href="/" className="flex items-center gap-3.5">
+						<img src="/logo-mark.png" alt="Orbit logo" width={48} height={48} />
+						<span className="leading-none">
+							<span className="block bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-xl font-black tracking-[0.3em] text-transparent">
+								ORBIT
+							</span>
+							<span className="mt-1.5 block text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">
+								Web Designs <span className="text-electric">&amp;</span> Marketing
+							</span>
 						</span>
-						<span className="mt-1.5 block text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">
-							Web Designs <span className="text-electric">&amp;</span> Marketing
-						</span>
-					</span>
-				</a>
+					</a>
 
-				<nav className="hidden items-center gap-7 md:flex" aria-label="Main">
-					{NAV_LINKS.map((l) => {
-						const active = path === l.href;
-						return (
-							<a
-								key={l.href}
-								href={l.href}
-								className={`text-sm transition ${
-									active
-										? "font-semibold text-gradient"
-										: "text-slate-300 hover:text-white"
-								}`}
-							>
-								{l.label}
-							</a>
-						);
-					})}
-				</nav>
+					<nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
+						{NAV_LINKS.map((l) => {
+							const active = path === l.href;
+							return (
+								<a
+									key={l.href}
+									href={l.href}
+									className={`nav-link text-sm transition-colors duration-300 ${
+										active ? "is-active font-semibold text-white" : "text-slate-300 hover:text-white"
+									}`}
+								>
+									{l.label}
+								</a>
+							);
+						})}
+					</nav>
+				</div>
 
 				<div className="flex items-center gap-3">
 					<a
 						href={whatsappLink(DEFAULT_WA_MESSAGE)}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="hidden rounded-full bg-gradient-to-r from-electric to-neon px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-electric/25 transition hover:brightness-110 md:inline-block"
+						className="btn-gradient hidden rounded-full px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-electric/25 hover:shadow-electric/40 md:inline-block"
 					>
 						Get a Free Quote
 					</a>
 					<button
 						type="button"
 						onClick={() => setOpen(!open)}
-						className="rounded-lg border border-edge p-2 text-slate-300 md:hidden"
+						className="rounded-lg border border-edge p-2 text-slate-300 transition hover:border-electric/60 md:hidden"
 						aria-label="Toggle menu"
 						aria-expanded={open}
 					>
@@ -74,7 +74,7 @@ export default function Navbar() {
 			</div>
 
 			{open && (
-				<nav className="border-t border-white/5 px-5 pb-4 pt-2 md:hidden" aria-label="Mobile">
+				<nav className="animate-menu border-t border-white/5 px-5 pb-4 pt-2 md:hidden" aria-label="Mobile">
 					{NAV_LINKS.map((l) => (
 						<a
 							key={l.href}
@@ -89,7 +89,7 @@ export default function Navbar() {
 						href={whatsappLink(DEFAULT_WA_MESSAGE)}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mt-2 block rounded-full bg-gradient-to-r from-electric to-neon px-5 py-2.5 text-center text-sm font-semibold text-white"
+						className="btn-gradient mt-2 block rounded-full px-5 py-2.5 text-center text-sm font-semibold text-white"
 					>
 						Get a Free Quote
 					</a>
@@ -98,5 +98,3 @@ export default function Navbar() {
 		</header>
 	);
 }
-
-

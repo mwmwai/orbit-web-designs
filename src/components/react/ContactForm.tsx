@@ -70,10 +70,11 @@ export default function ContactForm() {
 			</label>
 			<button
 				type="submit"
-				className="rounded-full bg-gradient-to-r from-electric to-neon px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 transition hover:brightness-110 sm:col-span-2"
+				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2"
 			>
 				Send via WhatsApp
 			</button>
 		</form>
 	);
 }
+
