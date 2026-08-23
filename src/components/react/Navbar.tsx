@@ -15,14 +15,14 @@ export default function Navbar() {
 	return (
 		<header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur-md">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-				<a href="/" className="flex items-center gap-3">
-					<img src="/logo-mark.png" alt="Orbit logo" width={38} height={38} />
+				<a href="/" className="flex items-center gap-3.5">
+					<img src="/logo-mark.png" alt="Orbit logo" width={48} height={48} />
 					<span className="leading-none">
-						<span className="block text-base font-extrabold tracking-[0.22em] text-slate-200">
+						<span className="block bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-xl font-black tracking-[0.3em] text-transparent">
 							ORBIT
 						</span>
-						<span className="mt-1 block text-[8px] font-semibold uppercase tracking-[0.24em] text-slate-500">
-							Web Designs &amp; Marketing
+						<span className="mt-1.5 block text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">
+							Web Designs <span className="text-electric">&amp;</span> Marketing
 						</span>
 					</span>
 				</a>
