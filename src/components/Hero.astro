@@ -1,0 +1,58 @@
+---
+import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
+---
+
+<section id="top" class="relative overflow-hidden">
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+		<div class="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/20 blur-[140px]"></div>
+		<div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-neon/15 blur-[120px]"></div>
+	</div>
+
+	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
+		<p class="mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300">
+			<span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
+			Trusted by growing brands
+		</p>
+
+		<h1 class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
+			We Build High-Performance Websites &
+			<span class="text-gradient">Drive Real Growth.</span>
+		</h1>
+
+		<p class="mt-6 max-w-2xl text-lg text-slate-400">
+			Professional web design, custom development, and targeted digital marketing to scale your brand.
+		</p>
+
+		<div class="mt-10 flex flex-wrap items-center gap-4">
+			<a
+				href={whatsappLink(DEFAULT_WA_MESSAGE)}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-full bg-gradient-to-r from-electric to-neon px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 transition hover:scale-[1.03] hover:brightness-110"
+			>
+				Get a Free Quote
+			</a>
+			<a
+				href="#pricing"
+				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
+			>
+				View Our Packages
+			</a>
+		</div>
+
+		<dl class="mt-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3">
+			{
+				[
+					["50+", "Projects delivered"],
+					["98%", "Client satisfaction"],
+					["< 3s", "Average load time"],
+				].map(([value, label]) => (
+					<div class="glow-border rounded-2xl px-6 py-5">
+						<dt class="text-gradient text-2xl font-extrabold">{value}</dt>
+						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</section>

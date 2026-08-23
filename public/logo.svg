@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+	<defs>
+		<radialGradient id="sphere" cx="0.32" cy="0.28" r="1.05">
+			<stop stop-color="#6fe4ff" />
+			<stop offset="0.45" stop-color="#1f8fff" />
+			<stop offset="1" stop-color="#0a4fc4" />
+		</radialGradient>
+		<radialGradient id="core" cx="0.35" cy="0.3" r="1">
+			<stop stop-color="#ffffff" />
+			<stop offset="0.55" stop-color="#9feaff" />
+			<stop offset="1" stop-color="#37c6ff" />
+		</radialGradient>
+		<linearGradient id="ringBack" x1="4" y1="24" x2="60" y2="46" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0d63c9" />
+			<stop offset="1" stop-color="#00b4e8" />
+		</linearGradient>
+		<linearGradient id="ringFront" x1="6" y1="48" x2="58" y2="26" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#009fe0" />
+			<stop offset="1" stop-color="#41e0ff" />
+		</linearGradient>
+	</defs>
+	<g transform="rotate(-32 32 34)">
+		<path d="M4 34a28 10.5 0 0 1 56 0" stroke="url(#ringBack)" stroke-width="5.5" />
+	</g>
+	<circle cx="31" cy="33" r="15.5" fill="url(#sphere)" />
+	<path d="M44.5 21.5A15.5 15.5 0 0 1 42 47.5" stroke="#0a4fc4" stroke-width="6" fill="none" stroke-linecap="round" />
+	<circle cx="31" cy="33" r="9" fill="#5fdcff" opacity="0.28" />
+	<circle cx="31" cy="33" r="5.4" fill="url(#core)" />
+	<g transform="rotate(-32 32 34)">
+		<path d="M4 34a28 10.5 0 0 0 56 0" stroke="url(#ringFront)" stroke-width="5.5" stroke-linecap="round" />
+	</g>
+</svg>

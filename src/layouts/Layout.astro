@@ -1,0 +1,31 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Orbit Web Designs & Marketing — Web Design for Kenyan Businesses",
+	description = "Professional web design, custom development, and digital marketing for brands in Kenya. Fast, mobile-responsive websites at affordable prices.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-ink text-slate-200 antialiased">
+		<slot />
+	</body>
+</html>
