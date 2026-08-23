@@ -1,5 +1,5 @@
 export const SITE_NAME = "Orbit Web Designs & Marketing";
-export const SITE_URL = "https://orbitwebdesigns.co.ke";
+export const SITE_URL = "https://www.orbitwebdesigns.co.ke";
 export const SITE_EMAIL = "mwmwai@gmail.com";
 export const SITE_PHONE_DISPLAY = "+254 741 992 308";
 
@@ -19,5 +19,6 @@ export const NAV_LINKS = [
 	{ href: "/portfolio", label: "Our Work" },
 	{ href: "/contact", label: "Contact" },
 ];
+
 
 

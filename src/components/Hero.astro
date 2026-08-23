@@ -4,58 +4,58 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 
 <section id="top" class="relative overflow-hidden">
 	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
-		<div class="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/20 blur-[140px]" style="animation: floaty 10s ease-in-out infinite"></div>
-		<div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-neon/15 blur-[120px]" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
+		<div class="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgb(201_169_110/0.06),transparent_60%)]"></div>
+		<div class="hero-orbit absolute left-1/2 top-[46%] hidden h-[720px] w-[720px] -translate-x-1/2 -translate-y-1/2 md:block" style="perspective: 900px">
+			<div class="absolute inset-0" style="transform-style: preserve-3d; animation: orbitSpin 32s linear infinite">
+				<div class="absolute left-1/2 top-1/2 h-[420px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-metal/10" style="transform: rotateX(68deg)"></div>
+				<div class="absolute left-1/2 top-1/2 h-[420px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-metal/10" style="transform: rotateX(68deg) rotateZ(28deg)"></div>
+				<div class="absolute left-1/2 top-1/2 h-[420px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-metal/10" style="transform: rotateX(68deg) rotateZ(-28deg)"></div>
+			</div>
+		</div>
 	</div>
 
-	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
-		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
-			<span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
-			Trusted by growing brands
+	<div class="relative mx-auto max-w-7xl px-6 py-28 md:px-8 md:py-40">
+		<p class="hero-anim inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-stone" style="animation-delay:0ms">
+			<span class="h-px w-8 bg-metal/50"></span>
+			Worldwide — remote first
 		</p>
 
-		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
-			We Build High-Performance Websites &
-			<span class="text-gradient">Drive Real Growth.</span>
+		<h1 class="hero-anim mt-8 max-w-4xl font-display text-5xl font-medium leading-[0.9] tracking-[-0.04em] text-cream sm:text-6xl md:text-7xl" style="animation-delay:90ms">
+			Websites crafted
+			<span class="font-light italic text-metal">for growth.</span>
 		</h1>
 
-		<p class="hero-anim mt-6 max-w-2xl text-lg text-slate-400" style="animation-delay:200ms">
-			Professional web design, custom development, and targeted digital marketing to scale your brand.
+		<p class="hero-anim mt-8 max-w-xl text-lg leading-relaxed text-stone md:text-xl" style="animation-delay:160ms">
+			We design and build fast, quiet, high-converting websites — then help the right people find them.
 		</p>
 
-		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
-			<a
-				href={whatsappLink(DEFAULT_WA_MESSAGE)}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50"
-			>
-				Get a Free Quote
+		<div class="hero-anim mt-12 flex flex-wrap items-center gap-8" style="animation-delay:240ms">
+			<a href="/contact" class="link-underline">
+				Start a project <span aria-hidden>→</span>
 			</a>
-			<a
-				href="/packages"
-				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
-			>
-				View Our Packages
+			<a href="/portfolio" class="font-mono text-xs uppercase tracking-widest text-stone transition hover:text-cream">
+				View work
 			</a>
 		</div>
 
-		<dl class="hero-anim mt-16 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3" style="animation-delay:420ms">
-			{
-				[
-					["50+", "Projects delivered"],
-					["98%", "Client satisfaction"],
-					["< 3s", "Average load time"],
-				].map(([value, label]) => (
-					<div class="glow-border rounded-2xl px-6 py-5" data-tilt>
-						<dt class="text-gradient text-2xl font-extrabold">{value}</dt>
-						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
-					</div>
-				))
-			}
-		</dl>
+		<div class="hero-anim mt-20 grid max-w-3xl grid-cols-3 gap-0 border-t border-edge/60 pt-10 md:mt-28" style="animation-delay:320ms">
+			<div class="pr-6">
+				<div class="font-display text-2xl text-cream">50+</div>
+				<div class="mt-2 font-mono text-xs uppercase tracking-widest text-stone">Projects delivered</div>
+			</div>
+			<div class="border-l border-edge/60 px-6">
+				<div class="font-display text-2xl text-cream">&lt; 1.2s</div>
+				<div class="mt-2 font-mono text-xs uppercase tracking-widest text-stone">Median load</div>
+			</div>
+			<div class="border-l border-edge/60 pl-6">
+				<div class="font-display text-2xl text-cream">Global</div>
+				<div class="mt-2 font-mono text-xs uppercase tracking-widest text-stone">Remote clients</div>
+			</div>
+		</div>
 	</div>
 </section>
 
-
-
+<style>
+	@keyframes orbitSpin { to { transform: rotateZ(360deg); } }
+	.hero-orbit > div { transform-style: preserve-3d; }
+</style>

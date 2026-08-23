@@ -27,3 +27,7 @@ business-card.html
 flick-output/
 flick-app/
 marketing-agent/
+
+FlickStudio.exe
+exe-*.log
+orbit-*.svg
