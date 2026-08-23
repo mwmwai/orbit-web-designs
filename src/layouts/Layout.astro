@@ -11,7 +11,7 @@ interface Props {
 
 const {
 	title = `${SITE_NAME} — Web Design & Digital Marketing`,
-	description = "Professional web design, custom development, and targeted digital marketing to scale your brand. Fast, mobile-responsive websites at affordable prices.",
+	description = "Orbit designs fast, secure websites and runs marketing that gets businesses found, trusted and paid. Custom builds from KES 15,000 — worldwide, fully remote.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
@@ -58,6 +58,7 @@ const jsonLd = {
 		<div id="scroll-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-electric to-neon" aria-hidden="true"></div>
 		<div id="cursor-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2.5 w-2.5 rounded-full bg-electric shadow-[0_0_14px_4px_rgba(0,200,255,0.45)] lg:block" aria-hidden="true"></div>
 		<div id="cursor-ring" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-9 w-9 rounded-full border border-electric/40 lg:block" aria-hidden="true"></div>
+		<div class="aurora" aria-hidden="true"><span></span><span></span></div>
 		<slot />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
@@ -147,11 +148,27 @@ const jsonLd = {
 					el.addEventListener("mouseleave", () => { ring.style.borderColor = "rgba(0,200,255,0.4)"; });
 				});
 			}
+			function initParallax() {
+				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				const orbit = document.querySelector(".hero-orbit");
+				if (!orbit || orbit.dataset.parallaxBound) return;
+				orbit.dataset.parallaxBound = "1";
+				let ticking = false;
+				window.addEventListener("scroll", () => {
+					if (ticking) return;
+					ticking = true;
+					requestAnimationFrame(() => {
+						orbit.style.marginTop = (window.scrollY * 0.1) + "px";
+						ticking = false;
+					});
+				}, { passive: true });
+			}
 			document.addEventListener("astro:page-load", () => {
 				initReveal();
 				initTilt();
 				initCounters();
 				initCursor();
+				initParallax();
 			});
 		</script>
 	</body>

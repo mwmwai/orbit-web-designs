@@ -26,10 +26,49 @@ body {
 }
 
 .text-gradient {
-	background: linear-gradient(90deg, var(--color-electric), var(--color-neon));
+	background: linear-gradient(90deg, var(--color-electric), var(--color-neon), var(--color-electric));
+	background-size: 200% auto;
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
+	animation: shimmer 7s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+	from { background-position: 0% center; }
+	to { background-position: 100% center; }
+}
+
+.aurora {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+.aurora span {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(120px);
+	opacity: 0.5;
+}
+.aurora span:nth-child(1) {
+	width: 55vw; height: 55vw; left: -12vw; top: -18vw;
+	background: radial-gradient(circle, rgb(0 200 255 / 0.14), transparent 65%);
+	animation: auroraA 26s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(2) {
+	width: 45vw; height: 45vw; right: -14vw; top: 30vh;
+	background: radial-gradient(circle, rgb(47 123 255 / 0.12), transparent 65%);
+	animation: auroraB 32s ease-in-out infinite alternate;
+}
+@keyframes auroraA {
+	to { transform: translate(9vw, 7vh) scale(1.12); }
+}
+@keyframes auroraB {
+	to { transform: translate(-8vw, -6vh) scale(0.92); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.aurora span { animation: none; }
 }
 
 .glow-border {
