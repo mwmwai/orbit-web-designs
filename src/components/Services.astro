@@ -36,11 +36,10 @@ const services = [
 		<div class="grid gap-6 md:grid-cols-3">
 			{
 				services.map((s, i) => (
-				<article
-					class="reveal glow-border group relative overflow-hidden rounded-2xl p-8 transition duration-300 hover:shadow-2xl hover:shadow-electric/10"
-					style={`transition-delay:${i * 80}ms`}
-					data-tilt
-				>
+					<article
+						class="reveal glow-border group relative overflow-hidden rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/10"
+						style={`transition-delay:${i * 80}ms`}
+					>
 						<div class="mb-6 inline-flex rounded-xl bg-gradient-to-br from-electric/20 to-neon/20 p-3.5 ring-1 ring-electric/30">
 							<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
 								<path d={s.icon} stroke="#8fb8ff" />
@@ -59,5 +58,4 @@ const services = [
 		</div>
 	</div>
 </section>
-
 

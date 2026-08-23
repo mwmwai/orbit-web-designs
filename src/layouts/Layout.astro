@@ -55,28 +55,6 @@ const jsonLd = {
 		<slot />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
-			function initTilt() {
-				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-				document.querySelectorAll("[data-tilt]").forEach((el) => {
-					if (el.dataset.tiltBound) return;
-					el.dataset.tiltBound = "1";
-					el.classList.add("tilt");
-					el.addEventListener("mousemove", (e) => {
-						const r = el.getBoundingClientRect();
-						const px = (e.clientX - r.left) / r.width - 0.5;
-						const py = (e.clientY - r.top) / r.height - 0.5;
-						el.style.setProperty("--ry", (px * 10).toFixed(2) + "deg");
-						el.style.setProperty("--rx", (-py * 8).toFixed(2) + "deg");
-						el.classList.add("is-tilting");
-					});
-					el.addEventListener("mouseleave", () => {
-						el.style.setProperty("--ry", "0deg");
-						el.style.setProperty("--rx", "0deg");
-						el.classList.remove("is-tilting");
-					});
-				});
-			}
-
 			function initReveal() {
 				const io = new IntersectionObserver(
 					(entries) => {
@@ -91,10 +69,7 @@ const jsonLd = {
 				);
 				document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 			}
-			document.addEventListener("astro:page-load", () => {
-				initReveal();
-				initTilt();
-			});
+			document.addEventListener("astro:page-load", initReveal);
 		</script>
 	</body>
 </html>
