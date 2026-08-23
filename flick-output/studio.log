@@ -1,0 +1,10 @@
+[90mRemotion root directory:[39m [90mC:\Users\mwmwa\OneDrive\Documents\Default Project\flick-output\remotion[39m
+[90mNo config file loaded.[39m
+[90mChecking if[39m [90msrc/index.tsx[39m [90mis the entry file[39m
+[90mEntry point:[39m [90mC:\Users\mwmwa\OneDrive\Documents\Default Project\flick-output\remotion\src\index.tsx[39m [90mreason:[39m [90margument passed - found in cwd[39m
+[90mUsing Webpack bundler.[39m
+[90mBinding server to host 0.0.0.0, port 3000[39m
+Server ready - Local: [4mhttp://localhost:3000[24m, Network: [4mhttp://192.168.0.108:3000[24m
+Building...
+[90mNot opening browser, reason: --no-open specified or config file[39m
+Built in 24024ms
