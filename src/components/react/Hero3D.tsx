@@ -3,12 +3,12 @@
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { Float, Html, OrbitControls, Stars, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Suspense } from "react";
 
 extend({ Float, Html, OrbitControls, Stars });
 
-function OrbitRings() {
+function OrbitRings({ mobile }: { mobile: boolean }) {
   const ref = useRef<THREE.Group>(null);
   const time = useRef(0);
 
@@ -25,7 +25,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.18,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -41,7 +41,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.12,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -55,7 +55,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.15,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -65,7 +65,7 @@ function OrbitRings() {
   );
 
   return (
-    <group ref={ref} rotationX={-Math.PI / 3}>
+    <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 0.85 : 1}>
       <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 16, 100)} material={ringMaterial} />
       <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 16, 100)} material={innerMaterial} rotationZ={0.5} />
       <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 16, 100)} material={accentMaterial} rotationZ={-0.4} />
@@ -133,7 +133,7 @@ function OrbitParticles() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.3);
           }
         `,
       }),
@@ -187,7 +187,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x00c8ff}
           transparent
-          opacity={0.15}
+          opacity={0.22}
           roughness={0}
           metalness={1}
           clearcoat={1}
@@ -199,7 +199,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x2f7bff}
           transparent
-          opacity={0.12}
+          opacity={0.17}
           roughness={0}
           metalness={1}
         />
@@ -209,7 +209,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x5fe6ff}
           transparent
-          opacity={0.1}
+          opacity={0.14}
           roughness={0}
           metalness={0.8}
         />
@@ -218,30 +218,42 @@ function AmbientOrbs() {
   );
 }
 
-function HeroScene() {
+function HeroScene({ mobile }: { mobile: boolean }) {
   return (
     <>
-      <ambientLight intensity={0.4} color="#5fe6ff" />
-      <directionalLight position={[5, 10, 7]} intensity={1.2} color="#ffffff" />
-      <directionalLight position={[-5, 5, -7]} intensity={0.6} color="#00c8ff" />
-      <OrbitRings />
+      <ambientLight intensity={0.55} color="#5fe6ff" />
+      <directionalLight position={[5, 10, 7]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[-5, 5, -7]} intensity={0.9} color="#00c8ff" />
+      <pointLight position={[0, 0, 4]} intensity={1.2} color="#00c8ff" distance={20} decay={1.6} />
+      <OrbitRings mobile={mobile} />
       <OrbitParticles />
       <AmbientOrbs />
-      <Stars radius={50} opacity={0.3} color="#00c8ff" />
+      <Stars radius={50} opacity={0.35} color="#00c8ff" />
     </>
   );
 }
 
 export default function Hero3D() {
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setMobile(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
   return (
     <div className="absolute inset-0 -z-10" aria-hidden="true">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 45 }}
-        gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
+        camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: mobile ? 58 : 45 }}
+        dpr={mobile ? [1, 1.25] : [1, 1.5]}
+        gl={{ antialias: !mobile, alpha: true, preserveDrawingBuffer: false, powerPreference: "high-performance" }}
         style={{ touchAction: "none" }}
       >
         <Suspense fallback={null}>
-          <HeroScene />
+          <HeroScene mobile={mobile} />
         </Suspense>
         <OrbitControls
           enablePan={false}

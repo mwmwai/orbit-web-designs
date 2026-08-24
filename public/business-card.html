@@ -67,7 +67,8 @@
 		.front { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 		.front .ring-1 { width: 3.4in; height: 5.2in; top: -1.6in; left: 0.05in; transform: rotate(-14deg); }
 		.front .ring-2 { width: 3.4in; height: 5.2in; top: -1.6in; right: 0.05in; left: auto; transform: rotate(14deg); border-color: rgb(47 123 255 / 0.12); }
-		.front img.mark { width: 0.62in; height: 0.62in; display: block; transform: translateX(-0.2in); }
+		.front .brand-row { display: flex; align-items: center; gap: 0.16in; }
+		.front img.mark { width: 0.52in; height: 0.52in; display: block; }
 		.wordmark {
 			margin-top: 0.09in;
 			font-size: 21pt; font-weight: 900; letter-spacing: 0.32em; line-height: 1;
@@ -82,6 +83,11 @@
 		.subtitle {
 			font-size: 7pt; font-weight: 600; letter-spacing: 0.30em; text-transform: uppercase;
 			color: var(--slate-400); text-indent: 0.30em;
+		}
+		.front .tagline {
+			position: absolute; left: 0; right: 0; bottom: 0.14in;
+			font-size: 6.2pt; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+			color: var(--slate-500); text-align: center;
 		}
 
 		/* ================= BACK ================= */
@@ -139,10 +145,13 @@
 				<div class="glow-b"></div>
 				<div class="ring ring-1"></div>
 				<div class="ring ring-2"></div>
-				<img class="mark" src="/logo-mark.png" alt="" />
+				<div class="brand-row">
+				<img class="mark" src="logo-mark.png" alt="" />
 				<div class="wordmark">ORBIT</div>
-				<div class="divider"></div>
+			</div>
+			<div class="divider"></div>
 				<div class="subtitle">Web Designs &amp; Marketing</div>
+			<div class="tagline">We Build High-Performance Websites &amp; Drive Real Growth</div>
 			</div>
 		</div>
 
