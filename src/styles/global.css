@@ -25,6 +25,55 @@ body {
 	background: rgb(0 200 255 / 0.3);
 }
 
+/* Fluid display type — scales like a design system, not stretched breakpoints */
+.display-1 {
+	font-size: clamp(2.5rem, 1.2rem + 5.2vw, 4.75rem);
+	line-height: 1.03;
+	letter-spacing: -0.02em;
+}
+.display-2 {
+	font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.25rem);
+	line-height: 1.08;
+	letter-spacing: -0.015em;
+}
+
+/* Word-by-word masked hero reveal */
+.word-reveal {
+	display: inline-block;
+	opacity: 0;
+	transform: translateY(0.65em) rotate(2deg);
+	transform-origin: left bottom;
+	animation: wordIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	animation-delay: calc(var(--i, 0) * 65ms + 150ms);
+	will-change: transform, opacity;
+}
+@keyframes wordIn {
+	to {
+		opacity: 1;
+		transform: translateY(0) rotate(0deg);
+	}
+}
+
+/* Custom scrollbar — thin, branded */
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, var(--color-electric), var(--color-neon));
+	border-radius: 8px;
+	border: 2px solid var(--color-ink);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(180deg, #5fe6ff, var(--color-electric));
+}
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-electric) var(--color-ink);
+}
+
 .text-gradient {
 	background: linear-gradient(90deg, var(--color-electric), var(--color-neon), var(--color-electric));
 	background-size: 200% auto;

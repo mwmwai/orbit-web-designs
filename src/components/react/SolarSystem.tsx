@@ -40,11 +40,11 @@ function Sun() {
       </mesh>
       <mesh ref={halo} scale={1.6}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.1} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.16} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
       <mesh scale={2.6}>
         <sphereGeometry args={[0.6, 24, 24]} />
-        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.045} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.07} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -52,6 +52,7 @@ function Sun() {
 
 function Planet({ def }: { def: PlanetDef }) {
   const mesh = useRef<THREE.Mesh>(null);
+  const glow = useRef<THREE.Mesh>(null);
   const a = useRef(def.phase);
 
   useFrame((_, dt) => {
@@ -60,13 +61,23 @@ function Planet({ def }: { def: PlanetDef }) {
       mesh.current.position.set(Math.cos(a.current) * def.radius, 0, Math.sin(a.current) * def.radius);
       mesh.current.rotation.y += dt * 0.5;
     }
+    if (glow.current) {
+      glow.current.position.set(Math.cos(a.current) * def.radius, 0, Math.sin(a.current) * def.radius);
+    }
   });
 
   return (
-    <mesh ref={mesh} position={[def.radius, 0, 0]}>
-      <sphereGeometry args={[def.size, 20, 20]} />
-      <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.35} roughness={0.4} metalness={0.6} />
-    </mesh>
+    <group>
+      <mesh ref={mesh} position={[def.radius, 0, 0]}>
+        <sphereGeometry args={[def.size, 20, 20]} />
+        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.9} roughness={0.3} metalness={0.5} />
+      </mesh>
+      {/* atmosphere glow */}
+      <mesh ref={glow} position={[def.radius, 0, 0]} scale={1.7}>
+        <sphereGeometry args={[def.size, 16, 16]} />
+        <meshBasicMaterial color={def.color} transparent opacity={0.16} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+      </mesh>
+    </group>
   );
 }
 
@@ -85,11 +96,11 @@ function RingedPlanet({ def }: { def: PlanetDef }) {
     <group ref={group} position={[def.radius, 0, 0]} rotation={[0.45, 0, 0.2]}>
       <mesh>
         <sphereGeometry args={[def.size, 20, 20]} />
-        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.3} roughness={0.5} metalness={0.5} />
+        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.8} roughness={0.35} metalness={0.5} />
       </mesh>
-      <mesh rotation={[Math.PI / 2.2, 0, 0]}>
-        <torusGeometry args={[def.size * 1.9, def.size * 0.12, 8, 40]} />
-        <meshBasicMaterial color={0x8fd8ff} transparent opacity={0.28} side={THREE.DoubleSide} />
+      <mesh scale={1.7}>
+        <sphereGeometry args={[def.size, 16, 16]} />
+        <meshBasicMaterial color={def.color} transparent opacity={0.15} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -166,6 +177,7 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
   const spinner = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const eased = useRef({ x: 0, y: 0 });
+  const spin = useRef(0);
 
   useEffect(() => {
     if (mobile) return;
@@ -186,11 +198,14 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
       parallax.current.rotation.y = eased.current.x * 0.07;
       parallax.current.rotation.x = -0.42 + eased.current.y * 0.05;
     }
+    // Rotation = gentle idle spin + scroll position (NOT per-frame increment — that compounded and spun wildly)
     if (spinner.current) {
-      spinner.current.rotation.y += dt * 0.012 + (window.scrollY || 0) * 0.00002;
+      spin.current += dt * 0.01;
+      spinner.current.rotation.y = spin.current + (window.scrollY || 0) * 0.00016;
     }
+    // Scroll dim: gentle, stays bright
     if (containerRef.current) {
-      const fade = Math.max(0.35, 1 - (window.scrollY || 0) / (innerHeight * 1.4));
+      const fade = Math.max(0.55, 1 - (window.scrollY || 0) / (innerHeight * 1.8));
       containerRef.current.style.opacity = fade.toFixed(3);
     }
   });
@@ -208,12 +223,12 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
   );
 
   const orbitDefs = [
-    { radius: 1.35, opacity: 0.14, tiltX: 0.05, tiltZ: 0.02 },
-    { radius: 1.95, opacity: 0.12, tiltX: -0.08, tiltZ: 0.06 },
-    { radius: 2.6, opacity: 0.11, tiltX: 0.1, tiltZ: -0.05 },
-    { radius: 3.2, opacity: 0.09, tiltX: -0.05, tiltZ: 0.1 },
-    { radius: 4.6, opacity: 0.08, tiltX: 0.07, tiltZ: -0.08 },
-    { radius: 5.4, opacity: 0.07, tiltX: -0.1, tiltZ: 0.04 },
+    { radius: 1.35, opacity: 0.22, tiltX: 0.05, tiltZ: 0.02 },
+    { radius: 1.95, opacity: 0.19, tiltX: -0.08, tiltZ: 0.06 },
+    { radius: 2.6, opacity: 0.17, tiltX: 0.1, tiltZ: -0.05 },
+    { radius: 3.2, opacity: 0.14, tiltX: -0.05, tiltZ: 0.1 },
+    { radius: 4.6, opacity: 0.13, tiltX: 0.07, tiltZ: -0.08 },
+    { radius: 5.4, opacity: 0.11, tiltX: -0.1, tiltZ: 0.04 },
   ];
 
   return (
@@ -223,21 +238,21 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
           <Sun />
           {orbitDefs.map((o, i) => (
             <mesh key={i} rotation={[Math.PI / 2 + o.tiltX, 0, o.tiltZ]}>
-              <torusGeometry args={[o.radius, 0.006, 8, 128]} />
-              <meshBasicMaterial color={0x38b6ff} transparent opacity={o.opacity} blending={THREE.AdditiveBlending} depthWrite={false} />
+              <torusGeometry args={[o.radius, 0.008, 8, 96]} />
+              <meshBasicMaterial color={0x4fc3ff} transparent opacity={o.opacity} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
           ))}
           {planets.map((p, i) =>
             p.ringed ? <RingedPlanet key={i} def={p} /> : <Planet key={i} def={p} />
           )}
-          <AsteroidBelt count={mobile ? 220 : 420} />
+          <AsteroidBelt count={mobile ? 160 : 300} />
         </group>
       </group>
       <Comet mobile={mobile} />
-      <Stars radius={60} depth={40} count={mobile ? 700 : 1400} factor={3.2} saturation={0} fade speed={0.6} />
-      <ambientLight intensity={0.5} color="#9fd8ff" />
-      <pointLight position={[0, 0, 0]} intensity={2.2} color="#bfefff" distance={14} decay={1.6} />
-      <directionalLight position={[6, 8, 6]} intensity={0.7} color="#ffffff" />
+      <Stars radius={60} depth={40} count={mobile ? 500 : 900} factor={3.5} saturation={0} fade speed={0.6} />
+      <ambientLight intensity={0.55} color="#9fd8ff" />
+      <pointLight position={[0, 0, 0]} intensity={2.6} color="#bfefff" distance={16} decay={1.5} />
+      <directionalLight position={[6, 8, 6]} intensity={0.9} color="#ffffff" />
     </>
   );
 }
@@ -258,8 +273,8 @@ export default function SolarSystem() {
     <div ref={containerRef} className="fixed inset-0 -z-10" aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0.6, mobile ? 11 : 9], fov: mobile ? 58 : 50 }}
-        dpr={mobile ? [1, 1.25] : [1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        dpr={mobile ? [1, 1] : [1, 1.25]}
+        gl={{ antialias: mobile ? false : true, alpha: true, powerPreference: "high-performance" }}
         style={{ touchAction: "none" }}
       >
         <Suspense fallback={null}>
