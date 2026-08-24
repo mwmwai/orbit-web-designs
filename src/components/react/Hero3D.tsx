@@ -15,8 +15,8 @@ function OrbitRings() {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.05;
-      ref.current.rotation.x = Math.sin(time.current * 0.1) * 0.15;
+      ref.current.rotation.y = time.current * 0.025;
+      ref.current.rotation.x = Math.sin(time.current * 0.06) * 0.08;
     }
   });
 
@@ -25,7 +25,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.06,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -41,7 +41,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.04,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -55,7 +55,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.035,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -65,17 +65,17 @@ function OrbitRings() {
   );
 
   return (
-    <group ref={ref} rotationX={-Math.PI / 3}>
-      <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 16, 100)} material={ringMaterial} />
-      <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 16, 100)} material={innerMaterial} rotationZ={0.5} />
-      <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 16, 100)} material={accentMaterial} rotationZ={-0.4} />
-      <mesh geometry={new THREE.TorusGeometry(1.6, 0.01, 16, 100)} material={ringMaterial} rotationZ={0.8} />
+    <group ref={ref} rotationX={-Math.PI / 2.8} position={[2.5, -1.5, 0]}>
+      <mesh geometry={new THREE.TorusGeometry(2.8, 0.018, 16, 100)} material={ringMaterial} />
+      <mesh geometry={new THREE.TorusGeometry(2.2, 0.012, 16, 100)} material={innerMaterial} rotationZ={0.5} />
+      <mesh geometry={new THREE.TorusGeometry(3.4, 0.02, 16, 100)} material={accentMaterial} rotationZ={-0.4} />
+      <mesh geometry={new THREE.TorusGeometry(1.6, 0.008, 16, 100)} material={ringMaterial} rotationZ={0.8} />
     </group>
   );
 }
 
 function OrbitParticles() {
-  const count = 800;
+  const count = 400;
   const positions = useMemo(() => new Float32Array(count * 3), []);
   const sizes = useMemo(() => new Float32Array(count), []);
   const alphas = useMemo(() => new Float32Array(count), []);
@@ -85,15 +85,15 @@ function OrbitParticles() {
 
   useMemo(() => {
     for (let i = 0; i < count; i++) {
-      const r = 1.2 + Math.random() * 2.8;
+      const r = 1.5 + Math.random() * 3;
       const a = Math.random() * Math.PI * 2;
-      const phi = (Math.random() - 0.5) * Math.PI * 0.6;
+      const phi = (Math.random() - 0.5) * Math.PI * 0.5;
       positions[i * 3] = r * Math.cos(a) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.sin(a) * Math.cos(phi);
-      sizes[i] = 0.5 + Math.random() * 1.5;
-      alphas[i] = 0.1 + Math.random() * 0.4;
-      speeds[i] = 0.02 + Math.random() * 0.08;
+      sizes[i] = 0.3 + Math.random() * 1.0;
+      alphas[i] = 0.05 + Math.random() * 0.25;
+      speeds[i] = 0.015 + Math.random() * 0.05;
       radii[i] = r;
       angles[i] = a;
     }
@@ -123,7 +123,7 @@ function OrbitParticles() {
           void main() {
             vAlpha = aAlpha;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = aSize * (300.0 / -mvPosition.z);
+            gl_PointSize = aSize * (250.0 / -mvPosition.z);
             gl_Position = projectionMatrix * mvPosition;
           }
         `,
@@ -133,7 +133,7 @@ function OrbitParticles() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 0.7);
           }
         `,
       }),
@@ -146,14 +146,15 @@ function OrbitParticles() {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.02;
+      ref.current.rotation.y = time.current * 0.01;
+      ref.current.position.x = Math.sin(time.current * 0.05) * 0.3;
       const pos = ref.current.geometry.attributes.position.array as Float32Array;
       const speed = ref.current.geometry.attributes.aSpeed.array as Float32Array;
       const radius = ref.current.geometry.attributes.aRadius.array as Float32Array;
       const angle = ref.current.geometry.attributes.aAngle.array as Float32Array;
       for (let i = 0; i < count; i++) {
         angle[i] += speed[i] * dt * 60;
-        const phi = Math.sin(time.current * speed[i] * 10 + i) * 0.3;
+        const phi = Math.sin(time.current * speed[i] * 8 + i) * 0.2;
         pos[i * 3] = radius[i] * Math.cos(angle[i]) * Math.cos(phi);
         pos[i * 3 + 1] = radius[i] * Math.sin(phi);
         pos[i * 3 + 2] = radius[i] * Math.sin(angle[i]) * Math.cos(phi);
