@@ -25,7 +25,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.18,
+        opacity: 0.22,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -41,7 +41,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.15,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -55,7 +55,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.18,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -65,7 +65,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
   );
 
   return (
-    <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 0.85 : 1}>
+    <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 1 : 1.2}>
       <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 16, 100)} material={ringMaterial} />
       <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 16, 100)} material={innerMaterial} rotationZ={0.5} />
       <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 16, 100)} material={accentMaterial} rotationZ={-0.4} />
@@ -133,7 +133,7 @@ function OrbitParticles() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.3);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.5);
           }
         `,
       }),
@@ -218,22 +218,32 @@ function AmbientOrbs() {
   );
 }
 
+function ScrollFade({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
+  useFrame(() => {
+    if (!containerRef.current) return;
+    const fade = Math.max(0.25, 1 - (window.scrollY || 0) / (window.innerHeight * 1.5));
+    containerRef.current.style.opacity = fade.toFixed(3);
+  });
+  return null;
+}
+
 function HeroScene({ mobile }: { mobile: boolean }) {
   return (
     <>
-      <ambientLight intensity={0.55} color="#5fe6ff" />
-      <directionalLight position={[5, 10, 7]} intensity={1.5} color="#ffffff" />
-      <directionalLight position={[-5, 5, -7]} intensity={0.9} color="#00c8ff" />
-      <pointLight position={[0, 0, 4]} intensity={1.2} color="#00c8ff" distance={20} decay={1.6} />
+      <ambientLight intensity={0.6} color="#5fe6ff" />
+      <directionalLight position={[5, 10, 7]} intensity={1.7} color="#ffffff" />
+      <directionalLight position={[-5, 5, -7]} intensity={1.0} color="#00c8ff" />
+      <pointLight position={[0, 0, 4]} intensity={1.5} color="#00c8ff" distance={20} decay={1.6} />
       <OrbitRings mobile={mobile} />
       <OrbitParticles />
       <AmbientOrbs />
-      <Stars radius={50} opacity={0.35} color="#00c8ff" />
+      <Stars radius={50} opacity={0.4} color="#00c8ff" />
     </>
   );
 }
 
 export default function Hero3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
@@ -245,7 +255,7 @@ export default function Hero3D() {
   }, []);
 
   return (
-    <div className="absolute inset-0 -z-10" aria-hidden="true">
+    <div ref={containerRef} className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: mobile ? 58 : 45 }}
         dpr={mobile ? [1, 1.25] : [1, 1.5]}
@@ -254,6 +264,7 @@ export default function Hero3D() {
       >
         <Suspense fallback={null}>
           <HeroScene mobile={mobile} />
+          <ScrollFade containerRef={containerRef} />
         </Suspense>
         <OrbitControls
           enablePan={false}
