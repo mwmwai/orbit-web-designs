@@ -1,12 +1,9 @@
 "use client";
 
-import { Canvas, useFrame, extend } from "@react-three/fiber";
-import { Float, Html, OrbitControls, Stars, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Suspense } from "react";
-
-extend({ Float, Html, OrbitControls, Stars });
 
 function OrbitRings({ mobile }: { mobile: boolean }) {
   const ref = useRef<THREE.Group>(null);
@@ -15,7 +12,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.05;
+      ref.current.rotation.y = time.current * 0.14;
       ref.current.rotation.x = Math.sin(time.current * 0.1) * 0.15;
     }
   });
@@ -146,13 +143,13 @@ function OrbitParticles() {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.02;
+      ref.current.rotation.y = time.current * 0.05;
       const pos = ref.current.geometry.attributes.position.array as Float32Array;
       const speed = ref.current.geometry.attributes.aSpeed.array as Float32Array;
       const radius = ref.current.geometry.attributes.aRadius.array as Float32Array;
       const angle = ref.current.geometry.attributes.aAngle.array as Float32Array;
       for (let i = 0; i < count; i++) {
-        angle[i] += speed[i] * dt * 60;
+        angle[i] += speed[i] * dt * 110;
         const phi = Math.sin(time.current * speed[i] * 10 + i) * 0.3;
         pos[i * 3] = radius[i] * Math.cos(angle[i]) * Math.cos(phi);
         pos[i * 3 + 1] = radius[i] * Math.sin(phi);
@@ -218,6 +215,45 @@ function AmbientOrbs() {
   );
 }
 
+function StarField() {
+  const ref = useRef<THREE.Points>(null);
+
+  const geo = useMemo(() => {
+    const count = 900;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 38 + Math.random() * 16;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    return g;
+  }, []);
+
+  const mat = useMemo(
+    () =>
+      new THREE.PointsMaterial({
+        color: 0x9fd8ff,
+        size: 0.09,
+        transparent: true,
+        opacity: 0.75,
+        sizeAttenuation: true,
+        depthWrite: false,
+      }),
+    []
+  );
+
+  useFrame((_, dt) => {
+    if (ref.current) ref.current.rotation.y += dt * 0.006;
+  });
+
+  return <points ref={ref} geometry={geo} material={mat} />;
+}
+
 function ScrollFade({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
   useFrame(() => {
     if (!containerRef.current) return;
@@ -237,7 +273,7 @@ function HeroScene({ mobile }: { mobile: boolean }) {
       <OrbitRings mobile={mobile} />
       <OrbitParticles />
       <AmbientOrbs />
-      <Stars radius={50} opacity={0.4} color="#00c8ff" />
+      <StarField />
     </>
   );
 }
@@ -266,13 +302,6 @@ export default function Hero3D() {
           <HeroScene mobile={mobile} />
           <ScrollFade containerRef={containerRef} />
         </Suspense>
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          enableRotate={false}
-          autoRotate={true}
-          autoRotateSpeed={0.3}
-        />
       </Canvas>
     </div>
   );
