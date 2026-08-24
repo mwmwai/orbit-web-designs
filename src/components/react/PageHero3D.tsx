@@ -21,38 +21,38 @@ function OrbitRings({ variant }: { variant: PageHero3DProps["variant"] }) {
     switch (variant) {
       case "services":
         return {
-          rings: 4,
-          baseRadius: 2.8,
-          colors: [0x00c8ff, 0x2f7bff, 0x5fe6ff, 0x00c8ff],
-          speeds: [0.05, 0.07, 0.03, 0.09],
+          rings: 5,
+          baseRadius: 2.6,
+          colors: [0x00ffff, 0x00c8ff, 0x5fe6ff, 0x2f7bff, 0x00ffff],
+          speeds: [0.06, 0.08, 0.04, 0.1, 0.05],
         };
       case "packages":
         return {
-          rings: 3,
-          baseRadius: 2.5,
-          colors: [0x2f7bff, 0x00c8ff, 0x5fe6ff],
-          speeds: [0.04, 0.06, 0.02],
+          rings: 4,
+          baseRadius: 2.4,
+          colors: [0x2f7bff, 0x00ffff, 0x5fe6ff, 0x00c8ff],
+          speeds: [0.05, 0.07, 0.03, 0.09],
         };
       case "portfolio":
         return {
-          rings: 5,
-          baseRadius: 3,
-          colors: [0x5fe6ff, 0x00c8ff, 0x2f7bff, 0x5fe6ff, 0x00c8ff],
-          speeds: [0.06, 0.08, 0.04, 0.1, 0.05],
+          rings: 6,
+          baseRadius: 2.8,
+          colors: [0x5fe6ff, 0x00ffff, 0x00c8ff, 0x2f7bff, 0x5fe6ff, 0x00ffff],
+          speeds: [0.07, 0.09, 0.05, 0.11, 0.06, 0.08],
         };
       case "contact":
         return {
-          rings: 2,
+          rings: 3,
           baseRadius: 2.2,
-          colors: [0x00c8ff, 0x5fe6ff],
-          speeds: [0.03, 0.05],
+          colors: [0x00ffff, 0x5fe6ff, 0x00c8ff],
+          speeds: [0.04, 0.06, 0.03],
         };
       default:
         return {
-          rings: 4,
-          baseRadius: 2.8,
-          colors: [0x00c8ff, 0x2f7bff, 0x5fe6ff, 0x00c8ff],
-          speeds: [0.05, 0.07, 0.03, 0.09],
+          rings: 5,
+          baseRadius: 2.6,
+          colors: [0x00ffff, 0x00c8ff, 0x5fe6ff, 0x2f7bff, 0x00ffff],
+          speeds: [0.06, 0.08, 0.04, 0.1, 0.05],
         };
     }
   }, [variant]);
@@ -60,21 +60,22 @@ function OrbitRings({ variant }: { variant: PageHero3DProps["variant"] }) {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.04;
-      ref.current.rotation.x = Math.sin(time.current * 0.1) * 0.12;
+      ref.current.rotation.y = time.current * 0.05;
+      ref.current.rotation.x = Math.sin(time.current * 0.1) * 0.15;
     }
   });
 
   return (
-    <group ref={ref} rotationX={-Math.PI / 3.5}>
+    <group ref={ref} rotationX={-Math.PI / 3.2}>
       {Array.from({ length: configs.rings }).map((_, i) => {
-        const radius = configs.baseRadius + i * 0.5 - (configs.rings - 1) * 0.25;
-        const opacity = 0.15 - i * 0.02;
+        const radius = configs.baseRadius + i * 0.45 - (configs.rings - 1) * 0.22;
+        const opacity = 0.35 - i * 0.04;
         const wireframe = i % 2 === 0;
+        const tube = wireframe ? 0.02 : 0.015;
         return (
           <mesh
             key={i}
-            geometry={new THREE.TorusGeometry(radius, 0.018, 16, 100)}
+            geometry={new THREE.TorusGeometry(radius, tube, 24, 120)}
             material={
               new THREE.MeshPhysicalMaterial({
                 color: configs.colors[i % configs.colors.length],
@@ -84,11 +85,13 @@ function OrbitRings({ variant }: { variant: PageHero3DProps["variant"] }) {
                 wireframe,
                 roughness: 0,
                 metalness: 1,
-                clearcoat: wireframe ? 1 : 0,
+                clearcoat: wireframe ? 1 : 0.5,
                 clearcoatRoughness: 0,
+                emissive: configs.colors[i % configs.colors.length],
+                emissiveIntensity: wireframe ? 0.15 : 0.08,
               })
             }
-            rotationZ={i * 0.4}
+            rotationZ={i * 0.35}
           />
         );
       })}
@@ -97,7 +100,7 @@ function OrbitRings({ variant }: { variant: PageHero3DProps["variant"] }) {
 }
 
 function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
-  const count = 600;
+  const count = variant === "portfolio" ? 1200 : 900;
   const positions = useMemo(() => new Float32Array(count * 3), []);
   const sizes = useMemo(() => new Float32Array(count), []);
   const alphas = useMemo(() => new Float32Array(count), []);
@@ -105,23 +108,25 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
   const radii = useMemo(() => new Float32Array(count), []);
   const angles = useMemo(() => new Float32Array(count), []);
   const phis = useMemo(() => new Float32Array(count), []);
+  const colorMix = useMemo(() => new Float32Array(count), []);
 
   useMemo(() => {
     for (let i = 0; i < count; i++) {
-      const r = 1 + Math.random() * 3;
+      const r = 0.8 + Math.random() * 3.5;
       const a = Math.random() * Math.PI * 2;
-      const phi = (Math.random() - 0.5) * Math.PI * 0.5;
+      const phi = (Math.random() - 0.5) * Math.PI * 0.6;
       positions[i * 3] = r * Math.cos(a) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.sin(a) * Math.cos(phi);
-      sizes[i] = 0.4 + Math.random() * 1.2;
-      alphas[i] = 0.08 + Math.random() * 0.35;
-      speeds[i] = 0.015 + Math.random() * 0.06;
+      sizes[i] = 0.8 + Math.random() * 2.0;
+      alphas[i] = 0.25 + Math.random() * 0.5;
+      speeds[i] = 0.02 + Math.random() * 0.08;
       radii[i] = r;
       angles[i] = a;
       phis[i] = phi;
+      colorMix[i] = Math.random();
     }
-  }, [positions, sizes, alphas, speeds, radii, angles, phis]);
+  }, [positions, sizes, alphas, speeds, radii, angles, phis, colorMix]);
 
   const geometry = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -132,8 +137,9 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
     g.setAttribute("aRadius", new THREE.BufferAttribute(radii, 1));
     g.setAttribute("aAngle", new THREE.BufferAttribute(angles, 1));
     g.setAttribute("aPhi", new THREE.BufferAttribute(phis, 1));
+    g.setAttribute("aColorMix", new THREE.BufferAttribute(colorMix, 1));
     return g;
-  }, [positions, sizes, alphas, speeds, radii, angles, phis]);
+  }, [positions, sizes, alphas, speeds, radii, angles, phis, colorMix]);
 
   const material = useMemo(
     () =>
@@ -144,21 +150,30 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
         vertexShader: `
           attribute float aSize;
           attribute float aAlpha;
+          attribute float aColorMix;
           varying float vAlpha;
+          varying float vColorMix;
           void main() {
             vAlpha = aAlpha;
+            vColorMix = aColorMix;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = aSize * (300.0 / -mvPosition.z);
+            gl_PointSize = aSize * (400.0 / -mvPosition.z);
             gl_Position = projectionMatrix * mvPosition;
           }
         `,
         fragmentShader: `
           varying float vAlpha;
+          varying float vColorMix;
           void main() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha);
+            vec3 color1 = vec3(0.0, 1.0, 1.0);
+            vec3 color2 = vec3(0.18, 0.48, 1.0);
+            vec3 color3 = vec3(0.37, 0.9, 1.0);
+            vec3 color = mix(color1, color2, vColorMix);
+            color = mix(color, color3, sin(vColorMix * 3.14159));
+            gl_FragColor = vec4(color, alpha * vAlpha * 1.5);
           }
         `,
       }),
@@ -171,7 +186,8 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
   useFrame((_, dt) => {
     time.current += dt;
     if (ref.current) {
-      ref.current.rotation.y = time.current * 0.015;
+      ref.current.rotation.y = time.current * 0.012;
+      ref.current.rotation.x = Math.sin(time.current * 0.05) * 0.05;
       const pos = ref.current.geometry.attributes.position.array as Float32Array;
       const speed = ref.current.geometry.attributes.aSpeed.array as Float32Array;
       const radius = ref.current.geometry.attributes.aRadius.array as Float32Array;
@@ -179,7 +195,7 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
       const phi = ref.current.geometry.attributes.aPhi.array as Float32Array;
       for (let i = 0; i < count; i++) {
         angle[i] += speed[i] * dt * 60;
-        const phiOffset = Math.sin(time.current * speed[i] * 8 + i) * 0.25;
+        const phiOffset = Math.sin(time.current * speed[i] * 6 + i) * 0.3;
         pos[i * 3] = radius[i] * Math.cos(angle[i]) * Math.cos(phi[i] + phiOffset);
         pos[i * 3 + 1] = radius[i] * Math.sin(phi[i] + phiOffset);
         pos[i * 3 + 2] = radius[i] * Math.sin(angle[i]) * Math.cos(phi[i] + phiOffset);
@@ -191,6 +207,78 @@ function OrbitParticles({ variant }: { variant: PageHero3DProps["variant"] }) {
   return <points ref={ref} geometry={geometry} material={material} />;
 }
 
+function CoreGlow({ variant }: { variant: PageHero3DProps["variant"] }) {
+  const time = useRef(0);
+  const ref = useRef<THREE.Mesh>(null);
+
+  useFrame((_, dt) => {
+    time.current += dt;
+    if (ref.current) {
+      ref.current.scale.setScalar(1 + Math.sin(time.current * 1.2) * 0.12);
+      ref.current.rotation.y = time.current * 0.08;
+      ref.current.rotation.x = time.current * 0.05;
+    }
+  });
+
+  const coreColors = useMemo(() => {
+    switch (variant) {
+      case "services": return [0x00ffff, 0x00c8ff];
+      case "packages": return [0x2f7bff, 0x5fe6ff];
+      case "portfolio": return [0x5fe6ff, 0x00ffff];
+      case "contact": return [0x00c8ff, 0x5fe6ff];
+      default: return [0x00ffff, 0x00c8ff];
+    }
+  }, [variant]);
+
+  return (
+    <group>
+      <mesh ref={ref} position={[0, 0, 0]}>
+        <sphereGeometry args={[0.6, 48, 48]} />
+        <meshPhysicalMaterial
+          color={coreColors[0]}
+          transparent
+          opacity={0.25}
+          roughness={0}
+          metalness={1}
+          clearcoat={1}
+          clearcoatRoughness={0}
+          emissive={coreColors[0]}
+          emissiveIntensity={0.6}
+        />
+      </mesh>
+      <mesh
+        position={[0, 0, 0]}
+        scale={1.4}
+      >
+        <sphereGeometry args={[0.85, 32, 32]} />
+        <meshPhysicalMaterial
+          color={coreColors[1]}
+          transparent
+          opacity={0.08}
+          side={THREE.BackSide}
+          roughness={0}
+          metalness={1}
+          emissive={coreColors[1]}
+          emissiveIntensity={0.3}
+        />
+      </mesh>
+      <mesh
+        position={[0, 0, 0]}
+        scale={2.2}
+      >
+        <sphereGeometry args={[1.0, 24, 24]} />
+        <meshBasicMaterial
+          color={coreColors[0]}
+          transparent
+          opacity={0.03}
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+    </group>
+  );
+}
+
 function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
   const time = useRef(0);
   const refs = useRef<(THREE.Mesh | null)[]>([]);
@@ -199,34 +287,39 @@ function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
     switch (variant) {
       case "services":
         return [
-          { pos: [-3.5, 1.5, -2], size: 0.7, color: 0x00c8ff, opacity: 0.12 },
-          { pos: [3, -1, -3], size: 0.5, color: 0x2f7bff, opacity: 0.1 },
-          { pos: [-2, -2, 2.5], size: 0.6, color: 0x5fe6ff, opacity: 0.08 },
-          { pos: [2.5, 2, 2], size: 0.4, color: 0x00c8ff, opacity: 0.06 },
+          { pos: [-4, 2, -2.5], size: 0.9, color: 0x00ffff, opacity: 0.2, emissive: 0.4 },
+          { pos: [3.5, -1.5, -3], size: 0.6, color: 0x00c8ff, opacity: 0.18, emissive: 0.3 },
+          { pos: [-2.5, -2.5, 3], size: 0.75, color: 0x5fe6ff, opacity: 0.15, emissive: 0.25 },
+          { pos: [3, 2.5, 2.5], size: 0.5, color: 0x00ffff, opacity: 0.12, emissive: 0.2 },
+          { pos: [-1.5, 3, -1], size: 0.45, color: 0x2f7bff, opacity: 0.1, emissive: 0.15 },
         ];
       case "packages":
         return [
-          { pos: [-3, 1.8, -2.5], size: 0.8, color: 0x2f7bff, opacity: 0.1 },
-          { pos: [3.5, -1.2, -2], size: 0.45, color: 0x00c8ff, opacity: 0.08 },
-          { pos: [-1.5, -2.2, 3], size: 0.55, color: 0x5fe6ff, opacity: 0.07 },
+          { pos: [-3.5, 2, -3], size: 1.0, color: 0x2f7bff, opacity: 0.18, emissive: 0.35 },
+          { pos: [4, -1.5, -2.5], size: 0.55, color: 0x00ffff, opacity: 0.14, emissive: 0.25 },
+          { pos: [-2, -2.8, 3.5], size: 0.7, color: 0x5fe6ff, opacity: 0.12, emissive: 0.2 },
+          { pos: [2.5, 2.8, 2.8], size: 0.45, color: 0x00c8ff, opacity: 0.1, emissive: 0.15 },
         ];
       case "portfolio":
         return [
-          { pos: [-4, 2, -3], size: 0.9, color: 0x5fe6ff, opacity: 0.12 },
-          { pos: [4, -1.5, -2.5], size: 0.5, color: 0x00c8ff, opacity: 0.09 },
-          { pos: [-2.5, -2.5, 3.5], size: 0.7, color: 0x2f7bff, opacity: 0.08 },
-          { pos: [3, 2.5, 2.5], size: 0.4, color: 0x5fe6ff, opacity: 0.06 },
+          { pos: [-4.5, 2.5, -3.5], size: 1.1, color: 0x5fe6ff, opacity: 0.22, emissive: 0.45 },
+          { pos: [4.5, -2, -3], size: 0.6, color: 0x00ffff, opacity: 0.16, emissive: 0.3 },
+          { pos: [-3, -3, 4], size: 0.85, color: 0x2f7bff, opacity: 0.14, emissive: 0.25 },
+          { pos: [3.5, 3, 3], size: 0.5, color: 0x00ffff, opacity: 0.1, emissive: 0.2 },
+          { pos: [-2, 3.5, -1.5], size: 0.5, color: 0x5fe6ff, opacity: 0.1, emissive: 0.18 },
+          { pos: [3, -2.5, 2], size: 0.4, color: 0x00c8ff, opacity: 0.08, emissive: 0.12 },
         ];
       case "contact":
         return [
-          { pos: [-3, 1.2, -2], size: 0.6, color: 0x00c8ff, opacity: 0.1 },
-          { pos: [2.8, -1, -2.5], size: 0.4, color: 0x5fe6ff, opacity: 0.08 },
+          { pos: [-3.5, 1.5, -2.5], size: 0.8, color: 0x00ffff, opacity: 0.18, emissive: 0.3 },
+          { pos: [3.2, -1.2, -2.8], size: 0.5, color: 0x5fe6ff, opacity: 0.12, emissive: 0.2 },
         ];
       default:
         return [
-          { pos: [-3.5, 1.5, -2], size: 0.7, color: 0x00c8ff, opacity: 0.12 },
-          { pos: [3, -1, -3], size: 0.5, color: 0x2f7bff, opacity: 0.1 },
-          { pos: [-2, -2, 2.5], size: 0.6, color: 0x5fe6ff, opacity: 0.08 },
+          { pos: [-4, 2, -2.5], size: 0.9, color: 0x00ffff, opacity: 0.2, emissive: 0.4 },
+          { pos: [3.5, -1.5, -3], size: 0.6, color: 0x00c8ff, opacity: 0.18, emissive: 0.3 },
+          { pos: [-2.5, -2.5, 3], size: 0.75, color: 0x5fe6ff, opacity: 0.15, emissive: 0.25 },
+          { pos: [3, 2.5, 2.5], size: 0.5, color: 0x00ffff, opacity: 0.12, emissive: 0.2 },
         ];
     }
   }, [variant]);
@@ -236,9 +329,11 @@ function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
     refs.current.forEach((mesh, i) => {
       if (mesh) {
         const cfg = orbConfigs[i];
-        mesh.position.y = cfg.pos[1] + Math.sin(time.current * 0.25 + i) * 0.25;
-        mesh.position.x = cfg.pos[0] + Math.cos(time.current * 0.18 + i * 2) * 0.18;
-        mesh.rotation.y = time.current * 0.08;
+        mesh.position.y = cfg.pos[1] + Math.sin(time.current * 0.3 + i) * 0.35;
+        mesh.position.x = cfg.pos[0] + Math.cos(time.current * 0.22 + i * 2) * 0.25;
+        mesh.position.z = cfg.pos[2] + Math.sin(time.current * 0.18 + i) * 0.2;
+        mesh.rotation.y = time.current * 0.1;
+        mesh.rotation.z = time.current * 0.06;
       }
     });
   });
@@ -247,7 +342,7 @@ function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
     <>
       {orbConfigs.map((cfg, i) => (
         <mesh key={i} ref={(el) => (refs.current[i] = el)} position={cfg.pos}>
-          <sphereGeometry args={[cfg.size, 32, 32]} />
+          <sphereGeometry args={[cfg.size, 48, 48]} />
           <meshPhysicalMaterial
             color={cfg.color}
             transparent
@@ -256,6 +351,8 @@ function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
             metalness={1}
             clearcoat={1}
             clearcoatRoughness={0}
+            emissive={cfg.color}
+            emissiveIntensity={cfg.emissive}
           />
         </mesh>
       ))}
@@ -264,15 +361,28 @@ function AmbientOrbs({ variant }: { variant: PageHero3DProps["variant"] }) {
 }
 
 function HeroScene({ variant }: { variant: PageHero3DProps["variant"] }) {
+  const coreColors = useMemo(() => {
+    switch (variant) {
+      case "services": return 0x00ffff;
+      case "packages": return 0x2f7bff;
+      case "portfolio": return 0x5fe6ff;
+      case "contact": return 0x00c8ff;
+      default: return 0x00ffff;
+    }
+  }, [variant]);
+
   return (
     <>
-      <ambientLight intensity={0.35} color="#5fe6ff" />
-      <directionalLight position={[5, 10, 7]} intensity={1} color="#ffffff" />
-      <directionalLight position={[-5, 5, -7]} intensity={0.5} color="#00c8ff" />
+      <ambientLight intensity={0.6} color="#8fe6ff" />
+      <directionalLight position={[8, 15, 10]} intensity={2.5} color="#ffffff" />
+      <directionalLight position={[-8, 10, -10]} intensity={1.5} color={coreColors} />
+      <pointLight position={[0, 5, 5]} intensity={1.2} color={coreColors} distance={20} decay={1.5} />
+      <pointLight position={[0, -5, -5]} intensity={0.8} color="#5fe6ff" distance={20} decay={1.5} />
+      <CoreGlow variant={variant} />
       <OrbitRings variant={variant} />
       <OrbitParticles variant={variant} />
       <AmbientOrbs variant={variant} />
-      <Stars radius={50} opacity={0.25} color="#00c8ff" />
+      <Stars radius={60} opacity={0.4} color="#00ffff" />
     </>
   );
 }
@@ -281,7 +391,7 @@ export default function PageHero3D({ variant = "default", className = "" }: Page
   return (
     <div className={`absolute inset-0 -z-10 ${className}`} aria-hidden="true">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 45 }}
+        camera={{ position: [0, 0, 7.5], fov: 50 }}
         gl={{ antialias: true, alpha: true, preserveDrawingBuffer: false }}
         style={{ touchAction: "none" }}
       >
@@ -293,7 +403,7 @@ export default function PageHero3D({ variant = "default", className = "" }: Page
           enableZoom={false}
           enableRotate={false}
           autoRotate={true}
-          autoRotateSpeed={0.25}
+          autoRotateSpeed={0.35}
         />
       </Canvas>
     </div>
