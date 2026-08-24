@@ -35,7 +35,7 @@ const steps = [
 		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 			{
 				steps.map((s, i) => (
-					<div class="reveal relative border border-edge/70 bg-charcoal/50 p-8" style={`transition-delay:${i * 70}ms`}>
+					<div class="reveal relative border border-edge/70 bg-charcoal/50 p-8 card-shine edge-glow hover-lift magnetic" style={`transition-delay:${i * 70}ms`}>
 						<span class="font-display text-5xl font-medium text-electric/20">{s.num}</span>
 						<h3 class="mt-4 text-lg font-semibold text-white">{s.title}</h3>
 						<p class="mt-3 text-sm leading-relaxed text-slate-400">{s.text}</p>

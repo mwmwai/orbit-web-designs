@@ -31,9 +31,14 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			Now boarding — limited slots
 		</p>
 
-		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
-			Your brand, in orbit —
-			<span class="text-gradient">designed to be unforgettable.</span>
+		<h1 class="display-1 max-w-3xl font-extrabold text-white">
+			<span class="word-reveal" style="--i:0">We</span>
+			<span class="word-reveal" style="--i:1">Build</span>
+			<span class="word-reveal" style="--i:2">High-Performance</span>
+			<span class="word-reveal" style="--i:3">Websites</span>
+			<span class="word-reveal text-gradient" style="--i:4">&amp;&nbsp;Drive</span>
+			<span class="word-reveal text-gradient" style="--i:5">Real</span>
+			<span class="word-reveal text-gradient" style="--i:6">Growth.</span>
 		</h1>
 
 		<p class="hero-anim mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" style="animation-delay:200ms">
@@ -46,13 +51,13 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50"
+				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple"
 			>
 				Start your project
 			</a>
 			<a
 				href="/packages"
-				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
+				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white magnetic ripple"
 			>
 				View pricing
 			</a>
@@ -66,7 +71,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 					["10+", "Industries"],
 					["24h", "Reply time"],
 				].map(([value, label]) => (
-					<div data-tilt class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
+					<div data-tilt class="glow-border edge-glow hover-lift rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
 						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>
