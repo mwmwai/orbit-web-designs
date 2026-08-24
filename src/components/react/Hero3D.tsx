@@ -75,7 +75,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
 }
 
 function OrbitParticles() {
-  const count = 800;
+  const count = 550;
   const positions = useMemo(() => new Float32Array(count * 3), []);
   const sizes = useMemo(() => new Float32Array(count), []);
   const alphas = useMemo(() => new Float32Array(count), []);

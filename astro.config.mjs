@@ -8,6 +8,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: 'https://orbitwebdesigns.co.ke',
 	integrations: [react(), sitemap()],
+	prefetch: {
+		defaultStrategy: 'hover',
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
