@@ -36,13 +36,13 @@ const services = [
 		tags: ["Meta Ads", "Google Ads", "Funnels"],
 		link: "/services",
 	},
-{
+	{
 		num: "05",
 		icon: "M12 19l7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5zM2 2l7.586 7.586M11 11a2 2 0 11-4 0 2 2 0 014 0z",
 		title: "Brand & Graphic Design",
 		description:
-			"Logos, identity systems, social kits and marketing creatives — from KES 5,000.",
-		tags: ["Logos", "Identity", "Social kits", "From KES 5k"],
+			"Logos, identity systems, social kits and marketing creatives that look the part everywhere.",
+		tags: ["Logos", "Identity", "Social kits"],
 		link: "/contact",
 	},
 	{
@@ -72,11 +72,11 @@ const services = [
 		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
 				services.map((s, i) => (
-<article
-					data-tilt
-					class="reveal card-shine glow-border edge-glow group relative flex flex-col rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/10 hover-lift magnetic"
-					style={`transition-delay:${(i % 3) * 70}ms`}
-				>
+					<article
+						data-tilt
+						class="reveal card-shine glow-border group relative flex flex-col rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/10"
+						style={`transition-delay:${(i % 3) * 70}ms`}
+					>
 						<div class="flex items-start justify-between">
 							<div class="inline-flex rounded-xl bg-gradient-to-br from-electric/20 to-neon/20 p-3.5 ring-1 ring-electric/30">
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

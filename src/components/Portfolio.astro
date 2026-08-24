@@ -72,11 +72,11 @@ const projects = [
 		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
 				projects.map((p, i) => (
-<article
-					data-tilt
-					class="reveal card-shine glow-border edge-glow group overflow-hidden rounded-2xl hover-lift magnetic transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/15"
-					style={`transition-delay:${(i % 3) * 80}ms`}
-				>
+					<article
+						data-tilt
+						class="reveal card-shine glow-border group overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-electric/15"
+						style={`transition-delay:${(i % 3) * 80}ms`}
+					>
 						<div class="relative h-52 overflow-hidden">
 							<img
 								src={p.image}
@@ -105,7 +105,7 @@ const projects = [
 					More live projects across beauty, energy, healthcare, travel and education — see them all.
 				</p>
 			</div>
-			<a href="/portfolio" class="link-underline ripple">
+			<a href="/portfolio" class="link-underline">
 				View the full portfolio <span aria-hidden>→</span>
 			</a>
 		</div>

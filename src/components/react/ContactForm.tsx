@@ -6,11 +6,9 @@ export default function ContactForm() {
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [details, setDetails] = useState("");
-	const [submitting, setSubmitting] = useState(false);
 
 	function handleSubmit(e: FormEvent) {
 		e.preventDefault();
-		setSubmitting(true);
 		const message = [
 			`Hello Orbit Web Designs & Marketing!`,
 			`My name is ${name}.`,
@@ -22,11 +20,10 @@ export default function ContactForm() {
 			.filter(Boolean)
 			.join("\n");
 		window.open(whatsappLink(message), "_blank", "noopener");
-		setTimeout(() => setSubmitting(false), 800);
 	}
 
 	const inputCls =
-		"w-full rounded-xl border border-edge bg-charcoal px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric focus:ring-2 focus:ring-electric/30 magnetic hover-lift";
+		"w-full rounded-xl border border-edge bg-charcoal px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric focus:ring-2 focus:ring-electric/30";
 
 	return (
 		<form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
@@ -73,10 +70,9 @@ export default function ContactForm() {
 			</label>
 			<button
 				type="submit"
-				disabled={submitting}
-				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2 magnetic ripple hover-lift disabled:opacity-60 disabled:cursor-wait"
+				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2"
 			>
-				{submitting ? "Opening WhatsApp…" : "Send via WhatsApp"}
+				Send via WhatsApp
 			</button>
 		</form>
 	);

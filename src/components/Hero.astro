@@ -4,12 +4,22 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 
 <section id="top" class="relative overflow-hidden">
 	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
-		<div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(80% 70% at 20% 30%, black, transparent 80%)"></div>
-		<div class="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/15 blur-[140px]" style="animation: floaty 10s ease-in-out infinite"></div>
-		<div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-neon/10 blur-[120px]" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
+		<div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(70% 60% at 20% 30%, black, transparent 75%)"></div>
+		<div class="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/20 blur-[140px]" style="animation: floaty 10s ease-in-out infinite"></div>
+		<div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-neon/15 blur-[120px]" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
 		<div class="film-grain"></div>
 		<div class="vignette"></div>
 		<div class="light-streak"></div>
+	</div>
+
+	<div class="hero-orbit pointer-events-none absolute left-0 top-1/2 h-[420px] w-[420px] -translate-y-1/2 opacity-50 sm:h-[520px] sm:w-[520px] md:h-[640px] md:w-[640px] md:opacity-100" aria-hidden="true" style="left: -12%">
+		<div class="absolute inset-0" style="transform-style: preserve-3d; animation: floaty 10s ease-in-out infinite">
+			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg)"></div>
+			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(28deg)"></div>
+			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(-28deg); border-color: rgb(47 123 255 / 0.14)"></div>
+			<span class="glow-dot" style="--radius: 280px; --dur: 18s; top: 50%; left: 50%"></span>
+			<span class="glow-dot" style="--radius: 200px; --dur: 26s; top: 50%; left: 50%; animation-delay: -8s"></span>
+		</div>
 	</div>
 
 	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
@@ -18,20 +28,17 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-60"></span>
 				<span class="relative inline-flex h-2 w-2 rounded-full bg-electric"></span>
 			</span>
-			Websites that work
+			Now boarding — limited slots
 		</p>
 
-		<h1 class="display-1 max-w-3xl font-extrabold text-white">
-			<span class="word-reveal" style="--i:0">Design</span>
-			<span class="word-reveal" style="--i:1">That</span>
-			<span class="word-reveal text-gradient" style="--i:2">Captivates.</span>
-			<span class="word-reveal" style="--i:3">Code</span>
-			<span class="word-reveal" style="--i:4">That</span>
-			<span class="word-reveal text-gradient" style="--i:5">Converts.</span>
+		<h1 class="hero-anim max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl" style="animation-delay:100ms">
+			Your brand, in orbit —
+			<span class="text-gradient">designed to be unforgettable.</span>
 		</h1>
 
 		<p class="hero-anim mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" style="animation-delay:200ms">
-			Web design, e-commerce, SEO & growth marketing — built to convert.
+			Cinematic websites, e-commerce and growth marketing — crafted by Orbit for
+			businesses that refuse to look ordinary.
 		</p>
 
 		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
@@ -39,13 +46,13 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple"
+				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50"
 			>
 				Start your project
 			</a>
 			<a
 				href="/packages"
-				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white magnetic ripple"
+				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
 			>
 				View pricing
 			</a>
@@ -59,7 +66,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 					["10+", "Industries"],
 					["24h", "Reply time"],
 				].map(([value, label]) => (
-					<div data-tilt class="glow-border edge-glow hover-lift rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
+					<div data-tilt class="glow-border rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
 						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
 						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
 					</div>

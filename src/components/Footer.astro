@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
 					{SITE_NAME} builds fast, secure websites and marketing that help
 					businesses get found, get trusted, and get paid.
 				</p>
-				<a href="/contact" class="link-underline mt-6 magnetic ripple">
+				<a href="/contact" class="link-underline mt-6">
 					Get a website quote <span aria-hidden>→</span>
 				</a>
 			</div>
@@ -28,7 +28,7 @@ const year = new Date().getFullYear();
 				<h3 class="font-mono text-xs uppercase tracking-[0.18em] text-stone">Company</h3>
 				<ul class="mt-5 grid gap-3 text-sm">
 					{NAV_LINKS.map((l) => (
-						<li><a href={l.href} class="text-slate-400 transition hover:text-white magnetic ripple">{l.label}</a></li>
+						<li><a href={l.href} class="text-slate-400 transition hover:text-white">{l.label}</a></li>
 					))}
 				</ul>
 			</div>
@@ -38,11 +38,11 @@ const year = new Date().getFullYear();
 				<ul class="mt-5 grid gap-3 text-sm text-slate-400">
 					<li>
 						<span class="block font-mono text-xs uppercase tracking-widest text-stone">Phone / WhatsApp</span>
-						<a href="tel:+254741992308" class="transition hover:text-white magnetic ripple">{SITE_PHONE_DISPLAY}</a>
+						<a href="tel:+254741992308" class="transition hover:text-white">{SITE_PHONE_DISPLAY}</a>
 					</li>
 					<li>
 						<span class="block font-mono text-xs uppercase tracking-widest text-stone">Email</span>
-						<a href={`mailto:${SITE_EMAIL}`} class="transition hover:text-white magnetic ripple">{SITE_EMAIL}</a>
+						<a href={`mailto:${SITE_EMAIL}`} class="transition hover:text-white">{SITE_EMAIL}</a>
 					</li>
 					<li>
 						<span class="block font-mono text-xs uppercase tracking-widest text-stone">Working hours</span>
