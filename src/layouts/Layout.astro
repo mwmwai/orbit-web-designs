@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER } from "../config";
 import ScrollIndicator from "../components/ScrollIndicator.astro";
+import SolarSystem from "../components/react/SolarSystem.tsx";
 import "../styles/global.css";
 
 interface Props {
@@ -53,6 +54,7 @@ const jsonLd = {
 		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
+		<SolarSystem client:load transition:persist />
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 		<div id="scroll-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-electric to-neon" aria-hidden="true"></div>
 		<div id="cursor-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2.5 w-2.5 rounded-full bg-electric shadow-[0_0_14px_4px_rgba(0,200,255,0.45)] lg:block" aria-hidden="true"></div>
