@@ -25,7 +25,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.06,
+        opacity: 0.03,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -41,7 +41,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.04,
+        opacity: 0.02,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -55,7 +55,7 @@ function OrbitRings() {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.035,
+        opacity: 0.015,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -133,7 +133,7 @@ function OrbitParticles() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 0.7);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 0.4);
           }
         `,
       }),
@@ -188,7 +188,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x00c8ff}
           transparent
-          opacity={0.15}
+          opacity={0.06}
           roughness={0}
           metalness={1}
           clearcoat={1}
@@ -200,7 +200,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x2f7bff}
           transparent
-          opacity={0.12}
+          opacity={0.05}
           roughness={0}
           metalness={1}
         />
@@ -210,7 +210,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x5fe6ff}
           transparent
-          opacity={0.1}
+          opacity={0.04}
           roughness={0}
           metalness={0.8}
         />
@@ -222,13 +222,13 @@ function AmbientOrbs() {
 function HeroScene() {
   return (
     <>
-      <ambientLight intensity={0.4} color="#5fe6ff" />
-      <directionalLight position={[5, 10, 7]} intensity={1.2} color="#ffffff" />
-      <directionalLight position={[-5, 5, -7]} intensity={0.6} color="#00c8ff" />
+      <ambientLight intensity={0.25} color="#5fe6ff" />
+      <directionalLight position={[5, 10, 7]} intensity={0.8} color="#ffffff" />
+      <directionalLight position={[-5, 5, -7]} intensity={0.4} color="#00c8ff" />
       <OrbitRings />
       <OrbitParticles />
       <AmbientOrbs />
-      <Stars radius={50} opacity={0.3} color="#00c8ff" />
+      <Stars radius={50} opacity={0.12} color="#00c8ff" />
     </>
   );
 }
