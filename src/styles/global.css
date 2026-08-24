@@ -128,25 +128,72 @@ body {
 }
 
 ::view-transition-old(root) {
-	animation: vtOut 0.28s ease both;
+	animation: vtOut 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 ::view-transition-new(root) {
-	animation: vtIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+	animation: vtIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	mix-blend-mode: normal;
 }
 
 @keyframes vtOut {
-	to {
+	0% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+		filter: blur(0px) brightness(1);
+	}
+	50% {
+		opacity: 0.6;
+		transform: scale(0.97) translateY(-8px);
+		filter: blur(4px) brightness(0.85);
+	}
+	100% {
 		opacity: 0;
-		transform: translateY(-14px);
+		transform: scale(0.95) translateY(-16px);
+		filter: blur(8px) brightness(0.7);
 	}
 }
 
 @keyframes vtIn {
-	from {
+	0% {
 		opacity: 0;
-		transform: translateY(16px);
+		transform: scale(1.03) translateY(20px);
+		filter: blur(8px) brightness(0.7);
 	}
+	40% {
+		opacity: 0.3;
+		transform: scale(1.01) translateY(8px);
+		filter: blur(4px) brightness(0.9);
+	}
+	70% {
+		opacity: 0.85;
+		transform: scale(1.002) translateY(-2px);
+		filter: blur(1px) brightness(1.02);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+		filter: blur(0) brightness(1);
+	}
+}
+
+@keyframes vtFlash {
+	0%, 100% { opacity: 0; }
+	50% { opacity: 0.15; }
+}
+
+::view-transition-new(root)::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: radial-gradient(ellipse at center, transparent 40%, rgb(0 200 255 / 0.12) 100%);
+	pointer-events: none;
+	z-index: 9999;
+	animation: vtFlash 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .nav-link {
