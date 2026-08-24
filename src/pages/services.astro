@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/react/Navbar";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
-import PageHero3D from "../components/react/PageHero3D.tsx";
 
 const services = [
 	{
@@ -65,7 +64,6 @@ const steps = [
 	<Navbar client:load />
 	<main id="main" class="page-reveal stagger">
 		<section class="relative overflow-hidden border-b border-white/5">
-			<PageHero3D client:load variant="services" />
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/10 blur-[130px]"></div>
 				<div class="film-grain"></div>
