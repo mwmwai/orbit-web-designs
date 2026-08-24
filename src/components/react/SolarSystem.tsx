@@ -40,11 +40,11 @@ function Sun() {
       </mesh>
       <mesh ref={halo} scale={1.6}>
         <sphereGeometry args={[0.5, 32, 32]} />
-        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.16} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.22} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
       <mesh scale={2.6}>
         <sphereGeometry args={[0.6, 24, 24]} />
-        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.07} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={0x00c8ff} transparent opacity={0.1} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -70,12 +70,12 @@ function Planet({ def }: { def: PlanetDef }) {
     <group>
       <mesh ref={mesh} position={[def.radius, 0, 0]}>
         <sphereGeometry args={[def.size, 20, 20]} />
-        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.9} roughness={0.3} metalness={0.5} />
+        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={1.2} roughness={0.3} metalness={0.5} />
       </mesh>
       {/* atmosphere glow */}
       <mesh ref={glow} position={[def.radius, 0, 0]} scale={1.7}>
         <sphereGeometry args={[def.size, 16, 16]} />
-        <meshBasicMaterial color={def.color} transparent opacity={0.16} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={def.color} transparent opacity={0.24} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -96,11 +96,11 @@ function RingedPlanet({ def }: { def: PlanetDef }) {
     <group ref={group} position={[def.radius, 0, 0]} rotation={[0.45, 0, 0.2]}>
       <mesh>
         <sphereGeometry args={[def.size, 20, 20]} />
-        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={0.8} roughness={0.35} metalness={0.5} />
+        <meshStandardMaterial color={def.color} emissive={def.color} emissiveIntensity={1.1} roughness={0.35} metalness={0.5} />
       </mesh>
       <mesh scale={1.7}>
         <sphereGeometry args={[def.size, 16, 16]} />
-        <meshBasicMaterial color={def.color} transparent opacity={0.15} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={def.color} transparent opacity={0.22} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -126,10 +126,10 @@ function AsteroidBelt({ count }: { count: number }) {
   const mat = useMemo(
     () =>
       new THREE.PointsMaterial({
-        color: 0x6fb8d8,
-        size: 0.02,
+        color: 0x8fd0e8,
+        size: 0.024,
         transparent: true,
-        opacity: 0.45,
+        opacity: 0.6,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
         sizeAttenuation: true,
@@ -205,7 +205,7 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
     }
     // Scroll dim: gentle, stays bright
     if (containerRef.current) {
-      const fade = Math.max(0.55, 1 - (window.scrollY || 0) / (innerHeight * 1.8));
+      const fade = Math.max(0.65, 1 - (window.scrollY || 0) / (innerHeight * 2.2));
       containerRef.current.style.opacity = fade.toFixed(3);
     }
   });
@@ -223,12 +223,12 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
   );
 
   const orbitDefs = [
-    { radius: 1.35, opacity: 0.22, tiltX: 0.05, tiltZ: 0.02 },
-    { radius: 1.95, opacity: 0.19, tiltX: -0.08, tiltZ: 0.06 },
-    { radius: 2.6, opacity: 0.17, tiltX: 0.1, tiltZ: -0.05 },
-    { radius: 3.2, opacity: 0.14, tiltX: -0.05, tiltZ: 0.1 },
-    { radius: 4.6, opacity: 0.13, tiltX: 0.07, tiltZ: -0.08 },
-    { radius: 5.4, opacity: 0.11, tiltX: -0.1, tiltZ: 0.04 },
+    { radius: 1.35, opacity: 0.32, tiltX: 0.05, tiltZ: 0.02 },
+    { radius: 1.95, opacity: 0.28, tiltX: -0.08, tiltZ: 0.06 },
+    { radius: 2.6, opacity: 0.25, tiltX: 0.1, tiltZ: -0.05 },
+    { radius: 3.2, opacity: 0.21, tiltX: -0.05, tiltZ: 0.1 },
+    { radius: 4.6, opacity: 0.19, tiltX: 0.07, tiltZ: -0.08 },
+    { radius: 5.4, opacity: 0.16, tiltX: -0.1, tiltZ: 0.04 },
   ];
 
   return (
@@ -238,8 +238,8 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
           <Sun />
           {orbitDefs.map((o, i) => (
             <mesh key={i} rotation={[Math.PI / 2 + o.tiltX, 0, o.tiltZ]}>
-              <torusGeometry args={[o.radius, 0.008, 8, 96]} />
-              <meshBasicMaterial color={0x4fc3ff} transparent opacity={o.opacity} blending={THREE.AdditiveBlending} depthWrite={false} />
+              <torusGeometry args={[o.radius, 0.009, 8, 96]} />
+              <meshBasicMaterial color={0x6fd4ff} transparent opacity={o.opacity} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
           ))}
           {planets.map((p, i) =>
@@ -249,10 +249,10 @@ function Scene({ containerRef, mobile }: { containerRef: React.RefObject<HTMLDiv
         </group>
       </group>
       <Comet mobile={mobile} />
-      <Stars radius={60} depth={40} count={mobile ? 500 : 900} factor={3.5} saturation={0} fade speed={0.6} />
-      <ambientLight intensity={0.55} color="#9fd8ff" />
-      <pointLight position={[0, 0, 0]} intensity={2.6} color="#bfefff" distance={16} decay={1.5} />
-      <directionalLight position={[6, 8, 6]} intensity={0.9} color="#ffffff" />
+      <Stars radius={60} depth={40} count={mobile ? 500 : 900} factor={4} saturation={0} fade speed={0.6} />
+      <ambientLight intensity={0.7} color="#9fd8ff" />
+      <pointLight position={[0, 0, 0]} intensity={3.2} color="#bfefff" distance={16} decay={1.4} />
+      <directionalLight position={[6, 8, 6]} intensity={1.2} color="#ffffff" />
     </>
   );
 }
