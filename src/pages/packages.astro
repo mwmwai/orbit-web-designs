@@ -4,6 +4,7 @@ import Navbar from "../components/react/Navbar";
 import Footer from "../components/Footer.astro";
 import Pricing from "../components/Pricing.astro";
 import CtaBand from "../components/CtaBand.astro";
+import PageHero3D from "../components/react/PageHero3D.tsx";
 
 const faqs = [
 	{
@@ -43,10 +44,13 @@ const faqJsonLd = {
 	description="Honest one-time pricing in Kenyan shillings. Professional websites from KES 15,000 — pay securely via M-Pesa, card, or PayPal. No hidden fees."
 >
 	<Navbar client:load />
-	<main id="main">
+	<main id="main" class="page-reveal stagger">
 		<section class="relative overflow-hidden border-b border-white/5">
+			<PageHero3D client:load variant="packages" />
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
-				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-neon/10 blur-[130px]"></div>
+				<div class="film-grain"></div>
+				<div class="vignette"></div>
 			</div>
 			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
 				<h1 class="hero-anim max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
@@ -69,7 +73,7 @@ const faqJsonLd = {
 				<div class="grid gap-4 lg:grid-cols-2">
 					{
 						faqs.map((f, i) => (
-							<details class="reveal glow-border group rounded-2xl p-6" style={`transition-delay:${i * 80}ms`}>
+							<details class="reveal glow-border edge-glow hover-lift magnetic card-shine group rounded-2xl p-6" style={`transition-delay:${i * 80}ms`}>
 								<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">
 									{f.q}
 								</summary>
