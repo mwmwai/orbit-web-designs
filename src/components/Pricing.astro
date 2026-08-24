@@ -64,10 +64,10 @@ const plans = [
 		<div class="grid items-stretch gap-6 lg:grid-cols-3">
 			{
 				plans.map((p, i) => (
-					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
+<article class="reveal" style={`transition-delay:${i * 70}ms`}>
 						<div
 							data-tilt
-							class={`relative flex h-full flex-col rounded-2xl p-8 ${
+							class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${
 								p.featured
 									? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10"
 									: "glow-border"
@@ -93,9 +93,9 @@ const plans = [
 									</li>
 								))}
 							</ul>
-							<a
+<a
 								href="/contact"
-								class={`mt-8 block rounded-full py-3 text-center font-semibold transition ${
+								class={`mt-8 block rounded-full py-3 text-center font-semibold transition ripple ${
 									p.featured
 										? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
 										: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
@@ -122,10 +122,10 @@ const plans = [
 				<h3 class="text-lg font-semibold text-white">Payments, handled quietly.</h3>
 				<p class="mt-1 max-w-md text-sm text-slate-400">M-Pesa, cards and PayPal — secure, verified, no drama.</p>
 			</div>
-			<div class="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest">
-				<span class="border border-edge px-4 py-2 text-stone">M-Pesa</span>
-				<span class="border border-edge px-4 py-2 text-stone">Card</span>
-				<span class="border border-edge px-4 py-2 text-stone">PayPal</span>
+<div class="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest">
+				<span class="border border-edge px-4 py-2 text-stone hover-lift magnetic">M-Pesa</span>
+				<span class="border border-edge px-4 py-2 text-stone hover-lift magnetic">Card</span>
+				<span class="border border-edge px-4 py-2 text-stone hover-lift magnetic">PayPal</span>
 			</div>
 		</div>
 	</div>
