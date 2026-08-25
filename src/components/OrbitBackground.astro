@@ -1,0 +1,204 @@
+---
+// OrbitBackground — hand-rolled Canvas 2D 3D orbit (no libraries).
+// Replaces the 866KB Three.js bundle with ~8KB of inline code.
+// Renders immediately with the page — no chunk, no hydration, no wait.
+---
+
+<div id="orbit-bg" aria-hidden="true">
+	<canvas id="orbit-canvas"></canvas>
+</div>
+
+<style>
+	#orbit-bg {
+		position: fixed;
+		inset: 0;
+		z-index: -10;
+		pointer-events: none;
+	}
+	#orbit-canvas {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		#orbit-bg { display: none; }
+	}
+</style>
+
+<script>
+	(() => {
+		const container = document.getElementById("orbit-bg");
+		const canvas = document.getElementById("orbit-canvas") as HTMLCanvasElement | null;
+		if (!container || !canvas) return;
+		const ctx = canvas.getContext("2d");
+		if (!ctx) return;
+
+		const mobile = window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		let W = 0, H = 0, CX = 0, CY = 0, DPR = 1;
+		function resize() {
+			DPR = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
+			W = window.innerWidth;
+			H = window.innerHeight;
+			CX = W / 2;
+			CY = H / 2;
+			canvas!.width = W * DPR;
+			canvas!.height = H * DPR;
+			ctx!.setTransform(DPR, 0, 0, DPR, 0, 0);
+		}
+		resize();
+		window.addEventListener("resize", resize, { passive: true });
+
+		// Pre-rendered glow sprite for particles (fast drawImage instead of gradients per frame)
+		const sprite = document.createElement("canvas");
+		sprite.width = sprite.height = 32;
+		const sctx = sprite.getContext("2d")!;
+		const grad = sctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+		grad.addColorStop(0, "rgba(120,225,255,1)");
+		grad.addColorStop(0.35, "rgba(0,200,255,0.55)");
+		grad.addColorStop(1, "rgba(0,200,255,0)");
+		sctx.fillStyle = grad;
+		sctx.fillRect(0, 0, 32, 32);
+
+		// --- Rings (true 3D: points projected each frame) ---
+		const RINGS = [
+			{ r: 2.8, tiltX: 1.05, tiltZ: 0.0, color: "rgba(0,200,255,0.35)", width: 1.4 },
+			{ r: 2.2, tiltX: 1.05, tiltZ: 0.5, color: "rgba(47,123,255,0.25)", width: 1.1 },
+			{ r: 3.4, tiltX: 1.05, tiltZ: -0.4, color: "rgba(95,230,255,0.3)", width: 1.2 },
+			{ r: 1.6, tiltX: 1.05, tiltZ: 0.8, color: "rgba(0,200,255,0.3)", width: 1.0 },
+		];
+		const RING_PTS = 90;
+
+		// --- Particles ---
+		const P_COUNT = mobile ? 300 : 480;
+		const parts = Array.from({ length: P_COUNT }, () => ({
+			r: 1.2 + Math.random() * 2.6,
+			a: Math.random() * Math.PI * 2,
+			speed: 0.15 + Math.random() * 0.45,
+			phi: (Math.random() - 0.5) * 0.9,
+			seed: Math.random() * Math.PI * 2,
+			size: 3 + Math.random() * 9,
+			alpha: 0.25 + Math.random() * 0.5,
+		}));
+
+		// --- Orbs ---
+		const ORBS = [
+			{ x: -3.5, y: 1.5, z: -2, r: 0.6, c: "0,200,255", a: 0.2 },
+			{ x: 3.2, y: -1.2, z: -3, r: 0.42, c: "47,123,255", a: 0.16 },
+			{ x: -2.2, y: -2.2, z: 2.5, r: 0.5, c: "95,230,255", a: 0.13 },
+		];
+
+		// --- Stars (far shell, twinkle) ---
+		const S_COUNT = mobile ? 140 : 220;
+		const stars = Array.from({ length: S_COUNT }, () => ({
+			x: (Math.random() - 0.5) * 2,
+			y: (Math.random() - 0.5) * 2,
+			tw: Math.random() * Math.PI * 2,
+			size: 0.6 + Math.random() * 1.2,
+		}));
+
+		const FOV = 8;
+		function project(x: number, y: number, z: number): [number, number, number] {
+			const s = FOV / (FOV + z);
+			return [CX + x * 100 * s, CY + y * 100 * s, s];
+		}
+
+		let t = 0;
+		let last = performance.now();
+
+		function frame(now: number) {
+			const dt = Math.min((now - last) / 1000, 0.05);
+			last = now;
+			t += dt;
+
+			// scroll fade
+			const fade = Math.max(0.25, 1 - (window.scrollY || 0) / (window.innerHeight * 1.5));
+			container!.style.opacity = fade.toFixed(3);
+
+			ctx!.clearRect(0, 0, W, H);
+			ctx!.globalCompositeOperation = "lighter";
+
+			// stars
+			for (const s of stars) {
+				const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * 1.4 + s.tw));
+				ctx!.fillStyle = `rgba(159,216,255,${(0.28 * tw).toFixed(3)})`;
+				ctx!.fillRect(s.x * W, ((s.y * 2 + 1) / 2) * H, s.size, s.size);
+			}
+
+			const rotY = t * 0.35;
+			const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+			const tiltX = 1.05, cosX = Math.cos(tiltX), sinX = Math.sin(tiltX);
+
+			// rings
+			for (const ring of RINGS) {
+				ctx!.beginPath();
+				const cz = Math.cos(ring.tiltZ), sz = Math.sin(ring.tiltZ);
+				for (let i = 0; i <= RING_PTS; i++) {
+					const th = (i / RING_PTS) * Math.PI * 2;
+					let x = ring.r * Math.cos(th);
+					let y = 0;
+					let z = ring.r * Math.sin(th);
+					// tiltZ (in ring plane)
+					const x2 = x * cz - y * sz;
+					const y2 = x * sz + y * cz;
+					x = x2; y = y2;
+					// global spin around Y
+					const x3 = x * cosY - z * sinY;
+					const z3 = x * sinY + z * cosY;
+					// tilt around X
+					const y4 = y2 * cosX - z3 * sinX;
+					const z4 = y2 * sinX + z3 * cosX;
+					const [sx, sy] = project(x3, y4, z4);
+					if (i === 0) ctx!.moveTo(sx, sy);
+					else ctx!.lineTo(sx, sy);
+				}
+				ctx!.strokeStyle = ring.color;
+				ctx!.lineWidth = ring.width;
+				ctx!.stroke();
+			}
+
+			// particles
+			for (const p of parts) {
+				p.a += p.speed * dt;
+				const wobble = Math.sin(t * 0.7 + p.seed) * 0.25;
+				let x = p.r * Math.cos(p.a);
+				let y = p.phi + Math.sin(t + p.seed) * 0.15 + wobble * 0.3;
+				let z = p.r * Math.sin(p.a);
+				const x3 = x * cosY - z * sinY;
+				const z3 = x * sinY + z * cosY;
+				const y4 = y * cosX - z3 * sinX;
+				const z4 = y * sinX + z3 * cosX;
+				const [sx, sy, s] = project(x3, y4, z4);
+				ctx!.globalAlpha = p.alpha;
+				const size = p.size * s;
+				ctx!.drawImage(sprite, sx - size / 2, sy - size / 2, size, size);
+			}
+			ctx!.globalAlpha = 1;
+
+			// orbs (soft radial blobs)
+			for (let i = 0; i < ORBS.length; i++) {
+				const o = ORBS[i];
+				const ox = o.x + Math.cos(t * 0.22 + i * 2) * 0.25;
+				const oy = o.y + Math.sin(t * 0.3 + i) * 0.3;
+				const [sx, sy, s] = project(ox, oy, o.z);
+				const r = o.r * 100 * s;
+				const g = ctx!.createRadialGradient(sx, sy, 0, sx, sy, r);
+				g.addColorStop(0, `rgba(${o.c},${o.a})`);
+				g.addColorStop(1, `rgba(${o.c},0)`);
+				ctx!.fillStyle = g;
+				ctx!.fillRect(sx - r, sy - r, r * 2, r * 2);
+			}
+
+			ctx!.globalCompositeOperation = "source-over";
+
+			if (!reduced) requestAnimationFrame(frame);
+		}
+
+		if (reduced) {
+			frame(performance.now()); // single static frame
+		} else {
+			requestAnimationFrame(frame);
+		}
+	})();
+</script>

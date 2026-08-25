@@ -67,8 +67,7 @@
 		.front { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 0 0.28in; }
 		.front .ring-1 { width: 3.4in; height: 5.2in; top: -1.6in; left: 0.05in; transform: rotate(-14deg); }
 		.front .ring-2 { width: 3.4in; height: 5.2in; top: -1.6in; right: 0.05in; left: auto; transform: rotate(14deg); border-color: rgb(47 123 255 / 0.12); }
-		.front .brand-row { display: flex; align-items: center; gap: 0.16in; }
-		.front img.mark { width: 0.68in; height: 0.68in; display: block; }
+		.front img.brand { width: 2.6in; display: block; }
 		.wordmark {
 			margin-top: 0.09in;
 			font-size: 26pt; font-weight: 900; letter-spacing: 0.32em; line-height: 1;
@@ -83,26 +82,25 @@
 		}
 		.subtitle {
 			font-size: 7.5pt; font-weight: 900; letter-spacing: 0.30em; text-transform: uppercase;
-			text-indent: 0.30em;
-			background: linear-gradient(90deg, #ffffff, #f8fafc 55%, #e2e8f0);
-			-webkit-background-clip: text; background-clip: text; color: transparent;
-			-webkit-text-stroke: 0.35pt #f1f5f9;
+			color: #ffffff; text-indent: 0.30em;
+			-webkit-text-stroke: 0.3pt #ffffff;
 		}
 		.front .tagline {
-			position: absolute; left: 0.28in; right: 0.28in; bottom: 0.14in;
-			font-size: 5.8pt; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;
-			background: linear-gradient(90deg, #ffffff, #f1f5f9 55%, #dbe3ee);
-			-webkit-background-clip: text; background-clip: text; color: transparent;
-			-webkit-text-stroke: 0.3pt #eef2f7;
-			text-align: left;
+			position: absolute; left: 0.3in; right: 0.3in; bottom: 0.17in;
+			font-size: 5.4pt; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+			color: #93a5bd; text-align: left;
 		}
 
 		/* ================= BACK ================= */
-		.back { padding: 0.22in 0.26in; }
+		.back { padding: 0.24in 0.3in; }
 		.back .ring-b { width: 2.6in; height: 4in; bottom: -2.2in; left: 1.4in; transform: rotate(24deg); }
 		.back-inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.18in; }
-		.contacts { display: flex; flex-direction: column; gap: 0.105in; min-width: 0; }
-		.headline { font-size: 10.5pt; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 0.075in; letter-spacing: 0.01em; }
+		.contacts { display: flex; flex-direction: column; gap: 0.12in; min-width: 0; }
+		.headline { font-size: 11pt; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 0.06in; letter-spacing: 0.01em; }
+		.headline::after {
+			content: ""; display: block; width: 0.62in; height: 2px; margin-top: 0.08in; border-radius: 2px;
+			background: linear-gradient(90deg, var(--electric), var(--neon));
+		}
 		.headline .grad {
 			background: linear-gradient(90deg, var(--electric), var(--neon));
 			-webkit-background-clip: text; background-clip: text; color: transparent;
@@ -152,12 +150,7 @@
 				<div class="glow-b"></div>
 				<div class="ring ring-1"></div>
 				<div class="ring ring-2"></div>
-				<div class="brand-row">
-				<img class="mark" src="logo-mark.png" alt="" />
-				<div class="wordmark">ORBIT</div>
-			</div>
-			<div class="divider"></div>
-				<div class="subtitle">Web Designs &amp; Marketing</div>
+			<img class="brand" src="card-logo.png" alt="Orbit Web Designs &amp; Marketing" />
 			<div class="tagline">We Build High-Performance Websites &amp; Drive Real Growth</div>
 			</div>
 		</div>
