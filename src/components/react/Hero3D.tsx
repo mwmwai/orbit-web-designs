@@ -22,7 +22,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.22,
+        opacity: 0.25,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -38,7 +38,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.18,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -52,7 +52,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.18,
+        opacity: 0.2,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -130,7 +130,7 @@ function OrbitParticles() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.5);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.65);
           }
         `,
       }),
@@ -184,7 +184,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x00c8ff}
           transparent
-          opacity={0.22}
+          opacity={0.26}
           roughness={0}
           metalness={1}
           clearcoat={1}
@@ -196,7 +196,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x2f7bff}
           transparent
-          opacity={0.17}
+          opacity={0.21}
           roughness={0}
           metalness={1}
         />
@@ -206,7 +206,7 @@ function AmbientOrbs() {
         <meshPhysicalMaterial
           color={0x5fe6ff}
           transparent
-          opacity={0.14}
+          opacity={0.17}
           roughness={0}
           metalness={0.8}
         />
