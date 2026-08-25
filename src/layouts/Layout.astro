@@ -12,7 +12,7 @@ interface Props {
 
 const {
 	title = `${SITE_NAME} — Web Design & Digital Marketing`,
-	description = "Orbit designs fast, secure websites and runs marketing that gets businesses found, trusted and paid. Custom builds from KES 18,000 — worldwide, fully remote.",
+	description = "Orbit designs fast, secure websites and runs marketing that gets businesses found, trusted and paid. Custom builds from KES 20,000 — worldwide, fully remote.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
@@ -26,7 +26,7 @@ const jsonLd = {
 	telephone: `+${WHATSAPP_NUMBER}`,
 	description,
 	areaServed: "Worldwide",
-	priceRange: "KES 18,000 - KES 90,000",
+	priceRange: "KES 20,000 - KES 90,000",
 };
 ---
 
