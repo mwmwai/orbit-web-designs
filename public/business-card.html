@@ -67,34 +67,23 @@
 		.front { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 0 0.28in; }
 		.front .ring-1 { width: 3.4in; height: 5.2in; top: -1.6in; left: 0.05in; transform: rotate(-14deg); }
 		.front .ring-2 { width: 3.4in; height: 5.2in; top: -1.6in; right: 0.05in; left: auto; transform: rotate(14deg); border-color: rgb(47 123 255 / 0.12); }
-		.front .brand-row { display: flex; align-items: center; gap: 0.16in; }
-		.front img.mark { width: 0.68in; height: 0.68in; display: block; }
+.front .brand-row { display: flex; align-items: flex-start; gap: 0.18in; }
+		.front img.mark { width: 1.1in; height: 1.1in; display: block; flex-shrink: 0; }
+		.brand-text { display: flex; flex-direction: column; justify-content: flex-start; }
 		.wordmark {
-			margin-top: 0.09in;
-			font-size: 26pt; font-weight: 900; letter-spacing: 0.32em; line-height: 1;
-			background: linear-gradient(90deg, #ffffff, #f8fafc 55%, #e2e8f0);
-			-webkit-background-clip: text; background-clip: text; color: transparent;
-			-webkit-text-stroke: 0.7pt #ffffff;
-			text-indent: 0.32em; /* balance tracking */
-		}
-		.divider {
-			width: 2.3in; height: 2px; margin: 0.10in 0 0.09in; border-radius: 2px;
-			background: linear-gradient(90deg, var(--electric), var(--neon));
+			font-size: 26pt; font-weight: 700; letter-spacing: 0.05em; line-height: 1;
+			color: #e8edf5;
+			-webkit-text-stroke: 0.3pt #c8d2e0;
+			margin-bottom: -0.02in;
 		}
 		.subtitle {
-			font-size: 7.5pt; font-weight: 900; letter-spacing: 0.30em; text-transform: uppercase;
-			text-indent: 0.30em;
-			background: linear-gradient(90deg, #ffffff, #f8fafc 55%, #e2e8f0);
-			-webkit-background-clip: text; background-clip: text; color: transparent;
-			-webkit-text-stroke: 0.35pt #f1f5f9;
+			font-size: 8.5pt; font-weight: 600; color: #94a3b8;
+			letter-spacing: 0.12em; text-transform: uppercase;
 		}
 		.front .tagline {
 			position: absolute; left: 0.28in; right: 0.28in; bottom: 0.14in;
-			font-size: 5.8pt; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;
-			background: linear-gradient(90deg, #ffffff, #f1f5f9 55%, #dbe3ee);
-			-webkit-background-clip: text; background-clip: text; color: transparent;
-			-webkit-text-stroke: 0.3pt #eef2f7;
-			text-align: left;
+			font-size: 7.8pt; font-weight: 700; color: #e8edf5; text-align: left;
+			-webkit-text-stroke: 0.25pt #c8d2e0;
 		}
 
 		/* ================= BACK ================= */
@@ -102,10 +91,11 @@
 		.back .ring-b { width: 2.6in; height: 4in; bottom: -2.2in; left: 1.4in; transform: rotate(24deg); }
 		.back-inner { position: relative; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.18in; }
 		.contacts { display: flex; flex-direction: column; gap: 0.105in; min-width: 0; }
-		.headline { font-size: 10.5pt; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 0.075in; letter-spacing: 0.01em; }
+		.headline { font-size: 11pt; font-weight: 900; line-height: 1.15; color: #fff; margin-bottom: 0.075in; letter-spacing: 0.01em; -webkit-text-stroke: 0.3pt #fff; }
 		.headline .grad {
 			background: linear-gradient(90deg, var(--electric), var(--neon));
 			-webkit-background-clip: text; background-clip: text; color: transparent;
+			-webkit-text-stroke: 0.4pt #00c8ff;
 		}
 		.contact-row { display: flex; align-items: center; gap: 0.11in; }
 		.contact-row .ico {
@@ -115,15 +105,15 @@
 			border: 1px solid rgb(0 200 255 / 0.35);
 		}
 		.contact-row .ico svg { width: 0.12in; height: 0.12in; stroke: var(--electric); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-		.contact-row .txt { font-size: 7.6pt; color: var(--slate-300); white-space: nowrap; }
-		.contact-row .txt b { color: #fff; font-weight: 700; }
+.contact-row .txt { font-size: 7.8pt; font-weight: 700; color: #e8edf5; white-space: nowrap; -webkit-text-stroke: 0.25pt #c8d2e0; }
+.contact-row .txt b { color: #fff; font-weight: 900; }
 		.qr-side { flex: none; display: flex; flex-direction: column; align-items: center; gap: 0.06in; }
 		.qr-tile {
 			width: 0.72in; height: 0.72in; background: #fff; border-radius: 0.07in; padding: 0.045in;
 			box-shadow: 0 0 0 1px rgb(0 200 255 / 0.35), 0 4px 14px rgb(0 200 255 / 0.15);
 		}
 		.qr-tile svg { width: 100%; height: 100%; display: block; }
-		.scan-hint { font-size: 5.6pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate-500); white-space: nowrap; }
+		.scan-hint { font-size: 5.8pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #94a3b8; white-space: nowrap; -webkit-text-stroke: 0.2pt #64748b; }
 
 		/* ===== Print: one card per page, zero margins ===== */
 		@page { size: 3.5in 2in; margin: 0; }
@@ -146,19 +136,20 @@
 		<!-- FRONT -->
 		<div class="cardwrap">
 			<div class="label">Front</div>
-			<div class="card front">
+<div class="card front">
 				<div class="grid-bg"></div>
 				<div class="glow-a"></div>
 				<div class="glow-b"></div>
 				<div class="ring ring-1"></div>
 				<div class="ring ring-2"></div>
 				<div class="brand-row">
-				<img class="mark" src="logo-mark.png" alt="" />
-				<div class="wordmark">ORBIT</div>
-			</div>
-			<div class="divider"></div>
-				<div class="subtitle">Web Designs &amp; Marketing</div>
-			<div class="tagline">We Build High-Performance Websites &amp; Drive Real Growth</div>
+					<img class="mark" src="planet-mark.png" alt="" />
+					<div class="brand-text">
+						<div class="wordmark">ORBIT</div>
+						<div class="subtitle">Web Designs & Marketing</div>
+					</div>
+				</div>
+				<div class="tagline">We Build High-Performance Websites & Drive Real Growth</div>
 			</div>
 		</div>
 
