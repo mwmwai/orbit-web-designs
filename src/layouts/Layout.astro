@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER } from "../config";
+import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER, BUSINESS_INFO, SITE_DESCRIPTION, SITE_OG_IMAGE, GA_MEASUREMENT_ID, META_PIXEL_ID } from "../config";
 import ScrollIndicator from "../components/ScrollIndicator.astro";
 import Hero3D from "../components/react/Hero3D.tsx";
 import "../styles/global.css";
@@ -11,33 +11,141 @@ interface Props {
 }
 
 const {
-	title = `${SITE_NAME} — Web Design & Digital Marketing`,
-	description = "Orbit designs fast, secure websites and runs marketing that gets businesses found, trusted and paid. Custom builds from KES 20,000 — worldwide, fully remote.",
+	title = SITE_NAME + " — Web Design & Digital Marketing",
+	description = SITE_DESCRIPTION,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 
-const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": "ProfessionalService",
-	name: SITE_NAME,
-	url: SITE_URL,
-	email: SITE_EMAIL,
-	telephone: `+${WHATSAPP_NUMBER}`,
-	description,
-	areaServed: "Worldwide",
-	priceRange: "KES 20,000 - KES 90,000",
-};
+const gaId = GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== "G-XXXXXXXXXX" ? GA_MEASUREMENT_ID : "";
+const metaPixelId = META_PIXEL_ID || "";
+
+// Comprehensive JSON-LD Schema
+const jsonLd = [
+	// Organization / LocalBusiness
+	{
+		"@context": "https://schema.org",
+		"@type": ["LocalBusiness", "WebDesignAgency", "ProfessionalService"],
+		"name": BUSINESS_INFO.name,
+		"url": BUSINESS_INFO.url,
+		"logo": BUSINESS_INFO.logo,
+		"email": BUSINESS_INFO.email,
+		"telephone": BUSINESS_INFO.telephone,
+		"description": description,
+		"address": BUSINESS_INFO.address,
+		"geo": BUSINESS_INFO.geo,
+		"openingHoursSpecification": {
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+			"opens": "08:00",
+			"closes": "22:00",
+		},
+		"priceRange": BUSINESS_INFO.priceRange,
+		"areaServed": BUSINESS_INFO.areaServed,
+		"sameAs": BUSINESS_INFO.sameAs,
+		"hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "Web Design & Marketing Services",
+			"itemListElement": [
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Custom Website Design",
+						"description": "Futuristic, accessible, Core Web Vitals optimized websites from KES 20,000",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "20000",
+					"priceCurrency": "KES",
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Landing Page Development",
+						"description": "High-converting, PPC-ready landing pages with A/B testing",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "15000",
+					"priceCurrency": "KES",
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "E-Commerce & M-Pesa Integration",
+						"description": "Daraja API, Lipa na M-Pesa, PayPal, Stripe - native, zero bloat",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "40000",
+					"priceCurrency": "KES",
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Digital Presence Setup",
+						"description": "GBP optimization, citations, schema, social profiles - from KES 12,000",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "12000",
+					"priceCurrency": "KES",
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Website Updates & Maintenance",
+						"description": "99.9% uptime, security patches, content edits - from KES 5,000/mo",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "5000",
+					"priceCurrency": "KES",
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Social Media Marketing",
+						"description": "Content, ads, community management - from KES 25,000/mo",
+						"provider": { "@type": "LocalBusiness", "name": BUSINESS_INFO.name },
+					},
+					"price": "25000",
+					"priceCurrency": "KES",
+				},
+			],
+		},
+	},
+	// WebSite with SearchAction
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": BUSINESS_INFO.name,
+		"url": BUSINESS_INFO.url,
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": {
+				"@type": "EntryPoint",
+				"urlTemplate": `${BUSINESS_INFO.url}/search?q={search_term_string}`,
+			},
+			"query-input": "required name=search_term_string",
+		},
+	},
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-KE">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/png" href="/logo-mark.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="dns-prefetch" href="https://wa.me" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="keywords" content="web design Kenya, website design Nairobi, e-commerce developer Kenya, M-Pesa integration, landing page design, PageSpeed optimization, digital marketing agency Nairobi" />
 		<link rel="canonical" href={canonical} />
 		<meta name="generator" content={Astro.generator} />
 
@@ -46,12 +154,18 @@ const jsonLd = {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
-		<meta property="og:image" content={new URL("/logo.png", SITE_URL).href} />
+		<meta property="og:image" content={new URL("/og-image.png", SITE_URL).href} />
+		<meta property="og:locale" content="en_KE" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL("/og-image.png", SITE_URL).href} />
 		<meta name="robots" content="index, follow" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		<ClientRouter />
+		{jsonLd.map((schema, i) => (
+			<script type="application/ld+json" set:html={JSON.stringify(schema)} key={i} />
+		))}
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
 		<Hero3D client:idle transition:persist />
@@ -62,7 +176,6 @@ const jsonLd = {
 		<div class="aurora" aria-hidden="true"><span></span><span></span></div>
 		<ScrollIndicator />
 		<slot />
-		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
 			function initTilt() {
 				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -204,16 +317,34 @@ const jsonLd = {
 					});
 				});
 			}
-			document.addEventListener("astro:page-load", () => {
-				initReveal();
-				initTilt();
-				initCounters();
-				initCursor();
-				initParallax();
-				initMagnetic();
-				initStagger();
-				initPageReveal();
-			});
+document.addEventListener("astro:page-load", () => {
+			initReveal();
+			initTilt();
+			initCounters();
+			initCursor();
+			initParallax();
+			initMagnetic();
+			initStagger();
+			initPageReveal();
+			// Analytics init
+			if (typeof window !== "undefined") {
+				if (gaId && !window.gtag) {
+					window.dataLayer = window.dataLayer || [];
+					window.gtag = function gtag() { window.dataLayer.push(arguments); };
+					window.gtag("js", new Date());
+					window.gtag("config", gaId, { page_path: window.location.pathname });
+				}
+				if (metaPixelId && !window.fbq) {
+					!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+						n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+						n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+						t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+						document,'script','https://connect.facebook.net/en_US/fbevents.js');
+					window.fbq("init", metaPixelId);
+					window.fbq("track", "PageView");
+				}
+			}
+		});
 		</script>
 	</body>
 </html>

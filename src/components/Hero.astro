@@ -31,23 +31,23 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			Now boarding — limited slots
 		</p>
 
-		<h1 class="display-1 max-w-3xl font-extrabold text-white">
-			<span class="word-reveal" style="--i:0">We</span>
-			<span class="word-reveal" style="--i:1">Build</span>
-			<span class="word-reveal" style="--i:2">High-Performance</span>
-			<span class="word-reveal" style="--i:3">Websites</span>
-			<span class="word-reveal text-gradient" style="--i:4">&amp;&nbsp;Drive</span>
-			<span class="word-reveal text-gradient" style="--i:5">Real</span>
-			<span class="word-reveal text-gradient" style="--i:6">Growth.</span>
+<h1 class="display-1 max-w-3xl font-extrabold text-white">
+			<span class="word-reveal" style="--i:0">Custom</span>
+			<span class="word-reveal" style="--i:1">Website</span>
+			<span class="word-reveal" style="--i:2">Design</span>
+			<span class="word-reveal" style="--i:3">&</span>
+			<span class="word-reveal text-gradient" style="--i:4">Digital</span>
+			<span class="word-reveal text-gradient" style="--i:5">Marketing</span>
+			<span class="word-reveal text-gradient" style="--i:6">— PageSpeed 95+</span>
 		</h1>
 
 		<p class="hero-anim mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" style="animation-delay:200ms">
-			Cinematic websites, e-commerce and growth marketing — crafted by Orbit for
-			businesses that refuse to look ordinary.
+			Nairobi's performance-obsessed web agency. M-Pesa ready, Core Web Vitals optimized, from KES 20,000.
 		</p>
 
 		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
 			<a
+				id="wa-hero"
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -62,6 +62,24 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 				View pricing
 			</a>
 		</div>
+
+<script>
+	function trackWA(eventName) {
+		if (typeof window !== "undefined" && window.gtag) {
+			window.gtag("event", eventName, { event_category: "WhatsApp", event_label: eventName });
+		}
+		if (typeof window !== "undefined" && window.fbq) {
+			window.fbq("track", "Contact", { content_name: eventName });
+		}
+	}
+	document.addEventListener("astro:page-load", () => {
+		const heroWA = document.getElementById("wa-hero");
+		if (heroWA && !heroWA.dataset.bound) {
+			heroWA.dataset.bound = "1";
+			heroWA.addEventListener("click", () => trackWA("hero_cta_whatsapp"));
+		}
+	});
+</script>
 
 		<dl class="hero-anim mt-16 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4" style="animation-delay:420ms">
 			{

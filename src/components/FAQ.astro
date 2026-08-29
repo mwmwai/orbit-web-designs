@@ -25,7 +25,22 @@ const faqs = [
 		a: "Every package includes 1–6 months of maintenance, training and documentation. After that, optional care plans cover updates, backups, security and edits.",
 	},
 ];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map((f) => ({
+		"@type": "Question",
+		"name": f.q,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": f.a,
+		},
+	})),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section id="faq" class="section-glow border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">

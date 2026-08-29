@@ -1,6 +1,13 @@
+# Robots.txt for Orbit Web Designs & Marketing
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://orbitwebdesigns.co.ke/sitemap-index.xml
 
+# Crawl-delay for polite bots
+Crawl-delay: 10
 
+# Disallow admin/private paths (none currently)
+# Disallow: /api/
+# Disallow: /admin/

@@ -55,9 +55,19 @@ const plans = [
 		featured: false,
 	},
 ];
+
+const pricingSchema = {
+	"@context": "https://schema.org",
+	"@type": "PriceSpecification",
+	"priceCurrency": "KES",
+	"minPrice": "20000",
+	"maxPrice": "90000",
+	"description": "One-time website packages: Starter KES 20,000, Business KES 30,000, Commerce from KES 40,000+",
+};
 ---
 
 <section id="pricing" class="section-glow border-t border-white/5 py-24">
+	<script type="application/ld+json" set:html={JSON.stringify(pricingSchema)} />
 	<div class="mx-auto max-w-7xl px-5">
 		<div class="text-reveal mb-14 max-w-2xl">
 			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pricelist</p>

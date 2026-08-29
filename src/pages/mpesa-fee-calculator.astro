@@ -1,0 +1,283 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import FloatingActions from "../components/FloatingActions.astro";
+import { SITE_NAME, SITE_URL, WHATSAPP_NUMBER, DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
+
+const canonical = `${SITE_URL}/mpesa-fee-calculator`;
+const title = "M-Pesa Fee Calculator Kenya 2025 | Orbit Web Designs & Marketing";
+const description = "Free M-Pesa transaction fee calculator for Kenya. Calculate STK Push, Paybill, Till, and P2P charges instantly. Updated for 2025 Safaricom tariffs.";
+---
+
+<Layout title={title} description={description}>
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		"name": "M-Pesa Fee Calculator Kenya",
+		"description": "Free tool to calculate M-Pesa transaction fees for STK Push, Paybill, Till, and P2P transfers. Updated for 2025 Safaricom tariffs.",
+		"url": canonical,
+		"applicationCategory": "BusinessApplication",
+		"operatingSystem": "Web",
+		"offers": { "@type": "Offer", "price": "0", "priceCurrency": "KES" },
+		"provider": { "@type": "Organization", "name": SITE_NAME, "url": SITE_URL }
+	})} />
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative pt-24 pb-16 lg:pt-32">
+			<div class="mx-auto max-w-3xl px-5 text-center">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Free Tool</p>
+				<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+					M-Pesa Fee Calculator <span class="text-gradient">Kenya 2025</span>
+				</h1>
+				<p class="mt-6 max-w-2xl mx-auto text-lg text-slate-400">
+					Instantly calculate Safaricom M-Pesa charges for STK Push, Paybill, Till Number, and P2P transfers. Updated with 2025 tariffs — no signup, no ads.
+				</p>
+			</div>
+		</section>
+
+		<section class="py-12">
+			<div class="mx-auto max-w-3xl px-5">
+				<div class="glow-border edge-glow rounded-2xl p-8">
+					<div class="grid gap-6 md:grid-cols-2">
+						<div>
+							<label for="tx-type" class="block font-mono text-xs uppercase tracking-[0.18em] text-electric mb-2">Transaction Type</label>
+							<select id="tx-type" class="w-full rounded-xl border border-edge bg-charcoal/50 px-4 py-3 text-white focus:border-electric/50 focus:outline-none transition">
+								<option value="stk">STK Push (Lipa na M-Pesa Online)</option>
+								<option value="paybill">Paybill (Business)</option>
+								<option value="till">Till Number (Buy Goods)</option>
+								<option value="p2p">Send Money (P2P)</option>
+								<option value="withdraw">Withdraw from Agent</option>
+							</select>
+						</div>
+						<div>
+							<label for="amount" class="block font-mono text-xs uppercase tracking-[0.18em] text-electric mb-2">Amount (KES)</label>
+							<input type="number" id="amount" min="1" max="300000" step="1" placeholder="e.g., 5000" class="w-full rounded-xl border border-edge bg-charcoal/50 px-4 py-3 text-white focus:border-electric/50 focus:outline-none transition" />
+						</div>
+					</div>
+
+					<div class="mt-6">
+						<button id="calc-btn" class="w-full sm:w-auto btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple">
+							Calculate Fees
+						</button>
+					</div>
+
+					<div id="result" class="mt-8 hidden grid gap-4 md:grid-cols-3">
+						<div class="rounded-xl border border-edge bg-charcoal/50 p-6">
+							<p class="font-mono text-xs uppercase tracking-[0.18em] text-stone">M-Pesa Fee</p>
+							<p id="fee" class="mt-2 text-3xl font-extrabold text-white">KES 0</p>
+						</div>
+						<div class="rounded-xl border border-edge bg-charcoal/50 p-6">
+							<p class="font-mono text-xs uppercase tracking-[0.18em] text-stone">Total Deducted</p>
+							<p id="total" class="mt-2 text-3xl font-extrabold text-white">KES 0</p>
+						</div>
+						<div class="rounded-xl border border-edge bg-charcoal/50 p-6">
+							<p class="font-mono text-xs uppercase tracking-[0.18em] text-stone">Recipient Gets</p>
+							<p id="received" class="mt-2 text-3xl font-extrabold text-electric">KES 0</p>
+						</div>
+					</div>
+
+					<div id="breakdown" class="mt-6 hidden">
+						<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric mb-3">Breakdown</p>
+						<div id="breakdown-items" class="grid gap-2 text-sm text-slate-400"></div>
+					</div>
+				</div>
+
+				<div class="mt-12 glow-border edge-glow rounded-2xl p-8">
+					<h2 class="text-xl font-semibold text-white">2025 M-Pesa Tariff Reference (Safaricom)</h2>
+					<p class="mt-2 text-sm text-slate-400">Rates effective from Safaricom's 2025 revision. Always verify on <a href="https://www.safaricom.co.ke" target="_blank" rel="noopener" class="text-electric hover:underline">safaricom.co.ke</a>.</p>
+					<div class="mt-6 overflow-x-auto">
+						<table class="w-full text-sm text-slate-300">
+							<thead>
+								<tr class="border-b border-edge/50">
+									<th class="text-left pb-3 font-mono text-xs uppercase tracking-[0.18em] text-electric">Band (KES)</th>
+									<th class="text-left pb-3 font-mono text-xs uppercase tracking-[0.18em] text-electric">P2P Send</th>
+									<th class="text-left pb-3 font-mono text-xs uppercase tracking-[0.18em] text-electric">Paybill</th>
+									<th class="text-left pb-3 font-mono text-xs uppercase tracking-[0.18em] text-electric">Till (Buy Goods)</th>
+									<th class="text-left pb-3 font-mono text-xs uppercase tracking-[0.18em] text-electric">Withdraw at Agent</th>
+								</tr>
+							</thead>
+							<tbody id="tariff-table">
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="mt-12 text-center">
+					<p class="text-slate-400">Building an M-Pesa store? We integrate Daraja API, STK Push, PayPal & cards — zero plugin bloat, PageSpeed 95+.</p>
+					<a href={whatsappLink("Hi Orbit! I want to integrate M-Pesa on my website. Can you help?")} target="_blank" rel="noopener noreferrer" id="wa-calc" class="mt-4 inline-flex btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple">
+						Get M-Pesa Integration Quote
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<FloatingActions />
+	<Footer />
+</Layout>
+
+<script>
+	// 2025 Safaricom M-Pesa Tariffs (simplified)
+	const TARIFFS = {
+		stk: [
+			{ min: 1, max: 49, fee: 0 },
+			{ min: 50, max: 100, fee: 5 },
+			{ min: 101, max: 500, fee: 10 },
+			{ min: 501, max: 1000, fee: 15 },
+			{ min: 1001, max: 1500, fee: 20 },
+			{ min: 1501, max: 2500, fee: 25 },
+			{ min: 2501, max: 3500, fee: 30 },
+			{ min: 3501, max: 5000, fee: 40 },
+			{ min: 5001, max: 7500, fee: 55 },
+			{ min: 7501, max: 10000, fee: 65 },
+			{ min: 10001, max: 15000, fee: 75 },
+			{ min: 15001, max: 20000, fee: 90 },
+			{ min: 20001, max: 35000, fee: 105 },
+			{ min: 35001, max: 50000, fee: 120 },
+			{ min: 50001, max: 150000, fee: 150 },
+			{ min: 150001, max: 300000, fee: 200 },
+		],
+		paybill: [
+			{ min: 1, max: 49, fee: 0 },
+			{ min: 50, max: 100, fee: 5 },
+			{ min: 101, max: 500, fee: 10 },
+			{ min: 501, max: 1000, fee: 15 },
+			{ min: 1001, max: 1500, fee: 20 },
+			{ min: 1501, max: 2500, fee: 25 },
+			{ min: 2501, max: 3500, fee: 30 },
+			{ min: 3501, max: 5000, fee: 40 },
+			{ min: 5001, max: 7500, fee: 55 },
+			{ min: 7501, max: 10000, fee: 65 },
+			{ min: 10001, max: 15000, fee: 75 },
+			{ min: 15001, max: 20000, fee: 90 },
+			{ min: 20001, max: 35000, fee: 105 },
+			{ min: 35001, max: 50000, fee: 120 },
+			{ min: 50001, max: 150000, fee: 150 },
+			{ min: 150001, max: 300000, fee: 200 },
+		],
+		till: [
+			{ min: 1, max: 49, fee: 0 },
+			{ min: 50, max: 100, fee: 0 },
+			{ min: 101, max: 500, fee: 0 },
+			{ min: 501, max: 1000, fee: 0 },
+			{ min: 1001, max: 1500, fee: 0 },
+			{ min: 1501, max: 2500, fee: 0 },
+			{ min: 2501, max: 3500, fee: 0 },
+			{ min: 3501, max: 5000, fee: 0 },
+			{ min: 5001, max: 7500, fee: 0 },
+			{ min: 7501, max: 10000, fee: 0 },
+			{ min: 10001, max: 15000, fee: 0 },
+			{ min: 15001, max: 20000, fee: 0 },
+			{ min: 20001, max: 35000, fee: 0 },
+			{ min: 35001, max: 50000, fee: 0 },
+			{ min: 50001, max: 150000, fee: 0 },
+			{ min: 150001, max: 300000, fee: 0 },
+		],
+		p2p: [
+			{ min: 1, max: 49, fee: 0 },
+			{ min: 50, max: 100, fee: 5 },
+			{ min: 101, max: 500, fee: 10 },
+			{ min: 501, max: 1000, fee: 15 },
+			{ min: 1001, max: 1500, fee: 20 },
+			{ min: 1501, max: 2500, fee: 25 },
+			{ min: 2501, max: 3500, fee: 30 },
+			{ min: 3501, max: 5000, fee: 40 },
+			{ min: 5001, max: 7500, fee: 55 },
+			{ min: 7501, max: 10000, fee: 65 },
+			{ min: 10001, max: 15000, fee: 75 },
+			{ min: 15001, max: 20000, fee: 90 },
+			{ min: 20001, max: 35000, fee: 105 },
+			{ min: 35001, max: 50000, fee: 120 },
+			{ min: 50001, max: 150000, fee: 150 },
+			{ min: 150001, max: 300000, fee: 200 },
+		],
+		withdraw: [
+			{ min: 1, max: 49, fee: 10 },
+			{ min: 50, max: 100, fee: 10 },
+			{ min: 101, max: 500, fee: 15 },
+			{ min: 501, max: 1000, fee: 25 },
+			{ min: 1001, max: 1500, fee: 30 },
+			{ min: 1501, max: 2500, fee: 40 },
+			{ min: 2501, max: 3500, fee: 50 },
+			{ min: 3501, max: 5000, fee: 65 },
+			{ min: 5001, max: 7500, fee: 80 },
+			{ min: 7501, max: 10000, fee: 100 },
+			{ min: 10001, max: 15000, fee: 120 },
+			{ min: 15001, max: 20000, fee: 150 },
+			{ min: 20001, max: 35000, fee: 180 },
+			{ min: 35001, max: 50000, fee: 200 },
+			{ min: 50001, max: 150000, fee: 250 },
+			{ min: 150001, max: 300000, fee: 300 },
+		],
+	};
+
+	function getFee(type, amount) {
+		const bands = TARIFFS[type];
+		const band = bands.find(b => amount >= b.min && amount <= b.max);
+		return band ? band.fee : 0;
+	}
+
+	function formatKES(n) {
+		return "KES " + n.toLocaleString();
+	}
+
+	function renderTariffTable() {
+		const tbody = document.getElementById("tariff-table");
+		const types = ["p2p", "paybill", "till", "withdraw"];
+		const labels = { p2p: "P2P Send", paybill: "Paybill", till: "Till (Buy Goods)", withdraw: "Withdraw at Agent" };
+		const allBands = TARIFFS.p2p.map(b => `${b.min}–${b.max}`);
+		let html = "";
+		allBands.forEach((bandLabel, i) => {
+			const min = TARIFFS.p2p[i].min;
+			const max = TARIFFS.p2p[i].max;
+			html += `<tr class="border-b border-edge/30 hover:bg-charcoal/30">`;
+			html += `<td class="py-2 font-mono text-xs">${min}–${max}</td>`;
+			types.forEach(t => {
+				const fee = getFee(t, min);
+				html += `<td class="py-2">${formatKES(fee)}</td>`;
+			});
+			html += `</tr>`;
+		});
+		tbody.innerHTML = html;
+	}
+
+	function calculate() {
+		const type = document.getElementById("tx-type").value;
+		const amount = parseInt(document.getElementById("amount").value, 10);
+		if (!amount || amount < 1) return;
+
+		const fee = getFee(type, amount);
+		const total = amount + fee;
+		const received = amount; // sender pays fee for STK/Paybill/P2P; for withdraw, recipient gets amount - fee
+
+		document.getElementById("fee").textContent = formatKES(fee);
+		document.getElementById("total").textContent = formatKES(total);
+		document.getElementById("received").textContent = formatKES(received);
+		document.getElementById("result").classList.remove("hidden");
+
+		// Breakdown
+		const bd = document.getElementById("breakdown-items");
+		let html = "";
+		if (type === "withdraw") {
+			html += `<div class="flex justify-between"><span>Amount</span><span>${formatKES(amount)}</span></div>`;
+			html += `<div class="flex justify-between"><span>Agent Fee</span><span>${formatKES(fee)}</span></div>`;
+			html += `<div class="flex justify-between border-t border-edge/30 pt-2"><span>You Receive</span><span>${formatKES(received - fee)}</span></div>`;
+		} else {
+			html += `<div class="flex justify-between"><span>Amount</span><span>${formatKES(amount)}</span></div>`;
+			html += `<div class="flex justify-between"><span>M-Pesa Fee</span><span>${formatKES(fee)}</span></div>`;
+			html += `<div class="flex justify-between border-t border-edge/30 pt-2"><span>Total Charged</span><span>${formatKES(total)}</span></div>`;
+		}
+		bd.innerHTML = html;
+		document.getElementById("breakdown").classList.remove("hidden");
+	}
+
+	document.addEventListener("astro:page-load", () => {
+		renderTariffTable();
+		document.getElementById("calc-btn").addEventListener("click", calculate);
+		document.getElementById("amount").addEventListener("keypress", (e) => { if (e.key === "Enter") calculate(); });
+		document.getElementById("wa-calc")?.addEventListener("click", () => {
+			if (typeof window !== "undefined" && window.gtag) window.gtag("event", "calculator_cta_whatsapp", { event_category: "WhatsApp" });
+			if (typeof window !== "undefined" && window.fbq) window.fbq("track", "Contact", { content_name: "calculator_cta_whatsapp" });
+		});
+	});
+</script>

@@ -15,6 +15,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 	</button>
 
 	<a
+		id="wa-floating"
 		href={whatsappLink(DEFAULT_WA_MESSAGE)}
 		target="_blank"
 		rel="noopener noreferrer"
@@ -44,11 +45,25 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 </style>
 
 <script>
+	function trackWA(eventName) {
+		if (typeof window !== "undefined" && window.gtag) {
+			window.gtag("event", eventName, { event_category: "WhatsApp", event_label: eventName });
+		}
+		if (typeof window !== "undefined" && window.fbq) {
+			window.fbq("track", "Contact", { content_name: eventName });
+		}
+	}
+
 	function initFloating() {
 		const top = document.getElementById("to-top");
+		const wa = document.getElementById("wa-floating");
 		if (top && !top.dataset.bound) {
 			top.dataset.bound = "1";
 			top.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+		}
+		if (wa && !wa.dataset.bound) {
+			wa.dataset.bound = "1";
+			wa.addEventListener("click", () => trackWA("floating_whatsapp"));
 		}
 	}
 	function onScroll() {
