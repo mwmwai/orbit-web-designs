@@ -54,6 +54,23 @@ const plans = [
 		cta: "Choose Commerce",
 		featured: false,
 	},
+	{
+		name: "Custom SaaS App",
+		price: "KES 30,000",
+		usd: "≈ $230",
+		eur: "≈ €215",
+		blurb: "Your idea as a real SaaS — subscriptions, dashboards, ready to sell.",
+		features: [
+			"Auth, subscriptions & billing wired",
+			"Admin + user dashboards",
+			"M-Pesa / card / PayPal payments",
+			"Roles, permissions & onboarding flow",
+			"Deployed, documented & handed over",
+			"Live in 2–3 weeks · 3 months support",
+		],
+		cta: "Build my SaaS",
+		featured: false,
+	},
 ];
 
 const pricingSchema = {
@@ -62,7 +79,7 @@ const pricingSchema = {
 	"priceCurrency": "KES",
 	"minPrice": "20000",
 	"maxPrice": "90000",
-	"description": "One-time website packages: Starter KES 20,000, Business KES 30,000, Commerce from KES 40,000+",
+	"description": "One-time packages: Starter KES 20,000, Business KES 30,000, Commerce from KES 40,000+, Custom SaaS from KES 30,000",
 };
 ---
 
@@ -75,11 +92,11 @@ const pricingSchema = {
 				Straight-line pricing. Clear as the night sky.
 			</h2>
 			<p class="mt-4 max-w-xl text-slate-400">
-				Three packages built for growing businesses — one-time payment, delivered fast. Prices in KES · USD &amp; EUR accepted worldwide.
+				Four packages built for growing businesses — one-time payment, delivered fast. Prices in KES · USD &amp; EUR accepted worldwide.
 			</p>
 		</div>
 
-		<div class="grid items-stretch gap-6 lg:grid-cols-3">
+		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
 			{
 				plans.map((p, i) => (
 					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
