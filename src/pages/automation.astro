@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+
+const plans = [
+  { name: "Custom AI Agent", price: "KES 20,000", usd: "≈ $155", eur:"≈ €140", blurb: "One agent that does one job brilliantly — replies, qualifies, books, follows up.", features: ["Trained on your business data","WhatsApp / site chat / email","Lead qualification & booking","Handover to human when needed","Deployed + 1 month tuning"], cta: "Get my Agent", featured: true },
+  { name: "Workflow Automation", price: "KES 16,000", suffix: "/ workflow", usd:"≈ $125", eur:"≈ €110", blurb: "Remove the manual work — one workflow, end-to-end.", features: ["M-Pesa → Sheets/CRM","Inquiry → WhatsApp → Calendar","Invoice / receipt auto-send","No-code, you own it","1 workflow = 16k, bundle discounts"], cta: "Automate a workflow", featured: false },
+  { name: "WhatsApp Responder", price: "KES 13,000", usd:"≈ $100", eur:"≈ €90", blurb: "Your WhatsApp Business replies instantly — day & night.", features: ["Greeting + away + quick replies","Catalog + labels setup","Click-to-chat button on site","Meta Business setup","One-time, you own it"], cta: "Setup Responder", featured: false },
+];
+---
+
+<Layout title="AI Agents & Workflow Automation — From KES 13,000 | Orbit" description="Custom AI agents, workflow automations and WhatsApp responders. Agents from KES 20k, workflows 16k, WhatsApp 13k — M-Pesa native, deployed fast.">
+  <Navbar client:load />
+  <main id="main">
+    <section class="relative overflow-hidden border-b border-white/5">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true"><div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div></div>
+      <div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Agents & Workflows</p>
+        <h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">AI agents & workflows that <span class="text-gradient">do the work.</span></h1>
+        <p class="mt-5 max-w-2xl text-lg text-slate-400">We build one honest agent per job — no "24/7 employee" hype. Setup is one-time; your Meta/BSP fees pay Meta directly. You own everything.</p>
+        <p class="mt-3 text-sm text-slate-500">First 1,000 WhatsApp conversations/mo free on Meta. CTWA ads get 72h free reply window.</p>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="mx-auto max-w-7xl px-5">
+        <div class="grid items-stretch gap-6 lg:grid-cols-3">
+          {plans.map((p,i)=>(
+            <article class="reveal" style={`transition-delay:${i*70}ms`}>
+              <div data-tilt class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${p.featured ? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10" : "glow-border"}`}>
+                {p.featured && <span class="mb-4 inline-flex w-fit rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">Most popular</span>}
+                <h3 class="text-lg font-semibold text-white">{p.name}</h3>
+                <p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
+                <p class="mt-6"><span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>{p.suffix && <span class="text-stone text-sm">{p.suffix}</span>}<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span></p>
+                <ul class="mt-8 grid flex-1 content-start gap-3">{p.features.map(f=>(
+                  <li class="flex items-start gap-3 text-sm text-slate-300"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-1 shrink-0"><path d="M20 6L9 17l-5-5"/></svg>{f}</li>
+                ))}</ul>
+                <a href={whatsappLink(`Hi Orbit! I'm interested in ${p.name} (${p.price}). Can you tell me more?`)} target="_blank" rel="noopener noreferrer" class={`mt-8 block rounded-full py-3 text-center font-semibold transition ${p.featured ? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5" : "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"}`}>{p.cta}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p class="reveal mt-8 text-sm text-slate-500">Need something custom? <a href="/contact" class="text-electric hover:underline">Ask for a quote</a> — we scope honestly.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-white/5 py-16">
+      <div class="mx-auto max-w-7xl px-5">
+        <h2 class="text-2xl font-bold tracking-tight text-white">How we ship</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[["Map","We map the job + your data."],["Build","Agent/workflow wired to your tools."],["Train","Test on real chats, tune."],["Launch","You own it, we support 1 month."]].map(([t,d],i)=>(
+            <article class="glow-border rounded-2xl p-6 reveal" style={`transition-delay:${i*80}ms`}><span class="text-gradient text-3xl font-extrabold">{i+1}</span><h3 class="mt-3 font-semibold text-white">{t}</h3><p class="mt-2 text-sm leading-relaxed text-slate-400">{d}</p></article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaBand title="Want an agent or workflow?" text="Tell us the one job you want off your plate — we reply with scope, timeline and honest price." />
+  </main>
+  <Footer />
+</Layout>
