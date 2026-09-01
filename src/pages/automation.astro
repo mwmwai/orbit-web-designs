@@ -6,9 +6,9 @@ import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
 
 const plans = [
-  { name: "Custom AI Agent", price: "KES 20,000", usd: "≈ $155", eur:"≈ €140", blurb: "One agent that does one job brilliantly — replies, qualifies, books, follows up.", features: ["Trained on your business data","WhatsApp / site chat / email","Lead qualification & booking","Handover to human when needed","Deployed + 1 month tuning"], cta: "Get my Agent", featured: true },
-  { name: "Workflow Automation", price: "KES 16,000", suffix: "/ workflow", usd:"≈ $125", eur:"≈ €110", blurb: "Remove the manual work — one workflow, end-to-end.", features: ["M-Pesa → Sheets/CRM","Inquiry → WhatsApp → Calendar","Invoice / receipt auto-send","No-code, you own it","1 workflow = 16k, bundle discounts"], cta: "Automate a workflow", featured: false },
-  { name: "WhatsApp Responder", price: "KES 13,000", usd:"≈ $100", eur:"≈ €90", blurb: "Your WhatsApp Business replies instantly — day & night.", features: ["Greeting + away + quick replies","Catalog + labels setup","Click-to-chat button on site","Meta Business setup","One-time, you own it"], cta: "Setup Responder", featured: false },
+  { name: "Custom AI Agent", price: "KES 20,000", usd: "≈ $155", eur:"≈ €140", blurb: "One agent that does one job brilliantly — replies, qualifies, books, follows up.", features: ["Trained on your business data","WhatsApp / site chat / email","Lead qualification & booking","Handover to human when needed","Deployed + 1 month tuning"], cta: "Get my Agent", featured: true, icon: "M12 8V4H8M12 8l4-4M12 8v8m-4 4h8M9 16h6M10 12a2 2 0 114 0 2 2 0 01-4 0z", grad: "from-electric to-neon" },
+  { name: "Workflow Automation", price: "KES 16,000", suffix: "/ workflow", usd:"≈ $125", eur:"≈ €110", blurb: "Remove the manual work — one workflow, end-to-end.", features: ["M-Pesa → Sheets/CRM","Inquiry → WhatsApp → Calendar","Invoice / receipt auto-send","No-code, you own it","1 workflow = 16k, bundle discounts"], cta: "Automate a workflow", featured: false, icon: "M13 10V3L4 14h7v7l9-11h-7z", grad: "from-violet-500 to-electric" },
+  { name: "WhatsApp Responder", price: "KES 13,000", usd:"≈ $100", eur:"≈ €90", blurb: "Your WhatsApp Business replies instantly — day & night.", features: ["Greeting + away + quick replies","Catalog + labels setup","Click-to-chat button on site","Meta Business setup","One-time, you own it"], cta: "Setup Responder", featured: false, icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", grad: "from-[#25D366] to-emerald-400" },
 ];
 ---
 
@@ -32,7 +32,10 @@ const plans = [
             <article class="reveal" style={`transition-delay:${i*70}ms`}>
               <div data-tilt class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${p.featured ? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10" : "glow-border"}`}>
                 {p.featured && <span class="mb-4 inline-flex w-fit rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">Most popular</span>}
-                <h3 class="text-lg font-semibold text-white">{p.name}</h3>
+                <div class={`inline-flex rounded-xl bg-gradient-to-br ${p.grad} p-3.5 ring-1 ring-white/10`}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={p.icon} /></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-semibold text-white">{p.name}</h3>
                 <p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
                 <p class="mt-6"><span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>{p.suffix && <span class="text-stone text-sm">{p.suffix}</span>}<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span></p>
                 <ul class="mt-8 grid flex-1 content-start gap-3">{p.features.map(f=>(
