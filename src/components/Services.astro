@@ -87,11 +87,11 @@ const services = [
 						</div>
 						<h3 class="mt-6 text-xl font-semibold text-white">{s.title}</h3>
 						<p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{s.description}</p>
-						<ul class="mt-6 flex flex-wrap gap-2">
+						<div class="mt-6 flex flex-wrap gap-2">
 							{s.tags.map((t) => (
 								<li class="list-none rounded-full border border-edge bg-charcoal px-3 py-1 font-mono text-xs text-slate-300">{t}</li>
 							))}
-						</ul>
+						</div>
 						<a href={s.link} class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-electric transition group-hover:gap-3">
 							Explore <span aria-hidden>→</span>
 						</a>
