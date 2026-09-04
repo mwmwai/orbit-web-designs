@@ -169,7 +169,6 @@ const jsonLd = [
 		))}
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
-		<div id="edit-bar" class="hidden fixed bottom-4 left-1/2 z-[99] -translate-x-1/2 rounded-full border border-edge bg-panel px-4 py-2 text-sm shadow-xl"><span class="text-electric">Edit mode ON</span> <button id="edit-save" class="ml-3 rounded-full bg-electric px-4 py-1 text-white">Save via WhatsApp</button> <button id="edit-off" class="ml-2 text-slate-400 underline">Exit</button></div>
 		<LogoReveal />
 		<Hero3D client:idle transition:persist />
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
@@ -320,9 +319,7 @@ const jsonLd = [
 					});
 				});
 			}
-function initEdit(){if(localStorage.getItem("admin_ok")!=="1")return;const b=document.getElementById("edit-bar");if(!b)return;b.classList.remove("hidden");document.querySelectorAll("h1,h2,h3,p,li").forEach(e=>{if(e.closest("#edit-bar")||e.closest("#logo-reveal"))return;e.contentEditable="true";e.style.outline="1px dashed rgba(0,200,255,0.25)"});document.getElementById("edit-off").onclick=()=>{localStorage.removeItem("admin_ok");location.reload()};document.getElementById("edit-save").onclick=()=>{const t=document.documentElement.innerText.slice(0,900);location.href="https://wa.me/254741992308?text="+encodeURIComponent("Admin inline edit — apply diff:\n"+t)}}
-		document.addEventListener("astro:page-load", () => {
-			initEdit();
+document.addEventListener("astro:page-load", () => {
 			initReveal();
 			initTilt();
 			initCounters();
