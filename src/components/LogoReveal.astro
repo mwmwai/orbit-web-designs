@@ -1,0 +1,10 @@
+---
+<div id="logo-reveal" class="fixed inset-0 z-[100] grid place-items-center bg-ink" aria-hidden="true">
+  <div class="text-center">
+    <img src="/logo-mark.png" alt="" width="72" height="72" class="mx-auto animate-[logoPulse_1.2s_ease]" />
+    <p class="mt-4 bg-gradient-to-r from-slate-100 via-slate-300 to-slate-400 bg-clip-text text-3xl font-black tracking-[0.3em] text-transparent">ORBIT</p>
+    <p class="mt-1 text-[10px] uppercase tracking-[0.26em] text-slate-500">Web Designs & Marketing</p>
+  </div>
+</div>
+<style>@keyframes logoPulse{0%{transform:scale(.85);opacity:0;filter:blur(8px)}100%{transform:scale(1);opacity:1;filter:blur(0)}}#logo-reveal.out{animation:fadeOut .6s forwards}@keyframes fadeOut{to{opacity:0;pointer-events:none}}</style>
+<script>(()=>{if(matchMedia("(prefers-reduced-motion:reduce)").matches){document.getElementById("logo-reveal")?.remove();return}setTimeout(()=>{const e=document.getElementById("logo-reveal");e?.classList.add("out"),setTimeout(()=>e?.remove(),700)},1800)})();</script>
