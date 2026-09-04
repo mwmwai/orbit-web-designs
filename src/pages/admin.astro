@@ -3,11 +3,21 @@ import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Admin — Orbit">
   <main class="mx-auto max-w-3xl px-5 py-24">
-    <h1 class="text-3xl font-bold text-white">Orbit Admin</h1>
-    <p class="mt-2 text-slate-400">Edit everything manually — no GitHub login needed for preview. Use Decap at <a href="/admin/" class="text-electric underline">/admin/</a> after OAuth is configured.</p>
-    <div class="mt-8 grid gap-4">
-      <a href="https://github.com/mwmwai/orbit-web-designs" target="_blank" class="rounded-xl border border-edge bg-panel p-6 hover:border-electric/60">Open GitHub — edit src/data/*.json directly</a>
-      <div class="rounded-xl border border-edge bg-panel p-6"><p class="font-semibold text-white">Quick edits</p><p class="text-sm text-slate-400">Tell me what to change — e.g. "Starter to 22k" — and I push it.</p></div>
+    <div id="lock" class="mx-auto max-w-sm rounded-2xl border border-edge bg-panel p-8">
+      <h1 class="text-xl font-bold text-white">Admin Login</h1>
+      <p class="mt-1 text-sm text-slate-400">Account 0741992308</p>
+      <input id="pw" type="password" placeholder="Password" class="mt-6 w-full rounded-xl border border-edge bg-ink px-4 py-3 text-white outline-none focus:border-electric" />
+      <button id="go" class="mt-4 w-full rounded-full btn-gradient py-3 font-semibold text-white">Unlock</button>
+      <p id="err" class="mt-3 hidden text-sm text-red-400">Wrong password</p>
+    </div>
+    <div id="panel" class="hidden">
+      <h1 class="text-3xl font-bold text-white">Orbit Admin ✓</h1>
+      <p class="mt-2 text-slate-400">Logged in as 0741992308 — edit everything below or tell me.</p>
+      <div class="mt-8 grid gap-4">
+        <a href="https://github.com/mwmwai/orbit-web-designs" target="_blank" class="rounded-xl border border-edge bg-panel p-6 hover:border-electric/60">Open GitHub — edit src/data/*.json</a>
+        <div class="rounded-xl border border-edge bg-panel p-6"><p class="font-semibold text-white">Quick edits</p><p class="text-sm text-slate-400">Message me e.g. "Starter to 22k" and I push.</p><button onclick="localStorage.removeItem('admin_ok');location.reload()" class="mt-3 text-sm text-slate-500 underline">Lock again</button></div>
+      </div>
     </div>
   </main>
 </Layout>
+<script>(()=>{const a="Prine12345",b=localStorage.getItem("admin_ok")==="1",c=document.getElementById("lock"),d=document.getElementById("panel"),e=document.getElementById("pw"),f=document.getElementById("go"),g=document.getElementById("err");function u(){c.classList.add("hidden"),d.classList.remove("hidden")}function v(){g.classList.remove("hidden")}if(b)u();f.onclick=()=>{e.value===a?(localStorage.setItem("admin_ok","1"),u()):v()},e.onkeydown=e=>{if(e.key==="Enter")f.click()}})();</script>
