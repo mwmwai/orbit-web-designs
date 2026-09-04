@@ -19,6 +19,11 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(-28deg); border-color: rgb(47 123 255 / 0.14)"></div>
 			<span class="glow-dot" style="--radius: 280px; --dur: 18s; top: 50%; left: 50%"></span>
 			<span class="glow-dot" style="--radius: 200px; --dur: 26s; top: 50%; left: 50%; animation-delay: -8s"></span>
+			<div class="orbit-particles" aria-hidden="true">
+				{[...Array(18)].map((_, i) => (
+					<span class="orbit-particle" style={{ '--i': i, '--delay': i * 0.15 + 's' }}></span>
+				))}
+			</div>
 		</div>
 	</div>
 

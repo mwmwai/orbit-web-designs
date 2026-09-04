@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "id": "wasted-first-impression",
+      "name": "WastedFirstImpression",
+      "transcript": "Your website loses you customers before they even read a word.",
+      "duration": 4,
+      "frames": 120,
+      "fps": 30,
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "three-second-exit",
+      "name": "ThreeSecondExit",
+      "transcript": "Visitors decide in 3 seconds. If yours is slow or outdated, they're already gone.",
+      "duration": 4,
+      "frames": 120,
+      "fps": 30,
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "orbit-builds-better",
+      "name": "OrbitBuildsBetter",
+      "transcript": "We build fast, modern websites that turn visitors into paying customers.",
+      "duration": 5,
+      "frames": 150,
+      "fps": 30,
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "design-speed-seo",
+      "name": "DesignSpeedSeo",
+      "transcript": "Trusted by businesses across Nairobi and beyond.",
+      "duration": 4,
+      "frames": 120,
+      "fps": 30,
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "orbit-outro",
+      "name": "OrbitOutro",
+      "transcript": "Orbit Web Designs — your brand, in motion. Visit orbitwebdesigns.co.ke",
+      "duration": 5,
+      "frames": 150,
+      "fps": 30,
+      "width": 1080,
+      "height": 1920
+    }
+  ]
+}

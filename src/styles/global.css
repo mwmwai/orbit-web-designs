@@ -322,14 +322,93 @@ html[data-astro-transition] body::after {
 .hero-orbit {
 	perspective: 900px;
 	transform-style: preserve-3d;
+	position: relative;
+}
+.hero-orbit::before,
+.hero-orbit::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	pointer-events: none;
+}
+.hero-orbit::before {
+	background: radial-gradient(circle at 50% 50%, rgba(0,200,255,0.08) 0%, transparent 70%);
+	animation: orbitGlow 8s ease-in-out infinite alternate;
 }
 .hero-orbit-ring {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	border: 1px solid rgb(0 200 255 / 0.12);
+	border: 1.5px solid rgb(0 200 255 / 0.28);
 	border-radius: 50%;
 	transform-style: preserve-3d;
+	box-shadow: 0 0 24px rgb(0 200 255 / 0.22), inset 0 0 12px rgb(0 200 255 / 0.1);
+}
+.hero-orbit-ring:nth-child(1) { animation: orbitSpin 18s linear infinite; }
+.hero-orbit-ring:nth-child(2) { animation: orbitSpin 24s linear infinite reverse; }
+.hero-orbit-ring:nth-child(3) { animation: orbitSpin 30s linear infinite; }
+@keyframes orbitSpin {
+	from { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(0deg); }
+	to { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg); }
+}
+@keyframes orbitGlow {
+	from { opacity: 0.3; transform: scale(1); }
+	to { opacity: 0.6; transform: scale(1.05); }
+}
+.orbit-particles {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+.orbit-particle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(0,200,255,1) 0%, rgba(0,200,255,0.3) 50%, transparent 70%);
+	opacity: 0;
+	transform-origin: center;
+	animation: particleOrbit 8s linear infinite;
+}
+.orbit-particle:nth-child(1) { --radius: 160px; --delay: 0s; }
+.orbit-particle:nth-child(2) { --radius: 180px; --delay: 0.3s; }
+.orbit-particle:nth-child(3) { --radius: 200px; --delay: 0.6s; }
+.orbit-particle:nth-child(3) { --radius: 220px; --delay: 0.9s; }
+.orbit-particle:nth-child(4) { --radius: 170px; --delay: 1.2s; }
+.orbit-particle:nth-child(5) { --radius: 190px; --delay: 1.5s; }
+.orbit-particle:nth-child(6) { --radius: 210px; --delay: 1.8s; }
+.orbit-particle:nth-child(7) { --radius: 150px; --delay: 2.1s; }
+.orbit-particle:nth-child(8) { --radius: 185px; --delay: 2.4s; }
+.orbit-particle:nth-child(9) { --radius: 205px; --delay: 2.7s; }
+.orbit-particle:nth-child(10) { --radius: 165px; --delay: 3s; }
+.orbit-particle:nth-child(11) { --radius: 185px; --delay: 3.3s; }
+.orbit-particle:nth-child(12) { --radius: 205px; --delay: 3.6s; }
+.orbit-particle:nth-child(13) { --radius: 175px; --delay: 3.9s; }
+.orbit-particle:nth-child(14) { --radius: 195px; --delay: 4.2s; }
+.orbit-particle:nth-child(15) { --radius: 215px; --delay: 4.5s; }
+.orbit-particle:nth-child(16) { --radius: 160px; --delay: 4.8s; }
+.orbit-particle:nth-child(17) { --radius: 180px; --delay: 5.1s; }
+.orbit-particle:nth-child(18) { --radius: 200px; --delay: 5.4s; }
+@keyframes particleOrbit {
+	0% {
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(0deg) translateX(var(--radius, 180px)) rotate(0deg) scale(0.3);
+	}
+	10% {
+		opacity: 0.8;
+		transform: translate(-50%, -50%) rotate(36deg) translateX(var(--radius, 180px)) rotate(-36deg) scale(1);
+	}
+	90% {
+		opacity: 0.8;
+		transform: translate(-50%, -50%) rotate(324deg) translateX(var(--radius, 180px)) rotate(-324deg) scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translate(-50%, -50%) rotate(360deg) translateX(var(--radius, 180px)) rotate(-360deg) scale(0.3);
+	}
 }
 .film-grain {
 	position: absolute;
