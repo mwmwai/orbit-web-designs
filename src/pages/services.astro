@@ -99,7 +99,7 @@ const steps = [
 							</ul>
 						</div>
 						<div class={`reveal overflow-hidden rounded-2xl glow-border ${i % 2 === 1 ? "lg:order-1" : ""}`} style={`transition-delay:120ms`}>
-							<img src={s.image} alt={s.alt} loading="lazy" class="h-72 w-full object-cover transition duration-500 hover:scale-105 lg:h-96" />
+							<img src={s.image} alt={s.alt} loading="lazy" decoding="async" width="1000" height="600" class="h-72 w-full object-cover transition duration-500 hover:scale-105 lg:h-96" />
 						</div>
 					</div>
 				</section>
