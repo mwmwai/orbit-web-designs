@@ -17,6 +17,7 @@ export const NAV_LINKS = [
 	{ href: "/services", label: "Services" },
 	{ href: "/packages", label: "Packages" },
 	{ href: "/portfolio", label: "Our Work" },
+	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
 	{ href: "/contact", label: "Contact" },
 ];
 
