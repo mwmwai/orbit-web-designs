@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/react/Navbar";
 import Hero from "../components/Hero.astro";
+import Orbit3D from "../components/react/Orbit3D";
 import Services from "../components/Services.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Pricing from "../components/Pricing.astro";
@@ -15,7 +16,8 @@ import FloatingActions from "../components/FloatingActions.astro";
 
 <Layout>
 	<Navbar client:load />
-	<main id="main">
+	<main id="main" class="relative">
+		<Orbit3D client:visible />
 		<Hero />
 		<Services />
 		<Portfolio />
