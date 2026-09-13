@@ -46,6 +46,21 @@ const plans = [
 		cta: "Choose Commerce",
 		featured: false,
 	},
+	{
+		name: "Custom App",
+		price: "KES 35,000",
+		blurb: "Your idea as a real app — dashboards, payments, ready to sell.",
+		features: [
+			"Auth, roles & onboarding flow",
+			"Admin + user dashboards",
+			"M-Pesa, card & PayPal payments",
+			"Deployed, documented & handed over",
+			"Training so you're never stuck",
+			"3 months of support",
+		],
+		cta: "Build my App",
+		featured: false,
+	},
 ];
 ---
 
@@ -57,11 +72,11 @@ const plans = [
 				Straight-line pricing. Clear as the night sky.
 			</h2>
 			<p class="mt-4 max-w-xl text-slate-400">
-				Three packages built for growing businesses — one-time payment, delivered fast.
+				Four packages built for growing businesses — one-time payment, delivered fast.
 			</p>
 		</div>
 
-		<div class="grid items-stretch gap-6 lg:grid-cols-3">
+		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
 			{
 				plans.map((p, i) => (
 					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
