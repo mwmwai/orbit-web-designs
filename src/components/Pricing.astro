@@ -61,6 +61,21 @@ const plans = [
 		cta: "Build my App",
 		featured: false,
 	},
+	{
+		name: "Graphic Design",
+		price: "KES 5,000+",
+		blurb: "Logos to full brand kits — from 5k to 15k.",
+		features: [
+			"Logos from KES 5,000",
+			"Social media kits",
+			"Brand identity up to KES 15,000",
+			"Marketing creatives & flyers",
+			"Fast turnaround",
+			"Revisions included",
+		],
+		cta: "Get design",
+		featured: false,
+	},
 ];
 ---
 
@@ -72,11 +87,11 @@ const plans = [
 				Straight-line pricing. Clear as the night sky.
 			</h2>
 			<p class="mt-4 max-w-xl text-slate-400">
-				Four packages built for growing businesses — one-time payment, delivered fast.
+				Five packages built for growing businesses — one-time payment, delivered fast.
 			</p>
 		</div>
 
-		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
+		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
 				plans.map((p, i) => (
 					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
