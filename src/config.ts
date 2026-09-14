@@ -6,7 +6,7 @@ export const SITE_PHONE_DISPLAY = "+254 741 992 308";
 export const WHATSAPP_NUMBER = "254741992308";
 
 export const DEFAULT_WA_MESSAGE =
-	"Hi Orbit Web Designs & Marketing! I'd like to inquire about your web design or marketing services.";
+	"Hi Orbit! I want a website for my business. I have my photos, text and logo ready — what package fits me?";
 
 export function whatsappLink(message: string) {
 	return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

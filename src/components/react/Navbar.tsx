@@ -53,7 +53,7 @@ export default function Navbar() {
 						rel="noopener noreferrer"
 						className="btn-gradient hidden rounded-full px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-electric/25 hover:shadow-electric/40 md:inline-block"
 					>
-						Get a Free Quote
+						Get 10% off
 					</a>
 					<button
 						type="button"
@@ -91,7 +91,7 @@ export default function Navbar() {
 						rel="noopener noreferrer"
 						className="btn-gradient mt-2 block rounded-full px-5 py-2.5 text-center text-sm font-semibold text-white"
 					>
-						Get a Free Quote
+						Get 10% off
 					</a>
 				</nav>
 			)}
