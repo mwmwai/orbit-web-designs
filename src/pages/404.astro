@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import { whatsappLink, DEFAULT_WA_MESSAGE } from "../config";
+---
+
+<Layout title="Lost in orbit — 404 | Orbit Web Designs & Marketing" description="This page drifted out of orbit. Head home or chat with us on WhatsApp.">
+	<Navbar client:load />
+	<main id="main" class="mx-auto max-w-3xl px-5 py-28 text-center">
+		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ 404</p>
+		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+			Lost in <span class="text-gradient">orbit.</span>
+		</h1>
+		<p class="mx-auto mt-5 max-w-md text-slate-400">
+			This page drifted off course. Head back home — or tell us what you were looking for and we'll point you right.
+		</p>
+		<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+			<a href="/" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">
+				Back home
+			</a>
+			<a href={whatsappLink(DEFAULT_WA_MESSAGE)} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">
+				Chat on WhatsApp
+			</a>
+		</div>
+	</main>
+	<Footer />
+</Layout>

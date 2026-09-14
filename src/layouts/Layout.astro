@@ -50,9 +50,11 @@ const jsonLd = {
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={new URL("/logo.png", SITE_URL).href} />
+		<meta property="og:image:alt" content="Orbit Web Designs & Marketing logo" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL("/logo.png", SITE_URL).href} />
 		<meta name="robots" content="index, follow" />
 		<ClientRouter />
 	</head>
