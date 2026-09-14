@@ -1,0 +1,6 @@
+Contact: mailto:mwmwai@gmail.com
+Contact: tel:+254741992308
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://orbitwebdesigns.co.ke/.well-known/security.txt
+Policy: https://orbitwebdesigns.co.ke/security-policy

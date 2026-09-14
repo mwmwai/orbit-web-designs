@@ -1,0 +1,398 @@
+---
+import Orbit3DUniverse from "../components/react/orbit3d/Orbit3DUniverse.tsx";
+import Playground from "../components/react/orbit3d/Playground.tsx";
+import GlobalBackdrop from "../components/react/orbit3d/GlobalBackdrop.tsx";
+import "../styles/global.css";
+
+const wa = "https://wa.me/254741992308?text=" + encodeURIComponent("Hi Orbit! I want a full-3D website for my brand. Show me what you can do.");
+
+const services = [
+  { n: "01", t: "Web Design & Development", d: "Custom builds engineered for speed, clarity and conversion — landing pages to full platforms.", tags: ["Landing pages", "Business sites", "Custom apps"] },
+  { n: "02", t: "E-commerce & M-Pesa", d: "Stores with M-Pesa, cards and PayPal wired in from day one — checkout in under a minute.", tags: ["Stores", "M-Pesa", "Inventory"] },
+  { n: "03", t: "SEO & Growth", d: "Technical, on-page and local SEO that ranks you for searches that pay.", tags: ["Technical SEO", "Local SEO", "Google"] },
+  { n: "04", t: "Digital Marketing", d: "Meta, Google and TikTok campaigns built around real funnels — measured, not guessed.", tags: ["Meta Ads", "Google Ads", "Funnels"] },
+  { n: "05", t: "Brand & Identity", d: "Logos, identity systems, social kits and creatives that look the part everywhere.", tags: ["Logos", "Identity", "Social kits"] },
+  { n: "06", t: "3D & Motion", d: "WebGL hero scenes, product configurators and scroll-driven 3D storytelling.", tags: ["WebGL", "Configurators", "Motion"] },
+];
+
+const work = [
+  { name: "Genthub Barbershop", type: "Booking", img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=70&w=800&auto=format&fit=crop" },
+  { name: "Sokoni Fresh", type: "E-commerce", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=70&w=800&auto=format&fit=crop" },
+  { name: "Zawadi Crafts", type: "Storefront", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=70&w=800&auto=format&fit=crop" },
+  { name: "Tatu Heights", type: "Real Estate", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=70&w=800&auto=format&fit=crop" },
+  { name: "Mama Oliech", type: "Hospitality", img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=70&w=800&auto=format&fit=crop" },
+  { name: "FitZone", type: "Landing", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=70&w=800&auto=format&fit=crop" },
+];
+
+const steps = [
+  { n: "01", t: "Ignite", d: "Map goals, audience and the orbit you want to own." },
+  { n: "02", t: "Blueprint", d: "Wireframes and 3D mockups you approve first." },
+  { n: "03", t: "Build", d: "Hand-crafted build with 3D, SEO and speed baked in." },
+  { n: "04", t: "Lift-off", d: "Go live, get trained, and climb from day one." },
+];
+
+const testimonials = [
+  { q: "Our bookings doubled in a month. The 3D hero makes us look twice our size.", who: "Genthub Barbershop · Nairobi" },
+  { q: "M-Pesa checkout just works. Customers finish payment in under a minute.", who: "Sokoni Fresh · Kiambu" },
+  { q: "Wholesale inquiries tripled. The site sells while we sleep.", who: "Zawadi Crafts · Online" },
+];
+
+const pricing = [
+  { t: "Launch", p: "KES 20,000", d: "One-page cinematic site, WhatsApp + maps, live in 48–72h." },
+  { t: "Business 3D", p: "KES 45,000", d: "Multi-section + 3D hero, M-Pesa ready, SEO baked in." },
+  { t: "Commerce+", p: "KES 90,000", d: "Full store + interactive 3D stage, inventory, training." },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbit Web Designs — Full 3D Experience</title>
+  <meta name="description" content="Orbit builds full-3D websites: WebGL hero scenes, interactive product stages and cinematic marketing sites." />
+</head>
+<body class="bg-[#0a0a0f] text-slate-200 antialiased overflow-x-hidden">
+  <div id="o3d-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0f] transition-opacity duration-700">
+    <p class="text-3xl font-black tracking-[0.4em] text-white">ORBIT</p>
+    <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.3em] text-cyan-300">charging warp drive…</p>
+    <div class="mt-6 h-[2px] w-48 overflow-hidden rounded bg-white/10"><div id="o3d-loadbar" class="h-full w-0 bg-gradient-to-r from-[#00c8ff] to-[#2f7bff]"></div></div>
+  </div>
+  <div id="o3d-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2 w-2 rounded-full bg-cyan-300 lg:block" aria-hidden="true"></div>
+  <div id="o3d-ring" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-8 w-8 rounded-full border border-cyan-300/50 lg:block" aria-hidden="true"></div>
+  <div id="o3d-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-[#00c8ff] to-[#2f7bff]" aria-hidden="true"></div>
+  <GlobalBackdrop client:load />
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+      <a href="/orbit-3d" class="leading-none">
+        <span class="block text-xl font-black tracking-[0.3em] text-white">ORBIT</span>
+        <span class="mt-1 block text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">Full-3D Demo</span>
+      </a>
+      <nav class="hidden items-center gap-7 lg:flex text-sm">
+        <a href="#top" class="text-white font-semibold">Home</a>
+        <a href="#services" class="text-slate-300 hover:text-white">Services</a>
+        <a href="#playground" class="text-slate-300 hover:text-white">3D Lab</a>
+        <a href="#work" class="text-slate-300 hover:text-white">Work</a>
+        <a href="#about" class="text-slate-300 hover:text-white">About</a>
+        <a href="#contact" class="text-slate-300 hover:text-white">Contact</a>
+      </nav>
+      <a href={wa} target="_blank" rel="noopener" class="rounded-full bg-gradient-to-r from-[#00c8ff] to-[#2f7bff] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25">Get 3D site</a>
+    </div>
+  </header>
+
+  <!-- HERO / HOME -->
+  <section id="top" class="relative min-h-screen flex items-center overflow-hidden pt-24">
+    <Orbit3DUniverse client:load />
+    <div class="relative z-10 mx-auto max-w-7xl px-5 py-24 w-full">
+      <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-slate-300">
+        <span class="relative flex h-2 w-2"><span class="absolute h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span><span class="relative h-2 w-2 rounded-full bg-cyan-400"></span></span>
+        Fully 3D · WebGL · pointer-reactive
+      </p>
+      <h1 class="max-w-4xl text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight text-white">
+        <span class="o3d-word" style="--i:0">Your</span>
+        <span class="o3d-word" style="--i:1">brand,</span><br />
+        <span class="o3d-word" style="--i:2">built</span>
+        <span class="o3d-word" style="--i:3">in</span>
+        <span class="o3d-word o3d-grad" style="--i:4">full</span>
+        <span class="o3d-word o3d-grad" style="--i:5">3D.</span>
+      </h1>
+      <p class="o3d-reveal mt-6 max-w-2xl text-lg leading-relaxed text-slate-400">
+        Beyond the cosmic orbit — drag the scene, dive on scroll. Live knot core,
+        moons riding the rings, 900-particle shell, pointer physics. This is the 199%.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href={wa} target="_blank" rel="noopener" data-magnetic class="rounded-full bg-gradient-to-r from-[#00c8ff] to-[#2f7bff] px-8 py-3.5 font-semibold text-white shadow-xl shadow-cyan-500/30">Start my 3D build</a>
+        <a href="#playground" data-magnetic class="rounded-full border border-white/15 bg-white/5 px-8 py-3.5 font-semibold text-white hover:border-cyan-300/60">Enter 3D Lab ↓</a>
+      </div>
+      <dl class="mt-14 grid max-w-3xl grid-cols-2 sm:grid-cols-4 gap-4">
+        {[["50+", "sites live"], ["25+", "M-Pesa stores"], ["95+", "PageSpeed"], ["24h", "reply time"]].map(([v, l]) => (
+          <div data-tilt class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur" style="transform-style:preserve-3d"><dt class="text-2xl font-extrabold text-white" data-counter>{v}</dt><dd class="text-xs text-slate-400 mt-1">{l}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="border-y border-white/5 bg-white/[0.02] py-4 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-5 flex flex-wrap justify-center gap-x-8 gap-y-2 font-mono text-xs uppercase tracking-[0.25em] text-slate-400">
+      <span>WebGL</span><span class="text-cyan-400">·</span><span>Three.js</span><span class="text-cyan-400">·</span><span>Motion 3D</span><span class="text-cyan-400">·</span><span>M-Pesa ready</span><span class="text-cyan-400">·</span><span>SEO built-in</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="relative py-24 overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5">
+      <p class="o3d-reveal font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">■ Services — copied from main site</p>
+      <h2 class="o3d-reveal mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">Everything in orbit, now in 3D.</h2>
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3" style="perspective:1200px">
+        {services.map((s) => (
+          <article data-tilt class="o3d-reveal rounded-2xl border border-white/10 bg-[#0d0d16]/80 p-8 backdrop-blur transition duration-300 hover:border-cyan-300/50 hover:shadow-2xl hover:shadow-cyan-500/10" style="transform-style:preserve-3d">
+            <span class="font-mono text-sm text-slate-500">{s.n}</span>
+            <h3 class="mt-4 text-xl font-semibold text-white">{s.t}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">{s.d}</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {s.tags.map((t) => (<span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">{t}</span>))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D LAB -->
+  <section id="playground" class="py-24 border-t border-white/5 bg-white/[0.015]">
+    <div class="mx-auto max-w-7xl px-5">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300 text-center">■ 3D Lab — proof, not promises</p>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight text-center">Orbit is one piece. Here's the rest.</h2>
+      <p class="mt-4 text-center text-slate-400 max-w-xl mx-auto">Tap a shape. Same stage, live geometry swap, pointer physics, additive particles.</p>
+      <div class="mt-10"><Playground client:visible /></div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="relative py-24 border-t border-white/5 overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5">
+      <p class="o3d-reveal font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">■ Work — copied from main site</p>
+      <h2 class="o3d-reveal mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">Recent launches, still climbing.</h2>
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3" style="perspective:1200px">
+        {work.map((p) => (
+          <article data-tilt class="o3d-reveal overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d16]/85 backdrop-blur transition duration-300 hover:border-cyan-300/40" style="transform-style:preserve-3d">
+            <div class="relative h-52 overflow-hidden">
+              <img src={p.img} alt={p.name} loading="lazy" width="600" height="400" class="h-full w-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent"></div>
+              <span class="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 font-mono text-xs uppercase tracking-widest backdrop-blur">{p.type}</span>
+            </div>
+            <div class="p-6"><h3 class="text-lg font-semibold text-white">{p.name}</h3><p class="mt-1 font-mono text-xs text-cyan-200/60">hover tilts in 3D · live demo cards</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="relative py-24 border-t border-white/5 bg-white/[0.015] overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5">
+      <p class="o3d-reveal font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">■ Process — copied from main site</p>
+      <h2 class="o3d-reveal mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">Ignition to orbit in four moves.</h2>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" style="perspective:1200px">
+        {steps.map((s) => (
+          <div data-tilt class="o3d-reveal rounded-2xl border border-white/10 bg-[#0d0d16]/85 backdrop-blur p-8" style="transform-style:preserve-3d">
+            <span class="text-5xl font-medium text-cyan-400/20">{s.n}</span>
+            <h3 class="mt-4 text-lg font-semibold text-white">{s.t}</h3>
+            <p class="mt-3 text-sm text-slate-400">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="relative py-24 border-t border-white/5 overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 grid gap-10 lg:grid-cols-2 items-center">
+      <div class="o3d-reveal">
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-cyan-300">■ About Orbit — copied from main site</p>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight">A Nairobi-born studio shipping worldwide.</h2>
+        <p class="mt-4 text-slate-400 leading-relaxed">Orbit Web Designs & Marketing builds fast, secure websites and runs marketing that gets businesses found, trusted and paid. This demo page is isolated — your original site is untouched.</p>
+        <div class="mt-6 flex flex-wrap gap-2 font-mono text-xs text-slate-300">
+          <span class="rounded-full border border-white/10 px-3 py-1">PageSpeed 95+</span>
+          <span class="rounded-full border border-white/10 px-3 py-1">SEO Ready</span>
+          <span class="rounded-full border border-white/10 px-3 py-1">M-Pesa wired</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4" style="perspective:1200px">
+        {[["50+", "Websites shipped"], ["10+", "Industries"], ["25+", "M-Pesa stores"], ["24h", "Reply time"]].map(([v, l]) => (
+          <div data-tilt class="o3d-reveal rounded-2xl border border-white/10 bg-[#0d0d16]/85 backdrop-blur p-6 text-center" style="transform-style:preserve-3d"><p class="text-3xl font-extrabold text-white">{v}</p><p class="mt-1 text-sm text-slate-400">{l}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS + PRICING (copied structure from main site) -->
+  <section id="proof" class="relative py-24 border-t border-white/5 overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5">
+      <p class="o3d-reveal font-mono text-xs uppercase tracking-[0.18em] text-cyan-300 text-center">■ Proof — copied from main site</p>
+      <h2 class="o3d-reveal mt-4 text-3xl sm:text-4xl font-bold text-white tracking-tight text-center">Loved by owners like you.</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3" style="perspective:1200px">
+        {testimonials.map((t) => (
+          <figure data-tilt class="o3d-reveal rounded-2xl border border-white/10 bg-[#0d0d16]/85 backdrop-blur p-7" style="transform-style:preserve-3d">
+            <blockquote class="text-slate-200 leading-relaxed">“{t.q}”</blockquote>
+            <figcaption class="mt-4 font-mono text-xs text-cyan-200/70">{t.who}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-3" style="perspective:1200px">
+        {pricing.map((p) => (
+          <div data-tilt class="o3d-reveal rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent p-8 text-center backdrop-blur" style="transform-style:preserve-3d">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-200/70">{p.t}</p>
+            <p class="mt-3 text-3xl font-extrabold text-white">{p.p}</p>
+            <p class="mt-3 text-sm text-slate-400">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="relative py-24 border-t border-white/5 bg-gradient-to-b from-cyan-500/10 to-transparent overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-3xl px-5 text-center o3d-reveal">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Want this 3D for your brand?</h2>
+      <p class="mt-4 text-slate-400">One message. One 3D website. More customers.</p>
+      <a href={wa} target="_blank" rel="noopener" class="mt-8 inline-block rounded-full bg-gradient-to-r from-[#00c8ff] to-[#2f7bff] px-10 py-4 font-semibold text-white shadow-xl shadow-cyan-500/30">Chat on WhatsApp →</a>
+      <p class="mt-4 font-mono text-xs text-slate-500">+254 741 992 308 · mwmwai@gmail.com</p>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/5 py-12">
+    <div class="mx-auto max-w-7xl px-5 grid gap-8 md:grid-cols-3">
+      <div>
+        <p class="text-xl font-black tracking-[0.3em] text-white">ORBIT</p>
+        <p class="mt-2 text-sm text-slate-400 max-w-xs">Full-3D demo. Fast, secure websites + marketing that gets businesses found, trusted and paid.</p>
+      </div>
+      <div class="font-mono text-xs text-slate-400 flex flex-col gap-2">
+        <a href="#services" class="hover:text-white">Services</a>
+        <a href="#playground" class="hover:text-white">3D Lab</a>
+        <a href="#work" class="hover:text-white">Work</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+      <div class="font-mono text-xs text-slate-400">
+        <p>+254 741 992 308</p>
+        <p class="mt-1">mwmwai@gmail.com</p>
+        <a href="/" class="mt-3 inline-block text-cyan-300 hover:text-white">← Back to main site</a>
+      </div>
+    </div>
+    <p class="mt-8 text-center font-mono text-xs text-slate-500">ORBIT 3D DEMO · isolated page · original site untouched · /orbit-3d</p>
+  </footer>
+
+  <!-- cinematic overlays (scoped, original untouched) -->
+  <div class="o3d-grain" aria-hidden="true"></div>
+  <div class="o3d-vignette" aria-hidden="true"></div>
+
+  <style>
+    .o3d-reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .o3d-reveal.is-visible { opacity: 1; transform: none; }
+    [data-tilt] { transition: transform .35s ease, box-shadow .35s ease; will-change: transform; }
+    .o3d-word { display: inline-block; opacity: 0; transform: translateY(0.6em) rotate(2deg); animation: o3dWordIn .8s cubic-bezier(0.22,1,0.36,1) forwards; animation-delay: calc(var(--i, 0) * 70ms + 150ms); }
+    .o3d-grad { background: linear-gradient(90deg, #00c8ff, #2f7bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    @keyframes o3dWordIn { to { opacity: 1; transform: none; } }
+    [data-magnetic] { transition: transform .35s cubic-bezier(0.22,1,0.36,1); display: inline-block; }
+    .o3d-grain { position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: .05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .o3d-vignette { position: fixed; inset: 0; z-index: 39; pointer-events: none; background: radial-gradient(80% 70% at 50% 40%, transparent 45%, rgb(0 0 0 / 0.5) 100%); }
+    @media (prefers-reduced-motion: reduce) { .o3d-reveal, .o3d-word { opacity: 1 !important; transform: none !important; animation: none !important; } }
+  </style>
+
+  <script>
+    function initO3D() {
+      // loader
+      const loader = document.getElementById("o3d-loader");
+      const loadbar = document.getElementById("o3d-loadbar");
+      if (loader && !loader.dataset.done) {
+        loader.dataset.done = "1";
+        if (loadbar) {
+          loadbar.style.transition = "width 0.9s ease";
+          requestAnimationFrame(() => { loadbar.style.width = "100%"; });
+        }
+        window.setTimeout(() => {
+          loader.style.opacity = "0";
+          window.setTimeout(() => loader.remove(), 750);
+        }, 950);
+      }
+      // custom cursor (desktop, fine pointer only)
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const dot = document.getElementById("o3d-dot");
+        const ring = document.getElementById("o3d-ring");
+        if (dot && ring && !dot.dataset.bound) {
+          dot.dataset.bound = "1";
+          let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+          addEventListener("mousemove", (ev) => {
+            const e = ev as MouseEvent;
+            mx = e.clientX; my = e.clientY;
+            dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+          });
+          (function loop() {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+            requestAnimationFrame(loop);
+          })();
+        }
+      }
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+        }
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".o3d-reveal").forEach((el) => io.observe(el));
+      // scroll progress
+      const bar = document.getElementById("o3d-progress");
+      function onScroll() {
+        if (!bar) return;
+        const h = document.documentElement.scrollHeight - innerHeight;
+        bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + "%";
+      }
+      addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      // animated counters (copied behavior from main site)
+      document.querySelectorAll("[data-counter]").forEach((el) => {
+        const node = el as HTMLElement;
+        if (node.dataset.counted) return;
+        node.dataset.counted = "1";
+        const m = (node.textContent || "").trim().match(/^([^\d]*)(\d+)(.*)$/);
+        if (!m) return;
+        const pre = m[1], target = parseInt(m[2], 10), suf = m[3];
+        const cio = new IntersectionObserver((es) => {
+          if (!es[0].isIntersecting) return;
+          cio.disconnect();
+          const t0 = performance.now();
+          (function tick(t) {
+            const p = Math.min((t - t0) / 1200, 1);
+            node.textContent = pre + Math.round(target * (1 - Math.pow(1 - p, 3))) + suf;
+            if (p < 1) requestAnimationFrame(tick);
+          })(t0);
+        }, { threshold: 0.4 });
+        cio.observe(node);
+      });
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      document.querySelectorAll("[data-tilt]").forEach((el) => {
+        const card = el as HTMLElement;
+        if (card.dataset.bound) return;
+        card.dataset.bound = "1";
+        card.addEventListener("mousemove", (ev) => {
+          const e = ev as MouseEvent;
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 10).toFixed(2)}deg) translateY(-4px)`;
+        });
+        card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+      });
+      // magnetic buttons
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll("[data-magnetic]").forEach((el) => {
+          const m = el as HTMLElement;
+          if (m.dataset.mag) return;
+          m.dataset.mag = "1";
+          m.addEventListener("mousemove", (ev) => {
+            const e = ev as MouseEvent;
+            const r = m.getBoundingClientRect();
+            m.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * 0.25).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.25).toFixed(1)}px)`;
+          });
+          m.addEventListener("mouseleave", () => { m.style.transform = ""; });
+        });
+      }
+      // press W anywhere for warp
+      if (!document.body.dataset.warpKey) {
+        document.body.dataset.warpKey = "1";
+        addEventListener("keydown", (ev) => {
+          const e = ev as KeyboardEvent;
+          if (e.key.toLowerCase() === "w" && !(e.target as HTMLElement)?.closest("input, textarea")) {
+            document.getElementById("o3d-warp-zone")?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+          }
+        });
+      }
+    }
+    document.addEventListener("astro:page-load", initO3D);
+    initO3D();
+  </script>
+</body>
+</html>
