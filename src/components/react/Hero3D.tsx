@@ -288,15 +288,22 @@ export default function Hero3D() {
     const update = () => setMobile(mq.matches);
     update();
     mq.addEventListener?.("change", update);
-    // Mount 3D only after first paint + idle: text/menu load first, orbit fades in after.
+    // Mount 3D only after full page load + idle: text/menu/paint first, orbit fades in after.
     let idleId = 0;
     let timer = 0;
     const mount = () => setMounted(true);
-    if ("requestIdleCallback" in window) {
-      // @ts-ignore
-      idleId = window.requestIdleCallback(mount, { timeout: 1500 });
+    const schedule = () => {
+      if ("requestIdleCallback" in window) {
+        // @ts-ignore
+        idleId = window.requestIdleCallback(mount, { timeout: 2000 });
+      } else {
+        timer = window.setTimeout(mount, 1500);
+      }
+    };
+    if (document.readyState === "complete") {
+      schedule();
     } else {
-      timer = window.setTimeout(mount, 1200);
+      window.addEventListener("load", schedule, { once: true });
     }
     return () => {
       mq.removeEventListener?.("change", update);
