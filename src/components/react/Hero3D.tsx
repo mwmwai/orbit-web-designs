@@ -281,17 +281,34 @@ function HeroScene({ mobile }: { mobile: boolean }) {
 export default function Hero3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mobile, setMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px), (pointer: coarse)");
     const update = () => setMobile(mq.matches);
     update();
     mq.addEventListener?.("change", update);
-    return () => mq.removeEventListener?.("change", update);
+    // Mount 3D only after first paint + idle: text/menu load first, orbit fades in after.
+    let idleId = 0;
+    let timer = 0;
+    const mount = () => setMounted(true);
+    if ("requestIdleCallback" in window) {
+      // @ts-ignore
+      idleId = window.requestIdleCallback(mount, { timeout: 1500 });
+    } else {
+      timer = window.setTimeout(mount, 1200);
+    }
+    return () => {
+      mq.removeEventListener?.("change", update);
+      // @ts-ignore
+      window.cancelIdleCallback?.(idleId);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   return (
     <div ref={containerRef} className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      {mounted && (
       <Canvas
         camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: mobile ? 58 : 45 }}
         dpr={mobile ? [1, 1.25] : [1, 1.5]}
@@ -303,6 +320,7 @@ export default function Hero3D() {
           <ScrollFade containerRef={containerRef} />
         </Suspense>
       </Canvas>
+      )}
     </div>
   );
 }
