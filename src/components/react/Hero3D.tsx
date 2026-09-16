@@ -71,16 +71,17 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
   );
 }
 
-function OrbitParticles() {
-  const count = 550;
-  const positions = useMemo(() => new Float32Array(count * 3), []);
-  const sizes = useMemo(() => new Float32Array(count), []);
-  const alphas = useMemo(() => new Float32Array(count), []);
-  const speeds = useMemo(() => new Float32Array(count), []);
-  const radii = useMemo(() => new Float32Array(count), []);
-  const angles = useMemo(() => new Float32Array(count), []);
-
-  useMemo(() => {
+function OrbitParticles({ mobile }: { mobile: boolean }) {
+  const count = mobile ? 350 : 550;
+  // All motion computed on the GPU (same math as before) — zero per-frame JS loop.
+  const geometry = useMemo(() => {
+    const positions = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
+    const alphas = new Float32Array(count);
+    const speeds = new Float32Array(count);
+    const radii = new Float32Array(count);
+    const angles = new Float32Array(count);
+    const seeds = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       const r = 1.2 + Math.random() * 2.8;
       const a = Math.random() * Math.PI * 2;
@@ -93,10 +94,8 @@ function OrbitParticles() {
       speeds[i] = 0.02 + Math.random() * 0.08;
       radii[i] = r;
       angles[i] = a;
+      seeds[i] = i;
     }
-  }, [positions, sizes, alphas, speeds, radii, angles]);
-
-  const geometry = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     g.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
@@ -104,8 +103,10 @@ function OrbitParticles() {
     g.setAttribute("aSpeed", new THREE.BufferAttribute(speeds, 1));
     g.setAttribute("aRadius", new THREE.BufferAttribute(radii, 1));
     g.setAttribute("aAngle", new THREE.BufferAttribute(angles, 1));
+    g.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1));
     return g;
-  }, [positions, sizes, alphas, speeds, radii, angles]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
 
   const material = useMemo(
     () =>
@@ -113,13 +114,26 @@ function OrbitParticles() {
         transparent: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
+        uniforms: { uTime: { value: 0 } },
         vertexShader: `
           attribute float aSize;
           attribute float aAlpha;
+          attribute float aSpeed;
+          attribute float aRadius;
+          attribute float aAngle;
+          attribute float aSeed;
+          uniform float uTime;
           varying float vAlpha;
           void main() {
             vAlpha = aAlpha;
-            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            float angle = aAngle + uTime * aSpeed * 110.0;
+            float phi = sin(uTime * aSpeed * 10.0 + aSeed) * 0.3;
+            vec3 pos = vec3(
+              aRadius * cos(angle) * cos(phi),
+              aRadius * sin(phi),
+              aRadius * sin(angle) * cos(phi)
+            );
+            vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
             gl_PointSize = aSize * (300.0 / -mvPosition.z);
             gl_Position = projectionMatrix * mvPosition;
           }
@@ -144,18 +158,7 @@ function OrbitParticles() {
     time.current += dt;
     if (ref.current) {
       ref.current.rotation.y = time.current * 0.05;
-      const pos = ref.current.geometry.attributes.position.array as Float32Array;
-      const speed = ref.current.geometry.attributes.aSpeed.array as Float32Array;
-      const radius = ref.current.geometry.attributes.aRadius.array as Float32Array;
-      const angle = ref.current.geometry.attributes.aAngle.array as Float32Array;
-      for (let i = 0; i < count; i++) {
-        angle[i] += speed[i] * dt * 110;
-        const phi = Math.sin(time.current * speed[i] * 10 + i) * 0.3;
-        pos[i * 3] = radius[i] * Math.cos(angle[i]) * Math.cos(phi);
-        pos[i * 3 + 1] = radius[i] * Math.sin(phi);
-        pos[i * 3 + 2] = radius[i] * Math.sin(angle[i]) * Math.cos(phi);
-      }
-      ref.current.geometry.attributes.position.needsUpdate = true;
+      (ref.current.material as THREE.ShaderMaterial).uniforms.uTime.value = time.current;
     }
   });
 
@@ -271,7 +274,7 @@ function HeroScene({ mobile }: { mobile: boolean }) {
       <directionalLight position={[-5, 5, -7]} intensity={1.0} color="#00c8ff" />
       <pointLight position={[0, 0, 4]} intensity={1.5} color="#00c8ff" distance={20} decay={1.6} />
       <OrbitRings mobile={mobile} />
-      <OrbitParticles />
+      <OrbitParticles mobile={mobile} />
       <AmbientOrbs />
       <StarField />
     </>
@@ -318,7 +321,7 @@ export default function Hero3D() {
       {mounted && (
       <Canvas
         camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: mobile ? 58 : 45 }}
-        dpr={mobile ? [1, 1.25] : [1, 1.5]}
+        dpr={mobile ? [1, 1] : [1, 1.5]}
         gl={{ antialias: !mobile, alpha: true, preserveDrawingBuffer: false, powerPreference: "high-performance" }}
         style={{ touchAction: "none" }}
       >
