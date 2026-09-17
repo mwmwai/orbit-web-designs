@@ -89,7 +89,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
       positions[i * 3] = r * Math.cos(a) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.sin(a) * Math.cos(phi);
-      sizes[i] = 0.5 + Math.random() * 1.5;
+      sizes[i] = 0.8 + Math.random() * 2.0;
       alphas[i] = 0.15 + Math.random() * 0.5;
       speeds[i] = 0.02 + Math.random() * 0.08;
       radii[i] = r;
