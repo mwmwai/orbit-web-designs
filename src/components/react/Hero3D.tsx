@@ -134,7 +134,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
               aRadius * sin(angle) * cos(phi)
             );
             vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-            gl_PointSize = aSize * (300.0 / -mvPosition.z);
+            gl_PointSize = min(aSize * (300.0 / -mvPosition.z), 22.0);
             gl_Position = projectionMatrix * mvPosition;
           }
         `,
