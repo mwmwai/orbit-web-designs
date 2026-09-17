@@ -71,6 +71,7 @@ const jsonLd = {
 		<script>
 			function initTilt() {
 				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 				document.querySelectorAll("[data-tilt]").forEach((el) => {
 					if (el.dataset.tiltBound) return;
 					el.dataset.tiltBound = "1";
@@ -172,6 +173,7 @@ const jsonLd = {
 			}
 			function initMagnetic() {
 				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 				document.querySelectorAll(".magnetic").forEach((el) => {
 					if (el.dataset.magneticBound) return;
 					el.dataset.magneticBound = "1";
