@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { whatsappLink } from "../../config";
+import { saveLead } from "../../lib/db";
 
 export default function ContactForm() {
 	const [name, setName] = useState("");
@@ -9,6 +10,7 @@ export default function ContactForm() {
 
 	function handleSubmit(e: FormEvent) {
 		e.preventDefault();
+		saveLead({ name, email: email || undefined, phone: phone || undefined, details: details || undefined, source: "contact-form" });
 		const message = [
 			`Hello Orbit Web Designs & Marketing!`,
 			`My name is ${name}.`,

@@ -15,10 +15,46 @@ const year = new Date().getFullYear();
 						<span class="mt-1.5 block text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-500">Web Designs &amp; Marketing</span>
 					</span>
 				</a>
-				<p class="mt-6 max-w-sm text-sm leading-relaxed text-slate-500">
-					{SITE_NAME} builds fast, secure websites and marketing that help
-					businesses get found, get trusted, and get paid.
-				</p>
+			<p class="mt-6 max-w-sm text-sm leading-relaxed text-slate-500">
+				{SITE_NAME} builds fast, secure websites and marketing that help
+				businesses get found, get trusted, and get paid.
+			</p>
+			<form id="newsletter-form" class="mt-6 flex max-w-sm gap-2">
+				<input
+					id="newsletter-email"
+					type="email"
+					required
+					placeholder="Email for growth tips"
+					aria-label="Email for growth tips"
+					class="min-w-0 flex-1 rounded-full border border-edge bg-charcoal px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric"
+				/>
+				<button type="submit" class="shrink-0 rounded-full btn-gradient px-5 py-2.5 text-sm font-semibold text-white">Join</button>
+			</form>
+			<p id="newsletter-msg" class="mt-2 hidden text-xs text-slate-400"></p>
+			<script>
+				(() => {
+					const form = document.getElementById("newsletter-form");
+					const input = document.getElementById("newsletter-email") as HTMLInputElement | null;
+					const msg = document.getElementById("newsletter-msg");
+					if (!form || !input || !msg || (form as HTMLFormElement & { dataset: DOMStringMap }).dataset.bound) return;
+					(form as HTMLElement).dataset.bound = "1";
+					form.addEventListener("submit", async (e) => {
+						e.preventDefault();
+						const email = input.value.trim();
+						if (!email) return;
+						msg.classList.remove("hidden");
+						msg.textContent = "Joining…";
+						try {
+							const { subscribeNewsletter } = await import("../lib/db");
+							const ok = await subscribeNewsletter(email);
+							msg.textContent = ok ? "You're in — watch your inbox." : "Saved! Prefer WhatsApp? Tap the green bubble.";
+							if (ok) input.value = "";
+						} catch {
+							msg.textContent = "Something hiccuped — try WhatsApp instead.";
+						}
+					});
+				})();
+			</script>
 				<a href="/contact" class="link-underline mt-6">
 					Get a website quote <span aria-hidden>→</span>
 				</a>
