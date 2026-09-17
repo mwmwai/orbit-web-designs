@@ -144,7 +144,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 2.0);
+            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 2.3);
           }
         `,
       }),
