@@ -47,14 +47,27 @@ const faqJsonLd = {
 		<section class="relative overflow-hidden border-b border-white/5">
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+				<div class="absolute top-20 right-0 h-[360px] w-[360px] rounded-full bg-neon/10 blur-[120px]"></div>
 			</div>
-			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
-				<h1 class="hero-anim max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+			<div class="relative mx-auto max-w-7xl px-5 pb-10 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Packages · 8 ways to ship</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
 					Simple packages, <span class="text-gradient">serious results.</span>
 				</h1>
-				<p class="hero-anim mt-5 max-w-2xl text-lg text-slate-400" style="animation-delay:120ms">
-					Honest, flexible pricing in KES — no hidden fees. Pay securely with M-Pesa, card, or PayPal.
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					Honest KES pricing — websites 29,999–49,999 · SaaS 49,999 · Design 14,999 · Agents 49,999 · Dashboards 19,999. No hidden fees. M-Pesa, card, PayPal.
 				</p>
+				<div class="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-xl font-extrabold">50+</p><p class="text-xs text-slate-400">sites shipped</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-xl font-extrabold">48–72h</p><p class="text-xs text-slate-400">Starter live</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-xl font-extrabold">M-Pesa</p><p class="text-xs text-slate-400">native</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-xl font-extrabold">Minutes</p><p class="text-xs text-slate-400">reply time</p></div>
+				</div>
+			</div>
+			<div class="border-y border-white/5 bg-charcoal/40">
+				<div class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-3 font-mono text-xs uppercase tracking-widest text-slate-400">
+					<span>★★★★★ 5.0 verified</span><span class="text-electric">·</span><span>Cancel anytime</span><span class="text-electric">·</span><span>Your files, your domain</span><span class="text-electric">·</span><span>Training included</span>
+				</div>
 			</div>
 		</section>
 
@@ -79,15 +92,22 @@ const faqJsonLd = {
 
 		<section class="border-t border-white/5 py-14">
 			<div class="mx-auto max-w-7xl px-5">
-				<div class="reveal flex flex-col items-start justify-between gap-6 rounded-2xl border border-edge/70 bg-charcoal/50 px-8 py-8 md:flex-row md:items-center">
-					<div>
-						<p class="text-lg font-semibold text-white">Need an agent, workflow or dashboard?</p>
-					 <p class="mt-1 max-w-md text-sm text-slate-400">They live on their own pages with honest pricing and API costs upfront.</p>
-					</div>
-					<div class="flex flex-wrap gap-3">
-						<a href="/automation" class="rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Agents & Workflows</a>
-						<a href="/dashboards" class="rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Dashboards</a>
-					</div>
+				<div class="grid gap-4 md:grid-cols-3">
+					<a href="/care" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
+						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-electric to-neon flex items-center justify-center text-white">✓</span>
+						<div><p class="font-semibold text-white">Orbit Care</p><p class="text-xs text-slate-400">7,599–11,999/mo + custom SaaS/Dash/Agent</p></div>
+						<span class="ml-auto text-electric">→</span>
+					</a>
+					<a href="/automation" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
+						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 to-electric flex items-center justify-center text-white">◈</span>
+						<div><p class="font-semibold text-white">Agents & Workflows</p><p class="text-xs text-slate-400">49,999 · 39,999 + API honesty</p></div>
+						<span class="ml-auto text-electric">→</span>
+					</a>
+					<a href="/dashboards" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
+						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-neon to-electric flex items-center justify-center text-white">▦</span>
+						<div><p class="font-semibold text-white">Dashboards</p><p class="text-xs text-slate-400">19,999 Add-on · 39,999 Standalone</p></div>
+						<span class="ml-auto text-electric">→</span>
+					</a>
 				</div>
 			</div>
 		</section>
