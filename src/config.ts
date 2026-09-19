@@ -22,6 +22,7 @@ export const NAV_LINKS = [
 ];
 
 export const MORE_LINKS = [
+	{ href: "/care", label: "Orbit Care" },
 	{ href: "/automation", label: "Agents & Workflows" },
 	{ href: "/dashboards", label: "Dashboards" },
 	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
