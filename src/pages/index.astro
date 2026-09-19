@@ -22,6 +22,26 @@ import FloatingActions from "../components/FloatingActions.astro";
 		<Pricing only={["Starter", "Business", "Master"]} />
 		<Process />
 		<Testimonials />
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ About</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Built hungry, based in Nairobi.</h2>
+					<p class="mt-4 text-slate-400">No bloated agency, no hand-offs — you talk to the person building your site.</p>
+				</div>
+				<a href="/about" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Meet Orbit</a>
+			</div>
+		</section>
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Learn the game. Then win it.</h2>
+					<p class="mt-4 text-slate-400">Short, honest guides with real numbers — start with what a website costs in Kenya.</p>
+				</div>
+				<a href="/guides" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Read guides</a>
+			</div>
+		</section>
 		<FAQ />
 		<CtaBand title="Your competitors are online. Are you?" text="One message. One website. More customers. 10% off new orders ends 30 September." />
 	</main>
