@@ -1,0 +1,94 @@
+---
+import { whatsappLink } from "../config";
+---
+
+<div id="orbit-assistant" class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3">
+	<div id="oa-panel" class="hidden w-80 max-w-[calc(100vw-3rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur">
+		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
+			<p class="font-semibold text-white">Orbit Assistant</p>
+			<p class="text-xs text-slate-400">Ask about packages, timelines, M-Pesa</p>
+		</div>
+		<div id="oa-log" class="grid max-h-72 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
+		<div class="flex gap-2 border-t border-white/5 p-3">
+			<input id="oa-input" type="text" placeholder="e.g. how much for 5 pages?" aria-label="Ask the assistant" class="min-w-0 flex-1 rounded-full border border-edge bg-charcoal px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric" />
+			<button id="oa-send" type="button" aria-label="Send" class="shrink-0 rounded-full btn-gradient px-4 py-2.5 text-sm font-semibold text-white">→</button>
+		</div>
+	</div>
+	<button
+		id="oa-toggle"
+		type="button"
+		aria-label="Chat with Orbit Assistant"
+		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
+	>
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
+	</button>
+</div>
+
+<script>
+	(() => {
+		const WA = "https://wa.me/254741992308?text=";
+		const rules: Array<[RegExp, string]> = [
+			[/price|cost|much|charge|package|starter|business|master/i, "Starter is KES 29,999 (1 page), Business KES 39,999 (up to 5 pages), Master KES 49,999 (store or bookings). 10% off ends 30 Sept — want me to connect you?"],
+			[/long|fast|timeline|when|deliver|72|hour/i, "Starter goes live in 48–72 hours, Business in ~5 days, Master in 7–10 days — once we have your photos, text and logo."],
+			[/m-pesa|mpesa|paybill|till|stk|pay/i, "We wire M-Pesa Paybill & Till plus cards and PayPal. STK auto-prompts need your own Safaricom Daraja approval — we connect it free when it lands."],
+			[/month|monthly|maintain|support|hosting/i, "Yes — Orbit Care from KES 7,599/month covers hosting, security, updates and support. Cancel anytime."],
+			[/seo|google|rank|found/i, "Every site ships with SEO setup and Google Business Profile. Master adds advanced SEO targeting buyers."],
+			[/human|person|call|talk|whatsapp|contact/i, "Best move — tap below and you'll reach a human in minutes, Mon–Sat."],
+			[/hello|hi|hey|habari|niaje/i, "Habari! Ask me about prices, timelines, M-Pesa or monthly care — or tap below for a human."],
+		];
+		const fallback = "Good question — a human answers that best. Tap below and we'll reply in minutes.";
+		const waLink = (q: string) => WA + encodeURIComponent("Hi Orbit! " + q);
+
+		const panel = document.getElementById("oa-panel");
+		const toggle = document.getElementById("oa-toggle");
+		const log = document.getElementById("oa-log");
+		const input = document.getElementById("oa-input") as HTMLInputElement | null;
+		const send = document.getElementById("oa-send");
+		if (!panel || !toggle || !log || !input || !send || toggle.dataset.bound) return;
+		toggle.dataset.bound = "1";
+
+		function bubble(text: string, mine: boolean) {
+			const d = document.createElement("div");
+			d.className = mine
+				? "justify-self-end rounded-2xl rounded-br-sm bg-electric/20 px-4 py-2.5 text-slate-100"
+				: "justify-self-start rounded-2xl rounded-bl-sm border border-edge bg-charcoal px-4 py-2.5 text-slate-300";
+			d.style.maxWidth = "90%";
+			d.textContent = text;
+			log!.appendChild(d);
+			log!.scrollTop = log!.scrollHeight;
+		}
+
+		function greet() {
+			if (log!.childElementCount > 0) return;
+			bubble("Habari! I'm the Orbit assistant — ask about prices, timelines or M-Pesa.", false);
+			const a = document.createElement("a");
+			a.href = waLink("I have a question about your services.");
+			a.target = "_blank";
+			a.rel = "noopener noreferrer";
+			a.className = "justify-self-start rounded-full bg-[#25D366] px-4 py-2 text-xs font-semibold text-white";
+			a.textContent = "Chat human on WhatsApp";
+			log!.appendChild(a);
+		}
+
+		function answer(q: string) {
+			bubble(q, true);
+			const hit = rules.find(([re]) => re.test(q));
+			setTimeout(() => bubble(hit ? hit[1] : fallback, false), 350);
+		}
+
+		toggle.addEventListener("click", () => {
+			panel.classList.toggle("hidden");
+			greet();
+			input.focus();
+		});
+		send.addEventListener("click", () => {
+			const q = input.value.trim();
+			if (!q) return;
+			input.value = "";
+			answer(q);
+		});
+		input.addEventListener("keydown", (e) => {
+			if (e.key === "Enter") send.click();
+		});
+	})();
+</script>

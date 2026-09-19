@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER } from "../config";
 import ScrollIndicator from "../components/ScrollIndicator.astro";
 import Hero3D from "../components/react/Hero3D.tsx";
+import OrbitAssistant from "../components/OrbitAssistant.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -67,6 +68,7 @@ const jsonLd = {
 		<div class="aurora" aria-hidden="true"><span></span><span></span></div>
 		<ScrollIndicator />
 		<slot />
+		<OrbitAssistant />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
 			function initTilt() {
