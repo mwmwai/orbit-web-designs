@@ -22,7 +22,6 @@ export const NAV_LINKS = [
 ];
 
 export const MORE_LINKS = [
-	{ href: "/portfolio", label: "Our Work" },
 	{ href: "/automation", label: "Agents & Workflows" },
 	{ href: "/dashboards", label: "Dashboards" },
 	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
