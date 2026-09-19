@@ -72,7 +72,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
 }
 
 function OrbitParticles({ mobile }: { mobile: boolean }) {
-  const count = mobile ? 350 : 550;
+  const count = mobile ? 250 : 400;
   // All motion computed on the GPU (same math as before) — zero per-frame JS loop.
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -222,7 +222,7 @@ function StarField() {
   const ref = useRef<THREE.Points>(null);
 
   const geo = useMemo(() => {
-    const count = 700;
+    const count = 400;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 38 + Math.random() * 16;
@@ -321,7 +321,7 @@ export default function Hero3D() {
       {mounted && (
       <Canvas
         camera={{ position: [0, 0, mobile ? 10.5 : 8], fov: mobile ? 58 : 45 }}
-        dpr={mobile ? [1, 1] : [1, 1.5]}
+        dpr={mobile ? [1, 1] : [1, 1.25]}
         gl={{ antialias: !mobile, alpha: true, preserveDrawingBuffer: false, powerPreference: "high-performance" }}
         style={{ touchAction: "none" }}
       >
