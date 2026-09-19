@@ -44,6 +44,52 @@ import FloatingActions from "../components/FloatingActions.astro";
 		<Pricing only={["Starter", "Business", "Master"]} />
 		<Process />
 		<Testimonials />
+		<!-- Surfaced: SaaS -->
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom SaaS Apps</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Your idea as a real app.</h2>
+					<p class="mt-4 text-slate-400">Auth, roles, dashboards and M-Pesa payments — shipped from KES 49,999 with docs, training and 3 months support. No template locking you in.</p>
+				</div>
+				<div class="flex shrink-0 flex-wrap gap-3">
+					<a href="/packages" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20">See SaaS — 49,999</a>
+					<a href="/contact" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Start yours</a>
+				</div>
+			</div>
+		</section>
+		<!-- Surfaced: Graphic Design -->
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Brand & Graphic Design</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Look like the price you charge.</h2>
+					<p class="mt-4 text-slate-400">Logos from 14,999, full kits to 24,999 — social kits, flyers, one-page guidelines. Source files included.</p>
+				</div>
+				<div class="flex shrink-0 flex-wrap gap-3">
+					<a href="/packages" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Design from 14,999</a>
+					<a href="/contact" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Get a quote</a>
+				</div>
+			</div>
+		</section>
+		<!-- Surfaced: Orbit Care -->
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto max-w-7xl px-5">
+				<div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+					<div class="max-w-xl">
+						<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Orbit Care — recurring revenue, made visible</p>
+						<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">A site you never worry about.</h2>
+						<p class="mt-4 text-slate-400">Hosting, security patches, speed tuning, backups and human WhatsApp support — 7,599/mo Starter · 9,599 Business · 11,999 Master. Cancel anytime, your site stays yours.</p>
+					</div>
+					<a href="/blog/website-care-kenya" class="shrink-0 rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20">See what's covered</a>
+				</div>
+				<div class="mt-8 grid gap-3 sm:grid-cols-3">
+					<div class="glow-border rounded-2xl p-5"><p class="text-sm font-semibold text-white">Starter Care</p><p class="mt-1 text-2xl font-extrabold text-gradient">7,599<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="mt-1 text-xs text-slate-400">For 29,999 sites</p></div>
+					<div class="glow-border rounded-2xl p-5 border-electric/30"><p class="text-sm font-semibold text-white">Business Care</p><p class="mt-1 text-2xl font-extrabold text-gradient">9,599<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="mt-1 text-xs text-slate-400">For 39,999 sites · most popular</p></div>
+					<div class="glow-border rounded-2xl p-5"><p class="text-sm font-semibold text-white">Master Care</p><p class="mt-1 text-2xl font-extrabold text-gradient">11,999<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="mt-1 text-xs text-slate-400">For stores & booking</p></div>
+				</div>
+			</div>
+		</section>
 		<section class="border-t border-white/5 py-20">
 			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
 				<div class="max-w-xl">
@@ -59,19 +105,20 @@ import FloatingActions from "../components/FloatingActions.astro";
 				<div class="max-w-xl">
 					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides</p>
 					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Learn the game. Then win it.</h2>
-					<p class="mt-4 text-slate-400">Short, honest guides with real numbers — start with what a website costs in Kenya.</p>
+					<p class="mt-4 text-slate-400">7 honest, actionable guides — pricing, care, SEO, M-Pesa and WhatsApp with checklists and real numbers.</p>
 				</div>
 				<a href="/guides" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Read guides</a>
 			</div>
 		</section>
+		<!-- Surfaced: Agents + Workflows split -->
 		<section class="border-t border-white/5 py-20">
-			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
-				<div class="max-w-xl">
-					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Agents & Workflows</p>
-					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">AI that does the work.</h2>
-					<p class="mt-4 text-slate-400">Agents from 49,999, workflows from 39,999 — you pay the APIs, we do the work.</p>
+			<div class="mx-auto max-w-7xl px-5">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Agents & Workflows</p>
+				<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">AI that does the work.</h2>
+				<div class="mt-8 grid gap-6 md:grid-cols-2">
+					<div class="glow-border rounded-2xl p-8 flex flex-col"><h3 class="text-xl font-semibold text-white">Custom AI Agents — 49,999</h3><p class="mt-2 text-sm text-slate-400">Trained on your business — WhatsApp/site chat/email, qualifies leads, books, hands to human.</p><a href="/automation" class="mt-6 inline-flex w-fit rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 hover:border-electric/60 hover:text-white">See agents →</a></div>
+					<div class="glow-border rounded-2xl p-8 flex flex-col"><h3 class="text-xl font-semibold text-white">Workflow Automation — 39,999</h3><p class="mt-2 text-sm text-slate-400">M-Pesa → Sheets/CRM, inquiry → WhatsApp → calendar, invoices auto-sent. You own it.</p><a href="/automation" class="mt-6 inline-flex w-fit rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 hover:border-electric/60 hover:text-white">See workflows →</a></div>
 				</div>
-				<a href="/automation" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See automation</a>
 			</div>
 		</section>
 		<section class="border-t border-white/5 py-20">
@@ -79,7 +126,7 @@ import FloatingActions from "../components/FloatingActions.astro";
 				<div class="max-w-xl">
 					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Dashboards</p>
 					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Your numbers, one screen.</h2>
-					<p class="mt-4 text-slate-400">M-Pesa sales, bookings and stock at a glance — from 15,000, no app install.</p>
+					<p class="mt-4 text-slate-400">M-Pesa sales, bookings and stock at a glance — from 35,000, no app install.</p>
 				</div>
 				<a href="/dashboards" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See dashboards</a>
 			</div>

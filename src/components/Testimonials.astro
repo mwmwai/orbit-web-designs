@@ -42,27 +42,52 @@ const testimonials = [
 		<p class="mt-4 flex items-center gap-3 text-slate-400">
 			<span class="text-metal" aria-hidden>★★★★★</span>
 			<span>5.0 average across verified reviews</span>
+			<a href="/reviews" class="ml-2 text-sm text-electric hover:underline">All reviews →</a>
 		</p>
 	</div>
 
-	<div class="drift-row reveal" data-tilt-ignore>
-		<div class="drift-track px-3">
-			{[0, 1].map(() => (
-				<div class="flex shrink-0 gap-6">
-					{testimonials.map((t) => (
-						<figure class="card-shine glow-border edge-glow hover-lift magnetic flex w-[340px] shrink-0 flex-col rounded-2xl p-7">
-							<div class="text-metal" aria-label="5 out of 5 stars">★★★★★</div>
-							<blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-300">"{t.quote}"</blockquote>
-							<figcaption class="mt-6 border-t border-edge/60 pt-4">
-								<div class="text-sm font-semibold text-white">{t.name}</div>
-								<div class="mt-0.5 font-mono text-xs uppercase tracking-widest text-stone">{t.role}</div>
-							</figcaption>
-						</figure>
-					))}
-				</div>
+	<div id="testimonial-slider" class="mx-auto mt-10 max-w-3xl px-5">
+		<div class="relative">
+			{testimonials.map((t, i) => (
+				<figure data-slide={i} class={`card-shine glow-border edge-glow rounded-2xl p-8 transition duration-500 ${i === 0 ? 'block' : 'hidden'}`}>
+					<div class="text-metal" aria-label="5 out of 5 stars">★★★★★</div>
+					<blockquote class="mt-4 text-lg leading-relaxed text-slate-200">"{t.quote}"</blockquote>
+					<figcaption class="mt-6 border-t border-edge/60 pt-4 flex items-center justify-between">
+						<div><div class="text-sm font-semibold text-white">{t.name}</div><div class="mt-0.5 font-mono text-xs uppercase tracking-widest text-stone">{t.role}</div></div>
+						<span class="font-mono text-xs text-slate-500">{i + 1} / {testimonials.length}</span>
+					</figcaption>
+				</figure>
+			))}
+		</div>
+		<div class="mt-6 flex items-center justify-center gap-2" role="tablist" aria-label="Testimonial slides">
+			{testimonials.map((_, i) => (
+				<button data-dot={i} aria-label={`Go to slide ${i+1}`} class={`h-2 rounded-full transition-all ${i===0 ? 'w-6 bg-electric' : 'w-2 bg-edge hover:bg-slate-500'}`}></button>
 			))}
 		</div>
 	</div>
+	<script>
+		(() => {
+			const root = document.getElementById('testimonial-slider');
+			if (!root || root.dataset.bound) return; root.dataset.bound='1';
+			const slides = root.querySelectorAll('[data-slide]');
+			const dots = root.querySelectorAll('[data-dot]');
+			let cur = 0, timer;
+			function go(n) {
+				slides[cur].classList.add('hidden'); slides[cur].classList.remove('block');
+				dots[cur].className = 'h-2 w-2 rounded-full bg-edge hover:bg-slate-500 transition-all';
+				cur = (n + slides.length) % slides.length;
+				slides[cur].classList.remove('hidden'); slides[cur].classList.add('block');
+				dots[cur].className = 'h-2 w-6 rounded-full bg-electric transition-all';
+			}
+			function next(){ go(cur+1); }
+			function start(){ timer = setInterval(next, 4000); }
+			function stop(){ clearInterval(timer); }
+			dots.forEach((d,i)=> d.addEventListener('click', ()=>{ stop(); go(i); start(); }));
+			root.addEventListener('mouseenter', stop);
+			root.addEventListener('mouseleave', start);
+			start();
+		})();
+	</script>
 </section>
 
 

@@ -8,8 +8,8 @@ import { whatsappLink } from "../../config";
 ---
 
 <Layout
-	title="How to Choose the Best Web Designer in Kenya (2026) | Orbit"
-	description="Choosing a web designer in Kenya? Compare on speed, M-Pesa, real prices, timelines and support — the 6 questions that reveal everything."
+	title="How to Choose a Web Designer in Kenya: Scorecard (2026) | Orbit"
+	description="Neutral scorecard to pick a web designer in Kenya: price, timeline, M-Pesa, speed, ownership, support — works on any quote."
 >
 	<Navbar client:load />
 	<main id="main">
@@ -18,38 +18,34 @@ import { whatsappLink } from "../../config";
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
 			</div>
 			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · Choosing</p>
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · Choosing · 5 min</p>
 				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-					Choosing a web designer? <span class="text-gradient">Ask these 6 questions.</span>
+					Choosing a designer? <span class="text-gradient">Use this scorecard.</span>
 				</h1>
-				<p class="mt-5 text-lg text-slate-400">Portfolios all look good. These questions separate builders who deliver from talkers who invoice.</p>
+				<p class="mt-5 text-lg text-slate-400">6 questions that work on any quote — including ours. Score 0–2 each.</p>
 			</div>
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<div class="grid gap-6">
-				{[
-					["1. What's the exact price?", "Vague quotes grow. Demand the number upfront — ours are on this site: 29,999 / 39,999 / 49,999. Anyone hiding prices is hiding something else."],
-					["2. When exactly is it live?", "“2–4 weeks” is a feeling, not a date. Get a day count in writing: ours is 48–72 hours for Starter, ~5 days Business, 7–10 Master."],
-					["3. Is M-Pesa native or a plugin?", "Plugin checkouts break and slow your store. Native Daraja wiring survives updates — ask which one you're getting."],
-					["4. How fast does it load on a cheap phone?", "Ask for THEIR PageSpeed number on mobile data, not fibre. Ours: 75 and climbing, published in our hero."],
-					["5. Who owns the site?", "Read the terms before paying. With us: your content, your domain, full license — details on our Terms page."],
-					["6. What happens after launch?", "A site without care rots. Ask what's included monthly — our Orbit Care runs 7,599–11,999 with hosting, security and support."],
-				].map(([t, d]) => (
-					<div class="glow-border rounded-2xl p-8">
-						<h2 class="text-xl font-bold text-white">{t}</h2>
-						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
-					</div>
-				))}
+			<div class="grid gap-4">
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">1. Exact price in writing?</h2><p class="mt-2 text-sm text-slate-400">0 = "depends", 1 = range, 2 = fixed KES with what's included listed. Our prices: 29,999 / 39,999 / 49,999. Demand the same list from anyone.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">2. Live date, not range?</h2><p class="mt-2 text-sm text-slate-400">0 = "2–4 weeks", 2 = "48–72h Starter / 5d Business / 7–10d Master" with approval gate before launch.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">3. M-Pesa native or plugin?</h2><p class="mt-2 text-sm text-slate-400">Plugin checkouts break on update and feel slow. 2 = native Daraja wiring you can see in dashboard. Ask to screen-share a test KES 10.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">4. Speed on cheap phone data?</h2><p class="mt-2 text-sm text-slate-400">Ask for their PageSpeed number on mobile (not fibre) + a live site to test. 2 = 90+ on <a href="https://pagespeed.web.dev" class="text-electric hover:underline">pagespeed.web.dev</a>.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">5. Who owns what?</h2><p class="mt-2 text-sm text-slate-400">Read terms before paying. 2 = your domain/content/files, full license, M-Pesa creds in your name — see our <a href="/terms-of-service" class="text-electric hover:underline">Terms</a>.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h2 class="text-lg font-bold text-white">6. What happens after launch?</h2><p class="mt-2 text-sm text-slate-400">A site without care rots. 2 = monthly listed (hosting/security/backups/support) with reply time. Ours 7,599–11,999, cancel anytime — or DIY with checklist in <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care guide</a>.</p></div>
 			</div>
-			<p class="mt-10 leading-relaxed text-slate-400">Ask us these six on WhatsApp right now — we answer in minutes, with numbers.</p>
-			<div class="mt-8">
-				<a href={whatsappLink("Hi Orbit! I'm comparing web designers. Why should I pick you?")} target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">Challenge us on WhatsApp</a>
+			<div class="mt-8 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm text-slate-300">
+				<p class="font-semibold text-white">Score: 10–12 = hire, 7–9 = ask more, &lt;7 = walk away. Red flags: won't put price/date in writing, no PageSpeed number, "lifetime hosting free".</p>
+			</div>
+			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
+				<p class="text-sm font-semibold text-white">Challenge us</p>
+				<p class="mt-1 text-sm text-slate-400">Send any competitor quote — we'll score both honestly. <a href={whatsappLink("Hi Orbit! I'm comparing designers — score my quote vs yours?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">WhatsApp the quote →</a></p>
 			</div>
 		</article>
 
 		<Comments slug="best-web-designer-kenya" />
-		<CtaBand title="Compare us live." text="Send any competitor quote — we'll beat it on speed, price or honesty, or tell you to take it." />
+		<CtaBand title="Compare us live." text="No pitch — just numbers, side by side." />
 	</main>
 	<Footer />
 </Layout>

@@ -8,8 +8,8 @@ import { whatsappLink } from "../../config";
 ---
 
 <Layout
-	title="Website Care in Kenya: What Keeps Your Site Alive | Orbit"
-	description="Website maintenance in Kenya: Orbit Care from KES 7,599/month — hosting, security, updates and support. What happens without it, and what to demand."
+	title="Website Care in Kenya: DIY Checklist vs Managed (2026) | Orbit"
+	description="What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care 7,599–11,999 covers."
 >
 	<Navbar client:load />
 	<main id="main">
@@ -18,36 +18,45 @@ import { whatsappLink } from "../../config";
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
 			</div>
 			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · Maintenance</p>
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · Maintenance · 5 min</p>
 				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-					Your website needs care. <span class="text-gradient">Here's what that means.</span>
+					Your site needs care. <span class="text-gradient">Do it yourself or delegate.</span>
 				</h1>
-				<p class="mt-5 text-lg text-slate-400">A site without care rots: slow loads, hacked forms, dead plugins. Orbit Care (7,599–11,999/mo) covers hosting, security, updates and support — here's exactly what you're paying for.</p>
+				<p class="mt-5 text-lg text-slate-400">Without care: slow loads, hacked forms, dead SSL, Google drops you. Here's the exact routine — free DIY or managed.</p>
 			</div>
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<div class="grid gap-6">
-				{[
-					["Hosting that answers", "Fast Kenyan-friendly servers, SSL kept valid, uptime watched. When hosting dies at 2am, someone notices — that someone is us."],
-					["Security patches", "Weekly updates to every dependency, malware scans, locked-down forms. Most hacked SME sites were simply never updated."],
-					["Speed kept fast", "Core Web Vitals re-checked monthly. Sites slow down as content grows — we trim before Google notices."],
-					["Human support", "WhatsApp us and get an answer in minutes, Mon–Sat. No tickets, no queues, no bots pretending to care."],
-				].map(([t, d]) => (
-					<div class="glow-border rounded-2xl p-8">
-						<h2 class="text-xl font-bold text-white">{t}</h2>
-						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
-					</div>
-				))}
+			<h2 class="text-xl font-bold text-white">DIY routine (30 min/month)</h2>
+			<div class="mt-6 grid gap-3 text-sm text-slate-300">
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Weekly</p><p class="mt-1 text-slate-400">Update CMS/plugins, scan with free Sucuri/Wordfence, check forms still send.</p></div>
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Monthly</p><p class="mt-1 text-slate-400">Run <a href="https://pagespeed.web.dev" class="text-electric hover:underline">PageSpeed</a> + Search Console, renew SSL auto-check, test backup restore, check 404s.</p></div>
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Always</p><p class="mt-1 text-slate-400">Daily off-site backup (Drive/Cloud), uptime ping via <a href="https://uptimerobot.com" class="text-electric hover:underline">UptimeRobot free</a>, WhatsApp alert on failure.</p></div>
 			</div>
-			<p class="mt-10 leading-relaxed text-slate-400">Starter care is KES 7,599/month, Business 9,599, Master 11,999. Cancel anytime — your site stays yours, we just stop watching it.</p>
-			<div class="mt-8">
-				<a href={whatsappLink("Hi Orbit! I want Orbit Care for my website. What tier fits me?")} target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">Get Orbit Care</a>
+
+			<h2 class="mt-10 text-xl font-bold text-white">When DIY fails</h2>
+			<p class="mt-3 text-sm leading-relaxed text-slate-400">Most hacked SME sites weren't targeted — they were just never updated. If you won't do the 30 min, delegate. That's the whole point of care plans.</p>
+
+			<h2 class="mt-10 text-xl font-bold text-white">What Orbit Care covers (and what it doesn't)</h2>
+			<div class="mt-6 overflow-hidden rounded-xl border border-edge">
+				<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-2">Task</th><th class="px-4 py-2">DIY free</th><th class="px-4 py-2">Orbit Care</th></tr></thead>
+				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">Hosting + SSL + backups</td><td class="px-4 py-2">You buy</td><td class="px-4 py-2 text-white">Included</td></tr><tr><td class="px-4 py-2">Security patches</td><td class="px-4 py-2">You update</td><td class="px-4 py-2 text-white">Weekly, we do</td></tr><tr><td class="px-4 py-2">Speed tuning</td><td class="px-4 py-2">You test</td><td class="px-4 py-2 text-white">Monthly re-check</td></tr><tr><td class="px-4 py-2">Human support</td><td class="px-4 py-2">—</td><td class="px-4 py-2 text-white">WhatsApp, Mon–Sat, minutes</td></tr></tbody></table>
+			</div>
+			<div class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Starter 7,599/mo</p><p class="text-xs text-slate-400">for 29,999 sites</p></div>
+				<div class="rounded-xl border border-electric/30 p-4"><p class="font-semibold text-white">Business 9,599/mo</p><p class="text-xs text-slate-400">most popular</p></div>
+				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Master 11,999/mo</p><p class="text-xs text-slate-400">stores/bookings</p></div>
+			</div>
+			<p class="mt-3 text-xs text-slate-500">Cancel anytime — site stays yours, we just stop watching it.</p>
+
+			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
+				<p class="text-sm font-semibold text-white">Need us to watch it?</p>
+				<p class="mt-1 text-sm text-slate-400">One message and it's handled. <a href={whatsappLink("Hi Orbit! I want Orbit Care — which tier fits my site?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Get Care on WhatsApp →</a></p>
 			</div>
 		</article>
 
 		<Comments slug="website-care-kenya" />
-		<CtaBand title="Rather just have it handled?" text="One message and your site is watched, updated and backed up — from 7,599/month." />
+		<CtaBand title="Rather just have it handled?" text="From 7,599/mo — watched, updated and backed up." />
 	</main>
 	<Footer />
 </Layout>

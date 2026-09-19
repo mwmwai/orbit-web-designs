@@ -210,6 +210,9 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 									</li>
 								))}
 							</ul>
+							{p.name === "Master" && (
+								<a href="/mpesa-fee-calculator" class="mt-4 inline-flex text-xs font-medium text-electric hover:underline">→ Price your margins with M-Pesa fee calculator</a>
+							)}
 							<a
 								href="/contact"
 								class={`promo-cta mt-8 block rounded-full py-3 text-center font-semibold transition ${
@@ -227,7 +230,7 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 		</div>
 
 		<p class="reveal mt-8 text-sm text-slate-500">
-			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — or browse care plans on request.
+			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">Agents & Workflows</a>
 		</p>
 	</div>
 
