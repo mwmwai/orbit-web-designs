@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/react/Navbar";
 import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
-import Portfolio from "../components/Portfolio.astro";
 import Pricing from "../components/Pricing.astro";
 import Process from "../components/Process.astro";
 import Testimonials from "../components/Testimonials.astro";
@@ -18,7 +17,30 @@ import FloatingActions from "../components/FloatingActions.astro";
 	<main id="main">
 		<Hero />
 		<Services />
-		<Portfolio />
+		<section class="relative overflow-hidden border-t border-white/5 py-20">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute left-1/2 top-0 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-electric/10 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5">
+				<div class="text-reveal mb-10 max-w-2xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Why Orbit</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Built different, on purpose.</h2>
+				</div>
+				<div class="grid gap-6 md:grid-cols-3">
+					{[
+						["Live in days", "Starter sites go live in 48–72 hours. Business in days, Master in a week or so. No month-long sagas."],
+						["M-Pesa native", "Paybill, Till, cards and PayPal wired from day one — checkout in under a minute."],
+						["Human on WhatsApp", "Reply in minutes, Mon–Sat. Talk to the builder, not a ticket queue."],
+					].map(([t, d], i) => (
+						<article data-tilt class="reveal glow-border edge-glow group relative flex flex-col rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5 hover-lift magnetic" style={`transition-delay:${i * 80}ms`}>
+							<span class="text-gradient text-3xl font-extrabold">0{i + 1}</span>
+							<h3 class="mt-4 text-xl font-semibold text-white">{t}</h3>
+							<p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{d}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
 		<Pricing only={["Starter", "Business", "Master"]} />
 		<Process />
 		<Testimonials />
@@ -40,6 +62,26 @@ import FloatingActions from "../components/FloatingActions.astro";
 					<p class="mt-4 text-slate-400">Short, honest guides with real numbers — start with what a website costs in Kenya.</p>
 				</div>
 				<a href="/guides" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Read guides</a>
+			</div>
+		</section>
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Agents & Workflows</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">AI that does the work.</h2>
+					<p class="mt-4 text-slate-400">Agents from 49,999, workflows from 39,999 — you pay the APIs, we do the work.</p>
+				</div>
+				<a href="/automation" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See automation</a>
+			</div>
+		</section>
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
+				<div class="max-w-xl">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Dashboards</p>
+					<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Your numbers, one screen.</h2>
+					<p class="mt-4 text-slate-400">M-Pesa sales, bookings and stock at a glance — from 15,000, no app install.</p>
+				</div>
+				<a href="/dashboards" class="shrink-0 rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See dashboards</a>
 			</div>
 		</section>
 		<FAQ />

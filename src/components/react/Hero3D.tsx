@@ -89,8 +89,8 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
       positions[i * 3] = r * Math.cos(a) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.sin(a) * Math.cos(phi);
-      sizes[i] = 0.4 + Math.random() * 1.1;
-      alphas[i] = 0.15 + Math.random() * 0.45;
+      sizes[i] = 0.8 + Math.random() * 2.0;
+      alphas[i] = 0.2 + Math.random() * 0.5;
       speeds[i] = 0.02 + Math.random() * 0.08;
       radii[i] = r;
       angles[i] = a;
@@ -134,7 +134,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
               aRadius * sin(angle) * cos(phi)
             );
             vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-            gl_PointSize = min(aSize * (300.0 / -mvPosition.z), 22.0);
+            gl_PointSize = min(aSize * (300.0 / -mvPosition.z), 30.0);
             gl_Position = projectionMatrix * mvPosition;
           }
         `,
@@ -144,7 +144,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 200.0/255.0, 1.0, alpha * vAlpha * 1.6);
+            gl_FragColor = vec4(0.0, 210.0/255.0, 1.0, alpha * vAlpha * 2.6);
           }
         `,
       }),
