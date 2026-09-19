@@ -72,7 +72,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
 }
 
 function OrbitParticles({ mobile }: { mobile: boolean }) {
-  const count = mobile ? 250 : 400;
+  const count = mobile ? 180 : 400;
   // All motion computed on the GPU (same math as before) — zero per-frame JS loop.
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -218,11 +218,11 @@ function AmbientOrbs() {
   );
 }
 
-function StarField() {
+function StarField({ mobile }: { mobile: boolean }) {
   const ref = useRef<THREE.Points>(null);
 
   const geo = useMemo(() => {
-    const count = 400;
+    const count = mobile ? 180 : 400;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 38 + Math.random() * 16;
@@ -235,7 +235,7 @@ function StarField() {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     return g;
-  }, []);
+  }, [mobile]);
 
   const mat = useMemo(
     () =>
@@ -243,11 +243,11 @@ function StarField() {
         color: 0x9fd8ff,
         size: 0.09,
         transparent: true,
-        opacity: 0.75,
+        opacity: mobile ? 0.5 : 0.75,
         sizeAttenuation: true,
         depthWrite: false,
       }),
-    []
+    [mobile]
   );
 
   useFrame((_, dt) => {
@@ -275,8 +275,8 @@ function HeroScene({ mobile }: { mobile: boolean }) {
       <pointLight position={[0, 0, 4]} intensity={1.5} color="#00c8ff" distance={20} decay={1.6} />
       <OrbitRings mobile={mobile} />
       <OrbitParticles mobile={mobile} />
-      <AmbientOrbs />
-      <StarField />
+      {!mobile && <AmbientOrbs />}
+      <StarField mobile={mobile} />
     </>
   );
 }
