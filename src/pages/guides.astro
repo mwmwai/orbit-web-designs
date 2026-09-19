@@ -1,0 +1,59 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const posts = [
+	{
+		href: "/blog/website-cost-kenya",
+		tag: "Pricing guide",
+		title: "How much does a website cost in Kenya?",
+		blurb: "Honest 2026 prices — Starter 29,999, Business 39,999, Master 49,999 — plus what drives the price and how to avoid overpaying.",
+	},
+];
+---
+
+<Layout
+	title="Guides — SEO, Pricing & Growth for Kenyan Businesses | Orbit"
+	description="Free guides for Kenyan SMEs: website pricing, SEO basics, M-Pesa selling and growth tactics that actually work."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Learn the game. <span class="text-gradient">Then win it.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					Short, honest guides for Kenyan business owners — no jargon, no fluff, numbers included.
+				</p>
+			</div>
+		</section>
+
+		<section class="py-16">
+			<div class="mx-auto grid max-w-7xl gap-6 px-5 md:grid-cols-2 lg:grid-cols-3">
+				{posts.map((p) => (
+					<a href={p.href} class="glow-border group rounded-2xl p-8 transition duration-300 hover:-translate-y-1.5">
+						<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">{p.tag}</p>
+						<h2 class="mt-3 text-xl font-bold text-white transition group-hover:text-electric">{p.title}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{p.blurb}</p>
+						<p class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-electric">Read <span aria-hidden>→</span></p>
+					</a>
+				))}
+				<div class="rounded-2xl border border-dashed border-edge p-8">
+					<p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Next up</p>
+					<h2 class="mt-3 text-xl font-bold text-slate-300">M-Pesa selling guide</h2>
+					<p class="mt-3 text-sm leading-relaxed text-slate-500">Paybill vs Till, fee math that protects your margin, and checkout flows that convert. Dropping soon.</p>
+				</div>
+			</div>
+		</section>
+
+		<CtaBand title="Rather just have it done?" text="Read the guides or hand the whole job to us — reply in minutes, Mon–Sat." />
+	</main>
+	<Footer />
+</Layout>

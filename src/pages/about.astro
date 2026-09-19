@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+---
+
+<Layout
+	title="About — 13-Year-Old Founder Building Kenya's Web Future | Orbit"
+	description="Meet the 13-year-old founder behind Orbit Web Designs & Marketing — building fast, M-Pesa-ready websites for Kenyan SMEs."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ About</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Hi, I'm building <span class="text-gradient">Kenya's web future.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">
+					I'm 13. While most people my age are just scrolling, I'm shipping websites for salons, shops and restaurants — fast, M-Pesa-ready, and built to bring customers, not just look pretty.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<a href={whatsappLink("Hi! I read your story — I want a website for my business.")} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white magnetic ripple">Start a project with me</a>
+					<a href="/packages" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See pricing</a>
+				</div>
+				<div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
+					<span><span class="text-electric">✓</span> Reply in minutes</span>
+					<span><span class="text-electric">✓</span> No-pressure chat</span>
+					<span><span class="text-electric">✓</span> Based in Nairobi</span>
+				</div>
+				<blockquote class="mt-10 max-w-2xl border-l-2 border-electric pl-6 text-lg italic leading-relaxed text-slate-300">
+					“It’s not about flashy design — it’s about customers. Can they find you? Can they trust you? Can they pay you in under a minute? Those are the questions I care about.”
+				</blockquote>
+			</div>
+		</section>
+
+		<section class="py-16">
+			<div class="mx-auto grid max-w-7xl gap-6 px-5 md:grid-cols-3">
+				{[
+					["Young means hungry", "No bloated agency, no juniors, no hand-offs. You talk to the person building your site — and I treat your business like it's my own."],
+					["Built for Kenya", "M-Pesa first, phones first, Google first. Every site is made for how Kenyans actually browse and buy."],
+					["Proof over promises", "Live in days, measured in inquiries. If a number is on this site, it's real — and I'll show you how we track it."],
+				].map(([t, d]) => (
+					<div class="glow-border rounded-2xl p-8">
+						<h2 class="text-xl font-bold text-white">{t}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<div class="grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
+					{[
+						["50+", "Websites shipped"],
+						["25+", "M-Pesa stores"],
+						["48–72h", "Starter delivery"],
+						["Minutes", "Reply time"],
+					].map(([v, l]) => (
+						<div class="glow-border rounded-2xl p-6">
+							<p class="text-gradient text-3xl font-extrabold">{v}</p>
+							<p class="mt-1 text-sm text-slate-400">{l}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Two ways to work with me</h2>
+				<div class="mt-8 grid gap-6 md:grid-cols-2">
+					<div class="glow-border rounded-2xl p-8">
+						<h3 class="text-xl font-bold text-white">A website project</h3>
+						<p class="mt-2 text-sm leading-relaxed text-slate-400">Best for businesses that need to get online fast — landing page, full site or store, live in days.</p>
+						<ul class="mt-4 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">→</span> Starter 29,999 · Business 39,999 · Master 49,999</li>
+							<li class="flex gap-2"><span class="text-electric">→</span> M-Pesa checkout that just works</li>
+							<li class="flex gap-2"><span class="text-electric">→</span> Training so you run it yourself</li>
+						</ul>
+						<a href="/packages" class="mt-6 inline-flex rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">See packages</a>
+					</div>
+					<div class="glow-border rounded-2xl p-8">
+						<h3 class="text-xl font-bold text-white">Automation & dashboards</h3>
+						<p class="mt-2 text-sm leading-relaxed text-slate-400">Best when the business already runs — agents, workflows and dashboards that remove manual work.</p>
+						<ul class="mt-4 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">→</span> AI agents, WhatsApp responders</li>
+							<li class="flex gap-2"><span class="text-electric">→</span> M-Pesa + bookings on one screen</li>
+							<li class="flex gap-2"><span class="text-electric">→</span> You own everything, APIs in your name</li>
+						</ul>
+						<a href="/automation" class="mt-6 inline-flex rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">See automation</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">What I believe</h2>
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					{[
+						["Useful beats flashy", "Pretty is nice. Customers pay the bills. Every page earns its place."],
+						["Speed is a feature", "Kenya browses on phones and bundles. Fast is the baseline, not a bonus."],
+						["Prices upfront", "Every package priced on this site. No discovery-call riddles."],
+						["Train, don't gatekeep", "You get a walkthrough and docs — never held hostage by your own site."],
+					].map(([t, d]) => (
+						<div>
+							<h3 class="font-semibold text-white">{t}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-slate-400">{d}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">How I work</h2>
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					{[
+						["01 · Listen", "A focused chat about your business, your customers and what winning looks like."],
+						["02 · Show", "You approve the design before a single line goes live. No surprises."],
+						["03 · Build", "Hand-built, fast and tested on real phones — with SEO and M-Pesa baked in."],
+						["04 · Launch", "Go live in days, get trained, and reach me in minutes whenever you need me."],
+					].map(([t, d]) => (
+						<div class="glow-border rounded-2xl p-6">
+							<p class="font-mono text-xs uppercase tracking-widest text-electric">{t}</p>
+							<p class="mt-2 text-sm leading-relaxed text-slate-400">{d}</p>
+						</div>
+					))}
+				</div>
+				<p class="mt-8 text-sm text-slate-500">Photo coming soon — for now, judge me by the work: <a href="/packages" class="text-electric hover:underline">packages</a>, <a href="/reviews" class="text-electric hover:underline">reviews</a>, <a href="/guides" class="text-electric hover:underline">guides</a>.</p>
+			</div>
+		</section>
+
+		<CtaBand title="Work with the future, today." text="One message. One website. More customers — reply in minutes, Mon–Sat." />
+	</main>
+	<Footer />
+</Layout>
