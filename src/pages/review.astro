@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+
+const REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJtzo1D9cRLxgRLbrhCrF868E";
+---
+
+<Layout
+	title="Leave Us a Review — Orbit Web Designs & Marketing"
+	description="Happy with your website? Leave Orbit a Google review in 30 seconds — it helps other Kenyan businesses find us."
+>
+	<Navbar client:load />
+	<main id="main" class="mx-auto max-w-3xl px-5 py-24 text-center">
+		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Reviews</p>
+		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+			Love your website? <span class="text-gradient">Tell Google.</span>
+		</h1>
+		<p class="mx-auto mt-5 max-w-xl text-lg text-slate-400">
+			One 30-second review helps other Kenyan businesses find us — and keeps our small team winning.
+		</p>
+		<div class="mt-6 text-4xl tracking-widest text-electric" aria-hidden="true">★★★★★</div>
+		<a
+			href={REVIEW_URL}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-10 inline-flex rounded-full btn-gradient px-10 py-4 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 magnetic ripple"
+		>
+			Leave a Google review
+		</a>
+		<p class="mt-6 text-sm text-slate-500">Mention speed, M-Pesa or communication if they stood out.</p>
+		<div class="mt-12 grid gap-4 text-left sm:grid-cols-3">
+			{[
+				["30 seconds", "Tap, tap stars, done."],
+				["Helps SMEs", "Your words bring us the next barbershop."],
+				["Keeps us sharp", "We read every single review."],
+			].map(([t, d]) => (
+				<div class="glow-border rounded-2xl p-6">
+					<p class="font-semibold text-white">{t}</p>
+					<p class="mt-2 text-sm text-slate-400">{d}</p>
+				</div>
+			))}
+		</div>
+	</main>
+	<Footer />
+</Layout>
