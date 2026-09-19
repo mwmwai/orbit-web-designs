@@ -4,6 +4,7 @@ import { SITE_NAME, SITE_URL, SITE_EMAIL, WHATSAPP_NUMBER } from "../config";
 import ScrollIndicator from "../components/ScrollIndicator.astro";
 import Hero3D from "../components/react/Hero3D.tsx";
 import OrbitAssistant from "../components/OrbitAssistant.astro";
+import CookieBanner from "../components/CookieBanner.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -57,6 +58,16 @@ const jsonLd = {
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={new URL("/logo.png", SITE_URL).href} />
 		<meta name="robots" content="index, follow" />
+		<!-- Add your GA4 ID to .env as PUBLIC_GA_ID=G-XXXXXXX to enable -->
+		{import.meta.env.PUBLIC_GA_ID && (
+			<>
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
+				<script set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${import.meta.env.PUBLIC_GA_ID}',{anonymize_ip:true});`} />
+			</>
+		)}
+		{import.meta.env.PUBLIC_GSC_VERIFICATION && (
+			<meta name="google-site-verification" content={import.meta.env.PUBLIC_GSC_VERIFICATION} />
+		)}
 		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
@@ -69,6 +80,7 @@ const jsonLd = {
 		<ScrollIndicator />
 		<slot />
 		<OrbitAssistant />
+		<CookieBanner />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<script>
 			function initTilt() {

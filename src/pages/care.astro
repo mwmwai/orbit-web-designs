@@ -4,6 +4,17 @@ import Navbar from "../components/react/Navbar";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
+
+const faqs = [
+	{ q: "What does Orbit Care cover?", a: "Hosting, SSL, daily off-site backups, weekly security patches, monthly speed tuning and WhatsApp support Mon–Sat. Tier determines priority and content tasks." },
+	{ q: "Can I cancel?", a: "Yes — cancel anytime. Your domain, files and site stay yours; we just stop watching it." },
+	{ q: "Do I need Care if I can DIY?", a: "If you do the 30-min monthly routine in our Website Care guide, you can skip it. Most SMEs delegate because they won't." },
+];
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a }})),
+};
 ---
 
 <Layout
@@ -81,6 +92,20 @@ import { whatsappLink } from "../config";
 			</div>
 		</section>
 
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Care FAQ</h2>
+				<div class="mt-8 grid gap-4">
+					{faqs.map(f => (
+						<details class="glow-border rounded-2xl p-6">
+							<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+							<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 		<CtaBand title="Keep it alive without thinking about it." text="One message — your site is watched, backed up and fast from 7,599/mo." />
 	</main>
 	<Footer />
