@@ -1,10 +1,17 @@
 ---
-const plans = [
+interface Props {
+	only?: string[];
+}
+
+const { only } = Astro.props;
+
+const allPlans = [
 	{
 		name: "Starter",
 		price: "KES 24,999",
 		usd: "≈ $195",
 		eur: "≈ €180",
+		care: "+ KES 7,599/mo Orbit Care",
 		blurb: "1 landing page that brings customers.",
 		features: [
 			"1 custom landing page",
@@ -22,6 +29,7 @@ const plans = [
 		price: "KES 34,999",
 		usd: "≈ $270",
 		eur: "≈ €250",
+		care: "+ KES 9,599/mo Orbit Care",
 		blurb: "Up to 5 pages + bookings.",
 		features: [
 			"Up to 5 custom pages",
@@ -29,7 +37,7 @@ const plans = [
 			"Booking integration (WhatsApp/Calendly)",
 			"Mobile optimized throughout",
 			"Copywriting for every page",
-			"Live in 48–72 hours",
+			"Live in about 5 days",
 		],
 		cta: "Claim 10% off",
 		featured: true,
@@ -39,6 +47,7 @@ const plans = [
 		price: "KES 44,999",
 		usd: "≈ $350",
 		eur: "≈ €320",
+		care: "+ KES 11,999/mo Orbit Care",
 		blurb: "Store or booking system that sells.",
 		features: [
 			"E-commerce or full booking system",
@@ -47,6 +56,7 @@ const plans = [
 			"Everything in Business included",
 			"Priority support — jump the queue",
 			"Training so you run it yourself",
+			"Live in 7–10 days",
 		],
 		cta: "Claim 10% off",
 		featured: false,
@@ -87,6 +97,8 @@ const plans = [
 		featured: false,
 	},
 ];
+
+const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : allPlans;
 ---
 
 <section id="pricing" class="section-glow border-t border-white/5 py-24">
@@ -98,7 +110,7 @@ const plans = [
 				Straight-line pricing. Clear as the night sky.
 			</h2>
 			<p class="mt-4 max-w-xl text-slate-400">
-				Five packages built for growing businesses — flexible payment, delivered fast.
+				{plans.length === 3 ? "Three packages" : "Five packages"} built for growing businesses — flexible payment, delivered fast.
 			</p>
 		</div>
 
@@ -129,6 +141,7 @@ const plans = [
 							<p class="mt-6">
 								<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
 								<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span>
+								{p.care && <span class="mt-1 block text-xs font-medium text-electric">{p.care}</span>}
 							</p>
 							<ul class="mt-8 grid flex-1 content-start gap-3">
 								{p.features.map((f) => (
