@@ -1,12 +1,12 @@
 ---
-import { SITE_NAME, SITE_EMAIL, SITE_PHONE_DISPLAY, NAV_LINKS } from "../config";
+import { SITE_NAME, SITE_EMAIL, SITE_PHONE_DISPLAY, NAV_LINKS, MORE_LINKS } from "../config";
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-white/5 py-16">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+		<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
 			<div class="lg:col-span-2">
 				<a href="/" class="inline-flex items-center gap-4">
 					<img src="/logo-mark.png" alt="Orbit logo" width={44} height={44} />
@@ -64,6 +64,15 @@ const year = new Date().getFullYear();
 				<h3 class="font-mono text-xs uppercase tracking-[0.18em] text-stone">Company</h3>
 				<ul class="mt-5 grid gap-3 text-sm">
 					{NAV_LINKS.map((l) => (
+						<li><a href={l.href} class="text-slate-400 transition hover:text-white">{l.label}</a></li>
+					))}
+				</ul>
+			</div>
+
+			<div>
+				<h3 class="font-mono text-xs uppercase tracking-[0.18em] text-stone">More</h3>
+				<ul class="mt-5 grid gap-3 text-sm">
+					{MORE_LINKS.map((l) => (
 						<li><a href={l.href} class="text-slate-400 transition hover:text-white">{l.label}</a></li>
 					))}
 				</ul>

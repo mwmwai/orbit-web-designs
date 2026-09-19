@@ -16,10 +16,19 @@ export const NAV_LINKS = [
 	{ href: "/", label: "Home" },
 	{ href: "/services", label: "Services" },
 	{ href: "/packages", label: "Packages" },
+	{ href: "/contact", label: "Contact" },
+];
+
+export const MORE_LINKS = [
+	{ href: "/portfolio", label: "Our Work" },
 	{ href: "/automation", label: "Agents & Workflows" },
 	{ href: "/dashboards", label: "Dashboards" },
 	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
-	{ href: "/contact", label: "Contact" },
+	{ href: "/web-design-nairobi", label: "Web Design Nairobi" },
+	{ href: "/mpesa-ecommerce-kenya", label: "M-Pesa Stores" },
+	{ href: "/seo-services-kenya", label: "SEO Services" },
+	{ href: "/reviews", label: "Reviews" },
+	{ href: "/faq", label: "FAQ" },
 ];
 
 

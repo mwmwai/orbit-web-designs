@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+---
+
+<Layout
+	title="SEO Services Kenya — Rank on Google & Get Customers | Orbit"
+	description="SEO services in Kenya: technical, on-page and local SEO that ranks you for the searches that pay. Google Business Profile included. Chat on WhatsApp."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ SEO · Kenya</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Rank for the searches <span class="text-gradient">that pay.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					Technical, on-page and local SEO for Kenyan businesses. We target “near me” and buyer-intent searches — then measure inquiries, not vanity rankings.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<a href={whatsappLink("Hi Orbit! I want my business to rank on Google. Where do I show up now?")} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white magnetic ripple">Rank higher — chat now</a>
+					<a href="/packages" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">View pricing</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16">
+			<div class="mx-auto grid max-w-7xl gap-6 px-5 md:grid-cols-2 lg:grid-cols-4">
+				{[
+					["Technical SEO", "Core Web Vitals, schema markup, sitemaps — the foundation Google rewards."],
+					["Local SEO", "Google Business Profile, Nairobi keywords, “near me” searches, reviews engine."],
+					["On-page SEO", "Titles, descriptions and content written around what buyers type."],
+					["Measured monthly", "Rankings + inquiries reported plainly. No jargon, no vanity graphs."],
+				].map(([t, d]) => (
+					<div class="glow-border rounded-2xl p-6">
+						<h2 class="font-semibold text-white">{t}</h2>
+						<p class="mt-2 text-sm leading-relaxed text-slate-400">{d}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Honest expectations</h2>
+				<ul class="mt-6 grid gap-3 text-slate-300">
+					<li class="flex items-start gap-3"><span class="text-electric">→</span> New sites typically move in 2–4 months; competitive terms take longer.</li>
+					<li class="flex items-start gap-3"><span class="text-electric">→</span> Every Orbit website ships with SEO setup baked in — this page is for going further.</li>
+					<li class="flex items-start gap-3"><span class="text-electric">→</span> We never guarantee positions. Anyone who does is selling you.</li>
+				</ul>
+			</div>
+		</section>
+
+		<CtaBand title="Want customers from Google?" text="Tell us what you sell and where — we reply with an honest read on what ranking takes." />
+	</main>
+	<Footer />
+</Layout>
