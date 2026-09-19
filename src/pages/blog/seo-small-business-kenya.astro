@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/react/Navbar";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink } from "../../config";
+---
+
+<Layout
+	title="SEO for Small Businesses in Kenya: A Practical Guide | Orbit"
+	description="SEO that brings Kenyan SMEs customers: Google Business Profile, buyer-intent keywords, fast pages. What works, what wastes money, what to pay."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · SEO</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					SEO that brings <span class="text-gradient">customers, not charts.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">Forget ranking #1 for vanity terms. Small-business SEO in Kenya means: the right searches, a fast site, and a Google profile that converts.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<div class="grid gap-6">
+				{[
+					["Google Business Profile first", "Half your local customers never leave Google. Claimed profile, real photos, correct hours, review engine — this alone beats most competitors."],
+					["Buyer keywords, not traffic keywords", "“barber Nairobi CBD open now” beats “best hairstyles 2026”. We target searches with wallets behind them."],
+					["Speed is SEO", "Google ranks fast pages higher and visitors bounce from slow ones. Every Orbit site ships PageSpeed 95+ and passing Core Web Vitals."],
+					["Reviews are rankings", "Each genuine review pushes your map position and your conversion rate. Ask every happy customer — we built a page for it: /review."],
+				].map(([t, d]) => (
+					<div class="glow-border rounded-2xl p-8">
+						<h2 class="text-xl font-bold text-white">{t}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
+					</div>
+				))}
+			</div>
+			<p class="mt-10 leading-relaxed text-slate-400">Realistic timelines: new sites move in 2–4 months on local terms. Anyone guaranteeing page one is selling you — read our <a href="/seo-services-kenya" class="text-electric hover:underline">SEO services page</a> for the honest version.</p>
+			<div class="mt-8">
+				<a href={whatsappLink("Hi Orbit! I want my business to rank on Google. Where do I show up now?")} target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">Rank higher — chat now</a>
+			</div>
+		</article>
+
+		<Comments slug="seo-small-business-kenya" />
+		<CtaBand title="Want customers from Google?" text="Tell us what you sell and where — honest read on what ranking takes." />
+	</main>
+	<Footer />
+</Layout>

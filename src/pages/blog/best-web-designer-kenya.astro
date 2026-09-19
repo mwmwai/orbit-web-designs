@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/react/Navbar";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink } from "../../config";
+---
+
+<Layout
+	title="How to Choose the Best Web Designer in Kenya (2026) | Orbit"
+	description="Choosing a web designer in Kenya? Compare on speed, M-Pesa, real prices, timelines and support — the 6 questions that reveal everything."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · Choosing</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Choosing a web designer? <span class="text-gradient">Ask these 6 questions.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">Portfolios all look good. These questions separate builders who deliver from talkers who invoice.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<div class="grid gap-6">
+				{[
+					["1. What's the exact price?", "Vague quotes grow. Demand the number upfront — ours are on this site: 29,999 / 39,999 / 49,999. Anyone hiding prices is hiding something else."],
+					["2. When exactly is it live?", "“2–4 weeks” is a feeling, not a date. Get a day count in writing: ours is 48–72 hours for Starter, ~5 days Business, 7–10 Master."],
+					["3. Is M-Pesa native or a plugin?", "Plugin checkouts break and slow your store. Native Daraja wiring survives updates — ask which one you're getting."],
+					["4. How fast does it load on a cheap phone?", "Ask for THEIR PageSpeed number on mobile data, not fibre. Ours: 75 and climbing, published in our hero."],
+					["5. Who owns the site?", "Read the terms before paying. With us: your content, your domain, full license — details on our Terms page."],
+					["6. What happens after launch?", "A site without care rots. Ask what's included monthly — our Orbit Care runs 7,599–11,999 with hosting, security and support."],
+				].map(([t, d]) => (
+					<div class="glow-border rounded-2xl p-8">
+						<h2 class="text-xl font-bold text-white">{t}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
+					</div>
+				))}
+			</div>
+			<p class="mt-10 leading-relaxed text-slate-400">Ask us these six on WhatsApp right now — we answer in minutes, with numbers.</p>
+			<div class="mt-8">
+				<a href={whatsappLink("Hi Orbit! I'm comparing web designers. Why should I pick you?")} target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">Challenge us on WhatsApp</a>
+			</div>
+		</article>
+
+		<Comments slug="best-web-designer-kenya" />
+		<CtaBand title="Compare us live." text="Send any competitor quote — we'll beat it on speed, price or honesty, or tell you to take it." />
+	</main>
+	<Footer />
+</Layout>

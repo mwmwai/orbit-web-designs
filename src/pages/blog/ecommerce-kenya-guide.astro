@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/react/Navbar";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink } from "../../config";
+---
+
+<Layout
+	title="E-commerce in Kenya: What Your Online Store Needs | Orbit"
+	description="Selling online in Kenya: M-Pesa checkout, inventory that counts itself, WhatsApp order pings. Master stores from KES 49,999, live in 7–10 days."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · E-commerce</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					What your online store <span class="text-gradient">actually needs.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">Not a template with 40 plugins — four things: trusted checkout, honest stock, instant order alerts, and pages Google can find.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<div class="grid gap-6">
+				{[
+					["M-Pesa checkout first", "Paybill and Till that customers trust, plus cards and PayPal. Checkout must finish in under a minute on a KES 3,000 phone — ours does."],
+					["Inventory that counts itself", "Every sale drops stock automatically. Low-stock alerts before you embarrass yourself with an oversell."],
+					["Orders on WhatsApp", "Each order pings your phone with items, amount and delivery details. No dashboard babysitting required."],
+					["Pages that rank", "Product and category pages built around what Kenyans type — not what sounds clever in a boardroom."],
+				].map(([t, d]) => (
+					<div class="glow-border rounded-2xl p-8">
+						<h2 class="text-xl font-bold text-white">{t}</h2>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{d}</p>
+					</div>
+				))}
+			</div>
+			<p class="mt-10 leading-relaxed text-slate-400">Our Master package (KES 49,999) ships all four in 7–10 days. Check our <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> to price your margins first.</p>
+			<div class="mt-8">
+				<a href={whatsappLink("Hi Orbit! I want an online store. I sell...")} target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full btn-gradient px-8 py-3.5 font-semibold text-white">Start selling online</a>
+			</div>
+		</article>
+
+		<Comments slug="ecommerce-kenya-guide" />
+		<CtaBand title="Ready to sell while you sleep?" text="Tell us what you sell — we reply with package, timeline and honest price." />
+	</main>
+	<Footer />
+</Layout>
