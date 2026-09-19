@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import FAQ from "../components/FAQ.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+
+<Layout
+	title="FAQ — Frequently Asked Questions | Orbit Web Designs & Marketing"
+	description="Answers about Orbit pricing (Starter 29,999, Business 39,999, Master 49,999), 48–72 hour delivery, monthly care, M-Pesa and Google ranking."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ FAQ</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Questions? <span class="text-gradient">Answered.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					Everything about pricing, timelines, payments and support — straight answers, no fine print.
+				</p>
+			</div>
+		</section>
+
+		<FAQ />
+
+		<CtaBand title="Still unsure? Ask on WhatsApp." text="Honest advice, no pitch — reply in minutes, Mon–Sat." />
+	</main>
+	<Footer />
+</Layout>
