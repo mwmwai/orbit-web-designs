@@ -1,0 +1,181 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+
+const week = [
+	{ d: "Mon", v: 42 }, { d: "Tue", v: 55 }, { d: "Wed", v: 48 },
+	{ d: "Thu", v: 70 }, { d: "Fri", v: 92 }, { d: "Sat", v: 100 }, { d: "Sun", v: 63 },
+];
+const max = 100;
+
+const feed = [
+	{ who: "M-Pesa · Till", what: "Haircut + beard trim", amt: "KES 800", when: "2 min ago" },
+	{ who: "M-Pesa · Till", what: "Kids haircut", amt: "KES 500", when: "18 min ago" },
+	{ who: "Booking", what: "Fade — Brian, Sat 10:30", amt: "KES 700", when: "1 hr ago" },
+	{ who: "M-Pesa · Till", what: "Dreadlocks retouch", amt: "KES 1,500", when: "2 hrs ago" },
+];
+
+const bookings = [
+	{ client: "Brian", service: "Fade", when: "Sat 10:30", status: "Confirmed" },
+	{ client: "Kevin", service: "Beard trim", when: "Sat 11:15", status: "Confirmed" },
+	{ client: "Dennis", service: "Kids cut", when: "Sat 12:00", status: "Pending" },
+];
+
+const tiers = [
+	{
+		name: "Dashboard Add-on",
+		price: "KES 15,000",
+		usd: "≈ $115",
+		eur: "≈ €105",
+		blurb: "Bolted onto your website: your numbers at a glance.",
+		features: ["Revenue + sales chart", "Live M-Pesa payments feed", "Bookings or orders table", "Works on any phone"],
+		cta: "Add to my site",
+		featured: false,
+	},
+	{
+		name: "Standalone Dashboard",
+		price: "KES 35,000",
+		usd: "≈ $270",
+		eur: "≈ €250",
+		blurb: "Its own private site for your whole business.",
+		features: ["Password login for you + staff", "Charts, filters + CSV export", "3 data sources wired in", "M-Pesa, bookings, stock or Sheets"],
+		cta: "Get my dashboard",
+		featured: true,
+	},
+];
+---
+
+<Layout
+	title="Business Dashboards — Track Sales, M-Pesa & Bookings | Orbit"
+	description="Private dashboards for Kenyan SMEs: live M-Pesa sales, bookings and stock at a glance. Add-on KES 15,000, standalone KES 35,000."
+>
+	<Navbar client:load />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Business dashboards</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Your whole business, <span class="text-gradient">on one screen.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					A private dashboard wired into your real data — M-Pesa sales, bookings, stock. Opens on any phone, no app to install. Below is a live demo with sample data from a barbershop.
+				</p>
+			</div>
+		</section>
+
+		<section class="py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Live demo · sample data</p>
+				<h2 class="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">Genthub Barbershop — this week</h2>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{[
+						["KES 48,500", "Revenue this week"],
+						["132", "Bookings"],
+						["6", "No-shows"],
+						["78%", "Repeat clients"],
+					].map(([v, l]) => (
+						<div data-tilt class="glow-border rounded-2xl p-6">
+							<p class="text-gradient text-3xl font-extrabold">{v}</p>
+							<p class="mt-1 text-sm text-slate-400">{l}</p>
+						</div>
+					))}
+				</div>
+
+				<div class="mt-6 grid gap-6 lg:grid-cols-5">
+					<div class="glow-border rounded-2xl p-6 lg:col-span-3">
+						<h3 class="font-semibold text-white">Revenue by day</h3>
+						<div class="mt-6 flex h-40 items-end gap-2 sm:gap-3" aria-hidden="true">
+							{week.map((d) => (
+								<div class="flex flex-1 flex-col items-center gap-2">
+									<div class="w-full rounded-t-md bg-gradient-to-t from-neon/40 to-electric" style={`height:${Math.round((d.v / max) * 100)}%`}></div>
+									<span class="font-mono text-[10px] uppercase text-slate-500">{d.d}</span>
+								</div>
+							))}
+						</div>
+					</div>
+					<div class="glow-border rounded-2xl p-6 lg:col-span-2">
+						<h3 class="font-semibold text-white">Live M-Pesa feed</h3>
+						<ul class="mt-4 grid gap-3">
+							{feed.map((f) => (
+								<li class="flex items-start justify-between gap-3 border-b border-white/5 pb-3 text-sm last:border-0">
+									<div>
+										<p class="font-medium text-slate-200">{f.what}</p>
+										<p class="text-xs text-slate-500">{f.who} · {f.when}</p>
+									</div>
+									<span class="shrink-0 font-semibold text-electric">{f.amt}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+
+				<div class="glow-border mt-6 overflow-x-auto rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Upcoming bookings</h3>
+					<table class="mt-4 w-full min-w-[520px] text-left text-sm">
+						<thead>
+							<tr class="border-b border-white/10 font-mono text-xs uppercase tracking-widest text-slate-500">
+								<th class="pb-3 pr-4">Client</th>
+								<th class="pb-3 pr-4">Service</th>
+								<th class="pb-3 pr-4">When</th>
+								<th class="pb-3">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{bookings.map((b) => (
+								<tr class="border-b border-white/5 text-slate-300 last:border-0">
+									<td class="py-3 pr-4 font-medium text-white">{b.client}</td>
+									<td class="py-3 pr-4">{b.service}</td>
+									<td class="py-3 pr-4">{b.when}</td>
+									<td class="py-3"><span class={`rounded-full px-3 py-1 font-mono text-xs ${b.status === "Confirmed" ? "bg-electric/10 text-electric" : "bg-yellow-400/10 text-yellow-300"}`}>{b.status}</span></td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<p class="mt-4 text-xs text-slate-500">Demo shows sample data. Your dashboard wires into your real M-Pesa, bookings and records.</p>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto max-w-7xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Get yours</h2>
+				<div class="mt-8 grid items-stretch gap-6 md:grid-cols-2">
+					{tiers.map((p, i) => (
+						<article class="reveal" style={`transition-delay:${i * 70}ms`}>
+							<div data-tilt class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${p.featured ? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10" : "glow-border"}`}>
+								{p.featured && (
+									<span class="mb-4 inline-flex w-fit rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">Most popular</span>
+								)}
+								<h3 class="text-lg font-semibold text-white">{p.name}</h3>
+								<p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
+								<p class="mt-6">
+									<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
+									<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span>
+								</p>
+								<ul class="mt-8 grid flex-1 content-start gap-3">
+									{p.features.map((f) => (
+										<li class="flex items-start gap-3 text-sm text-slate-300">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-1 shrink-0"><path d="M20 6L9 17l-5-5" /></svg>
+											{f}
+										</li>
+									))}
+								</ul>
+								<a href={whatsappLink(`Hi Orbit! I want a business dashboard (${p.name}, ${p.price}). My business does...`)} target="_blank" rel="noopener noreferrer" class={`mt-8 block rounded-full py-3 text-center font-semibold transition ${p.featured ? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5" : "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"}`}>{p.cta}</a>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<CtaBand title="Want your numbers on one screen?" text="Tell us what you track — sales, bookings, stock — and we'll scope your dashboard with an honest price." />
+	</main>
+	<Footer />
+</Layout>
