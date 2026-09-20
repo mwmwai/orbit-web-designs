@@ -22,7 +22,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: 0.27,
+        opacity: mobile ? 0.16 : 0.27,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -30,7 +30,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
         clearcoat: 1,
         clearcoatRoughness: 0,
       }),
-    []
+    [mobile]
   );
 
   const innerMaterial = useMemo(
@@ -38,13 +38,13 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: 0.2,
+        opacity: mobile ? 0.12 : 0.2,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
         metalness: 1,
       }),
-    []
+    [mobile]
   );
 
   const accentMaterial = useMemo(
@@ -52,17 +52,17 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: 0.22,
+        opacity: mobile ? 0.13 : 0.22,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
         metalness: 0.8,
       }),
-    []
+    [mobile]
   );
 
   return (
-    <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 1 : 1.2}>
+    <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 0.7 : 1.2} position={mobile ? [0.4, -1.2, 0] : [0, 0, 0]}>
       <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 8, 48)} material={ringMaterial} />
       <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 8, 48)} material={innerMaterial} rotationZ={0.5} />
       <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 8, 48)} material={accentMaterial} rotationZ={-0.4} />

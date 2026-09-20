@@ -12,7 +12,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		<div class="light-streak"></div>
 	</div>
 
-	<div class="hero-orbit pointer-events-none absolute left-0 top-1/2 h-[420px] w-[420px] -translate-y-1/2 opacity-50 sm:h-[520px] sm:w-[520px] md:h-[640px] md:w-[640px] md:opacity-100" aria-hidden="true" style="left: -12%">
+	<div class="hero-orbit pointer-events-none absolute left-0 top-1/2 hidden h-[640px] w-[640px] -translate-y-1/2 opacity-100 md:block" aria-hidden="true" style="left: -12%">
 		<div class="absolute inset-0" style="transform-style: preserve-3d; animation: floaty 10s ease-in-out infinite">
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg)"></div>
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(28deg)"></div>
@@ -22,7 +22,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		</div>
 	</div>
 
-	<div class="relative mx-auto max-w-7xl px-5 pb-24 pt-24 md:pt-36">
+	<div class="relative mx-auto max-w-7xl px-4 pb-16 pt-16 md:px-5 md:pb-24 md:pt-24 lg:pt-36">
 		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
 			<span class="relative flex h-2 w-2">
 				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-60"></span>
@@ -46,24 +46,24 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			business needs to get found, get trusted and get paid.
 		</p>
 
-		<div class="hero-anim mt-10 flex flex-wrap items-center gap-4" style="animation-delay:300ms">
+		<div class="hero-anim mt-8 flex flex-col sm:flex-row gap-4" style="animation-delay:300ms">
 			<a
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple"
+				class="rounded-full btn-gradient px-6 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple w-full sm:w-auto text-center"
 			>
 				Get customers this week — chat now
 			</a>
 			<a
 				href="/packages"
-				class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white magnetic ripple"
+				class="rounded-full border border-edge bg-panel px-6 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white magnetic ripple w-full sm:w-auto text-center"
 			>
 				View pricing
 			</a>
 		</div>
 
-		<dl class="hero-anim mt-16 grid max-w-4xl grid-cols-2 gap-6 sm:grid-cols-4" style="animation-delay:420ms">
+		<dl class="hero-anim mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4" style="animation-delay:420ms">
 			{
 				[
 					["50+", "Websites shipped"],
@@ -71,20 +71,20 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 					["10+", "Industries"],
 					["24h", "Reply time"],
 				].map(([value, label]) => (
-					<div data-tilt class="glow-border edge-glow hover-lift rounded-2xl px-6 py-5 transition duration-300 hover:-translate-y-1">
-						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
-						<dd class="mt-1 text-sm text-slate-400">{label}</dd>
+					<div data-tilt class="glow-border edge-glow hover-lift rounded-xl px-4 py-4 transition duration-300 hover:-translate-y-1">
+						<dt class="text-gradient counter-num text-xl font-extrabold sm:text-2xl" data-counter>{value}</dt>
+						<dd class="mt-1 text-xs sm:text-sm text-slate-400">{label}</dd>
 					</div>
 				))
 			}
 		</dl>
 
-		<div class="hero-anim mt-12 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4" style="animation-delay:500ms">
+		<div class="hero-anim mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" style="animation-delay:500ms">
 			{
 				[["75", "Performance"], ["100", "Best Practices"], ["100", "SEO"], ["95+", "PageSpeed"]].map(([v, l]) => (
-					<div class="border border-edge/70 bg-charcoal/60 px-3 py-2.5 text-center">
-						<p class="text-gradient text-xl font-extrabold">{v}</p>
-						<p class="font-mono text-[10px] uppercase tracking-widest text-slate-400">{l}</p>
+					<div class="border border-edge/70 bg-charcoal/60 px-3 py-2 text-center">
+						<p class="text-gradient text-lg font-extrabold sm:text-xl">{v}</p>
+						<p class="font-mono text-[9px] uppercase tracking-widest text-slate-400">{l}</p>
 					</div>
 				))
 			}
