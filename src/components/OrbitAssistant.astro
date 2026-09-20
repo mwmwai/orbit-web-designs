@@ -38,10 +38,31 @@ import { whatsappLink } from "../config";
 
 <script>
 	(() => {
+		const STORAGE_KEY = "orbit_assistant_memory";
 		const WA = "https://wa.me/254741992308?text=";
 		const waLink = (q: string) => WA + encodeURIComponent("Hi Orbit! " + q);
 
-		// Actions: one-tap flows that do the whole job
+		function loadMemory(): { chat: string[]; name: string; email: string; phone: string } {
+			try {
+				const raw = localStorage.getItem(STORAGE_KEY);
+				if (raw) return JSON.parse(raw);
+			} catch {}
+			return { chat: [], name: "", email: "", phone: "" };
+		}
+		function saveMemory(m: { chat: string[]; name: string; email: string; phone: string }) {
+			try { localStorage.setItem(STORAGE_KEY, JSON.stringify(m)); } catch {}
+		}
+		function extractUser(q: string): { name?: string; email?: string; phone?: string } {
+			const info: { name?: string; email?: string; phone?: string } = {};
+			const emailM = q.match(/[\w.+-]+@[\w-]+\.[\w.+-]+/);
+			if (emailM) info.email = emailM[0];
+			const phoneM = q.match(/\+?254[\s.-]?\d{3}[\s.-]?\d{3}[\s.-]?\d{3}/);
+			if (phoneM) info.phone = phoneM[0].replace(/\s/g, "");
+			const nameM = q.match(/(?:my name is|I am|I'm|call me)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)/i);
+			if (nameM) info.name = nameM[1];
+			return info;
+		}
+
 		const ACTIONS: Array<{ label: string; ask: string; reply: string; link?: [string, string]; wa: string }> = [
 			{ label: "🛒 I want an online store", ask: "I want an online store", reply: "Master **KES 49,999** is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 7–10 days. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 49,999). I sell..." },
 			{ label: "📅 I want bookings", ask: "I want to take bookings", reply: "Business **KES 39,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live ~5 days.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 39,999). My business is..." },
@@ -69,7 +90,6 @@ import { whatsappLink } from "../config";
 			{ keys: ["discount", "offer", "promo", "deal", "off"], text: "Prices are transparent — no hidden fees." },
 		];
 		const fallback = "I don't have that one yet — a human will know. Tap below, we reply in minutes.";
-		const quickChips = ["🛒 Online store", "📅 Bookings", "💬 Just get found", "💰 Monthly cost?", "📱 M-Pesa Till or Paybill?"];
 
 		const stop = new Set(["a","an","the","is","are","do","does","i","my","me","for","to","of","in","on","and","or","it","this","that","with","what","how","much","can","you","your","we","our","get","want","need","have","has","about","please","hi"]);
 		function score(q: string, keys: string[]): number {
@@ -92,6 +112,8 @@ import { whatsappLink } from "../config";
 		if (!panel || !toggle || !log || !input || !send || toggle.dataset.bound) return;
 		toggle.dataset.bound = "1";
 
+		const mem = loadMemory();
+
 		function bubble(text: string, mine: boolean, html = false) {
 			const d = document.createElement("div");
 			d.className = mine
@@ -112,7 +134,8 @@ import { whatsappLink } from "../config";
 		}
 		function waButton(q: string, label = "Chat human on WhatsApp") {
 			const a = document.createElement("a");
-			a.href = waLink(q);
+			const ctx = mem.name ? ` (${mem.name})` : "";
+			a.href = waLink(q + ctx);
 			a.target = "_blank";
 			a.rel = "noopener noreferrer";
 			a.className = "justify-self-start rounded-full bg-[#25D366] px-4 py-2 text-xs font-semibold text-white";
@@ -129,8 +152,10 @@ import { whatsappLink } from "../config";
 				b.textContent = a.label;
 				b.addEventListener("click", () => {
 					bubble(a.ask, true);
+					addChat(a.ask);
 					setTimeout(() => {
 						bubble(a.reply, false, true);
+						addChat(a.reply);
 						if (a.link) richLink(a.link[0], a.link[1]);
 						waButton(a.wa, "Start this on WhatsApp");
 					}, 350);
@@ -143,15 +168,28 @@ import { whatsappLink } from "../config";
 			const el = document.getElementById("oa-typing");
 			if (el) el.classList.toggle("hidden", !show);
 		}
+		function addChat(msg: string) {
+			mem.chat.push(msg);
+			if (mem.chat.length > 20) mem.chat.shift();
+			saveMemory(mem);
+		}
 
 		function greet() {
 			if (log!.childElementCount > 0) return;
-			bubble("👋 **Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Tap an action below or ask me anything.", false);
+			const name = mem.name || "there";
+			bubble(`👋 **Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Ask me anything or tap an action below.`, false);
 			renderActions();
 		}
 
 		function answer(q: string) {
 			bubble(q, true);
+			addChat(q);
+			const info = extractUser(q);
+			if (info.name) mem.name = info.name;
+			if (info.email) mem.email = info.email;
+			if (info.phone) mem.phone = info.phone;
+			saveMemory(mem);
+
 			let best: (typeof KB)[number] | null = null, bestScore = 0;
 			for (const entry of KB) {
 				const s = score(q, entry.keys);
@@ -162,9 +200,11 @@ import { whatsappLink } from "../config";
 				typingIndicator(false);
 				if (best && bestScore > 0) {
 					bubble(best.text, false, true);
+					addChat(best.text);
 					if (best.link) richLink(best.link[0], best.link[1]);
 				} else {
 					bubble(fallback, false);
+					addChat(fallback);
 				}
 				waButton(q);
 			}, 600 + Math.random() * 400);
@@ -172,8 +212,10 @@ import { whatsappLink } from "../config";
 
 		toggle.addEventListener("click", () => {
 			panel.classList.toggle("hidden");
-			greet();
-			input.focus();
+			if (!panel.classList.contains("hidden")) {
+				if (log!.childElementCount === 0) greet();
+				input.focus();
+			}
 		});
 		send.addEventListener("click", () => {
 			const q = input.value.trim();
