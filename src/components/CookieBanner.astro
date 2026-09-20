@@ -16,10 +16,13 @@
 		const banner = document.getElementById("cookie-banner");
 		if (!banner) return;
 		const consent = localStorage.getItem(k);
-		banner.classList.remove("hidden");
-		requestAnimationFrame(() => requestAnimationFrame(() => {
-			banner.classList.remove("translate-y-full");
-		}));
+		// Once-and-done: after Accept or Decline the choice persists, banner never returns.
+		if (!consent) {
+			banner.classList.remove("hidden");
+			requestAnimationFrame(() => requestAnimationFrame(() => {
+				banner.classList.remove("translate-y-full");
+			}));
+		}
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		const dismiss = () => {
 			banner.classList.add("translate-y-full");
