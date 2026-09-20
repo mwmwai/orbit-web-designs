@@ -1,16 +1,18 @@
 ---
 ---
 
-<div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-[100] hidden border-t border-electric/20 bg-ink/95 backdrop-blur-md" style="box-shadow: 0 -8px 40px rgb(0 200 255 / 0.08);">
-	<div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric/60 to-transparent"></div>
-	<div class="mx-auto max-w-7xl px-5 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+<div id="cookie-banner" class="fixed bottom-4 inset-x-4 z-[100] hidden">
+	<div class="glow-border edge-glow mx-auto flex max-w-3xl flex-col gap-4 rounded-2xl bg-panel/95 p-5 shadow-2xl shadow-black/50 backdrop-blur-md md:flex-row md:items-center md:justify-between" style="box-shadow: 0 8px 40px rgb(0 0 0 / 0.5), 0 0 30px -10px rgb(0 200 255 / 0.25);">
 		<div class="flex items-start gap-3">
-			<span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-electric/30 bg-electric/10 text-sm">◈</span>
-			<p class="text-sm text-slate-300">We use cookies for analytics to improve your experience. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy policy</a>.</p>
+			<span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-electric to-neon text-sm font-bold text-white shadow-lg shadow-electric/30">◈</span>
+			<div>
+				<p class="text-sm font-semibold text-white">Cookies, your call.</p>
+				<p class="mt-0.5 text-xs leading-relaxed text-slate-400">We use cookies for analytics to improve your experience. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy policy</a>.</p>
+			</div>
 		</div>
-		<div class="flex gap-3 shrink-0">
+		<div class="flex shrink-0 gap-2 pl-12 md:pl-0">
 			<button id="cookie-accept" class="rounded-full btn-gradient px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-electric/25 transition hover:-translate-y-0.5">Accept</button>
-			<button id="cookie-decline" class="rounded-full border border-edge bg-panel px-6 py-2 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Decline</button>
+			<button id="cookie-decline" class="rounded-full border border-edge bg-charcoal px-6 py-2 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Decline</button>
 		</div>
 	</div>
 </div>
