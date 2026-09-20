@@ -20,12 +20,26 @@
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		document.getElementById("cookie-accept")?.addEventListener("click", () => {
 			localStorage.setItem(k, "accepted");
+			document.cookie = "orbit_cookie_consent=accepted; path=/; max-age=31536000; SameSite=Lax";
 			(window as any).orbitAnalyticsOK = true;
 			banner.classList.add("hidden");
-			location.reload();
+			// Load GA if not already loaded
+			if (import.meta.env.PUBLIC_GA_ID && !(window as any).gtag) {
+				const script = document.createElement("script");
+				script.async = true;
+				script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`;
+				document.head.appendChild(script);
+				window.dataLayer = window.dataLayer || [];
+				function gtag() { dataLayer.push(arguments); }
+				(window as any).gtag = gtag;
+				gtag('js', new Date());
+				gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
+			}
+			banner.classList.add("hidden");
 		});
 		document.getElementById("cookie-decline")?.addEventListener("click", () => {
 			localStorage.setItem(k, "declined");
+			document.cookie = "orbit_cookie_consent=declined; path=/; max-age=31536000; SameSite=Lax";
 			banner.classList.add("hidden");
 		});
 	})();

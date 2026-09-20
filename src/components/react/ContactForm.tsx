@@ -34,6 +34,7 @@ export default function ContactForm() {
 				<input
 					type="text"
 					required
+					maxLength={60}
 					value={name}
 					onInput={(e) => setName((e.target as HTMLInputElement).value)}
 					placeholder="Jane Wanjiku"
@@ -44,6 +45,7 @@ export default function ContactForm() {
 				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Email</span>
 				<input
 					type="email"
+					maxLength={100}
 					value={email}
 					onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
 					placeholder="jane@company.co.ke"
@@ -54,6 +56,7 @@ export default function ContactForm() {
 				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Phone Number</span>
 				<input
 					type="tel"
+					maxLength={20}
 					value={phone}
 					onInput={(e) => setPhone((e.target as HTMLInputElement).value)}
 					placeholder="+254 7XX XXX XXX"
@@ -64,6 +67,7 @@ export default function ContactForm() {
 				<span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Project Details</span>
 				<textarea
 					rows={4}
+					maxLength={800}
 					value={details}
 					onInput={(e) => setDetails((e.target as HTMLTextAreaElement).value)}
 					placeholder="Tell us about your project — what does your business do, and what do you need?"
