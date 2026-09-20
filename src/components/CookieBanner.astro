@@ -17,18 +17,14 @@
 		if (!banner || banner.dataset.bound) return;
 		banner.dataset.bound = "1";
 		const consent = localStorage.getItem(k);
-		// Only ever nag once: wait until hero/loader settle, then slide up.
-		// Choice persists via localStorage + cookie, so it never returns.
-		if (!consent) {
-			setTimeout(() => {
-				if (!localStorage.getItem(k)) {
-					banner.classList.remove("hidden");
-					requestAnimationFrame(() => requestAnimationFrame(() => {
-						banner.classList.remove("translate-y-full");
-					}));
-				}
-			}, 3000);
-		}
+		// Always show on every page load (3s after settle), per site owner.
+		// Choice still saves, but the banner returns each visit.
+		setTimeout(() => {
+			banner.classList.remove("hidden");
+			requestAnimationFrame(() => requestAnimationFrame(() => {
+				banner.classList.remove("translate-y-full");
+			}));
+		}, 3000);
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		const dismiss = () => {
 			banner.classList.add("translate-y-full");

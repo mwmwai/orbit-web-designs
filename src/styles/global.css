@@ -191,14 +191,14 @@ body {
 
 @keyframes vtFlash {
 	0%, 100% { opacity: 0; }
-	50% { opacity: 0.12; }
+	50% { opacity: 0.22; }
 }
 
 ::view-transition-new(root)::before {
 	content: "";
 	position: fixed;
 	inset: 0;
-	background: radial-gradient(ellipse at center, transparent 45%, rgb(0 200 255 / 0.1) 100%);
+	background: radial-gradient(ellipse at center, transparent 35%, rgb(0 200 255 / 0.18) 100%);
 	pointer-events: none;
 	z-index: 9999;
 	animation: vtFlash 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
@@ -217,13 +217,13 @@ body {
 	top: -10%;
 	bottom: -10%;
 	left: 0;
-	width: 34%;
+	width: 45%;
 	background: linear-gradient(
 		90deg,
 		transparent,
-		rgb(0 200 255 / 0.06) 30%,
-		rgb(160 235 255 / 0.14) 50%,
-		rgb(0 200 255 / 0.06) 70%,
+		rgb(0 200 255 / 0.12) 30%,
+		rgb(160 235 255 / 0.28) 50%,
+		rgb(0 200 255 / 0.12) 70%,
 		transparent
 	);
 	pointer-events: none;
