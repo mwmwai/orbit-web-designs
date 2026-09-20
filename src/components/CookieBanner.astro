@@ -19,7 +19,7 @@
 		if (!banner || banner.dataset.bound) return;
 		banner.dataset.bound = "1";
 		const consent = localStorage.getItem(k);
-		// Gate: no choice yet → block the site immediately until they pick one.
+		// Gate once: first visit blocks until they pick, choice remembered after.
 		if (!consent) {
 			banner.classList.remove("hidden");
 			banner.classList.add("flex");
