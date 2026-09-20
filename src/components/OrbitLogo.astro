@@ -1,0 +1,84 @@
+---
+interface Props {
+	size?: number;
+	class?: string;
+	ariaLabel?: string;
+}
+
+const { size = 72, class: className = "", ariaLabel = "Orbit logo" } = Astro.props;
+---
+
+<svg
+	width={size}
+	height={size}
+	viewBox="0 0 120 120"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+	role="img"
+	aria-label={ariaLabel}
+	class={className}
+>
+	<defs>
+		<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+			<feGaussianBlur stdDeviation="3" result="blur" />
+			<feMerge>
+				<feMergeNode in="blur" />
+				<feMergeNode in="SourceGraphic" />
+			</feMerge>
+		</filter>
+		<linearGradient id="electricGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#00E5FF" />
+			<stop offset="50%" stop-color="#00C8FF" />
+			<stop offset="100%" stop-color="#0099CC" />
+		</linearGradient>
+		<linearGradient id="whiteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#FFFFFF" />
+			<stop offset="100%" stop-color="#E8ECF4" />
+		</linearGradient>
+	</defs>
+
+	<circle cx="60" cy="60" r="48" stroke="url(#electricGradient)" stroke-width="1.5" fill="none" opacity="0.15" />
+
+	<g filter="url(#glow)">
+		<circle cx="60" cy="60" r="28" stroke="url(#electricGradient)" stroke-width="2" fill="none" stroke-dasharray="175.93 175.93" stroke-dashoffset="0">
+			<animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="20s" repeatCount="indefinite" />
+		</circle>
+
+		<circle cx="60" cy="60" r="20" stroke="url(#whiteGradient)" stroke-width="1.5" fill="none" stroke-dasharray="125.66 125.66" stroke-dashoffset="62.83">
+			<animateTransform attributeName="transform" type="rotate" from="360 60 60" to="0 60 60" dur="15s" repeatCount="indefinite" />
+		</circle>
+
+		<circle cx="60" cy="60" r="12" stroke="url(#electricGradient)" stroke-width="1" fill="none" stroke-dasharray="75.4 75.4" stroke-dashoffset="37.7">
+			<animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="12s" repeatCount="indefinite" />
+		</circle>
+	</g>
+
+	<g filter="url(#glow)">
+		<circle cx="60" cy="60" r="28" fill="url(#electricGradient)">
+			<animateMotion path="M 60 32 A 28 28 0 1 1 60 32" dur="20s" repeatCount="indefinite" rotate="auto" />
+		</circle>
+		<circle cx="60" cy="60" r="28" fill="#00E5FF" opacity="0.6">
+			<animateMotion path="M 60 32 A 28 28 0 1 1 60 32" dur="20s" repeatCount="indefinite" rotate="auto" begin="5s" />
+		</circle>
+		<circle cx="60" cy="60" r="28" fill="#FFFFFF" opacity="0.4">
+			<animateMotion path="M 60 32 A 28 28 0 1 1 60 32" dur="20s" repeatCount="indefinite" rotate="auto" begin="10s" />
+		</circle>
+
+		<circle cx="60" cy="60" r="20" fill="url(#whiteGradient)">
+			<animateMotion path="M 60 40 A 20 20 0 1 1 60 40" dur="15s" repeatCount="indefinite" rotate="auto-reverse" />
+		</circle>
+		<circle cx="60" cy="60" r="20" fill="#00E5FF" opacity="0.5">
+			<animateMotion path="M 60 40 A 20 20 0 1 1 60 40" dur="15s" repeatCount="indefinite" rotate="auto-reverse" begin="3.75s" />
+		</circle>
+
+		<circle cx="60" cy="60" r="12" fill="url(#electricGradient)">
+			<animateMotion path="M 60 48 A 12 12 0 1 1 60 48" dur="12s" repeatCount="indefinite" rotate="auto" />
+		</circle>
+		<circle cx="60" cy="60" r="12" fill="#FFFFFF" opacity="0.6">
+			<animateMotion path="M 60 48 A 12 12 0 1 1 60 48" dur="12s" repeatCount="indefinite" rotate="auto" begin="6s" />
+		</circle>
+	</g>
+
+	<circle cx="60" cy="60" r="6" fill="url(#whiteGradient)" filter="url(#glow)" />
+	<circle cx="60" cy="60" r="3" fill="#00E5FF" />
+</svg>

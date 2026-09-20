@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BusinessCardFront from "../components/BusinessCardFront.astro";
+import BusinessCardBack from "../components/BusinessCardBack.astro";
+import { SITE_NAME, SITE_URL } from "../config";
+---
+
+<Layout title={`${SITE_NAME} — Business Card`} description="Orbit Web Designs & Marketing — professional business card design showcase.">
+	<main class="relative min-h-screen flex flex-col items-center justify-center px-5 py-14">
+		<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+			<div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(70% 60% at 50% 50%, black, transparent 75%)"></div>
+			<div class="absolute -top-40 left-1/2 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]" style="animation: floaty 10s ease-in-out infinite"></div>
+			<div class="absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-neon/10 blur-[120px]" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
+		</div>
+
+		<header class="relative z-10 text-center mb-12 reveal">
+			<h1 class="display-1 font-black tracking-[0.02em] text-white mb-4">Business Card Design</h1>
+			<p class="text-lg text-slate-400 max-w-xl mx-auto">Minimalist, high-contrast B2B technology branding — print-ready at 3.5″ × 2″ with spot-glow accents.</p>
+		</header>
+
+		<div class="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-5xl px-4 reveal stagger">
+			<article class="cardwrap relative">
+				<div class="absolute -inset-4 bg-gradient-to-r from-electric/20 to-neon/20 rounded-2xl blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true"></div>
+				<div class="relative">
+					<BusinessCardFront class="hover-lift edge-glow" />
+				</div>
+				<p class="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400 text-center">Front</p>
+			</article>
+
+			<article class="cardwrap relative">
+				<div class="absolute -inset-4 bg-gradient-to-r from-electric/20 to-neon/20 rounded-2xl blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true"></div>
+				<div class="relative">
+					<BusinessCardBack class="hover-lift edge-glow" />
+				</div>
+				<p class="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400 text-center">Back</p>
+			</article>
+		</div>
+
+		<div class="relative z-10 mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+			<a href="/business-card-print.html" target="_blank" rel="noopener noreferrer" class="btn-gradient inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold text-white shadow-xl shadow-electric/30 transition hover:-translate-y-0.5 hover:shadow-electric/50">
+				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/><path d="M12 3v12"/><path d="M21 15H3"/><path d="M7 15h.01"/><path d="M12 15h.01"/><path d="M17 15h.01"/></svg>
+				View Print-Ready Version
+			</a>
+			<a href="/card" class="inline-flex items-center justify-center gap-2 rounded-full border border-electric/40 bg-transparent px-8 py-4 font-semibold text-electric transition hover:bg-electric/10 hover:border-electric">
+				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98"/></svg>
+				Digital Card (NFC/Share)
+			</a>
+		</div>
+
+		<section class="relative z-10 mt-20 w-full max-w-3xl px-4 reveal">
+			<h2 class="display-2 font-extrabold text-white mb-6 text-center">Design Specifications</h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<div class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow">
+					<h3 class="font-semibold text-white mb-2">Dimensions</h3>
+					<ul class="text-sm text-slate-400 space-y-1">
+						<li>• 3.5″ × 2″ (88.9mm × 50.8mm)</li>
+						<li>• Bleed: 0.125″ each side</li>
+						<li>• Safe zone: 0.125″ inside trim</li>
+					</ul>
+				</div>
+				<div class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow">
+					<h3 class="font-semibold text-white mb-2">Colors</h3>
+					<ul class="text-sm text-slate-400 space-y-1">
+						<li>• Background: #0A0F1D (Deep Navy)</li>
+						<li>• Electric Cyan: #00C8FF</li>
+						<li>• Neon Blue: #2F7BFF</li>
+						<li>• White: #FFFFFF / Slate gradients</li>
+					</ul>
+				</div>
+				<div class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow">
+					<h3 class="font-semibold text-white mb-2">Typography</h3>
+					<ul class="text-sm text-slate-400 space-y-1">
+						<li>• Brand: Inter / SF Pro, 900 weight</li>
+						<li>• Tracking: +0.32em (brand)</li>
+						<li>• Contact: 7.6–10.5pt</li>
+						<li>• All caps for labels</li>
+					</ul>
+				</div>
+				<div class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow">
+					<h3 class="font-semibold text-white mb-2">Print Setup</h3>
+					<ul class="text-sm text-slate-400 space-y-1">
+						<li>• CMYK conversion recommended</li>
+						<li>• Spot UV on logo/divider</li>
+						<li>• Soft-touch matte laminate</li>
+						<li>• Double-sided, flip on short edge</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="relative z-10 mt-16 w-full max-w-3xl px-4 reveal">
+			<h2 class="display-2 font-extrabold text-white mb-6 text-center">Download Assets</h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<a href="/orbit-logo.svg" download class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow flex items-center gap-4 group">
+					<div class="h-12 w-12 rounded-xl bg-electric/10 flex items-center justify-center group-hover:bg-electric/20 transition">
+						<svg class="h-6 w-6 text-electric" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+					</div>
+					<div>
+						<p class="font-semibold text-white">Orbit Logo (SVG)</p>
+						<p class="text-sm text-slate-500">Vector, scalable, animated + static</p>
+					</div>
+				</a>
+				<a href="/orbit-qr.svg" download class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow flex items-center gap-4 group">
+					<div class="h-12 w-12 rounded-xl bg-neon/10 flex items-center justify-center group-hover:bg-neon/20 transition">
+						<svg class="h-6 w-6 text-neon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+					</div>
+					<div>
+						<p class="font-semibold text-white">QR Code (SVG)</p>
+						<p class="text-sm text-slate-500">Links to orbitwebdesigns.co.ke</p>
+					</div>
+				</a>
+				<a href="/business-card-print.html" download class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow flex items-center gap-4 group">
+					<div class="h-12 w-12 rounded-xl bg-slate-600/20 flex items-center justify-center group-hover:bg-slate-600/30 transition">
+						<svg class="h-6 w-6 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+					</div>
+					<div>
+						<p class="font-semibold text-white">Print-Ready HTML</p>
+						<p class="text-sm text-slate-500">Front + back, @page CSS included</p>
+					</div>
+				</a>
+				<a href="/orbit-contact.vcf" download class="rounded-2xl border border-edge bg-panel p-6 hover-lift edge-glow flex items-center gap-4 group">
+					<div class="h-12 w-12 rounded-xl bg-green-500/10 flex items-center justify-center group-hover:bg-green-500/20 transition">
+						<svg class="h-6 w-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+					</div>
+					<div>
+						<p class="font-semibold text-white">vCard Contact</p>
+						<p class="text-sm text-slate-500">One-tap save to phone</p>
+					</div>
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>

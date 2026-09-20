@@ -32,7 +32,6 @@ export const MORE_LINKS = [
 	{ href: "/reviews", label: "Reviews" },
 	{ href: "/faq", label: "FAQ" },
 	{ href: "/about", label: "About" },
-	{ href: "/guides", label: "Guides" },
 ];
 
 
