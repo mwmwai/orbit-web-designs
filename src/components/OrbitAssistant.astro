@@ -5,23 +5,23 @@ import { whatsappLink } from "../config";
 <div id="orbit-assistant" class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3">
 	<div id="oa-panel" class="hidden w-80 max-w-[calc(100vw-3rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
-			<p class="font-semibold text-white">Orbit Agent</p>
-			<p class="text-xs text-slate-400">Finds your package · builds your quote · answers anything</p>
+			<p class="font-semibold text-white">Orbit Concierge</p>
+			<p class="text-xs text-slate-400">Tap an action or ask anything</p>
 		</div>
 		<div id="oa-log" class="grid max-h-72 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
-		<div id="oa-chips" class="flex flex-wrap gap-2 px-5 pb-1"></div>
+		<div id="oa-actions" class="grid gap-2 px-5 pb-2"></div>
 		<div class="flex gap-2 border-t border-white/5 p-3">
-			<input id="oa-input" type="text" placeholder="e.g. find my package" aria-label="Ask the agent" class="min-w-0 flex-1 rounded-full border border-edge bg-charcoal px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric" />
+			<input id="oa-input" type="text" placeholder="Ask about prices, M-Pesa…" aria-label="Ask the concierge" class="min-w-0 flex-1 rounded-full border border-edge bg-charcoal px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric" />
 			<button id="oa-send" type="button" aria-label="Send" class="shrink-0 rounded-full btn-gradient px-4 py-2.5 text-sm font-semibold text-white">→</button>
 		</div>
 	</div>
 	<button
 		id="oa-toggle"
 		type="button"
-		aria-label="Chat with Orbit Agent"
+		aria-label="Chat with Orbit Concierge"
 		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
 	>
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8M12 8l4-4M12 8v8m-4 4h8M9 16h6M10 12a2 2 0 114 0 2 2 0 01-4 0z" /></svg>
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
 	</button>
 </div>
 
@@ -30,63 +30,51 @@ import { whatsappLink } from "../config";
 		const WA = "https://wa.me/254741992308?text=";
 		const waLink = (q: string) => WA + encodeURIComponent("Hi Orbit! " + q);
 
-		// ---------- Agent memory (persists across turns in this session) ----------
-		const mem: { name?: string; biz?: string; need?: string; budget?: string } = {};
-		try {
-			const saved = sessionStorage.getItem("oa-mem");
-			if (saved) Object.assign(mem, JSON.parse(saved));
-		} catch {}
-		const saveMem = () => { try { sessionStorage.setItem("oa-mem", JSON.stringify(mem)); } catch {} };
-
-		// ---------- Knowledge base ----------
-		const KB: Array<{ keys: string[]; text: string; link?: [string, string] }> = [
-			{ keys: ["starter", "29,999", "29999", "landing", "one page", "1 page", "cheap", "cheapest", "basic"], text: "Starter is KES 29,999 — up to 3 custom pages, mobile-first, WhatsApp chat, basic SEO, polished copy, Google Business Profile. Live in 48–72 hours. + Care 7,599/mo.", link: ["/packages", "See Starter →"] },
-			{ keys: ["business", "39,999", "39999", "7 page", "booking", "bookings", "calendly"], text: "Business is KES 39,999 — up to 7 pages, full SEO, booking integration, copy on every page, under 2s load. Live in ~5 days. Most popular. + Care 9,599/mo.", link: ["/packages", "See Business →"] },
-			{ keys: ["master", "49,999", "49999", "store", "shop", "ecommerce", "e-commerce", "sell online", "selling"], text: "Master is KES 49,999 — full online store or booking system with native M-Pesa + cards, advanced SEO, abandoned-cart automations, training. Live 7–10 days. Try the fee calculator to price your margins.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] },
-			{ keys: ["saas", "app", "custom app", "platform", "software"], text: "Custom SaaS apps from KES 49,999 — auth + roles, admin & user dashboards, M-Pesa payments, deployed + documented with 3 months support.", link: ["/packages", "See SaaS →"] },
-			{ keys: ["logo", "brand", "design", "14,999", "14999", "graphic", "flyer", "poster", "kit"], text: "Graphic design from KES 14,999 — logos, full brand kits to 24,999, social kits, flyers, source files + guideline sheet included.", link: ["/packages", "See design →"] },
-			{ keys: ["agent", "ai", "bot", "chatbot", "responder", "auto-reply", "autoreply"], text: "Custom AI Agent is KES 49,999 — trained on your business, replies on WhatsApp/site/email, qualifies leads, books, hands to a human. 1 month tuning included. WhatsApp Responder setup is 29,999.", link: ["/automation", "See agents →"] },
-			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice", "receipt"], text: "Workflow automation is KES 39,999 per workflow — M-Pesa → Sheets/CRM, inquiry → WhatsApp → calendar, invoices auto-sent. You own it, documented. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
-			{ keys: ["dashboard", "35,999", "35999", "19,999", "19999", "report", "analytics", "track sales"], text: "Dashboards: Add-on KES 19,999 (bolted to your site) or Standalone KES 35,999 (own private site, logins, CSV export). Live M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
-			{ keys: ["care", "maintain", "maintenance", "monthly", "month", "hosting", "support", "7,599", "7599", "9,599", "11,999", "update"], text: "Orbit Care: Starter 7,599/mo, Business 9,599/mo, Master 11,999/mo — hosting, SSL, backups, security, speed tuning, WhatsApp support. Cancel anytime, site stays yours. Custom: SaaS 14,999, Dashboard 5,999, Agent 7,999, Design 9,999.", link: ["/care", "See Care →"] },
-			{ keys: ["price", "cost", "much", "charge", "fee", "quote", "budget"], text: "Websites: Starter 29,999 · Business 39,999 · Master 49,999. SaaS from 49,999. Design from 14,999. Agent 49,999. Workflow 39,999. Dashboard 19,999–35,999. 10% off new orders ends 30 Sept.", link: ["/packages", "Full pricelist →"] },
-			{ keys: ["long", "fast", "timeline", "when", "deliver", "72", "hour", "day", "live", "launch", "ready"], text: "Starter live in 48–72 hours, Business ~5 days, Master 7–10 days — once we have your photos, text and logo. You approve the design before anything goes live." },
-			{ keys: ["m-pesa", "mpesa", "paybill", "till", "stk", "daraja"], text: "Native M-Pesa Paybill + Till, plus cards and PayPal. Till = walk-in sales, Paybill = tracked/online sales — our guide + calculator pick the right one.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill guide →"] },
-			{ keys: ["seo", "google", "rank", "found", "search", "traffic"], text: "Every site ships with SEO setup + Google Business Profile. Master adds advanced buyer-keyword SEO. Realistic local movement: 2–4 months — our free 30-day plan shows the DIY steps.", link: ["/blog/seo-small-business-kenya", "30-day SEO plan →"] },
-			{ keys: ["own", "owner", "ownership", "domain", "files", "contract", "terms"], text: "You own everything — domain, content, files, M-Pesa credentials, full license. If we part ways early you only pay for work done. Details in Terms." },
-			{ keys: ["revision", "change", "edit", "approve"], text: "You approve the design before launch — we revise until you're happy. No surprises, in writing." },
-			{ keys: ["content", "copy", "write", "photo", "text", "need from me"], text: "We need 3 things from you: photos, text about your business, and your logo. No logo? We design one from 14,999. Copy polishing is included in every tier." },
-			{ keys: ["installment", "deposit", "how to pay"], text: "50% to start, 50% on launch — pay via M-Pesa, card or PayPal. After that only Care monthly (7,599–11,999), cancel anytime." },
-			{ keys: ["guide", "blog", "learn", "tutorial", "calculator"], text: "7 free guides: website cost, care DIY, e-commerce checklist, 30-day SEO, designer scorecard, Till vs Paybill, WhatsApp setup — plus the M-Pesa fee calculator.", link: ["/guides", "All guides →"] },
-			{ keys: ["human", "person", "call", "talk", "contact", "phone", "number", "email"], text: "Talk to a human in minutes, Mon–Sat: WhatsApp +254 741 992 308, or tap below and your question arrives pre-typed." },
-			{ keys: ["hello", "hi", "hey", "habari", "niaje", "morning", "sasa"], text: "Habari! Ask me about prices, timelines, M-Pesa, care or design — or say 'find my package' and I'll guide you." },
-			{ keys: ["who", "about", "founder", "nairobi", "kenya", "orbit"], text: "Orbit Web Designs & Marketing — built hungry in Nairobi. 50+ sites shipped, 25+ M-Pesa stores, reply in minutes Mon–Sat.", link: ["/about", "Meet Orbit →"] },
-			{ keys: ["review", "trust", "proof", "client", "testimonial", "portfolio"], text: "5.0 across verified reviews — law firm Page 5→1 in 3 months, e-commerce doing 100s of M-Pesa/mo, advocacy site still <2s after a year.", link: ["/reviews", "See reviews →"] },
-			{ keys: ["discount", "offer", "promo", "10%", "off", "deal"], text: "10% off new orders ends 30 September — new clients, one per business. Mention it on WhatsApp when you chat." },
+		// One-tap actions: each does the whole job in a single step.
+		const ACTIONS: Array<{ label: string; ask: string; reply: string; link?: [string, string]; wa: string }> = [
+			{ label: "🛒 I want an online store", ask: "I want an online store", reply: "Master KES 49,999 is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 7–10 days. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 49,999). I sell..." },
+			{ label: "📅 I want bookings", ask: "I want to take bookings", reply: "Business KES 39,999: up to 7 pages, full SEO, booking integration, copy everywhere. Live ~5 days.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 39,999). My business is..." },
+			{ label: "💬 Just get found", ask: "I just want to get found online", reply: "Starter KES 29,999: up to 3 pages, WhatsApp chat, basic SEO, live in 48–72 hours.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (29,999). My business is..." },
 		];
-		const fallback = "I don't have that one yet — a human will know. Tap below and we'll reply in minutes.";
-		const chips = ["Find my package", "How much for a store?", "Till or Paybill?", "Monthly costs?"];
 
-		const stop = new Set(["a","an","the","is","are","do","does","i","my","me","for","to","of","in","on","and","or","it","this","that","with","what","how","much","can","you","your","we","our","get","want","need","have","has","about","please","kindly","hi"]);
+		const KB: Array<{ keys: string[]; text: string; link?: [string, string] }> = [
+			{ keys: ["starter", "29,999", "29999", "landing", "cheap", "basic"], text: "Starter is KES 29,999 — up to 3 pages, WhatsApp chat, basic SEO, live 48–72h. + Care 7,599/mo.", link: ["/packages", "See Starter →"] },
+			{ keys: ["business", "39,999", "39999", "booking"], text: "Business is KES 39,999 — up to 7 pages, full SEO, bookings, live ~5 days. Most popular. + Care 9,599/mo.", link: ["/packages", "See Business →"] },
+			{ keys: ["master", "49,999", "49999", "store", "shop", "sell"], text: "Master is KES 49,999 — store/bookings, native M-Pesa + cards, automations, live 7–10 days.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] },
+			{ keys: ["saas", "app", "platform", "software"], text: "Custom SaaS from KES 49,999 — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
+			{ keys: ["logo", "brand", "design", "14,999", "graphic", "flyer"], text: "Design from KES 14,999 — logos, kits to 24,999, files included.", link: ["/packages", "See design →"] },
+			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], text: "AI Agent KES 49,999 (WhatsApp/site/email + tuning). WhatsApp Responder setup 29,999.", link: ["/automation", "See agents →"] },
+			{ keys: ["workflow", "automate", "zapier", "sheets", "invoice"], text: "Workflows KES 39,999 each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
+			{ keys: ["dashboard", "35,999", "19,999", "report", "track"], text: "Dashboards: Add-on 19,999 or Standalone 35,999 — M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
+			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], text: "Care: Starter 7,599 · Business 9,599 · Master 11,999/mo. Cancel anytime. Custom: SaaS 14,999, Dash 5,999, Agent 7,999, Design 9,999.", link: ["/care", "See Care →"] },
+			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter 29,999 · Business 39,999 · Master 49,999. SaaS 49,999+. Design 14,999+. Agent 49,999. 10% off ends 30 Sept.", link: ["/packages", "Full pricelist →"] },
+			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter 48–72h, Business ~5 days, Master 7–10 days — once we have your photos, text + logo." },
+			{ keys: ["mpesa", "m-pesa", "paybill", "till", "stk", "daraja", "pay"], text: "Till = walk-in, Paybill = tracked/online. We wire both natively.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill →"] },
+			{ keys: ["seo", "google", "rank", "found", "search"], text: "Every site ships SEO + Google Business Profile. Master adds buyer-keyword SEO.", link: ["/blog/seo-small-business-kenya", "SEO plan →"] },
+			{ keys: ["own", "domain", "files", "terms"], text: "You own everything — domain, files, credentials. Pay only for work done if we part ways." },
+			{ keys: ["guide", "learn", "calculator", "tutorial"], text: "7 free guides + M-Pesa calculator — steal them even if you never hire us.", link: ["/guides", "All guides →"] },
+			{ keys: ["human", "person", "talk", "contact", "phone", "email", "call"], text: "Human in minutes, Mon–Sat: +254 741 992 308. Tap below — your question arrives pre-typed." },
+			{ keys: ["hello", "hi", "hey", "habari", "niaje", "sasa"], text: "Habari! Tap an action below or ask me anything." },
+			{ keys: ["discount", "offer", "promo", "deal", "off"], text: "10% off new orders ends 30 Sept — mention it on WhatsApp." },
+		];
+		const fallback = "A human knows that one best — tap below, we reply in minutes.";
+
+		const stop = new Set(["a","an","the","is","are","do","does","i","my","me","for","to","of","in","on","and","or","it","this","that","with","what","how","much","can","you","your","we","our","get","want","need","have","has","about","please","hi"]);
 		function score(q: string, keys: string[]): number {
 			const words = q.toLowerCase().split(/[^a-z0-9]+/).filter(w => w && !stop.has(w));
 			let s = 0;
 			for (const k of keys) {
 				const kl = k.toLowerCase();
-				if (q.toLowerCase().includes(kl)) s += kl.includes(" ") ? 3 : 2;
-				else if (words.some(w => kl.includes(w) && w.length > 3 || w.includes(kl) && kl.length > 3)) s += 1;
+				if (q.toLowerCase().includes(kl)) s += 2;
+				else if (words.some(w => w.length > 3 && (kl.includes(w) || w.includes(kl)))) s += 1;
 			}
 			return s;
 		}
 
-		// ---------- Multi-turn flows ----------
-		type Flow = { step: number; kind: "finder" | "quote" | "mpesa" };
-		let flow: Flow | null = null;
-
 		const panel = document.getElementById("oa-panel");
 		const toggle = document.getElementById("oa-toggle");
 		const log = document.getElementById("oa-log");
-		const chipsBox = document.getElementById("oa-chips");
+		const actionsBox = document.getElementById("oa-actions");
 		const input = document.getElementById("oa-input") as HTMLInputElement | null;
 		const send = document.getElementById("oa-send");
 		if (!panel || !toggle || !log || !input || !send || toggle.dataset.bound) return;
@@ -120,137 +108,34 @@ import { whatsappLink } from "../config";
 			log!.appendChild(a);
 			log!.scrollTop = log!.scrollHeight;
 		}
-		function choiceButtons(options: string[], cb: (choice: string) => void) {
-			const wrap = document.createElement("div");
-			wrap.className = "flex flex-wrap gap-2 justify-self-start";
-			for (const o of options) {
+
+		function renderActions() {
+			actionsBox!.innerHTML = "";
+			for (const a of ACTIONS) {
 				const b = document.createElement("button");
 				b.type = "button";
-				b.className = "rounded-full border border-electric/40 bg-electric/10 px-3 py-1.5 text-xs font-semibold text-electric transition hover:bg-electric/20";
-				b.textContent = o;
-				b.addEventListener("click", () => { wrap.remove(); bubble(o, true); cb(o); });
-				wrap.appendChild(b);
-			}
-			log!.appendChild(wrap);
-			log!.scrollTop = log!.scrollHeight;
-		}
-
-		// --- Flow: package finder ---
-		function startFinder() {
-			flow = { step: 0, kind: "finder" };
-			const nameBit = mem.name ? ` ${mem.name}` : "";
-			setTimeout(() => {
-				bubble(`Sawa${nameBit}! 3 quick questions and I'll name your package. First — what does your business do? (e.g. salon, shop, law firm)`, false);
-				choiceButtons(["Salon / services", "Shop / store", "Restaurant / food", "Professional firm"], (c) => {
-					mem.biz = c; saveMem(); finderStep1();
-				});
-			}, 350);
-		}
-		function finderStep1() {
-			flow = { step: 1, kind: "finder" };
-			setTimeout(() => {
-				bubble("Got it. What do you need the site to DO?", false);
-				choiceButtons(["Just get found + WhatsApp", "Take bookings", "Sell online (M-Pesa)"], (c) => {
-					mem.need = c; saveMem(); finderResult();
-				});
-			}, 350);
-		}
-		function finderResult() {
-			flow = null;
-			const need = (mem.need || "").toLowerCase();
-			let rec: string, link: [string, string], wa: string;
-			if (need.includes("sell")) {
-				rec = `For ${mem.biz || "your business"} selling online → **Master KES 49,999**: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 7–10 days.`;
-				link = ["/packages", "See Master →"]; wa = `Hi Orbit! Your agent recommended Master 49,999 for my ${mem.biz || "business"} (online store).`;
-			} else if (need.includes("book")) {
-				rec = `For ${mem.biz || "your business"} taking bookings → **Business KES 39,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live ~5 days.`;
-				link = ["/packages", "See Business →"]; wa = `Hi Orbit! Your agent recommended Business 39,999 for my ${mem.biz || "business"} (bookings).`;
-			} else {
-				rec = `For ${mem.biz || "your business"} getting found → **Starter KES 29,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 48–72 hours.`;
-				link = ["/packages", "See Starter →"]; wa = `Hi Orbit! Your agent recommended Starter 29,999 for my ${mem.biz || "business"}.`;
-			}
-			setTimeout(() => {
-				bubble(rec, false);
-				richLink(link[0], link[1]);
-				waButton(wa, "Claim it on WhatsApp");
-			}, 350);
-		}
-
-		// --- Flow: quote builder ---
-		function startQuote() {
-			flow = { step: 0, kind: "quote" };
-			setTimeout(() => {
-				if (!mem.name) { bubble("Cool, let's build your quote. What's your name?", false); }
-				else { bubble(`${mem.name}, what does your business sell or do?`, false); flow = { step: 1, kind: "quote" }; }
-			}, 350);
-		}
-		function quoteStep(q: string) {
-			if (!mem.name) { mem.name = q.trim().slice(0, 40); saveMem(); flow = { step: 1, kind: "quote" }; setTimeout(() => bubble(`Nice to meet you, ${mem.name}! What does your business sell or do?`, false), 350); return; }
-			if (flow!.step === 1) {
-				mem.biz = q.trim().slice(0, 80); saveMem(); flow = { step: 2, kind: "quote" };
-				setTimeout(() => { bubble("And what's the #1 thing the site must do — get found, take bookings, or sell online?", false); choiceButtons(["Get found", "Take bookings", "Sell online"], (c) => { mem.need = c; saveMem(); quoteResult(); }); }, 350);
-				return;
-			}
-		}
-		function quoteResult() {
-			flow = null;
-			const msg = `Hi Orbit! I'm ${mem.name || "interested"} — my business: ${mem.biz || "not specified"}. Goal: ${mem.need || "website"}. Your agent helped me — what's my exact package + timeline?`;
-			setTimeout(() => {
-				bubble(`Done, ${mem.name || "friend"}! I've packed everything into one WhatsApp message — tap below and we reply with your exact package + timeline in minutes.`, false);
-				waButton(msg, "Send my quote request");
-			}, 350);
-		}
-
-		// --- Flow: M-Pesa chooser ---
-		function startMpesa() {
-			flow = { step: 0, kind: "mpesa" };
-			setTimeout(() => {
-				bubble("Till or Paybill in 10 seconds: do customers pay you FACE-TO-FACE (shop, salon, counter)?", false);
-				choiceButtons(["Yes — face to face", "No — online / invoice"], (c) => {
-					const face = c.startsWith("Yes");
-					flow = null;
+				b.className = "w-full rounded-xl border border-electric/30 bg-electric/5 px-4 py-2.5 text-left text-xs font-semibold text-white transition hover:bg-electric/15";
+				b.textContent = a.label;
+				b.addEventListener("click", () => {
+					bubble(a.ask, true);
 					setTimeout(() => {
-						bubble(face ? "→ **Till**. No account number to type, money lands instantly. Perfect for counters." : "→ **Paybill**. The account field auto-matches payments to orders — gold for online stores.", false);
-						richLink("/blog/mpesa-till-vs-paybill", "Full Till vs Paybill guide →");
-						richLink("/mpesa-fee-calculator", "Check the fees →");
+						bubble(a.reply, false);
+						if (a.link) richLink(a.link[0], a.link[1]);
+						waButton(a.wa, "Start this on WhatsApp");
 					}, 350);
 				});
-			}, 350);
+				actionsBox!.appendChild(b);
+			}
 		}
 
 		function greet() {
 			if (log!.childElementCount > 0) return;
-			const nameBit = mem.name ? ` Welcome back, ${mem.name}!` : "";
-			bubble(`Habari! I'm the Orbit agent — I find packages, build quotes and answer anything.${nameBit}`, false);
-			chipsBox!.innerHTML = "";
-			for (const c of ["Find my package", "Build my quote", "Till or Paybill?", "How much for a store?"]) {
-				const b = document.createElement("button");
-				b.type = "button";
-				b.className = "rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-300 transition hover:border-electric/60 hover:text-white";
-				b.textContent = c;
-				b.addEventListener("click", () => answer(c));
-				chipsBox!.appendChild(b);
-			}
+			bubble("Habari! Pick what you want below — or type any question.", false);
+			renderActions();
 		}
 
 		function answer(q: string) {
 			bubble(q, true);
-			const ql = q.toLowerCase();
-
-			// In-flow answers go to the flow, not the KB
-			if (flow?.kind === "quote") { quoteStep(q); return; }
-
-			// Flow triggers
-			if (/find.*package|recommend|suggest|which.*(package|plan|fit)|help me choose|choose for me/i.test(q)) { startFinder(); return; }
-			if (/quote|estimate/i.test(q)) { startQuote(); return; }
-			if (/till.*paybill|paybill.*till|which.*(till|paybill|m-pesa|mpesa)/i.test(q)) { startMpesa(); return; }
-			if (/my name is|i'm |i am |call me /i.test(q)) {
-				const m = q.match(/(?:my name is|call me|i'm|i am)\s+([a-zA-Z]+)/i);
-				if (m) { mem.name = m[1].slice(0, 40); saveMem(); setTimeout(() => bubble(`Noted, ${mem.name}! What can I do for you — find your package, build a quote, or answer a question?`, false), 350); return; }
-			}
-			if (/^(cancel|stop|exit|quit)/i.test(q)) { flow = null; setTimeout(() => bubble("Cancelled — fresh start. What do you need?", false), 350); return; }
-
-			// Knowledge base with memory-aware answers
 			let best: (typeof KB)[number] | null = null, bestScore = 0;
 			for (const entry of KB) {
 				const s = score(q, entry.keys);
@@ -258,9 +143,7 @@ import { whatsappLink } from "../config";
 			}
 			setTimeout(() => {
 				if (best && bestScore > 0) {
-					let text = best.text;
-					if (mem.name && /^(hi|hello|hey|habari)/i.test(ql)) text = `${mem.name}, ` + text.charAt(0).toLowerCase() + text.slice(1);
-					bubble(text, false);
+					bubble(best.text, false);
 					if (best.link) richLink(best.link[0], best.link[1]);
 				} else {
 					bubble(fallback, false);
