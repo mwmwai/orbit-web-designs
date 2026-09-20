@@ -23,7 +23,7 @@ const allPlans = [
 			"Google Business Profile setup",
 			"Live in 48–72 hours",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -43,7 +43,7 @@ const allPlans = [
 			"Loads in under 2 seconds, guaranteed",
 			"Live in about 5 days",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: true,
 	},
 	{
@@ -64,7 +64,7 @@ const allPlans = [
 			"Free domain + hosting + SSL setup",
 			"Live in 7–10 days",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -84,7 +84,7 @@ const allPlans = [
 			"Free domain + SSL setup",
 			"3 months of support",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -103,7 +103,7 @@ const allPlans = [
 			"Fast turnaround",
 			"Revisions included",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -119,7 +119,7 @@ const allPlans = [
 			"1 month tuning included",
 			"Your API accounts, you own it",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -135,7 +135,7 @@ const allPlans = [
 			"You own it, documented",
 			"Bundle deals for 3+",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 	{
@@ -151,7 +151,7 @@ const allPlans = [
 			"Works on any phone",
 			"3 data sources wired in",
 		],
-		cta: "Claim 10% off",
+		cta: "Get started",
 		featured: false,
 	},
 ];
@@ -170,10 +170,6 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 			<p class="mt-4 max-w-xl text-slate-400">
 				{plans.length === 3 ? "Three packages" : "Five packages"} built for growing businesses — flexible payment, delivered fast.
 			</p>
-		</div>
-
-		<div id="promo-banner" class="reveal mb-10 flex flex-col items-center justify-between gap-4 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-5 md:flex-row">
-			<p class="text-sm font-semibold text-white sm:text-base">10% off new orders — <span class="text-gradient">ends 30 September.</span> <span class="text-slate-400">New clients only, one per business. Mention it on WhatsApp.</span></p>
 		</div>
 
 		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -234,16 +230,6 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 		</p>
 	</div>
 
-	<script>
-		(() => {
-			const END = new Date("2026-09-30T23:59:59+03:00").getTime();
-			if (Date.now() <= END) return;
-			document.getElementById("promo-banner")?.remove();
-			document.querySelectorAll("#pricing .promo-cta").forEach((el) => {
-				el.textContent = "Start now";
-			});
-		})();
-	</script>
 </section>
 
 <section id="payments" class="border-t border-white/5 pb-8 pt-4">

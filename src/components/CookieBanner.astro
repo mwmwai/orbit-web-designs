@@ -22,7 +22,6 @@
 			localStorage.setItem(k, "accepted");
 			(window as any).orbitAnalyticsOK = true;
 			banner.classList.add("hidden");
-			location.reload();
 		});
 		document.getElementById("cookie-decline")?.addEventListener("click", () => {
 			localStorage.setItem(k, "declined");

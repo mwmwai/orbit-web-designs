@@ -53,7 +53,7 @@ export default function Navbar() {
 						rel="noopener noreferrer"
 						className="btn-gradient rounded-full px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-electric/25 hover:shadow-electric/40 md:px-6 md:py-2.5 md:text-sm"
 					>
-						10% off
+						Get started
 					</a>
 					<button
 						type="button"
@@ -91,7 +91,7 @@ export default function Navbar() {
 						rel="noopener noreferrer"
 						className="btn-gradient mt-4 block rounded-full px-6 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-electric/25"
 					>
-						Get 10% off
+						Get started
 					</a>
 				</nav>
 			)}
