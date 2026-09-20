@@ -90,7 +90,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
       positions[i * 3 + 1] = r * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.sin(a) * Math.cos(phi);
       sizes[i] = 0.8 + Math.random() * 2.0;
-      alphas[i] = 0.2 + Math.random() * 0.5;
+      alphas[i] = 0.35 + Math.random() * 0.6;
       speeds[i] = 0.02 + Math.random() * 0.08;
       radii[i] = r;
       angles[i] = a;
@@ -144,7 +144,7 @@ function OrbitParticles({ mobile }: { mobile: boolean }) {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
             float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-            gl_FragColor = vec4(0.0, 210.0/255.0, 1.0, alpha * vAlpha * 2.6);
+            gl_FragColor = vec4(0.0, 210.0/255.0, 1.0, alpha * vAlpha * 3.8);
           }
         `,
       }),
@@ -243,7 +243,7 @@ function StarField({ mobile }: { mobile: boolean }) {
         color: 0x9fd8ff,
         size: 0.09,
         transparent: true,
-        opacity: mobile ? 0.5 : 0.75,
+        opacity: mobile ? 0.7 : 0.95,
         sizeAttenuation: true,
         depthWrite: false,
       }),
