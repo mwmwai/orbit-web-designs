@@ -212,6 +212,12 @@
     const loadingScreen = document.getElementById('loading-screen');
     if (!loadingScreen) return;
 
+    // Skip loading screen on view transitions (not initial page load)
+    if (sessionStorage.getItem('orbit-loading-seen') === 'true') {
+      loadingScreen.remove();
+      return;
+    }
+
     const elements = {
       atmosphereRing: loadingScreen.querySelector('.atmosphere-ring'),
       orbitRing: loadingScreen.querySelector('.orbit-ring'),
@@ -233,6 +239,9 @@
     const hideLoading = () => {
       if (hideScheduled) return;
       hideScheduled = true;
+      
+      // Mark as seen for future navigations
+      sessionStorage.setItem('orbit-loading-seen', 'true');
       
       // Add loaded classes for idle animations
       elements.orbitRing?.classList.add('loaded');
