@@ -654,5 +654,14 @@ html {
 	.scroll-indicator { display: none; }
 	body::before,
 	body::after { animation: none !important; height: 0 !important; }
+	/* Instant page switches when motion is reduced: no cinema, max speed */
+	::view-transition-old(root),
+	::view-transition-new(root),
+	::view-transition-old(root)::after,
+	::view-transition-new(root)::before {
+		animation: none !important;
+	}
+	::view-transition-old(root) { opacity: 0 !important; }
+	::view-transition-new(root) { opacity: 1 !important; }
 }
 
