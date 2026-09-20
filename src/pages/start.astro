@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import Footer from "../components/Footer.astro";
+import { whatsappLink } from "../config";
+---
+
+<Layout
+	title="Get a Website That Gets You Paid — From 29,999 | Orbit"
+	description="Fast, M-Pesa-ready websites from KES 29,999. Live in 48–72 hours. Reply in minutes on WhatsApp. Your brand, in motion."
+>
+	<Navbar client:load />
+	<main id="main">
+		<!-- HERO — single CTA -->
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ One goal — your site, live & paid</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Get a website that <span class="text-gradient">gets you paid.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">
+					From KES 29,999. M-Pesa native. Live in 48–72 hours. You approve the design before launch — or pay nothing.
+				</p>
+				<div class="mt-8 flex flex-col items-start gap-4 md:flex-row md:items-center">
+					<a href={whatsappLink("Hi Orbit! I want a website that gets me paid. What package fits my business?")} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple w-full md:w-auto text-center">
+						💬 Get my fit on WhatsApp — reply in minutes
+					</a>
+				</div>
+				<div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-slate-400">
+					<span class="flex items-center gap-2"><span class="text-electric">★★★★★</span> 5.0 Google · 50+ sites</span>
+					<span class="flex items-center gap-2"><span class="text-electric">✓</span> 48–72h Starter</span>
+					<span class="flex items-center gap-2"><span class="text-electric">✓</span> M-Pesa native</span>
+					<span class="flex items-center gap-2"><span class="text-electric">✓</span> You approve before launch</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- PROOF — above fold on desktop -->
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Outcomes · real clients</p>
+				<div class="mt-8 grid gap-6 md:grid-cols-3">
+					<article class="glow-border rounded-2xl p-6">
+						<p class="text-xs font-mono uppercase tracking-widest text-slate-400">Law firm · Nairobi</p>
+						<p class="mt-3 text-3xl font-extrabold text-white">Page 5 → 1</p>
+						<p class="mt-2 text-sm text-slate-400">Main service term in 3 months. Inquiries from searches they never ranked for before.</p>
+					</article>
+					<article class="glow-border rounded-2xl p-6 border-electric/30">
+						<p class="text-xs font-mono uppercase tracking-widest text-slate-400">E-commerce · M-Pesa store</p>
+						<p class="mt-3 text-3xl font-extrabold text-white">100s / month</p>
+						<p class="mt-2 text-sm text-slate-400">M-Pesa checkout never called about gateway. Stock auto-subtracts, orders ping WhatsApp.</p>
+					</article>
+					<article class="glow-border rounded-2xl p-6">
+						<p class="text-xs font-mono uppercase tracking-widest text-slate-400">Advocacy · 12 months later</p>
+						<p class="mt-3 text-3xl font-extrabold text-white"><2s load</p>
+						<p class="mt-2 text-sm text-slate-400">Still under 2s after a year. Speed kept via monthly Care tuning.</p>
+					</article>
+				</div>
+				<p class="mt-4 text-center text-xs text-slate-500"><a href="/cases/law-firm-nairobi" class="text-electric hover:underline">Law case →</a> · <a href="/cases/mpesa-store" class="text-electric hover:underline">M-Pesa case →</a> · <a href="/cases/advocacy-site" class="text-electric hover:underline">Speed case →</a></p>
+			</div>
+		</section>
+
+		<!-- 3 PACKAGES ONLY — no choice paralysis -->
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto max-w-7xl px-5">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pick one — we build it</p>
+				<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Three packages. Honest prices. No upsells.</h2>
+				<div class="mt-10 grid gap-6 md:grid-cols-3">
+					<article class="glow-border rounded-2xl p-8">
+						<h3 class="text-lg font-semibold text-white">Starter — 29,999</h3>
+						<p class="mt-2 text-sm text-slate-400">1–3 pages. Mobile-first. WhatsApp chat. Basic SEO. Copy polished. Live 48–72h.</p>
+						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">✓</span> Domain + SSL + hosting setup</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> WhatsApp chat button</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Google Business Profile</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> You own everything</li>
+						</ul>
+						<a href={whatsappLink("Hi Orbit! I want the Starter 29,999 package. My business is...")} target="_blank" rel="noopener noreferrer" class="mt-8 block rounded-full btn-gradient py-3 text-center font-semibold text-white shadow-lg shadow-electric/20">Start Starter — 29,999</a>
+					</article>
+					<article class="glow-border rounded-2xl p-8 border-electric/30 bg-gradient-to-b from-electric/10 to-transparent">
+						<span class="mb-3 inline-flex rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">Most popular</span>
+						<h3 class="text-lg font-semibold text-white">Business — 39,999</h3>
+						<p class="mt-2 text-sm text-slate-400">Up to 7 pages. Full SEO. Booking integration. Copy everywhere. Live ~5 days.</p>
+						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">✓</span> Everything in Starter</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Booking integration</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Copy for every page</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Priority support</li>
+						</ul>
+						<a href={whatsappLink("Hi Orbit! I want the Business 39,999 package. My business is...")} target="_blank" rel="noopener noreferrer" class="mt-8 block rounded-full btn-gradient py-3 text-center font-semibold text-white shadow-lg shadow-electric/20">Start Business — 39,999</a>
+					</article>
+					<article class="glow-border rounded-2xl p-8">
+						<h3 class="text-lg font-semibold text-white">Master — 49,999</h3>
+						<p class="mt-2 text-sm text-slate-400">Store or booking system. Native Till/Paybill + cards. Advanced SEO. Automations. Live 7–10 days.</p>
+						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">✓</span> Everything in Business</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Native Till/Paybill checkout</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Abandoned cart + review automations</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Training + handover docs</li>
+						</ul>
+						<a href={whatsappLink("Hi Orbit! I want the Master 49,999 package. My business is...")} target="_blank" rel="noopener noreferrer" class="mt-8 block rounded-full border border-edge bg-panel py-3 text-center font-semibold text-slate-200 hover:border-electric/60 hover:text-white">Start Master — 49,999</a>
+					</article>
+				</div>
+				<p class="mt-6 text-center text-sm text-slate-500">No upsells · You approve design before launch · <a href="/terms-of-service" class="text-electric hover:underline">Full license in Terms</a></p>
+			</div>
+		</section>
+
+		<!-- GUARANTEE + FAQ -->
+		<section class="border-t border-white/5 py-20">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">You approve the design before a shilling leaves your pocket.</h2>
+				<p class="mt-4 text-slate-400">If we part ways early, you only pay for work already done. You own domain, content, files, M-Pesa credentials — full license.</p>
+				<div class="mt-10 grid gap-4">
+					<details class="glow-border rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">How fast is "48–72 hours"?</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">Once we have your photos, text, and logo — we start. You see a live preview, approve it, we launch. No month-long sagas.</p>
+					</details>
+					<details class="glow-border rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">What if I don't like the design?</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">We revise until you're happy. You approve before launch — in writing. If we part ways early, you only pay for work already done.</p>
+					</details>
+					<details class="glow-border rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">What's the monthly cost after launch?</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">Orbit Care keeps it alive: 7,599/mo Starter, 9,599 Business, 11,999 Master — hosting, security, updates, backups, WhatsApp support. Cancel anytime, site stays yours.</p>
+					</details>
+				</div>
+			</div>
+		</section>
+
+		<!-- STICKY MOBILE BAR handled via CSS -->
+		<div class="fixed bottom-0 left-0 right-0 md:hidden bg-ink/95 backdrop-blur-md border-t border-white/10 px-4 py-3 z-[100]">
+			<a href={whatsappLink("Hi Orbit! I want a website that gets me paid. What package fits my business?")} target="_blank" rel="noopener noreferrer" class="block rounded-full btn-gradient px-6 py-3 text-center font-semibold text-white shadow-xl shadow-electric/30">
+				💬 Chat on WhatsApp — reply in minutes
+			</a>
+		</div>
+	</main>
+	<Footer />
+</Layout>
