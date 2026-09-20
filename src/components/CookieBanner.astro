@@ -1,12 +1,16 @@
 ---
 ---
 
-<div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-[100] hidden border-t border-white/10 bg-ink/95 backdrop-blur-md">
+<div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-[100] hidden border-t border-electric/20 bg-ink/95 backdrop-blur-md" style="box-shadow: 0 -8px 40px rgb(0 200 255 / 0.08);">
+	<div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric/60 to-transparent"></div>
 	<div class="mx-auto max-w-7xl px-5 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-		<p class="text-sm text-slate-400">We use cookies for analytics to improve your experience. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy</a>.</p>
+		<div class="flex items-start gap-3">
+			<span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-electric/30 bg-electric/10 text-sm">◈</span>
+			<p class="text-sm text-slate-300">We use cookies for analytics to improve your experience. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy</a>.</p>
+		</div>
 		<div class="flex gap-3 shrink-0">
-			<button id="cookie-accept" class="rounded-full btn-gradient px-6 py-2 text-sm font-semibold text-white">Accept</button>
-			<button id="cookie-decline" class="rounded-full border border-edge bg-panel px-6 py-2 text-sm font-semibold text-slate-200">Decline</button>
+			<button id="cookie-accept" class="rounded-full btn-gradient px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-electric/25 transition hover:-translate-y-0.5">Accept</button>
+			<button id="cookie-decline" class="rounded-full border border-edge bg-panel px-6 py-2 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Decline</button>
 		</div>
 	</div>
 </div>
@@ -17,10 +21,8 @@
 		if (!banner || banner.dataset.bound) return;
 		banner.dataset.bound = "1";
 		const consent = localStorage.getItem(k);
-		// Always show on every page load (3s after settle), per site owner.
-		setTimeout(() => {
-			banner.classList.remove("hidden");
-		}, 3000);
+		// Always show immediately on every page load, per site owner.
+		banner.classList.remove("hidden");
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		document.getElementById("cookie-accept")?.addEventListener("click", () => {
 			localStorage.setItem(k, "accepted");
