@@ -16,7 +16,7 @@
 		const banner = document.getElementById("cookie-banner");
 		if (!banner) return;
 		const consent = localStorage.getItem(k);
-		if (!consent) banner.classList.remove("hidden");
+		banner.classList.remove("hidden");
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		document.getElementById("cookie-accept")?.addEventListener("click", () => {
 			localStorage.setItem(k, "accepted");
