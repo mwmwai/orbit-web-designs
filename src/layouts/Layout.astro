@@ -75,10 +75,14 @@ const jsonLd = {
 					function gtag() { dataLayer.push(arguments); }
 					window.gtag = gtag;
 					gtag('js', new Date());
-					gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
+gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
 				}
 			}
 		</script>
+		{import.meta.env.PUBLIC_TURNSTILE_SITE_KEY && (
+			<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+		)}
+		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
 		<Hero3D client:idle transition:persist />

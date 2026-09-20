@@ -1,16 +1,38 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect } from "react";
 import { whatsappLink } from "../../config";
-import { saveLead } from "../../lib/db";
+
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function ContactForm() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [details, setDetails] = useState("");
+	const [turnstileToken, setTurnstileToken] = useState("");
+	const [submitting, setSubmitting] = useState(false);
+	const [submitError, setSubmitError] = useState("");
+	const widgetIdRef = useState<number | null>(null);
 
-	function handleSubmit(e: FormEvent) {
+	useEffect(() => {
+		if (TURNSTILE_SITE_KEY && (window as any).turnstile) {
+			const id = (window as any).turnstile.render('#cf-turnstile', {
+				sitekey: TURNSTILE_SITE_KEY,
+				callback: (token: string) => setTurnstileToken(token),
+				'expired-callback': () => setTurnstileToken(''),
+			});
+			widgetIdRef.current = id;
+		}
+	}, [TURNSTILE_SITE_KEY]);
+
+	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
-		saveLead({ name, email: email || undefined, phone: phone || undefined, details: details || undefined, source: "contact-form" });
+		if (!turnstileToken) {
+			setSubmitError("Please complete the security check");
+			return;
+		}
+		setSubmitting(true);
+		setSubmitError("");
+
 		const message = [
 			`Hello Orbit Web Designs & Marketing!`,
 			`My name is ${name}.`,
@@ -21,7 +43,30 @@ export default function ContactForm() {
 		]
 			.filter(Boolean)
 			.join("\n");
-		window.open(whatsappLink(message), "_blank", "noopener");
+
+		try {
+			const res = await fetch('/api/supabase/submit', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					table: 'leads',
+					data: { name, email: email || undefined, phone: phone || undefined, details: details || undefined, source: "contact-form", turnstile_token: turnstileToken },
+				}),
+			});
+
+			const data = await res.json();
+			if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+			window.open(whatsappLink(message), "_blank", "noopener");
+			setName(""); setEmail(""); setPhone(""); setDetails(""); setTurnstileToken("");
+			if (widgetIdRef.current !== null && (window as any).turnstile) {
+				(window as any).turnstile.reset(widgetIdRef.current);
+			}
+		} catch (err: any) {
+			setSubmitError(err.message || "Something went wrong. Try WhatsApp instead.");
+		} finally {
+			setSubmitting(false);
+		}
 	}
 
 	const inputCls =
@@ -74,13 +119,17 @@ export default function ContactForm() {
 					className={`${inputCls} resize-y`}
 				/>
 			</label>
+			<label className="sm:col-span-2">
+				<div id="cf-turnstile" />
+				{submitError && <p className="mt-2 text-sm text-red-400">{submitError}</p>}
+			</label>
 			<button
 				type="submit"
-				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2"
+				disabled={submitting || !turnstileToken}
+				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2 disabled:opacity-50 disabled:cursor-not-allowed"
 			>
-				Send via WhatsApp
+				{submitting ? "Sending…" : "Send via WhatsApp"}
 			</button>
 		</form>
 	);
 }
-

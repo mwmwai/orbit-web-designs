@@ -32,6 +32,7 @@ const { slug } = Astro.props;
 			aria-label="Your comment"
 			class="resize-y rounded-xl border border-edge bg-charcoal px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric"
 		></textarea>
+		<div id="cf-turnstile-comments" />
 		<div>
 			<button type="submit" class="rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Post comment</button>
 		</div>
@@ -52,14 +53,25 @@ const { slug } = Astro.props;
 
 		const URL = (import.meta as unknown as { env: Record<string, string | undefined> }).env.PUBLIC_SUPABASE_URL;
 		const KEY = (import.meta as unknown as { env: Record<string, string | undefined> }).env.PUBLIC_SUPABASE_ANON_KEY;
+		const TURNSTILE_SITE_KEY = (import.meta as unknown as { env: Record<string, string | undefined> }).env.PUBLIC_TURNSTILE_SITE_KEY;
+		let turnstileToken = "";
+		let widgetId: number | null = null;
 
-function esc(s: string) {
+		function esc(s: string) {
 			return s
 				.replace(/&/g, "&")
 				.replace(/</g, "<")
 				.replace(/>/g, ">")
 				.replace(/"/g, "\"")
 				.replace(/'/g, "'");
+		}
+
+		if (TURNSTILE_SITE_KEY && (window as any).turnstile) {
+			widgetId = (window as any).turnstile.render('#cf-turnstile-comments', {
+				sitekey: TURNSTILE_SITE_KEY,
+				callback: (token: string) => { turnstileToken = token; },
+				'expired-callback': () => { turnstileToken = ""; },
+			});
 		}
 
 		async function load() {
@@ -84,6 +96,11 @@ function esc(s: string) {
 
 		form.addEventListener("submit", async (e) => {
 			e.preventDefault();
+			if (!turnstileToken) {
+				msg.textContent = "Please complete the security check";
+				msg.classList.remove("hidden");
+				return;
+			}
 			const data = new FormData(form);
 			const name = String(data.get("name") || "").trim().slice(0, 60);
 			const text = String(data.get("text") || "").trim().slice(0, 1000);
@@ -98,12 +115,18 @@ function esc(s: string) {
 				const res = await fetch(`${URL}/rest/v1/comments`, {
 					method: "POST",
 					headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
-					body: JSON.stringify({ slug, name, text }),
+					body: JSON.stringify({ slug, name, text, turnstile_token: turnstileToken }),
 				});
 				msg.textContent = res.ok
 					? "Thanks! Your comment appears after a quick review."
 					: "Couldn't post — try WhatsApp instead, we reply in minutes.";
-				if (res.ok) form.reset();
+				if (res.ok) {
+					form.reset();
+					turnstileToken = "";
+					if (widgetId !== null && (window as any).turnstile) {
+						(window as any).turnstile.reset(widgetId);
+					}
+				}
 			} catch {
 				msg.textContent = "Couldn't post — try WhatsApp instead, we reply in minutes.";
 			}
