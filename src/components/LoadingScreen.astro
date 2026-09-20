@@ -1,12 +1,7 @@
 ---
 ---
 
-<!-- Immediate hide via CSS if already seen (runs before JS) -->
-<style is:global>
-  #loading-screen[data-seen="true"] { display: none !important; }
-</style>
-
-<div id="loading-screen" class="fixed inset-0 z-[200] flex items-center justify-center bg-ink overflow-hidden" data-seen="false">
+<div id="loading-screen" class="fixed inset-0 z-[200] items-center justify-center bg-ink overflow-hidden" style="display:none">
   <!-- Ambient glow layers -->
   <div class="absolute inset-0" aria-hidden="true">
     <div class="absolute -top-1/2 left-1/2 w-[600px] h-[600px] -translate-x-1/2 rounded-full bg-electric/10 blur-[200px]" style="animation: ambientFloat 8s ease-in-out infinite;"></div>
@@ -217,12 +212,16 @@
     const loadingScreen = document.getElementById('loading-screen');
     if (!loadingScreen) return;
 
-    // Check immediately - if already seen, hide via data attribute (CSS handles instant hide)
+    // Only ever show on the very first load of this tab. Default is hidden,
+    // so view transitions (home -> services etc.) never flash the loader.
     if (sessionStorage.getItem('orbit-loading-seen') === 'true') {
-      loadingScreen.dataset.seen = 'true';
       loadingScreen.remove();
       return;
     }
+    // First visit: claim the flag immediately so quick navigations can't retrigger,
+    // then reveal the loader and run the cinematic.
+    sessionStorage.setItem('orbit-loading-seen', 'true');
+    loadingScreen.style.display = 'flex';
 
     const elements = {
       atmosphereRing: loadingScreen.querySelector('.atmosphere-ring'),
@@ -245,10 +244,6 @@
     const hideLoading = () => {
       if (hideScheduled) return;
       hideScheduled = true;
-      
-      // Mark as seen for future navigations (CSS uses this for instant hide)
-      sessionStorage.setItem('orbit-loading-seen', 'true');
-      loadingScreen.dataset.seen = 'true';
       
       // Add loaded classes for idle animations
       elements.orbitRing?.classList.add('loaded');
