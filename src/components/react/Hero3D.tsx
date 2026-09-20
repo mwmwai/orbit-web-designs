@@ -63,16 +63,16 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
 
   return (
     <group ref={ref} rotationX={-Math.PI / 3} scale={mobile ? 1 : 1.2}>
-      <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 12, 72)} material={ringMaterial} />
-      <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 12, 72)} material={innerMaterial} rotationZ={0.5} />
-      <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 12, 72)} material={accentMaterial} rotationZ={-0.4} />
-      <mesh geometry={new THREE.TorusGeometry(1.6, 0.01, 12, 72)} material={ringMaterial} rotationZ={0.8} />
+      <mesh geometry={new THREE.TorusGeometry(2.8, 0.02, 8, 48)} material={ringMaterial} />
+      <mesh geometry={new THREE.TorusGeometry(2.2, 0.015, 8, 48)} material={innerMaterial} rotationZ={0.5} />
+      <mesh geometry={new THREE.TorusGeometry(3.4, 0.025, 8, 48)} material={accentMaterial} rotationZ={-0.4} />
+      <mesh geometry={new THREE.TorusGeometry(1.6, 0.01, 8, 48)} material={ringMaterial} rotationZ={0.8} />
     </group>
   );
 }
 
 function OrbitParticles({ mobile }: { mobile: boolean }) {
-  const count = mobile ? 180 : 400;
+  const count = mobile ? 120 : 280;
   // All motion computed on the GPU (same math as before) — zero per-frame JS loop.
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -183,7 +183,7 @@ function AmbientOrbs() {
   return (
     <>
       <mesh ref={(el) => (refs.current[0] = el)} position={[-3.5, 1.5, -2]}>
-        <sphereGeometry args={[0.6, 24, 24]} />
+        <sphereGeometry args={[0.6, 16, 16]} />
         <meshPhysicalMaterial
           color={0x00c8ff}
           transparent
@@ -195,7 +195,7 @@ function AmbientOrbs() {
         />
       </mesh>
       <mesh ref={(el) => (refs.current[1] = el)} position={[3, -1, -3]}>
-        <sphereGeometry args={[0.4, 24, 24]} />
+        <sphereGeometry args={[0.4, 16, 16]} />
         <meshPhysicalMaterial
           color={0x2f7bff}
           transparent
@@ -205,7 +205,7 @@ function AmbientOrbs() {
         />
       </mesh>
       <mesh ref={(el) => (refs.current[2] = el)} position={[-2, -2, 2.5]}>
-        <sphereGeometry args={[0.5, 24, 24]} />
+        <sphereGeometry args={[0.5, 16, 16]} />
         <meshPhysicalMaterial
           color={0x5fe6ff}
           transparent
@@ -222,7 +222,7 @@ function StarField({ mobile }: { mobile: boolean }) {
   const ref = useRef<THREE.Points>(null);
 
   const geo = useMemo(() => {
-    const count = mobile ? 180 : 400;
+    const count = mobile ? 100 : 250;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 38 + Math.random() * 16;

@@ -1,0 +1,109 @@
+---
+---
+
+<div id="loading-screen" class="fixed inset-0 z-[200] flex items-center justify-center bg-ink">
+  <div class="flex flex-col items-center justify-center gap-6">
+    <div class="relative w-24 h-24">
+      <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="electricGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00c8ff" />
+            <stop offset="100%" stop-color="#2f7bff" />
+          </linearGradient>
+        </defs>
+        <circle class="orbit-ring" cx="24" cy="24" r="20" stroke="url(#electricGradient)" stroke-width="2" fill="none" stroke-dasharray="125.6" stroke-dashoffset="125.6" style="animation: orbitDraw 1.2s ease-out forwards, orbitRotate 3s linear infinite 1.2s; transform-origin: 24px 24px;" />
+        <circle class="logo-mark" cx="24" cy="24" r="8" fill="url(#electricGradient)" style="animation: logoScale 0.6s ease-out 1.1s forwards; transform-origin: 24px 24px; opacity: 0;" />
+        <text x="24" y="30" class="orbit-text" text-anchor="middle" font-family="system-ui, sans-serif" font-size="3" font-weight="700" fill="#00c8ff" style="animation: textFade 0.4s ease-out 1.4s forwards; opacity: 0;">ORBIT</text>
+      </svg>
+    </div>
+    <div class="loading-progress">
+      <div class="progress-bar" style="animation: progressFill 1.8s ease-out forwards;"></div>
+    </div>
+  </div>
+  <style>
+    @keyframes orbitDraw {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes orbitRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes logoScale {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes textFade {
+      to { opacity: 1; }
+    }
+    @keyframes progressFill {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    .loading-progress {
+      width: 120px;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00c8ff, #2f7bff);
+      border-radius: 9999px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orbit-ring, .logo-mark, .orbit-text, .progress-bar {
+        animation: none !important;
+        stroke-dashoffset: 0;
+        opacity: 1;
+        transform: none;
+        width: 100%;
+      }
+    }
+  </style>
+</div>
+<script>
+  (() => {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (!loadingScreen) return;
+
+    // Hide loading screen after page is fully loaded
+    const hideLoading = () => {
+      loadingScreen.style.opacity = '0';
+      loadingScreen.style.transition = 'opacity 0.5s ease-out';
+      setTimeout(() => {
+        loadingScreen.remove();
+      }, 500);
+    };
+
+    // Minimum display time for branding (1.5s)
+    const minDisplayTime = 1500;
+    const startTime = Date.now();
+
+    const checkReady = () => {
+      const elapsed = Date.now() - startTime;
+      if (document.readyState === 'complete') {
+        const remaining = minDisplayTime - elapsed;
+        if (remaining > 0) {
+          setTimeout(hideLoading, remaining);
+        } else {
+          hideLoading();
+        }
+      } else {
+        window.addEventListener('load', () => {
+          const elapsed = Date.now() - startTime;
+          const remaining = minDisplayTime - elapsed;
+          if (remaining > 0) {
+            setTimeout(hideLoading, remaining);
+          } else {
+            hideLoading();
+          }
+        }, { once: true });
+      }
+    };
+
+    checkReady();
+  })();
+</script>

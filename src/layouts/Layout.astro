@@ -5,6 +5,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro";
 import Hero3D from "../components/react/Hero3D.tsx";
 import OrbitAssistant from "../components/OrbitAssistant.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import LoadingScreen from "../components/LoadingScreen.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -38,9 +39,16 @@ const jsonLd = {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/png" href="/logo-mark.png" />
+		<link rel="preload" as="image" href="/logo-mark.png" />
+		<link rel="preload" as="image" href="/logo.png" />
+		<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" />
 		<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 		<link rel="dns-prefetch" href="https://images.unsplash.com" />
 		<link rel="dns-prefetch" href="https://wa.me" />
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+		<link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -85,6 +93,7 @@ gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
 		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
+		<LoadingScreen />
 		<Hero3D client:idle transition:persist />
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 		<div id="scroll-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-electric to-neon" aria-hidden="true"></div>
