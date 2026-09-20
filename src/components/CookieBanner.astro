@@ -1,12 +1,14 @@
 ---
 ---
 
-<div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-[100] hidden translate-y-full border-t border-white/10 bg-ink/95 backdrop-blur-md transition-transform duration-500 ease-out">
-	<div class="mx-auto max-w-7xl px-5 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-		<p class="text-sm text-slate-400">We use cookies for analytics to improve your experience. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy</a>.</p>
-		<div class="flex gap-3 shrink-0">
-			<button id="cookie-accept" class="rounded-full btn-gradient px-6 py-2 text-sm font-semibold text-white">Accept</button>
-			<button id="cookie-decline" class="rounded-full border border-edge bg-panel px-6 py-2 text-sm font-semibold text-slate-200">Decline</button>
+<div id="cookie-banner" class="fixed inset-0 z-[200] hidden items-center justify-center bg-ink/80 p-5 backdrop-blur-sm">
+	<div class="glow-border edge-glow w-full max-w-md rounded-2xl bg-panel p-8 text-center shadow-2xl shadow-black/60" style="box-shadow: 0 8px 60px rgb(0 0 0 / 0.6), 0 0 40px -10px rgb(0 200 255 / 0.3);">
+		<span class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-electric to-neon text-lg font-bold text-white shadow-lg shadow-electric/30">◈</span>
+		<p class="mt-4 text-lg font-bold text-white">Cookies, your call.</p>
+		<p class="mt-2 text-sm leading-relaxed text-slate-400">We use cookies for analytics to improve your experience. Pick one to enter the site. See our <a href="/cookie-policy" class="text-electric hover:underline">cookie policy</a> and <a href="/privacy-policy" class="text-electric hover:underline">privacy policy</a>.</p>
+		<div class="mt-6 grid grid-cols-2 gap-3">
+			<button id="cookie-accept" class="rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-electric/25 transition hover:-translate-y-0.5">Accept</button>
+			<button id="cookie-decline" class="rounded-full border border-edge bg-charcoal px-6 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Decline</button>
 		</div>
 	</div>
 </div>
@@ -14,27 +16,42 @@
 	(() => {
 		const k = "orbit_cookie_consent";
 		const banner = document.getElementById("cookie-banner");
-		if (!banner) return;
+		if (!banner || banner.dataset.bound) return;
+		banner.dataset.bound = "1";
 		const consent = localStorage.getItem(k);
-		// Once-and-done: after Accept or Decline the choice persists, banner never returns.
+		// Gate: no choice yet → block the site immediately until they pick one.
 		if (!consent) {
 			banner.classList.remove("hidden");
-			requestAnimationFrame(() => requestAnimationFrame(() => {
-				banner.classList.remove("translate-y-full");
-			}));
+			banner.classList.add("flex");
+			document.body.style.overflow = "hidden";
 		}
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		const dismiss = () => {
-			banner.classList.add("translate-y-full");
-			setTimeout(() => banner.classList.add("hidden"), 500);
+			banner.classList.add("hidden");
+			banner.classList.remove("flex");
+			document.body.style.overflow = "";
 		};
 		document.getElementById("cookie-accept")?.addEventListener("click", () => {
 			localStorage.setItem(k, "accepted");
+			document.cookie = "orbit_cookie_consent=accepted; path=/; max-age=31536000; SameSite=Lax";
 			(window as any).orbitAnalyticsOK = true;
 			dismiss();
+			// Load GA if not already loaded
+			if (import.meta.env.PUBLIC_GA_ID && !(window as any).gtag) {
+				const script = document.createElement("script");
+				script.async = true;
+				script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`;
+				document.head.appendChild(script);
+				window.dataLayer = window.dataLayer || [];
+				function gtag() { dataLayer.push(arguments); }
+				(window as any).gtag = gtag;
+				gtag('js', new Date());
+				gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
+			}
 		});
 		document.getElementById("cookie-decline")?.addEventListener("click", () => {
 			localStorage.setItem(k, "declined");
+			document.cookie = "orbit_cookie_consent=declined; path=/; max-age=31536000; SameSite=Lax";
 			dismiss();
 		});
 	})();
