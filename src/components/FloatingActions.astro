@@ -66,4 +66,13 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		initFloating();
 		onScroll();
 	});
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", () => {
+			initFloating();
+			onScroll();
+		}, { once: true });
+	} else {
+		initFloating();
+		onScroll();
+	}
 </script>

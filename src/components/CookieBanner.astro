@@ -13,8 +13,10 @@
 <script>
 	(() => {
 		const k = "orbit_cookie_consent";
+		function initCookie() {
 		const banner = document.getElementById("cookie-banner");
-		if (!banner) return;
+		if (!banner || banner.dataset.bound) return;
+		banner.dataset.bound = "1";
 		const consent = localStorage.getItem(k);
 		if (!consent) banner.classList.remove("hidden");
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
@@ -27,5 +29,12 @@
 			localStorage.setItem(k, "declined");
 			banner.classList.add("hidden");
 		});
+		}
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", initCookie, { once: true });
+		} else {
+			initCookie();
+		}
+		document.addEventListener("astro:page-load", initCookie);
 	})();
 </script>

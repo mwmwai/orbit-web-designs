@@ -103,6 +103,7 @@ import { whatsappLink } from "../config";
 			return s;
 		}
 
+		function init() {
 		const panel = document.getElementById("oa-panel");
 		const toggle = document.getElementById("oa-toggle");
 		const log = document.getElementById("oa-log");
@@ -226,5 +227,12 @@ import { whatsappLink } from "../config";
 		input.addEventListener("keydown", (e) => {
 			if (e.key === "Enter") send.click();
 		});
+		}
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", init, { once: true });
+		} else {
+			init();
+		}
+		document.addEventListener("astro:page-load", init);
 	})();
 </script>

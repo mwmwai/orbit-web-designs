@@ -136,11 +136,11 @@ body {
 }
 
 ::view-transition-old(root) {
-	animation: vtOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+	animation: vtOut 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 ::view-transition-new(root) {
-	animation: vtIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+	animation: vtIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 ::view-transition-old(root),
@@ -201,7 +201,7 @@ body {
 	background: radial-gradient(ellipse at center, transparent 35%, rgb(0 200 255 / 0.18) 100%);
 	pointer-events: none;
 	z-index: 9999;
-	animation: vtFlash 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+	animation: vtFlash 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 @keyframes vtSweep {
@@ -228,7 +228,7 @@ body {
 	);
 	pointer-events: none;
 	z-index: 9999;
-	animation: vtSweep 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+	animation: vtSweep 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 body::before,
@@ -247,8 +247,8 @@ body::after { bottom: 0; }
 
 html[data-astro-transition="forward"],
 html[data-astro-transition="backward"] {
-	& body::before { animation: barTop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-	& body::after { animation: barBottom 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+	& body::before { animation: barTop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+	& body::after { animation: barBottom 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
 }
 
 @keyframes barTop {
@@ -587,6 +587,22 @@ html[data-astro-transition] body::after {
 		0 0 40px -5px rgb(0 200 255 / 0.25);
 }
 
+/* Touch devices: hover doesn't exist — kill sticky hover jumps on tap */
+@media (hover: none) {
+	.hover-lift:hover {
+		transform: none;
+		box-shadow: 0 0 0 1px rgb(0 200 255 / 0.1) inset;
+	}
+	.edge-glow:hover {
+		box-shadow:
+			0 0 0 1px rgb(0 200 255 / 0.1) inset,
+			0 0 30px -10px rgb(0 200 255 / 0.15);
+	}
+	.card-shine:hover::before { transform: translateX(-120%); }
+	.magnetic { transition: none; }
+	details > summary:hover { color: inherit; }
+}
+
 .scroll-indicator {
 	position: fixed;
 	right: 1.5rem;
@@ -645,12 +661,20 @@ html {
 	.stagger > *,
 	.hover-lift,
 	.magnetic,
-	.scroll-indicator {
+	.scroll-indicator,
+	.marquee-track,
+	.drift-track,
+	.word-reveal,
+	.glow-dot,
+	.light-streak,
+	.scanline,
+	.ken-burns {
 		transition: none !important;
 		animation: none !important;
 		opacity: 1 !important;
 		transform: none !important;
 	}
+	.word-reveal { opacity: 1 !important; }
 	.scroll-indicator { display: none; }
 	body::before,
 	body::after { animation: none !important; height: 0 !important; }
@@ -663,5 +687,98 @@ html {
 	}
 	::view-transition-old(root) { opacity: 0 !important; }
 	::view-transition-new(root) { opacity: 1 !important; }
+	html { scroll-behavior: auto !important; }
+}
+
+/* ============ HIGH-QUALITY UI/UX LAYER ============ */
+
+/* Brand selection: selecting text feels on-brand, stays readable */
+::selection {
+	background: rgb(0 200 255 / 0.35);
+	color: #fff;
+}
+
+/* Smooth anchor scrolling (motion-safe users only) */
+@media (prefers-reduced-motion: no-preference) {
+	html { scroll-behavior: smooth; }
+}
+
+/* Anchored sections never hide under the fixed navbar */
+section[id], div[id] { scroll-margin-top: 5.5rem; }
+
+/* Visible keyboard focus everywhere: a11y + power users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid var(--color-electric);
+	outline-offset: 3px;
+	border-radius: 6px;
+}
+
+/* Tactile press feedback on every CTA: press → squish, release → spring */
+.btn-gradient,
+button.rounded-full,
+a.rounded-full {
+	transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background-position 0.5s ease;
+}
+.btn-gradient:active,
+button.rounded-full:active,
+a.rounded-full:active {
+	transform: scale(0.96);
+}
+
+/* Balanced headlines: no orphan words on wraps */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* Inputs: calm default, electric focus, clear disabled */
+input, textarea, select {
+	caret-color: var(--color-electric);
+}
+input:disabled, textarea:disabled, button:disabled {
+	cursor: not-allowed;
+}
+input::placeholder, textarea::placeholder {
+	opacity: 0.55;
+}
+
+/* FAQ accordions: smooth open, clear affordance */
+details > summary {
+	list-style: none;
+	transition: color 0.2s ease;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary:hover { color: #fff; }
+details > summary::after {
+	content: "+";
+	float: right;
+	color: var(--color-electric);
+	font-weight: 700;
+	transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+details[open] > summary::after { transform: rotate(45deg); }
+details > summary + * {
+	animation: detailsIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes detailsIn {
+	from { opacity: 0; transform: translateY(-6px); }
+	to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+	details > summary + * { animation: none !important; }
+}
+
+/* Images: never layout-shift, always cover gracefully */
+img { font-style: italic; }
+img[width][height] { height: auto; }
+
+/* Touch targets: minimum 44px on coarse pointers */
+@media (pointer: coarse) {
+	a, button { min-height: 44px; }
+	nav a, footer a { min-height: 44px; display: inline-flex; align-items: center; }
 }
 
