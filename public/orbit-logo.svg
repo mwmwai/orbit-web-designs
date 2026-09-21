@@ -1,0 +1,32 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient id="electricGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#00E5FF" />
+			<stop offset="50%" stop-color="#00C8FF" />
+			<stop offset="100%" stop-color="#0099CC" />
+		</linearGradient>
+		<linearGradient id="whiteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#FFFFFF" />
+			<stop offset="100%" stop-color="#E8ECF4" />
+		</linearGradient>
+	</defs>
+
+	<circle cx="60" cy="60" r="48" stroke="url(#electricGradient)" stroke-width="1.5" fill="none" opacity="0.15" />
+
+	<circle cx="60" cy="60" r="28" stroke="url(#electricGradient)" stroke-width="2" fill="none" stroke-dasharray="175.93 175.93" stroke-dashoffset="0" />
+	<circle cx="60" cy="60" r="20" stroke="url(#whiteGradient)" stroke-width="1.5" fill="none" stroke-dasharray="125.66 125.66" stroke-dashoffset="62.83" />
+	<circle cx="60" cy="60" r="12" stroke="url(#electricGradient)" stroke-width="1" fill="none" stroke-dasharray="75.4 75.4" stroke-dashoffset="37.7" />
+
+	<circle cx="98" cy="60" r="4" fill="url(#electricGradient)" />
+	<circle cx="60" cy="28" r="4" fill="url(#whiteGradient)" />
+	<circle cx="22" cy="60" r="4" fill="url(#electricGradient)" />
+	<circle cx="60" cy="92" r="4" fill="url(#whiteGradient)" />
+
+	<circle cx="74.5" cy="36.5" r="3" fill="url(#whiteGradient)" />
+	<circle cx="83.5" cy="83.5" r="3" fill="url(#electricGradient)" />
+	<circle cx="36.5" cy="83.5" r="3" fill="url(#whiteGradient)" />
+	<circle cx="36.5" cy="36.5" r="3" fill="url(#electricGradient)" />
+
+	<circle cx="60" cy="60" r="6" fill="url(#whiteGradient)" />
+	<circle cx="60" cy="60" r="3" fill="#00E5FF" />
+</svg>

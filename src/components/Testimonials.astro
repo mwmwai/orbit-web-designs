@@ -72,20 +72,33 @@ const testimonials = [
 			if (!root || root.dataset.bound) return; root.dataset.bound='1';
 			const slides = root.querySelectorAll('[data-slide]');
 			const dots = root.querySelectorAll('[data-dot]');
-			let cur = 0, timer;
+			let cur = 0, timer, resumeT;
+			function fade(el) {
+				el.classList.remove('slide-fade');
+				void el.offsetWidth;
+				el.classList.add('slide-fade');
+			}
 			function go(n) {
 				slides[cur].classList.add('hidden'); slides[cur].classList.remove('block');
 				dots[cur].className = 'h-2 w-2 rounded-full bg-edge hover:bg-slate-500 transition-all';
 				cur = (n + slides.length) % slides.length;
 				slides[cur].classList.remove('hidden'); slides[cur].classList.add('block');
+				fade(slides[cur]);
 				dots[cur].className = 'h-2 w-6 rounded-full bg-electric transition-all';
 			}
 			function next(){ go(cur+1); }
-			function start(){ timer = setInterval(next, 4000); }
-			function stop(){ clearInterval(timer); }
-			dots.forEach((d,i)=> d.addEventListener('click', ()=>{ stop(); go(i); start(); }));
-			root.addEventListener('mouseenter', stop);
-			root.addEventListener('mouseleave', start);
+			function start(){ clearInterval(timer); timer = setInterval(next, 4000); }
+			function pause(){
+				clearInterval(timer); clearTimeout(resumeT);
+				resumeT = setTimeout(start, 8000);
+			}
+			dots.forEach((d,i)=> d.addEventListener('click', ()=>{ pause(); go(i); start(); }));
+			root.addEventListener('pointerenter', pause);
+			root.addEventListener('pointerleave', start);
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden) { clearInterval(timer); } else { start(); }
+			});
+			fade(slides[0]);
 			start();
 		}
 		if (document.readyState === "loading") {
@@ -94,7 +107,7 @@ const testimonials = [
 			initSlider();
 		}
 		document.addEventListener("astro:page-load", initSlider);
-	})();
+		})();
 	</script>
 </section>
 
