@@ -42,14 +42,21 @@ import { whatsappLink } from "../config";
 		const WA = "https://wa.me/254741992308?text=";
 		const waLink = (q: string) => WA + encodeURIComponent("Hi Orbit! " + q);
 
-		function loadMemory(): { chat: string[]; name: string; email: string; phone: string } {
+		function loadMemory(): { chat: Array<{ r: string; t: string }>; name: string; email: string; phone: string } {
+			const empty = { chat: [], name: "", email: "", phone: "" };
 			try {
 				const raw = localStorage.getItem(STORAGE_KEY);
-				if (raw) return JSON.parse(raw);
-			} catch {}
-			return { chat: [], name: "", email: "", phone: "" };
+				if (!raw) return empty;
+				const m = JSON.parse(raw);
+				const chat = Array.isArray(m.chat) ? m.chat.map((e: any) =>
+					typeof e === "string"
+						? { r: "u", t: e }
+						: (e && typeof e.t === "string" ? { r: e.r === "a" ? "a" : "u", t: e.t } : null)
+				).filter(Boolean).slice(-20) : [];
+				return { chat, name: m.name || "", email: m.email || "", phone: m.phone || "" };
+			} catch { return empty; }
 		}
-		function saveMemory(m: { chat: string[]; name: string; email: string; phone: string }) {
+		function saveMemory(m: { chat: Array<{ r: string; t: string }>; name: string; email: string; phone: string }) {
 			try { localStorage.setItem(STORAGE_KEY, JSON.stringify(m)); } catch {}
 		}
 		function extractUser(q: string): { name?: string; email?: string; phone?: string } {
@@ -153,10 +160,10 @@ import { whatsappLink } from "../config";
 				b.textContent = a.label;
 				b.addEventListener("click", () => {
 					bubble(a.ask, true);
-					addChat(a.ask);
+					addChat("u", a.ask);
 					setTimeout(() => {
 						bubble(a.reply, false, true);
-						addChat(a.reply);
+						addChat("a", a.reply);
 						if (a.link) richLink(a.link[0], a.link[1]);
 						waButton(a.wa, "Start this on WhatsApp");
 					}, 350);
@@ -169,8 +176,8 @@ import { whatsappLink } from "../config";
 			const el = document.getElementById("oa-typing");
 			if (el) el.classList.toggle("hidden", !show);
 		}
-		function addChat(msg: string) {
-			mem.chat.push(msg);
+		function addChat(role: "u" | "a", msg: string) {
+			mem.chat.push({ r: role, t: msg });
 			if (mem.chat.length > 20) mem.chat.shift();
 			saveMemory(mem);
 		}
@@ -182,9 +189,9 @@ import { whatsappLink } from "../config";
 			renderActions();
 		}
 
-		function answer(q: string) {
+		async function answer(q: string) {
 			bubble(q, true);
-			addChat(q);
+			addChat("u", q);
 			const info = extractUser(q);
 			if (info.name) mem.name = info.name;
 			if (info.email) mem.email = info.email;
@@ -196,19 +203,47 @@ import { whatsappLink } from "../config";
 				const s = score(q, entry.keys);
 				if (s > bestScore) { bestScore = s; best = entry; }
 			}
+			// Strong keyword hit → instant scripted answer (free, zero latency).
+			if (best && bestScore >= 4) {
+				bubble(best.text, false, true);
+				addChat("a", best.text);
+				if (best.link) richLink(best.link[0], best.link[1]);
+				waButton(best.wa || q);
+				return;
+			}
+			// Anything else → real AI. Any failure falls back to the KB.
 			typingIndicator(true);
-			setTimeout(() => {
+			try {
+				const history = mem.chat.slice(-6).map((m) => ({
+					role: m.r === "a" ? "assistant" : "user",
+					content: m.t.slice(0, 600),
+				}));
+				const res = await fetch("/api/chat", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ messages: history, name: mem.name || undefined }),
+				});
+				if (!res.ok) throw new Error("ai-off");
+				const data = await res.json();
+				const reply = typeof data.reply === "string" && data.reply.trim()
+					? data.reply.trim().slice(0, 1200)
+					: "";
+				if (!reply) throw new Error("ai-empty");
+				typingIndicator(false);
+				bubble(reply, false);
+				addChat("a", reply);
+			} catch {
 				typingIndicator(false);
 				if (best && bestScore > 0) {
 					bubble(best.text, false, true);
-					addChat(best.text);
+					addChat("a", best.text);
 					if (best.link) richLink(best.link[0], best.link[1]);
 				} else {
 					bubble(fallback, false);
-					addChat(fallback);
+					addChat("a", fallback);
 				}
-				waButton(q);
-			}, 600 + Math.random() * 400);
+			}
+			waButton(q);
 		}
 
 		toggle.addEventListener("click", () => {
