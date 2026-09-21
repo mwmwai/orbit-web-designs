@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+---
+
+<Layout
+	title="Graphic Design — Logos from KES 17,999 | Orbit"
+	description="Logos from 17,999, brand kits to 29,999 — social kits, flyers, guidelines. Source files + revisions. Nairobi, worldwide."
+>
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/15 blur-[140px]"></div>
+				<div class="absolute top-20 right-0 h-[360px] w-[360px] rounded-full bg-neon/10 blur-[120px]"></div>
+			</div>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pt-32">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Brand & Graphic Design — you own it</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Look like the <span class="text-gradient">price you charge.</span>
+				</h1>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">Logos 17,999, full brand kits to 29,999 — social kits, flyers, one-page guidelines. Source files included, revisions included. We design, you own.</p>
+				<div class="mt-8 flex flex-wrap gap-3">
+					<a href={whatsappLink("Hi Orbit! I need a logo/brand kit — from 17,999. My business is...")} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20">Get a quote — WhatsApp</a>
+					<a href="/packages" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 hover:border-electric/60 hover:text-white">See packages</a>
+				</div>
+				<div class="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">17,999</p><p class="text-xs text-slate-400">logos</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">29,999</p><p class="text-xs text-slate-400">brand kit</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">Source</p><p class="text-xs text-slate-400">files</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">Revisions</p><p class="text-xs text-slate-400">included</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<div class="grid gap-6 md:grid-cols-3">
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300"><h3 class="font-semibold text-white">Logos — 17,999</h3><p class="mt-2 text-sm text-slate-400">3 concepts, unlimited polish, print + social exports.</p></div>
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300 border-electric/30"><h3 class="font-semibold text-white">Brand Kit — 29,999</h3><p class="mt-2 text-sm text-slate-400">Logo + colors + typography + social kit + one-page guideline.</p></div>
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300"><h3 class="font-semibold text-white">Social & Flyers</h3><p class="mt-2 text-sm text-slate-400">Marketing creatives that convert — ready for print and feed.</p></div>
+				</div>
+
+				<div class="mt-8 grid gap-6 lg:grid-cols-2">
+					<div class="grid gap-4">
+						<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4">
+							<div class="h-14 w-14 rounded-xl bg-gradient-to-br from-electric to-neon flex items-center justify-center text-xl font-black text-white">O</div>
+							<div><p class="font-bold text-white tracking-[0.2em]">ORBIT</p><p class="text-xs text-slate-400 tracking-[0.2em]">WEB DESIGNS & MARKETING</p><div class="mt-2 flex gap-1.5"><span class="h-3 w-3 rounded-full bg-electric"></span><span class="h-3 w-3 rounded-full bg-neon"></span><span class="h-3 w-3 rounded-full bg-white"></span><span class="h-3 w-3 rounded-full bg-charcoal border border-white/10"></span></div></div>
+						</div>
+						<div class="grid grid-cols-3 gap-4">
+							<div class="glow-border rounded-xl p-3 text-center"><div class="h-16 rounded-lg bg-gradient-to-br from-electric/30 to-neon/30 border border-white/5"></div><p class="mt-2 text-xs text-slate-400">Poster</p></div>
+							<div class="glow-border rounded-xl p-3 text-center"><div class="h-16 rounded-lg bg-charcoal border border-white/5 flex items-center justify-center"><span class="text-electric">◈</span></div><p class="mt-2 text-xs text-slate-400">Social kit</p></div>
+							<div class="glow-border rounded-xl p-3 text-center"><div class="h-16 rounded-lg bg-white text-ink flex items-center justify-center font-black text-xs tracking-widest">B&G</div><p class="mt-2 text-xs text-slate-400">Guideline</p></div>
+						</div>
+					</div>
+					<div class="glow-border rounded-2xl p-8 flex flex-col">
+						<p class="font-semibold text-white">What you get</p>
+						<ul class="mt-4 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">✓</span> Logos 17,999 — 3 concepts, unlimited polish</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Social kits that match your site</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Full identity to 29,999 + guideline sheet</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Print-ready + social-ready exports</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Source files — you own everything</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Fast turnaround, revisions included</li>
+						</ul>
+						<a href={whatsappLink("Hi Orbit! I want Graphic Design (from 17,999) — logo/brand for...")} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block rounded-full btn-gradient px-8 py-3 font-semibold text-white text-center">WhatsApp to start →</a>
+						<p class="mt-3 text-xs text-slate-500">Keep it fresh with <a href="/care" class="text-electric hover:underline">Design Retainer</a></p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white">How we ship</h2>
+				<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{[ ["Brief","You send references, colors, vibe — we ask sharp questions."], ["Concepts","3 logo directions, you pick one."], ["Polish","Refine, guideline, social exports."], ["Hand over","Source files + handover, you own it."]].map(([t,d],i)=> (
+						<article class="glow-border rounded-2xl p-6"><span class="text-gradient text-3xl font-extrabold">{i+1}</span><h3 class="mt-3 font-semibold text-white">{t}</h3><p class="mt-2 text-sm text-slate-400">{d}</p></article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<CtaBand title="Need a logo that sticks?" text="Send your name + 2 references — we reply with concepts and honest price." />
+	</main>
+	<Footer />
+</Layout>
