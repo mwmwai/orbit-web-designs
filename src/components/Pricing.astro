@@ -159,7 +159,7 @@ const 	allPlans = [
 function pageForPlan(p: typeof allPlans[number]) {
 	if (p.name === "Custom AI Agent") return "/automation";
 	if (p.name === "Workflow Automation") return "/automation";
-	if (p.name === "Custom SaaS App") return "/packages";
+	if (p.name === "Custom SaaS App") return "/saas";
 	if (p.name === "Business Dashboard") return "/dashboards";
 	if (p.name === "Graphic Design") return "/contact";
 	if (["Starter","Business","Master"].includes(p.name)) return "/packages";
