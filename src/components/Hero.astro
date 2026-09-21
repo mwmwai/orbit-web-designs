@@ -10,6 +10,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		<div class="film-grain"></div>
 		<div class="vignette"></div>
 		<div class="light-streak"></div>
+		<canvas id="hero-stars" class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
 	</div>
 
 	<div class="hero-orbit pointer-events-none absolute left-0 top-1/2 hidden h-[640px] w-[640px] -translate-y-1/2 opacity-100 md:block" aria-hidden="true" style="left: -12%">
@@ -17,8 +18,12 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg)"></div>
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(28deg)"></div>
 			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(-28deg); border-color: rgb(47 123 255 / 0.14)"></div>
+			<div class="hero-orbit-ring h-[300px] w-[460px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(56deg); border-color: rgb(139 92 246 / 0.16)"></div>
+			<div class="hero-orbit-ring h-[440px] w-[620px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: translate3d(-50%, -50%, 0) rotateX(68deg) rotateZ(-56deg); border-color: rgb(0 200 255 / 0.07)"></div>
+			<div class="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/25 blur-[50px]"></div>
 			<span class="glow-dot" style="--radius: 280px; --dur: 18s; top: 50%; left: 50%"></span>
 			<span class="glow-dot" style="--radius: 200px; --dur: 26s; top: 50%; left: 50%; animation-delay: -8s"></span>
+			<span class="glow-dot" style="--radius: 230px; --dur: 22s; top: 50%; left: 50%; animation-delay: -14s"></span>
 		</div>
 	</div>
 
@@ -103,3 +108,79 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		<span>Reply in minutes</span>
 	</div>
 </div>
+
+<script>
+	(() => {
+		// Lightweight 2D starfield: ~110 drifting, twinkling dots. No libraries,
+		// DPR-capped, pauses offscreen and in background tabs.
+		function initStars() {
+			const canvas = document.getElementById("hero-stars");
+			if (!canvas || canvas.dataset.bound) return;
+			canvas.dataset.bound = "1";
+			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+			const ctx = canvas.getContext("2d");
+			if (!ctx) return;
+			const isMobile = window.matchMedia("(max-width: 768px)").matches;
+			const N = isMobile ? 45 : 110;
+			const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
+			const COLORS = ["0,200,255", "189,243,255", "139,92,246", "255,255,255"];
+			let w = 0, h = 0, stars = [], running = false, t = Math.random() * 10;
+			function resize() {
+				const r = canvas.getBoundingClientRect();
+				w = r.width; h = r.height;
+				canvas.width = Math.max(1, Math.floor(w * dpr));
+				canvas.height = Math.max(1, Math.floor(h * dpr));
+				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			}
+			function seed() {
+				stars = Array.from({ length: N }, () => ({
+					x: Math.random() * w,
+					y: Math.random() * h,
+					r: 0.4 + Math.random() * 1.4,
+					c: COLORS[(Math.random() * COLORS.length) | 0],
+					p: Math.random() * 6.2832,
+					s: 0.6 + Math.random() * 1.8,
+					vx: (Math.random() - 0.5) * 0.12,
+					vy: (Math.random() - 0.5) * 0.12,
+				}));
+			}
+			function frame() {
+				if (!running) return;
+				t += 0.016;
+				ctx.clearRect(0, 0, w, h);
+				for (const st of stars) {
+					st.x = (st.x + st.vx + w) % w;
+					st.y = (st.y + st.vy + h) % h;
+					const a = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(t * st.s + st.p));
+					ctx.beginPath();
+					ctx.arc(st.x, st.y, st.r, 0, 6.2832);
+					ctx.fillStyle = "rgba(" + st.c + "," + a.toFixed(3) + ")";
+					ctx.fill();
+				}
+				requestAnimationFrame(frame);
+			}
+			function play() {
+				if (!running && !document.hidden) {
+					running = true;
+					requestAnimationFrame(frame);
+				}
+			}
+			function pause() { running = false; }
+			resize(); seed();
+			new IntersectionObserver((es) => {
+				if (es[0].isIntersecting) play(); else pause();
+			}).observe(canvas);
+			document.addEventListener("visibilitychange", () => {
+				if (document.hidden) pause();
+			});
+			window.addEventListener("resize", () => { resize(); seed(); }, { passive: true });
+			play();
+		}
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", initStars, { once: true });
+		} else {
+			initStars();
+		}
+		document.addEventListener("astro:page-load", initStars);
+	})();
+</script>
