@@ -47,10 +47,10 @@ const year = new Date().getFullYear();
 						try {
 							const { subscribeNewsletter } = await import("../lib/db");
 							const ok = await subscribeNewsletter(email);
-							msg.textContent = ok ? "You're in — watch your inbox." : "Saved! Prefer WhatsApp? Tap the green bubble.";
+							msg.textContent = ok ? "You're in — watch your inbox." : "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";
 							if (ok) input.value = "";
 						} catch {
-							msg.textContent = "Something hiccuped — try WhatsApp instead.";
+							msg.textContent = "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";
 						}
 					});
 				})();
@@ -66,8 +66,6 @@ const year = new Date().getFullYear();
 					{NAV_LINKS.map((l) => (
 						<li><a href={l.href} class="text-slate-400 transition hover:text-white">{l.label}</a></li>
 					))}
-					<li><a href="/about" class="text-slate-400 transition hover:text-white">About</a></li>
-					<li><a href="/guides" class="text-slate-400 transition hover:text-white">Guides</a></li>
 					<li><a href="/faq" class="text-slate-400 transition hover:text-white">FAQ</a></li>
 				</ul>
 			</div>
@@ -103,7 +101,7 @@ const year = new Date().getFullYear();
 		<div class="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-6 text-xs text-slate-400 md:flex-row md:items-center">
 			<p>© {year} {SITE_NAME}. All rights reserved. · Prices in KES, USD & EUR accepted.</p>
 			<p class="flex flex-wrap gap-x-4 gap-y-1 text-slate-400">
-				<a href="https://g.page/r/CS264QqxfOvBECE/review" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">⭐ Review us</a>
+				<a href="https://g.page/r/CS264QqxfOvBECE/review" target="_blank" rel="noopener noreferrer" class="transition hover:text-white"><span class="text-electric" aria-hidden>★</span> Review us</a>
 				<a href="/blog/website-cost-kenya" class="transition hover:text-white">Pricing guide</a>
 				<a href="/faq" class="transition hover:text-white">FAQ</a>
 				<a href="/web-design-nairobi" class="transition hover:text-white">Nairobi</a>
