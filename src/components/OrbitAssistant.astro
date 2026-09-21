@@ -42,8 +42,9 @@ import { whatsappLink } from "../config";
 		const WA = "https://wa.me/254741992308?text=";
 		const waLink = (q: string) => WA + encodeURIComponent("Hi Orbit! " + q);
 
-		function loadMemory(): { chat: Array<{ r: string; t: string }>; name: string; email: string; phone: string } {
-			const empty = { chat: [], name: "", email: "", phone: "" };
+		type Mem = { chat: Array<{ r: string; t: string }>; name: string; email: string; phone: string; interests: Record<string, number>; visits: number; lastTopic: string; qualified: null | { need: string; budget: string; package: string } };
+		function loadMemory(): Mem {
+			const empty: Mem = { chat: [], name: "", email: "", phone: "", interests: {}, visits: 0, lastTopic: "", qualified: null };
 			try {
 				const raw = localStorage.getItem(STORAGE_KEY);
 				if (!raw) return empty;
@@ -53,10 +54,19 @@ import { whatsappLink } from "../config";
 						? { r: "u", t: e }
 						: (e && typeof e.t === "string" ? { r: e.r === "a" ? "a" : "u", t: e.t } : null)
 				).filter(Boolean).slice(-20) : [];
-				return { chat, name: m.name || "", email: m.email || "", phone: m.phone || "" };
+				return {
+					chat,
+					name: m.name || "",
+					email: m.email || "",
+					phone: m.phone || "",
+					interests: m.interests && typeof m.interests === "object" ? m.interests : {},
+					visits: typeof m.visits === "number" ? m.visits : 0,
+					lastTopic: m.lastTopic || "",
+					qualified: m.qualified && m.qualified.package ? m.qualified : null,
+				};
 			} catch { return empty; }
 		}
-		function saveMemory(m: { chat: Array<{ r: string; t: string }>; name: string; email: string; phone: string }) {
+		function saveMemory(m: Mem) {
 			try { localStorage.setItem(STORAGE_KEY, JSON.stringify(m)); } catch {}
 		}
 		function extractUser(q: string): { name?: string; email?: string; phone?: string } {
@@ -76,16 +86,16 @@ import { whatsappLink } from "../config";
 			{ label: "💬 Just get found", ask: "I just want to get found online", reply: "Starter **KES 29,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 3–5 days.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (29,999). My business is..." },
 		];
 
-		const KB: Array<{ keys: string[]; text: string; link?: [string, string]; wa?: string }> = [
-			{ keys: ["starter", "29,999", "29999", "landing", "cheap", "basic"], text: "Starter is **KES 29,999** — up to 3 pages, WhatsApp chat, basic SEO, live 3–5 days. + Care 6,500/mo.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter package (KES 29,999). My business is..." },
-			{ keys: ["business", "39,999", "39999", "booking"], text: "Business is **KES 39,999** — up to 7 pages, full SEO, bookings, live 1–2 weeks. Most popular. + Care 9,599/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business package (KES 39,999) for bookings. My business is..." },
-			{ keys: ["master", "49,999", "49999", "store", "shop", "sell"], text: "Master is **KES 49,999** — store/bookings, native M-Pesa + cards, automations, live 2–3 weeks.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want the Master package (KES 49,999) for my store." },
-			{ keys: ["saas", "app", "platform", "software"], text: "Custom SaaS from **KES 49,999** — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
-			{ keys: ["logo", "brand", "design", "14,999", "14999", "graphic", "flyer"], text: "Design from **KES 14,999** — logos, kits to 24,999, social kits, flyers, files included.", link: ["/packages", "See design →"] },
-			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], text: "AI Agent **KES 49,999** (WhatsApp/site/email + tuning). WhatsApp Responder setup **29,999**.", link: ["/automation", "See agents →"] },
-			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], text: "Workflows **KES 39,999** each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
-			{ keys: ["dashboard", "35,999", "19,999", "report", "track"], text: "Dashboards: Add-on **19,999** or Standalone **35,999** — M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
-			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], text: "Care: Starter **6,500** · Business **9,599** · Master **11,999/mo**. Cancel anytime. Custom: SaaS 14,999 · Dash 5,999 · Agent 7,999 · Design 9,999.", link: ["/care", "See Care →"] },
+		const KB: Array<{ keys: string[]; text: string; link?: [string, string]; wa?: string; t?: string }> = [
+			{ keys: ["starter", "29,999", "29999", "landing", "cheap", "basic"], t: "Starter", text: "Starter is **KES 29,999** — up to 3 pages, WhatsApp chat, basic SEO, live 3–5 days. + Care 6,500/mo.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter package (KES 29,999). My business is..." },
+			{ keys: ["business", "39,999", "39999", "booking"], t: "Business", text: "Business is **KES 39,999** — up to 7 pages, full SEO, bookings, live 1–2 weeks. Most popular. + Care 9,599/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business package (KES 39,999) for bookings. My business is..." },
+			{ keys: ["master", "49,999", "49999", "store", "shop", "sell"], t: "Master", text: "Master is **KES 49,999** — store/bookings, native M-Pesa + cards, automations, live 2–3 weeks.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want the Master package (KES 49,999) for my store." },
+			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 49,999** — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
+			{ keys: ["logo", "brand", "design", "14,999", "14999", "graphic", "flyer"], t: "Design", text: "Design from **KES 14,999** — logos, kits to 24,999, social kits, flyers, files included.", link: ["/packages", "See design →"] },
+			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], t: "AI Agent", text: "AI Agent **KES 49,999** (WhatsApp/site/email + tuning). WhatsApp Responder setup **29,999**.", link: ["/automation", "See agents →"] },
+			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 39,999** each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
+			{ keys: ["dashboard", "35,999", "19,999", "report", "track"], t: "Dashboards", text: "Dashboards: Add-on **19,999** or Standalone **35,999** — M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
+			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **6,500** · Business **9,599** · Master **11,999/mo**. Cancel anytime. Custom: SaaS 14,999 · Dash 5,999 · Agent 7,999 · Design 9,999.", link: ["/care", "See Care →"] },
 			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **29,999** · Business **39,999** · Master **49,999**. SaaS **49,999+**. Design **14,999+**. Agent **49,999**.", link: ["/packages", "Full pricelist →"] },
 			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter **3–5 days**, Business **1–2 weeks**, Master **2–3 weeks** — once we have your photos, text + logo." },
 			{ keys: ["mpesa", "m-pesa", "paybill", "till", "stk", "daraja", "pay"], text: "Till = walk-in, Paybill = tracked/online. We wire both natively.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill →"] },
@@ -121,6 +131,8 @@ import { whatsappLink } from "../config";
 		toggle.dataset.bound = "1";
 
 		const mem = loadMemory();
+		mem.visits = (mem.visits || 0) + 1;
+		saveMemory(mem);
 
 		function bubble(text: string, mine: boolean, html = false) {
 			const d = document.createElement("div");
@@ -170,6 +182,56 @@ import { whatsappLink } from "../config";
 				});
 				actionsBox!.appendChild(b);
 			}
+			const q = document.createElement("button");
+			q.type = "button";
+			q.className = "w-full rounded-xl border border-neon/40 bg-neon/10 px-4 py-2.5 text-left text-xs font-semibold text-white transition hover:bg-neon/20";
+			q.textContent = "🔍 Find my fit — 2 questions";
+			q.addEventListener("click", startQualify);
+			actionsBox!.appendChild(q);
+		}
+
+		function showChoices(options: string[], cb: (choice: string) => void) {
+			actionsBox!.innerHTML = "";
+			for (const o of options) {
+				const c = document.createElement("button");
+				c.type = "button";
+				c.className = "w-full rounded-xl border border-electric/30 bg-electric/5 px-4 py-2.5 text-left text-xs font-semibold text-white transition hover:bg-electric/15";
+				c.textContent = o;
+				c.addEventListener("click", () => {
+					bubble(o, true);
+					addChat("u", o);
+					cb(o);
+				});
+				actionsBox!.appendChild(c);
+			}
+		}
+
+		function startQualify() {
+			bubble("Two quick questions, then I'll point you at the exact package.", false);
+			showChoices(["Online store", "Bookings", "Just get found"], (need) => {
+				bubble("Noted — and your budget?", false);
+				showChoices(["Under 30k", "30–40k", "40k+", "Not sure"], (budget) => {
+					const base = need === "Online store"
+						? { pkg: "Master", price: "49,999", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] as [string, string] }
+						: need === "Bookings"
+						? { pkg: "Business", price: "39,999", link: ["/packages", "See Business →"] as [string, string] }
+						: { pkg: "Starter", price: "29,999", link: ["/packages", "See Starter →"] as [string, string] };
+					const fit = budget === "Under 30k" && base.pkg !== "Starter"
+						? " That's above 30k — **Starter (29,999)** gets you live now, upgrade later."
+						: " That fits your budget.";
+					const text = `For ${need.toLowerCase()} → **${base.pkg} (${base.price})**.${fit}`;
+					bubble(text, false, true);
+					addChat("a", text);
+					richLink(base.link[0], base.link[1]);
+					const wa = `Hi Orbit! I need ${need.toLowerCase()}, budget ${budget}. You recommended ${base.pkg} (${base.price}). My business is...`;
+					waButton(wa, "Send this to WhatsApp");
+					mem.qualified = { need, budget, package: `${base.pkg} (${base.price})` };
+					mem.lastTopic = base.pkg;
+					mem.interests[base.pkg] = (mem.interests[base.pkg] || 0) + 1;
+					saveMemory(mem);
+					setTimeout(renderActions, 600);
+				});
+			});
 		}
 
 		function typingIndicator(show: boolean) {
@@ -184,8 +246,16 @@ import { whatsappLink } from "../config";
 
 		function greet() {
 			if (log!.childElementCount > 0) return;
-			const name = mem.name || "there";
-			bubble(`👋 **Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Ask me anything or tap an action below.`, false);
+			if (mem.visits > 1) {
+				const top = Object.entries(mem.interests || {}).sort((a, b) => b[1] - a[1])[0];
+				let back = `Welcome back${mem.name ? ", " + mem.name : ""}! `;
+				if (mem.qualified) back += `Still thinking about ${mem.qualified.package}?`;
+				else if (top) back += `Last time you were looking at ${top[0]} — still interested?`;
+				else back += "Pick up where you left off.";
+				bubble(back, false);
+			} else {
+				bubble(`👋 **Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Ask me anything or tap an action below.`, false);
+			}
 			renderActions();
 		}
 
@@ -202,6 +272,11 @@ import { whatsappLink } from "../config";
 			for (const entry of KB) {
 				const s = score(q, entry.keys);
 				if (s > bestScore) { bestScore = s; best = entry; }
+			}
+			if (best && bestScore > 0 && best.t) {
+				mem.lastTopic = best.t;
+				mem.interests[best.t] = (mem.interests[best.t] || 0) + 1;
+				saveMemory(mem);
 			}
 			// Every typed question goes to the real AI. Any failure falls back to the KB.
 			typingIndicator(true);
