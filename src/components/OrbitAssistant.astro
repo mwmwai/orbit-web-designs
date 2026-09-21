@@ -84,23 +84,23 @@ import { whatsappLink } from "../config";
 		}
 
 		const ACTIONS: Array<{ label: string; ask: string; reply: string; link?: [string, string]; wa: string }> = [
-			{ label: "🛒 I want an online store", ask: "I want an online store", reply: "Master **KES 49,999** is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 2–3 weeks. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 49,999). I sell..." },
-			{ label: "📅 I want bookings", ask: "I want to take bookings", reply: "Business **KES 39,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live 1–2 weeks.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 39,999). My business is..." },
-			{ label: "💬 Just get found", ask: "I just want to get found online", reply: "Starter **KES 29,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 3–5 days.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (29,999). My business is..." },
+			{ label: "🛒 I want an online store", ask: "I want an online store", reply: "Master **KES 59,999** is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 2 weeks. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 59,999). I sell..." },
+			{ label: "📅 I want bookings", ask: "I want to take bookings", reply: "Business **KES 47,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live 1 week.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 47,999). My business is..." },
+			{ label: "💬 Just get found", ask: "I just want to get found online", reply: "Starter **KES 35,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 5 days.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (35,999). My business is..." },
 		];
 
 		const KB: Array<{ keys: string[]; text: string; link?: [string, string]; wa?: string; t?: string }> = [
-			{ keys: ["starter", "29,999", "29999", "landing", "cheap", "basic"], t: "Starter", text: "Starter is **KES 29,999** — up to 3 pages, WhatsApp chat, basic SEO, live 3–5 days. + Care 6,500/mo.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter package (KES 29,999). My business is..." },
-			{ keys: ["business", "39,999", "39999", "booking"], t: "Business", text: "Business is **KES 39,999** — up to 7 pages, full SEO, bookings, live 1–2 weeks. Most popular. + Care 9,599/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business package (KES 39,999) for bookings. My business is..." },
-			{ keys: ["master", "49,999", "49999", "store", "shop", "sell"], t: "Master", text: "Master is **KES 49,999** — store/bookings, native M-Pesa + cards, automations, live 2–3 weeks.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want the Master package (KES 49,999) for my store." },
-			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 49,999** — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
-			{ keys: ["logo", "brand", "design", "14,999", "14999", "graphic", "flyer"], t: "Design", text: "Design from **KES 14,999** — logos, kits to 24,999, social kits, flyers, files included.", link: ["/packages", "See design →"] },
-			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], t: "AI Agent", text: "AI Agent **KES 49,999** (WhatsApp/site/email + tuning). WhatsApp Responder setup **29,999**.", link: ["/automation", "See agents →"] },
-			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 39,999** each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
+			{ keys: ["starter", "35,999", "29999", "landing", "cheap", "basic"], t: "Starter", text: "Starter is **KES 35,999** — up to 3 pages, WhatsApp chat, basic SEO, live 5 days. + Care 7,499/mo.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter package (KES 35,999). My business is..." },
+			{ keys: ["business", "47,999", "39999", "booking"], t: "Business", text: "Business is **KES 47,999** — up to 7 pages, full SEO, bookings, live 1 week. Most popular. + Care 10,999/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business package (KES 47,999) for bookings. My business is..." },
+			{ keys: ["master", "59,999", "49999", "store", "shop", "sell"], t: "Master", text: "Master is **KES 59,999** — store/bookings, native M-Pesa + cards, automations, live 2 weeks.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want the Master package (KES 59,999) for my store." },
+			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 59,999** — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
+			{ keys: ["logo", "brand", "design", "17,999", "14999", "graphic", "flyer"], t: "Design", text: "Design from **KES 17,999** — logos, kits to 24,999, social kits, flyers, files included.", link: ["/packages", "See design →"] },
+			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], t: "AI Agent", text: "AI Agent **KES 59,999** (WhatsApp/site/email + tuning). WhatsApp Responder setup **35,999**.", link: ["/automation", "See agents →"] },
+			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 47,999** each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
 			{ keys: ["dashboard", "35,999", "19,999", "report", "track"], t: "Dashboards", text: "Dashboards: Add-on **19,999** or Standalone **35,999** — M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
-			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **6,500** · Business **9,599** · Master **11,999/mo**. Cancel anytime. Custom: SaaS 14,999 · Dash 5,999 · Agent 7,999 · Design 9,999.", link: ["/care", "See Care →"] },
-			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **29,999** · Business **39,999** · Master **49,999**. SaaS **49,999+**. Design **14,999+**. Agent **49,999**.", link: ["/packages", "Full pricelist →"] },
-			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter **3–5 days**, Business **1–2 weeks**, Master **2–3 weeks** — once we have your photos, text + logo." },
+			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **7,499** · Business **10,999** · Master **13,999/mo**. Cancel anytime. Custom: SaaS 17,999 · Dash 5,999 · Agent 7,999 · Design 9,999.", link: ["/care", "See Care →"] },
+			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **35,999** · Business **47,999** · Master **59,999**. SaaS **59,999+**. Design **17,999+**. Agent **59,999**.", link: ["/packages", "Full pricelist →"] },
+			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter **5 days**, Business **1 week**, Master **2 weeks** — once we have your photos, text + logo." },
 			{ keys: ["mpesa", "m-pesa", "paybill", "till", "stk", "daraja", "pay"], text: "Till = walk-in, Paybill = tracked/online. We wire both natively.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill →"] },
 			{ keys: ["seo", "google", "rank", "found", "search"], text: "Every site ships SEO + Google Business Profile. Master adds buyer-keyword SEO.", link: ["/blog/seo-small-business-kenya", "SEO plan →"] },
 			{ keys: ["own", "domain", "files", "terms"], text: "You own everything — domain, files, credentials. Pay only for work done if we part ways." },
@@ -239,12 +239,12 @@ import { whatsappLink } from "../config";
 				bubble("Noted — and your budget?", false);
 				showChoices(["Under 30k", "30–40k", "40k+", "Not sure"], (budget) => {
 					const base = need === "Online store"
-						? { pkg: "Master", price: "49,999", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] as [string, string] }
+						? { pkg: "Master", price: "59,999", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] as [string, string] }
 						: need === "Bookings"
-						? { pkg: "Business", price: "39,999", link: ["/packages", "See Business →"] as [string, string] }
-						: { pkg: "Starter", price: "29,999", link: ["/packages", "See Starter →"] as [string, string] };
+						? { pkg: "Business", price: "47,999", link: ["/packages", "See Business →"] as [string, string] }
+						: { pkg: "Starter", price: "35,999", link: ["/packages", "See Starter →"] as [string, string] };
 					const fit = budget === "Under 30k" && base.pkg !== "Starter"
-						? " That's above 30k — **Starter (29,999)** gets you live now, upgrade later."
+						? " That's above 30k — **Starter (35,999)** gets you live now, upgrade later."
 						: " That fits your budget.";
 					const text = `For ${need.toLowerCase()} → **${base.pkg} (${base.price})**.${fit}`;
 					bubble(text, false, true);

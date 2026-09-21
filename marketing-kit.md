@@ -10,7 +10,7 @@ Use 3x/week LinkedIn/X/IG. Each post links to guide + calculator. All copy paste
 1. Title: How much does a website cost in Kenya? (2026)
 2. Table: Template 5-15k / Pro 29-49k / Agency 80k+ — what you get
 3. Hidden-cost checklist: domain? monthly? who owns files? revisions? speed on cheap phone?
-4. Where Orbit sits: Starter 29,999 (48-72h) / Business 39,999 (5d) / Master 49,999 (7-10d)
+4. Where Orbit sits: Starter 42,999 (48-72h) / Business 47,999 (5d) / Master 59,999 (7-10d)
 5. CTA: Full breakdown + calculator → orbitwebdesigns.co.ke/blog/website-cost-kenya
 
 **Caption:**
@@ -18,7 +18,7 @@ Most Kenyans overpay because the quote hides the monthly. Here's the real range 
 #WebDesignKenya #SMEKenya
 
 **GBP Post (weekly):**
-Need a website? Starter from 29,999 live in 48–72h. See honest 2026 prices + what drives the cost → [link]
+Need a website? Starter from 42,999 live in 48–72h. See honest 2026 prices + what drives the cost → [link]
 
 ---
 
@@ -28,7 +28,7 @@ Need a website? Starter from 29,999 live in 48–72h. See honest 2026 prices + w
 1. Your site rots without care: slow, hacked, dead SSL
 2. DIY 30min/month: weekly plugins / monthly PageSpeed+Search Console / daily backup + UptimeRobot
 3. When DIY fails: most hacks = never updated
-4. Orbit Care table: 7,599 / 9,599 / 11,999 — what's included
+4. Orbit Care table: 7,599 / 10,999 / 13,999 — what's included
 5. CTA → /blog/website-care-kenya + /care
 
 **Caption:**
@@ -116,7 +116,7 @@ Your customers live in WhatsApp. 4 setups to do this afternoon — templates ins
 6. BusinessList.co.ke
 7. Tuko directory / HapaKenya business submission (if open)
 
-Use description: "Orbit builds fast, M-Pesa-ready websites from KES 29,999 — live in days, WhatsApp support Mon–Sat. Nairobi, remote worldwide." + link to /packages + logo.
+Use description: "Orbit builds fast, M-Pesa-ready websites from KES 42,999 — live in days, WhatsApp support Mon–Sat. Nairobi, remote worldwide." + link to /packages + logo.
 
 ---
 

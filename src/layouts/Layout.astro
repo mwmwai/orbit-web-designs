@@ -13,10 +13,13 @@ interface Props {
 
 const {
 	title = `${SITE_NAME} | Nairobi Web Designer`,
-	description = "Orbit designs fast websites that get businesses found, trusted and paid. Custom builds from KES 29,999 — worldwide, fully remote.",
+	description = "Orbit designs fast websites that get businesses found, trusted and paid. Custom builds from KES 35,999 — worldwide, fully remote.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+
+const GA_ID = import.meta.env.PUBLIC_GA_ID as string | undefined;
+const META_PIXEL_ID = "1397340971942619";
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -27,7 +30,7 @@ const jsonLd = {
 	telephone: `+${WHATSAPP_NUMBER}`,
 	description,
 	areaServed: "Worldwide",
-	priceRange: "KES 14,999 - KES 49,999",
+	priceRange: "KES 17,999 - KES 59,999",
 };
 ---
 
@@ -46,6 +49,7 @@ const jsonLd = {
 		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 		<link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
+		<link rel="dns-prefetch" href="https://connect.facebook.net" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -67,27 +71,34 @@ const jsonLd = {
 			<meta name="google-site-verification" content={import.meta.env.PUBLIC_GSC_VERIFICATION} />
 		)}
 		<ClientRouter />
-		<script is:inline>
-			if (import.meta.env.PUBLIC_GA_ID) {
-				const k = "orbit_cookie_consent";
-				const consent = localStorage.getItem(k);
-				if (consent === "accepted") {
-					const script = document.createElement("script");
-					script.async = true;
-					script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`;
-					document.head.appendChild(script);
-					window.dataLayer = window.dataLayer || [];
-					function gtag() { dataLayer.push(arguments); }
-					window.gtag = gtag;
-					gtag('js', new Date());
-gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
+		<script is:inline define:vars={{ gaId: GA_ID, pixelId: META_PIXEL_ID }}>
+			(function() {
+				var CONSENT_KEY = "orbit_cookie_consent";
+				function loadAnalytics() {
+					if (window._orbitAnalyticsLoaded) return;
+					window._orbitAnalyticsLoaded = true;
+					if (gaId) {
+						var s = document.createElement("script");
+						s.async = true;
+						s.src = "https://www.googletagmanager.com/gtag/js?id=" + gaId;
+						document.head.appendChild(s);
+						window.dataLayer = window.dataLayer || [];
+						window.gtag = function() { window.dataLayer.push(arguments); };
+						window.gtag("js", new Date());
+						window.gtag("config", gaId, { anonymize_ip: true });
+					}
+					if (pixelId) {
+						!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+						window.fbq('init', pixelId);
+						window.fbq('track', 'PageView');
+					}
 				}
-			}
-		</script>
-		<script is:inline>
-			!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-			fbq('init', '1397340971942619');
-			fbq('track', 'PageView');
+				try {
+					if (localStorage.getItem(CONSENT_KEY) === "accepted") loadAnalytics();
+				} catch {}
+				window.addEventListener("orbit:consent-accepted", loadAnalytics);
+				window.loadOrbitAnalytics = loadAnalytics;
+			})();
 		</script>
 		<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1397340971942619&ev=PageView&noscript=1" /></noscript>
 		{import.meta.env.PUBLIC_TURNSTILE_SITE_KEY && (

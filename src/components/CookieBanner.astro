@@ -22,8 +22,8 @@
 		if (consent === "accepted") (window as any).orbitAnalyticsOK = true;
 		document.getElementById("cookie-accept")?.addEventListener("click", () => {
 			localStorage.setItem(k, "accepted");
-			(window as any).orbitAnalyticsOK = true;
 			banner.classList.add("hidden");
+			try { window.dispatchEvent(new Event("orbit:consent-accepted")); } catch {}
 		});
 		document.getElementById("cookie-decline")?.addEventListener("click", () => {
 			localStorage.setItem(k, "declined");
