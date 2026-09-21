@@ -45,12 +45,16 @@ const year = new Date().getFullYear();
 						msg.classList.remove("hidden");
 						msg.textContent = "Joining…";
 						try {
-							const { subscribeNewsletter } = await import("../lib/db");
-							const res = await subscribeNewsletter(email);
+							const res = await fetch("/api/supabase/submit", {
+								method: "POST",
+								headers: { "Content-Type": "application/json" },
+								body: JSON.stringify({ table: "newsletter", data: { email } }),
+							});
+							const data = await res.json().catch(() => ({}));
 							if (res.ok) {
-								msg.textContent = "You're in — watch your inbox.";
+								msg.textContent = "You're in — check your inbox for a welcome email.";
 								input.value = "";
-							} else if (res.duplicate) {
+							} else if (res.status === 409 || data.duplicate) {
 								msg.textContent = "Already subscribed — you're on the list.";
 							} else {
 								msg.textContent = "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";

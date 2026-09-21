@@ -108,10 +108,40 @@ export default async function handler(request: Request): Promise<Response> {
 
     if (error) {
       console.error('Supabase error:', error);
+      // 23505 = unique violation (already subscribed)
+      if ((error as any).code === '23505' && table === 'newsletter') {
+        return new Response(JSON.stringify({ error: 'Already subscribed', duplicate: true }), {
+          status: 409,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
       return new Response(JSON.stringify({ error: 'Failed to submit' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
+    }
+
+    // Fire-and-forget welcome email for newsletter signups.
+    if (table === 'newsletter' && data.email) {
+      const resendKey = process.env.RESEND_API_KEY;
+      const from = process.env.FROM_EMAIL || 'Orbit Web Designs <hello@orbitwebdesigns.co.ke>';
+      if (resendKey) {
+        const email = String(data.email);
+        // Don't await — don't block the response.
+        fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from,
+            to: email,
+            subject: 'Welcome to Orbit — growth tips incoming',
+            html: `<p>You're in — thanks for joining Orbit.</p><p>Every couple weeks we send one actionable tip on websites, M-Pesa, SEO, or WhatsApp sales — no spam.</p><p>Want a site in the meantime? Reply to this email or <a href="https://wa.me/254741992308?text=Hi%20Orbit!%20I%20joined%20the%20newsletter.">chat on WhatsApp</a>.</p><p>— Wanjohi, Orbit Web Designs & Marketing</p><p style="font-size:12px;color:#888">You're receiving this because you subscribed at orbitwebdesigns.co.ke. Reply STOP to unsubscribe.</p>`,
+          }),
+        }).catch((e) => console.error('Resend welcome failed:', e));
+      }
     }
 
     return new Response(JSON.stringify({ success: true }), {
