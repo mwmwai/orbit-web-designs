@@ -22,7 +22,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x00c8ff,
         transparent: true,
-        opacity: mobile ? 0.16 : 0.27,
+        opacity: mobile ? 0.16 : 0.33,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -38,7 +38,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x2f7bff,
         transparent: true,
-        opacity: mobile ? 0.12 : 0.2,
+        opacity: mobile ? 0.12 : 0.25,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -52,7 +52,7 @@ function OrbitRings({ mobile }: { mobile: boolean }) {
       new THREE.MeshPhysicalMaterial({
         color: 0x5fe6ff,
         transparent: true,
-        opacity: mobile ? 0.13 : 0.22,
+        opacity: mobile ? 0.13 : 0.27,
         side: THREE.DoubleSide,
         wireframe: true,
         roughness: 0,
@@ -269,7 +269,7 @@ function ScrollFade({ containerRef }: { containerRef: React.RefObject<HTMLDivEle
 function HeroScene({ mobile }: { mobile: boolean }) {
   return (
     <>
-      <ambientLight intensity={0.6} color="#5fe6ff" />
+      <ambientLight intensity={0.72} color="#5fe6ff" />
       <directionalLight position={[5, 10, 7]} intensity={1.7} color="#ffffff" />
       <directionalLight position={[-5, 5, -7]} intensity={1.0} color="#00c8ff" />
       <pointLight position={[0, 0, 4]} intensity={1.5} color="#00c8ff" distance={20} decay={1.6} />
