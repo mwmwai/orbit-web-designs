@@ -128,7 +128,7 @@ import { whatsappLink } from "../config";
 				? "justify-self-end rounded-2xl rounded-br-sm bg-electric/20 px-4 py-2.5 text-slate-100"
 				: "justify-self-start rounded-2xl rounded-bl-sm border border-edge bg-charcoal px-4 py-2.5 text-slate-300";
 			d.style.maxWidth = "90%";
-			if (html) d.innerHTML = text; else d.textContent = text;
+			if (html) d.innerHTML = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); else d.textContent = text;
 			log!.appendChild(d);
 			log!.scrollTop = log!.scrollHeight;
 		}
@@ -203,15 +203,7 @@ import { whatsappLink } from "../config";
 				const s = score(q, entry.keys);
 				if (s > bestScore) { bestScore = s; best = entry; }
 			}
-			// Strong keyword hit → instant scripted answer (free, zero latency).
-			if (best && bestScore >= 4) {
-				bubble(best.text, false, true);
-				addChat("a", best.text);
-				if (best.link) richLink(best.link[0], best.link[1]);
-				waButton(best.wa || q);
-				return;
-			}
-			// Anything else → real AI. Any failure falls back to the KB.
+			// Every typed question goes to the real AI. Any failure falls back to the KB.
 			typingIndicator(true);
 			try {
 				const history = mem.chat.slice(-6).map((m) => ({
@@ -232,6 +224,7 @@ import { whatsappLink } from "../config";
 				typingIndicator(false);
 				bubble(reply, false);
 				addChat("a", reply);
+				if (best && bestScore >= 4 && best.link) richLink(best.link[0], best.link[1]);
 			} catch {
 				typingIndicator(false);
 				if (best && bestScore > 0) {
