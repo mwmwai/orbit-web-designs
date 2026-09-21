@@ -15,16 +15,23 @@ import { whatsappLink } from "../config";
 		<section class="relative overflow-hidden border-b border-white/5">
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 				<div class="absolute -top-40 left-1/3 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/15 blur-[140px]"></div>
+				<div class="absolute top-20 right-0 h-[360px] w-[360px] rounded-full bg-neon/10 blur-[120px]"></div>
 			</div>
-			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom SaaS</p>
+			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pt-32">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom SaaS — you own it</p>
 				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
 					Your idea as a <span class="text-gradient">real app.</span>
 				</h1>
-				<p class="mt-5 max-w-2xl text-lg text-slate-400">Auth, roles, onboarding, admin + user dashboards, M-Pesa + cards — deployed, documented, handed over with 3 months support. You own everything.</p>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">Auth, roles, onboarding, admin + user dashboards, M-Pesa + cards — deployed, documented, handed over with 3 months support. You own everything, no subscriptions to us.</p>
 				<div class="mt-8 flex flex-wrap gap-3">
 					<a href={whatsappLink("Hi Orbit! I want a Custom SaaS App from 59,999 — my idea is...")} target="_blank" rel="noopener noreferrer" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20">Scope my SaaS — WhatsApp</a>
 					<a href="/packages" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 hover:border-electric/60 hover:text-white">See pricing</a>
+				</div>
+				<div class="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">Auth</p><p class="text-xs text-slate-400">roles ready</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">M-Pesa</p><p class="text-xs text-slate-400">native</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">Own it</p><p class="text-xs text-slate-400">your code</p></div>
+					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-lg font-extrabold">3 mo</p><p class="text-xs text-slate-400">support</p></div>
 				</div>
 			</div>
 		</section>
@@ -32,22 +39,34 @@ import { whatsappLink } from "../config";
 		<section class="py-16">
 			<div class="mx-auto max-w-7xl px-5">
 				<div class="grid gap-6 md:grid-cols-3">
-					<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Auth & Roles</h3><p class="mt-2 text-sm text-slate-400">Login, roles, onboarding, permissions — ready for real users.</p></div>
-					<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Dashboards</h3><p class="mt-2 text-sm text-slate-400">Admin + user views, sales/M-Pesa/bookings at a glance + CSV reports.</p></div>
-					<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Payments</h3><p class="mt-2 text-sm text-slate-400">M-Pesa, cards, PayPal native — you own the keys and the money.</p></div>
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300"><h3 class="font-semibold text-white">Auth & Roles</h3><p class="mt-2 text-sm text-slate-400">Login, roles, onboarding, permissions — ready for real users on day one.</p></div>
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300"><h3 class="font-semibold text-white">Dashboards</h3><p class="mt-2 text-sm text-slate-400">Admin + user views, sales/M-Pesa/bookings at a glance + CSV reports.</p></div>
+					<div class="glow-border edge-glow rounded-2xl p-6 hover-lift transition duration-300"><h3 class="font-semibold text-white">Payments</h3><p class="mt-2 text-sm text-slate-400">M-Pesa, cards, PayPal native — you own the keys and the money.</p></div>
 				</div>
-				<div class="mt-6 glow-border rounded-2xl p-8">
-					<p class="font-semibold text-white">From KES 59,999 — what's included</p>
-					<ul class="mt-4 grid gap-2 text-sm text-slate-300 sm:grid-cols-2">
-						<li class="flex gap-2"><span class="text-electric">✓</span> Auth, roles & onboarding flow</li>
-						<li class="flex gap-2"><span class="text-electric">✓</span> Admin + user dashboards</li>
-						<li class="flex gap-2"><span class="text-electric">✓</span> M-Pesa, card & PayPal</li>
-						<li class="flex gap-2"><span class="text-electric">✓</span> Deployed, documented & handed over</li>
-						<li class="flex gap-2"><span class="text-electric">✓</span> CSV export + business reports</li>
-						<li class="flex gap-2"><span class="text-electric">✓</span> 3 months support + training</li>
-					</ul>
-					<a href={whatsappLink("Hi Orbit! I want a Custom SaaS App (from 59,999). My idea is...")} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block rounded-full btn-gradient px-8 py-3 font-semibold text-white">WhatsApp to scope →</a>
-					<p class="mt-3 text-xs text-slate-500">Stay live with <a href="/care" class="text-electric hover:underline">SaaS Care 15,999/mo</a></p>
+				<div class="mt-8 grid gap-6 lg:grid-cols-2">
+					<div class="glow-border edge-glow card-shine rounded-2xl p-6">
+						<div class="flex items-center justify-between"><span class="font-mono text-xs uppercase tracking-widest text-slate-500">orbit.app — dashboard</span><span class="h-2 w-2 rounded-full bg-electric shadow-[0_0_10px_rgba(0,200,255,0.6)]"></span></div>
+						<div class="mt-6 grid grid-cols-3 gap-3">
+							<div class="rounded-xl bg-charcoal p-4 border border-white/5"><p class="text-xs text-slate-400">MRR</p><p class="text-lg font-extrabold text-white">KES 84k</p><p class="text-xs text-electric">↑ 12%</p></div>
+							<div class="rounded-xl bg-charcoal p-4 border border-white/5"><p class="text-xs text-slate-400">Users</p><p class="text-lg font-extrabold text-white">1,204</p><p class="text-xs text-slate-500">+38 today</p></div>
+							<div class="rounded-xl bg-charcoal p-4 border border-white/5"><p class="text-xs text-slate-400">M-Pesa</p><p class="text-lg font-extrabold text-white">KES 32k</p><p class="text-xs text-slate-500">today</p></div>
+						</div>
+						<div class="mt-4 h-20 rounded-xl bg-gradient-to-r from-electric/20 to-neon/20 border border-electric/20 flex items-end gap-1 p-3"><div class="flex-1 rounded-t bg-electric/60" style="height:40%"></div><div class="flex-1 rounded-t bg-electric/80" style="height:65%"></div><div class="flex-1 rounded-t bg-electric" style="height:90%"></div><div class="flex-1 rounded-t bg-neon/70" style="height:55%"></div><div class="flex-1 rounded-t bg-electric/70" style="height:75%"></div></div>
+						<p class="mt-3 text-[10px] font-mono uppercase tracking-widest text-slate-500">Sample SaaS data — your real M-Pesa, users, revenue</p>
+					</div>
+					<div class="glow-border rounded-2xl p-8 flex flex-col">
+						<p class="font-semibold text-white">From KES 59,999 — what's included</p>
+						<ul class="mt-4 grid gap-2 text-sm text-slate-300">
+							<li class="flex gap-2"><span class="text-electric">✓</span> Auth, roles & onboarding flow</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Admin + user dashboards + business view</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> M-Pesa, card & PayPal — native</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> Deployed, documented & handed over</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> CSV export + business reports</li>
+							<li class="flex gap-2"><span class="text-electric">✓</span> 3 months support + training, you own it</li>
+						</ul>
+						<a href={whatsappLink("Hi Orbit! I want a Custom SaaS App (from 59,999). My idea is...")} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block rounded-full btn-gradient px-8 py-3 font-semibold text-white text-center">WhatsApp to scope →</a>
+						<p class="mt-3 text-xs text-slate-500">Stay live with <a href="/care" class="text-electric hover:underline">SaaS Care 15,999/mo</a> — DB, auth & bug watch</p>
+					</div>
 				</div>
 			</div>
 		</section>
