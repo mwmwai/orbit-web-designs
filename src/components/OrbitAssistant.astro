@@ -5,10 +5,13 @@ import { whatsappLink } from "../config";
 <div id="orbit-assistant" class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3" client:load>
 	<div id="oa-panel" class="hidden w-80 max-w-[calc(100vw-3rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
+		<div class="flex items-center justify-between gap-2">
 			<div class="flex items-center gap-2">
 				<div class="h-2 w-2 rounded-full bg-electric/30 animate-pulse"></div>
 				<p class="font-semibold text-white">Orbit AI</p>
 			</div>
+			<span id="oa-status" class="text-[10px] text-slate-500">…</span>
+		</div>
 			<p class="text-xs text-slate-400">Ask me anything · Tap chips for quick answers</p>
 		</div>
 		<div id="oa-log" class="grid max-h-72 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
@@ -131,6 +134,30 @@ import { whatsappLink } from "../config";
 		toggle.dataset.bound = "1";
 
 		const mem = loadMemory();
+		mem.visits = (mem.visits || 0) + 1;
+		saveMemory(mem);
+
+		async function checkAI() {
+			const el = document.getElementById("oa-status");
+			if (!el) return;
+			const basic = () => {
+				el.textContent = "● basic";
+				el.className = "text-[10px] font-semibold text-amber-400";
+			};
+			try {
+				const res = await fetch("/api/chat");
+				const data = await res.json();
+				if (data && data.ai) {
+					el.textContent = "● live AI";
+					el.className = "text-[10px] font-semibold text-emerald-400";
+				} else {
+					basic();
+				}
+			} catch {
+				basic();
+			}
+		}
+		checkAI();
 		mem.visits = (mem.visits || 0) + 1;
 		saveMemory(mem);
 
@@ -280,6 +307,7 @@ import { whatsappLink } from "../config";
 			}
 			// Every typed question goes to the real AI. Any failure falls back to the KB.
 			typingIndicator(true);
+			let rateLimited = false;
 			try {
 				const history = mem.chat.slice(-6).map((m) => ({
 					role: m.r === "a" ? "assistant" : "user",
@@ -290,7 +318,10 @@ import { whatsappLink } from "../config";
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ messages: history, name: mem.name || undefined }),
 				});
-				if (!res.ok) throw new Error("ai-off");
+				if (!res.ok) {
+					if (res.status === 429) rateLimited = true;
+					throw new Error("ai-off");
+				}
 				const data = await res.json();
 				const reply = typeof data.reply === "string" && data.reply.trim()
 					? data.reply.trim().slice(0, 1200)
@@ -302,7 +333,10 @@ import { whatsappLink } from "../config";
 				if (best && bestScore >= 4 && best.link) richLink(best.link[0], best.link[1]);
 			} catch {
 				typingIndicator(false);
-				if (best && bestScore > 0) {
+				if (rateLimited) {
+					bubble("Easy — I've had a lot of chats this hour. Try again in a bit, or tap below and a human replies in minutes.", false);
+					addChat("a", "Rate limited. Human handoff offered.");
+				} else if (best && bestScore > 0) {
 					bubble(best.text, false, true);
 					addChat("a", best.text);
 					if (best.link) richLink(best.link[0], best.link[1]);

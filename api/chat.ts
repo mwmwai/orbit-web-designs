@@ -42,6 +42,9 @@ export default async function handler(request: Request): Promise<Response> {
       headers: { 'Content-Type': 'application/json', ...extraHeaders },
     });
 
+  if (request.method === 'GET') {
+    return json({ ok: true, ai: Boolean(process.env.OPENROUTER_API_KEY) });
+  }
   if (request.method !== 'POST') {
     return json({ error: 'Method not allowed' }, 405);
   }

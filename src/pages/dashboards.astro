@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/react/Navbar";
+import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
@@ -52,7 +52,7 @@ const bookings = [
 	title="Business Dashboards — Track Sales, M-Pesa & Bookings | Orbit"
 	description="Private dashboards for Kenyan SMEs: live M-Pesa sales, bookings and stock at a glance. Add-on KES 19,999, standalone KES 35,999."
 >
-	<Navbar client:load />
+	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">

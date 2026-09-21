@@ -1,12 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/react/Navbar";
+import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { whatsappLink, DEFAULT_WA_MESSAGE } from "../config";
 ---
 
 <Layout title="Lost in orbit — 404 | Orbit Web Designs & Marketing" description="This page drifted out of orbit. Head home or chat with us on WhatsApp.">
-	<Navbar client:load />
+	<Navbar />
 	<main id="main" class="mx-auto max-w-3xl px-5 py-28 text-center">
 		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ 404</p>
 		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">

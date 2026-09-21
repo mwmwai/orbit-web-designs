@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/react/Navbar";
+import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import FloatingActions from "../components/FloatingActions.astro";
 import { SITE_NAME, SITE_URL, WHATSAPP_NUMBER, DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
@@ -22,7 +22,7 @@ const description = "Free M-Pesa transaction fee calculator for Kenya. Calculate
 		"offers": { "@type": "Offer", "price": "0", "priceCurrency": "KES" },
 		"provider": { "@type": "Organization", "name": SITE_NAME, "url": SITE_URL }
 	})} />
-	<Navbar client:load />
+	<Navbar />
 	<main id="main">
 		<section class="relative pt-24 pb-16 lg:pt-32">
 			<div class="mx-auto max-w-3xl px-5 text-center">

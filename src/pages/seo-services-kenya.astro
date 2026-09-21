@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/react/Navbar";
+import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
@@ -10,7 +10,7 @@ import { whatsappLink } from "../config";
 	title="SEO Services Kenya — Rank on Google & Get Customers | Orbit"
 	description="SEO services in Kenya: technical, on-page and local SEO that ranks you for the searches that pay. Google Business Profile included. Chat on WhatsApp."
 >
-	<Navbar client:load />
+	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
 			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
