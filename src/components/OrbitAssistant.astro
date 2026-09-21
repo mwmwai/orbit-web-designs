@@ -2,7 +2,7 @@
 import { whatsappLink } from "../config";
 ---
 
-<div id="orbit-assistant" class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3" client:load>
+<div id="orbit-assistant" class="fixed bottom-6 left-6 z-[110] flex flex-col items-start gap-3" client:load>
 	<div id="oa-panel" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
@@ -355,6 +355,15 @@ import { whatsappLink } from "../config";
 				input.focus();
 			}
 		});
+		// Always usable: keyboard shortcut + auto-prompt
+		document.addEventListener("keydown", (e) => {
+			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); panel.classList.remove("hidden"); if (log!.childElementCount === 0) greet(); input.focus(); }
+			if (e.key === "/" && !["INPUT","TEXTAREA"].includes((document.activeElement as HTMLElement)?.tagName)) { e.preventDefault(); panel.classList.remove("hidden"); if (log!.childElementCount === 0) greet(); input.focus(); }
+			if (e.key === "Escape") panel.classList.add("hidden");
+		});
+		if (!mem.visits || mem.visits <= 1) {
+			setTimeout(() => { if (panel.classList.contains("hidden") && !localStorage.getItem("orbit_ai_prompted")) { panel.classList.remove("hidden"); greet(); localStorage.setItem("orbit_ai_prompted","1"); } }, 10000);
+		}
 		send.addEventListener("click", () => {
 			const q = input.value.trim();
 			if (!q) return;
