@@ -310,7 +310,7 @@ import { whatsappLink } from "../config";
 			typingIndicator(true);
 			let rateLimited = false;
 			try {
-				const history = mem.chat.slice(-6).map((m) => ({
+				const history = mem.chat.slice(-10).map((m) => ({
 					role: m.r === "a" ? "assistant" : "user",
 					content: m.t.slice(0, 600),
 				}));

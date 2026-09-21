@@ -1,6 +1,8 @@
+import { createClient } from '@supabase/supabase-js';
+
 const RATE_LIMIT = 15; // chat calls per window — each one costs money
 const WINDOW_MS = 3_600_000; // 1 hour
-const MAX_MSGS = 8;
+const MAX_MSGS = 10;
 const MAX_MSG_CHARS = 600;
 const MAX_TOTAL_CHARS = 3000;
 const MAX_TOKENS = 500;
@@ -138,6 +140,26 @@ export default async function handler(request: Request): Promise<Response> {
     if (!reply) {
       return json({ error: 'AI unavailable', fallback: true }, 502);
     }
+    // Powerful engine: auto-save lead if name/phone/email shared (fire-and-forget)
+    try {
+      const lastUser = clean[clean.length - 1].content;
+      const emailM = lastUser.match(/[\w.+-]+@[\w-]+\.[\w.+-]+/);
+      const phoneM = lastUser.match(/(\+?254[\s.-]?\d{9}|0?7\d{8})/);
+      if ((name || emailM || phoneM) && lastUser.length > 12) {
+        const sbUrl = process.env.PUBLIC_SUPABASE_URL;
+        const sbKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
+        if (sbUrl && sbKey) {
+          const sb = createClient(sbUrl, sbKey);
+          await sb.from('leads').insert({
+            name: (name || 'Orbit AI chat').slice(0, 80),
+            email: emailM ? emailM[0].slice(0, 120) : null,
+            phone: phoneM ? phoneM[0].replace(/\s/g, '').slice(0, 20) : null,
+            details: `AI: ${lastUser.slice(0, 400)} | Reply: ${reply.slice(0, 400)}`,
+            source: 'orbit-ai',
+          });
+        }
+      }
+    } catch {}
     return json({ reply });
   } catch {
     return json({ error: 'AI unavailable', fallback: true }, 502);
