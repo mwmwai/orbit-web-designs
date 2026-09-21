@@ -105,11 +105,11 @@ import { whatsappLink } from "../config";
 			{ keys: ["seo", "google", "rank", "found", "search"], text: "Every site ships SEO + Google Business Profile. Master adds buyer-keyword SEO.", link: ["/blog/seo-small-business-kenya", "SEO plan →"] },
 			{ keys: ["own", "domain", "files", "terms"], text: "You own everything — domain, files, credentials. Pay only for work done if we part ways." },
 			{ keys: ["guide", "learn", "calculator", "tutorial"], text: "7 free guides + M-Pesa calculator — steal them even if you never hire us.", link: ["/guides", "All guides →"] },
-			{ keys: ["human", "person", "talk", "contact", "phone", "email", "call"], text: "Human in minutes, Mon–Sat: +254 741 992 308. Tap below — your question arrives pre-typed." },
+			{ keys: ["human", "person", "talk", "contact", "phone", "email", "call"], text: "Talk to a human in minutes, Mon–Sat: +254 741 992 308 on WhatsApp." },
 			{ keys: ["hello", "hi", "hey", "habari", "niaje", "sasa"], text: "Habari! 👋 I'm Orbit — ask me about prices, timelines, M-Pesa, care, or anything. Or tap an action below." },
 			{ keys: ["discount", "offer", "promo", "deal", "off"], text: "Prices are transparent — no hidden fees." },
 		];
-		const fallback = "I don't have that one yet — a human will know. Tap below, we reply in minutes.";
+		const fallback = "I don't have that one yet — try asking about prices, timelines, M-Pesa, or care.";
 
 		const stop = new Set(["a","an","the","is","are","do","does","i","my","me","for","to","of","in","on","and","or","it","this","that","with","what","how","much","can","you","your","we","our","get","want","need","have","has","about","please","hi"]);
 		function score(q: string, keys: string[]): number {
@@ -334,7 +334,7 @@ import { whatsappLink } from "../config";
 			} catch {
 				typingIndicator(false);
 				if (rateLimited) {
-					bubble("Easy — I've had a lot of chats this hour. Try again in a bit, or tap below and a human replies in minutes.", false);
+					bubble("Easy — I've had a lot of chats this hour. Try again in a bit.", false);
 					addChat("a", "Rate limited. Human handoff offered.");
 				} else if (best && bestScore > 0) {
 					bubble(best.text, false, true);
@@ -345,7 +345,6 @@ import { whatsappLink } from "../config";
 					addChat("a", fallback);
 				}
 			}
-			waButton(q);
 		}
 
 		toggle.addEventListener("click", () => {
