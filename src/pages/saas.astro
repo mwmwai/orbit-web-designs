@@ -71,6 +71,37 @@ import { whatsappLink } from "../config";
 			</div>
 		</section>
 
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-7xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white">How we ship</h2>
+				<div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{[
+						["Map", "We map your idea, roles, data model and M-Pesa flows."],
+						["Build", "SaaS wired to your DB, auth and payments on your accounts."],
+						["Launch", "Deployed on your domain, docs + handover video."],
+						["Scale", "3 months tuning, then SaaS Care if you want us watching."],
+					].map(([t, d], i) => (
+						<article class="glow-border reveal rounded-2xl p-6" style={`transition-delay:${i * 80}ms`}>
+							<span class="text-gradient text-3xl font-extrabold">{i + 1}</span>
+							<h3 class="mt-3 font-semibold text-white">{t}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-slate-400">{d}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white">SaaS FAQ</h2>
+				<div class="mt-8 grid gap-4">
+					<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">Who owns the code?</summary><p class="mt-3 text-sm text-slate-400">You do — repo, DB, domain, payments all on your accounts. We hand over everything.</p></details>
+					<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">What about hosting?</summary><p class="mt-3 text-sm text-slate-400">We deploy where you want (Vercel/Supabase/your VPS). Hosting bills to you, no markup.</p></details>
+					<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">Do you maintain it after?</summary><p class="mt-3 text-sm text-slate-400">3 months included. After that SaaS Care 15,999/mo covers hosting, DB, auth, bug fixes and uptime.</p></details>
+				</div>
+			</div>
+		</section>
+
 		<CtaBand title="Have an idea?" text="Tell us what it does — we reply with scope, timeline and honest price." />
 	</main>
 	<Footer />
