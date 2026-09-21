@@ -156,13 +156,13 @@ const 	allPlans = [
 	},
 ];
 
-import { whatsappLink } from "../config";
-
-function waForPlan(p: typeof allPlans[number]) {
-	if (p.name === "Custom AI Agent") return whatsappLink(`Hi Orbit! I want the Custom AI Agent (${p.price}) — can you scope it for my business?`);
-	if (p.name === "Workflow Automation") return whatsappLink(`Hi Orbit! I want Workflow Automation (${p.price}) — the job I want automated is...`);
-	if (p.name === "Custom SaaS App") return whatsappLink(`Hi Orbit! I want a Custom SaaS App (${p.price}) — my idea is...`);
-	if (p.name === "Business Dashboard") return whatsappLink(`Hi Orbit! I want a Business Dashboard (${p.name}, ${p.price})`);
+function pageForPlan(p: typeof allPlans[number]) {
+	if (p.name === "Custom AI Agent") return "/automation";
+	if (p.name === "Workflow Automation") return "/automation";
+	if (p.name === "Custom SaaS App") return "/packages";
+	if (p.name === "Business Dashboard") return "/dashboards";
+	if (p.name === "Graphic Design") return "/contact";
+	if (["Starter","Business","Master"].includes(p.name)) return "/packages";
 	return "/contact";
 }
 
@@ -220,9 +220,7 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 								<a href="/mpesa-fee-calculator" class="mt-4 inline-flex text-xs font-medium text-electric hover:underline">→ Price your margins with M-Pesa fee calculator</a>
 							)}
 							<a
-								href={waForPlan(p)}
-								target={waForPlan(p).startsWith("https://wa.me") ? "_blank" : undefined}
-								rel={waForPlan(p).startsWith("https://wa.me") ? "noopener noreferrer" : undefined}
+								href={pageForPlan(p)}
 								class={`promo-cta mt-8 block rounded-full py-3 text-center font-semibold transition ${
 									p.featured
 										? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
