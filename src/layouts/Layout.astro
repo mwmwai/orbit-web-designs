@@ -100,6 +100,31 @@ gtag('config', import.meta.env.PUBLIC_GA_ID, { anonymize_ip: true });
 		<OrbitAssistant />
 		<CookieBanner />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		<script is:inline>
+			(function() {
+				document.addEventListener('click', function(e) {
+					var a = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+					if (!a) return;
+					var label = a.getAttribute('data-track') || a.textContent.trim().slice(0, 40) || 'whatsapp';
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'whatsapp_click', { event_category: 'engagement', event_label: label });
+					}
+					if (typeof window.fbq === 'function') {
+						window.fbq('track', 'Contact', { content_name: label });
+					}
+				});
+				document.addEventListener('click', function(e) {
+					var btn = e.target.closest('a.btn-gradient, a[class*="btn-gradient"], button.btn-gradient');
+					if (!btn) return;
+					// Don't double-count WhatsApp buttons already tracked above.
+					if (btn.closest('a[href*="wa.me"]') || btn.getAttribute('href')?.includes('wa.me')) return;
+					var label = btn.getAttribute('data-track') || btn.textContent.trim().slice(0, 40) || 'cta';
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'cta_click', { event_category: 'engagement', event_label: label });
+					}
+				});
+			})();
+		</script>
 		<script>
 			function initTilt() {
 				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

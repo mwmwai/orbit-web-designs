@@ -7,8 +7,8 @@ const KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
 
 export const dbReady = Boolean(URL && KEY);
 
-async function insert(table: "leads" | "newsletter", row: Record<string, unknown>): Promise<boolean> {
-	if (!dbReady) return false;
+async function insert(table: "leads" | "newsletter", row: Record<string, unknown>): Promise<{ ok: boolean; duplicate?: boolean }> {
+	if (!dbReady) return { ok: false };
 	try {
 		const res = await fetch(`${URL}/rest/v1/${table}`, {
 			method: "POST",
@@ -20,9 +20,11 @@ async function insert(table: "leads" | "newsletter", row: Record<string, unknown
 			},
 			body: JSON.stringify(row),
 		});
-		return res.ok;
+		if (res.ok) return { ok: true };
+		if (res.status === 409) return { ok: false, duplicate: true };
+		return { ok: false };
 	} catch {
-		return false;
+		return { ok: false };
 	}
 }
 
@@ -31,6 +33,6 @@ export function saveLead(lead: { name: string; email?: string; phone?: string; d
 	void insert("leads", lead);
 }
 
-export async function subscribeNewsletter(email: string, name?: string): Promise<boolean> {
+export async function subscribeNewsletter(email: string, name?: string): Promise<{ ok: boolean; duplicate?: boolean }> {
 	return insert("newsletter", { email, name: name || null });
 }

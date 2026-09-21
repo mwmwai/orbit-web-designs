@@ -46,9 +46,15 @@ const year = new Date().getFullYear();
 						msg.textContent = "Joining…";
 						try {
 							const { subscribeNewsletter } = await import("../lib/db");
-							const ok = await subscribeNewsletter(email);
-							msg.textContent = ok ? "You're in — watch your inbox." : "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";
-							if (ok) input.value = "";
+							const res = await subscribeNewsletter(email);
+							if (res.ok) {
+								msg.textContent = "You're in — watch your inbox.";
+								input.value = "";
+							} else if (res.duplicate) {
+								msg.textContent = "Already subscribed — you're on the list.";
+							} else {
+								msg.textContent = "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";
+							}
 						} catch {
 							msg.textContent = "Couldn't save that — tap the green bubble and we'll add you on WhatsApp.";
 						}
