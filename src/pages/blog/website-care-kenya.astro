@@ -27,31 +27,46 @@ import { whatsappLink } from "../../config";
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<h2 class="text-xl font-bold text-white">DIY routine (30 min/month)</h2>
+			<h2 class="text-2xl font-bold text-white">Why sites die without care</h2>
+			<p class="mt-3 text-sm leading-relaxed text-slate-400">A website is software. WordPress, plugins, themes and SSL certificates all get updates — some weekly, some daily. When you skip updates, you're leaving the front door open. Hackers don't target your business specifically; they scan for any site running an old plugin version. A compromised site gets flagged by Google within hours, your traffic drops to zero, and recovery costs 3-10x what monthly care would have been.</p>
+			<p class="mt-3 text-sm leading-relaxed text-slate-400">Beyond security, sites slow down. Images bloat, databases accumulate junk, and cached pages go stale. A site that loaded in 1.5 seconds at launch can creep to 4+ seconds in six months. Google's Core Web Vitals penalise that — you slide down search results even if your content is solid. Regular speed tuning keeps you in the 90+ range where both Google and customers stay happy.</p>
+
+			<h2 class="mt-10 text-2xl font-bold text-white">DIY routine (30 min/month)</h2>
 			<div class="mt-6 grid gap-3 text-sm text-slate-300">
-				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Weekly</p><p class="mt-1 text-slate-400">Update CMS/plugins, scan with free Sucuri/Wordfence, check forms still send.</p></div>
-				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Monthly</p><p class="mt-1 text-slate-400">Run <a href="https://pagespeed.web.dev" class="text-electric hover:underline">PageSpeed</a> + Search Console, renew SSL auto-check, test backup restore, check 404s.</p></div>
-				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Always</p><p class="mt-1 text-slate-400">Daily off-site backup (Drive/Cloud), uptime ping via <a href="https://uptimerobot.com" class="text-electric hover:underline">UptimeRobot free</a>, WhatsApp alert on failure.</p></div>
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Weekly (5 min)</p><p class="mt-1 text-slate-400">Log in, update CMS core + any plugin with a green dot, scan with free Sucuri/Wordfence, test one contact form. If you see "update available" for more than 2 weeks, you're behind.</p></div>
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Monthly (15 min)</p><p class="mt-1 text-slate-400">Run <a href="https://pagespeed.web.dev" class="text-electric hover:underline">PageSpeed</a> on mobile — compare to last month. Check Search Console for crawl errors, 404s and security issues. Renew SSL auto-check (most hosts do this, but verify). Test a full backup restore — a backup you've never tested is not a backup.</p></div>
+				<div class="glow-border rounded-xl p-5"><p class="font-semibold text-white">Always on (automated)</p><p class="mt-1 text-slate-400">Daily off-site backup to Google Drive or Dropbox (not just host backup), uptime ping via <a href="https://uptimerobot.com" class="text-electric hover:underline">UptimeRobot free</a> with WhatsApp alert on failure, and monthly database optimisation if you're on WordPress.</p></div>
 			</div>
 
-			<h2 class="mt-10 text-xl font-bold text-white">When DIY fails</h2>
-			<p class="mt-3 text-sm leading-relaxed text-slate-400">Most hacked SME sites weren't targeted — they were just never updated. If you won't do the 30 min, delegate. That's the whole point of care plans.</p>
+			<h2 class="mt-10 text-2xl font-bold text-white">When DIY fails (and it usually does)</h2>
+			<p class="mt-3 text-sm leading-relaxed text-slate-400">Most hacked SME sites weren't targeted — they were just never updated. A common story: a restaurant client installs a free gallery plugin, never updates it, 8 months later it has a known vulnerability. Injected malware redirects all traffic to a spam site. Google blacklists the domain. The fix? Wipe, restore from backup, rebuild trust with Google — 2-3 weeks offline, customers lost.</p>
+			<p class="mt-3 text-sm leading-relaxed text-slate-400">Speed decay is quieter but equally damaging. You don't notice the slowdown day-to-day, but your bounce rate creeps up from 40% to 65% over six months. Every 1-second delay in mobile load time drops conversions by roughly 7%. If your site made KES 100k/month at launch, a slow site is quietly costing you KES 20-30k now. If you won't do the 30 min, delegate. That's the whole point of care plans.</p>
 
-			<h2 class="mt-10 text-xl font-bold text-white">What Orbit Care covers (and what it doesn't)</h2>
+			<h2 class="mt-10 text-2xl font-bold text-white">What Orbit Care covers (and what it doesn't)</h2>
 			<div class="mt-6 overflow-hidden rounded-xl border border-edge">
 				<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-2">Task</th><th class="px-4 py-2">DIY free</th><th class="px-4 py-2">Orbit Care</th></tr></thead>
-				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">Hosting + SSL + backups</td><td class="px-4 py-2">You buy</td><td class="px-4 py-2 text-white">Included</td></tr><tr><td class="px-4 py-2">Security patches</td><td class="px-4 py-2">You update</td><td class="px-4 py-2 text-white">Weekly, we do</td></tr><tr><td class="px-4 py-2">Speed tuning</td><td class="px-4 py-2">You test</td><td class="px-4 py-2 text-white">Monthly re-check</td></tr><tr><td class="px-4 py-2">Human support</td><td class="px-4 py-2">—</td><td class="px-4 py-2 text-white">WhatsApp, Mon–Sat, minutes</td></tr></tbody></table>
+				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">Hosting + SSL + backups</td><td class="px-4 py-2">You buy & manage</td><td class="px-4 py-2 text-white">Included, monitored</td></tr><tr><td class="px-4 py-2">Security patches</td><td class="px-4 py-2">You update weekly</td><td class="px-4 py-2 text-white">Patched within 24h</td></tr><tr><td class="px-4 py-2">Speed tuning</td><td class="px-4 py-2">You test monthly</td><td class="px-4 py-2 text-white">Monthly re-check + fix</td></tr><tr><td class="px-4 py-2">Uptime monitoring</td><td class="px-4 py-2">UptimeRobot free</td><td class="px-4 py-2 text-white">24/7 + instant response</td></tr><tr><td class="px-4 py-2">Human support</td><td class="px-4 py-2">—</td><td class="px-4 py-2 text-white">WhatsApp, Mon–Sat, minutes</td></tr></tbody></table>
 			</div>
+			<p class="mt-4 text-sm text-slate-400">What Care does NOT cover: redesigns, new features, content changes, or domain renewal fees. Those are separate. Think of Care as insurance + janitor — keeping what you have healthy, not building new things.</p>
 			<div class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
-				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Starter 7,499/mo</p><p class="text-xs text-slate-400">for 35,999 sites</p></div>
-				<div class="rounded-xl border border-electric/30 p-4"><p class="font-semibold text-white">Business 10,999/mo</p><p class="text-xs text-slate-400">most popular</p></div>
-				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Master 13,999/mo</p><p class="text-xs text-slate-400">stores/bookings</p></div>
+				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Starter 7,499/mo</p><p class="text-xs text-slate-400">for 35,999 sites — hosting, backups, patches</p></div>
+				<div class="rounded-xl border border-electric/30 p-4"><p class="font-semibold text-white">Business 10,999/mo</p><p class="text-xs text-slate-400">+ speed tuning + priority support</p></div>
+				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Master 13,999/mo</p><p class="text-xs text-slate-400">+ stores/bookings — full monitoring</p></div>
 			</div>
 			<p class="mt-3 text-xs text-slate-500">Cancel anytime — site stays yours, we just stop watching it.</p>
 
+			<h2 class="mt-10 text-2xl font-bold text-white">Free tools to DIY today</h2>
+			<ul class="mt-4 grid gap-2 text-sm text-slate-300">
+				<li>→ <a href="https://pagespeed.web.dev" class="text-electric hover:underline">PageSpeed Insights</a> — test mobile speed, track over time</li>
+				<li>→ <a href="https://search.google.com/search-console" class="text-electric hover:underline">Search Console</a> — crawl errors, security issues, index coverage</li>
+				<li>→ <a href="https://uptimerobot.com" class="text-electric hover:underline">UptimeRobot</a> — free uptime monitoring with email/WhatsApp alerts</li>
+				<li>→ <a href="https://sucuri.net" class="text-electric hover:underline">Sucuri</a> — free malware scanner (WordPress)</li>
+				<li>→ <a href="https://squoosh.app" class="text-electric hover:underline">Squoosh</a> — compress images monthly to keep pages fast</li>
+			</ul>
+
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<p class="text-sm font-semibold text-white">Need us to watch it?</p>
-				<p class="mt-1 text-sm text-slate-400">One message and it's handled. <a href={whatsappLink("Hi Orbit! I want Orbit Care — which tier fits my site?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Get Care on WhatsApp →</a></p>
+				<p class="mt-1 text-sm text-slate-400">One message and it's handled — patches, backups, speed, the lot. <a href={whatsappLink("Hi Orbit! I want Orbit Care — which tier fits my site?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Get Care on WhatsApp →</a></p>
 			</div>
 		</article>
 

@@ -27,33 +27,57 @@ import { whatsappLink } from "../../config";
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<h2 class="text-xl font-bold text-white">The 4 systems</h2>
+			<p class="text-sm leading-relaxed text-slate-400">Selling online in Kenya isn't just "put products on a site." You need four systems working together: checkout, inventory, order notifications and SEO. Skip one and you either lose sales, oversell stock, or get zero traffic. Here's exactly what each needs — works whether you're on Shopify, WooCommerce or custom.</p>
+
+			<h2 class="mt-10 text-2xl font-bold text-white">The 4 systems</h2>
 			<div class="mt-6 grid gap-4">
-				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">1. Checkout in &lt;60s on cheap phone</h3><p class="mt-2 text-sm text-slate-400">Paybill/Till + cards/PayPal via Daraja (native API, not plugin). Test: can a customer finish with 1 hand while on boda? <a href="/mpesa-till-vs-paybill" class="text-electric hover:underline">Till vs Paybill →</a></p></div>
-				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">2. Stock that subtracts itself</h3><p class="mt-2 text-sm text-slate-400">Every sale drops inventory; low-stock alert at 5 left. Without this you oversell on WhatsApp and refund with shame.</p></div>
-				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">3. Orders ping WhatsApp instantly</h3><p class="mt-2 text-sm text-slate-400">Items + amount + delivery + customer phone pushed to your WhatsApp. No dashboard babysitting.</p></div>
-				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">4. Pages Google can find</h3><p class="mt-2 text-sm text-slate-400">Each product/category targets one buyer phrase Kenyans type. See <a href="/blog/seo-small-business-kenya" class="text-electric hover:underline">SEO guide</a>.</p></div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">1. Checkout in &lt;60s on cheap phone</h3>
+					<p class="mt-2 text-sm text-slate-400">Your customer is on a boda or in a matatu on 3G. If checkout takes more than 60 seconds or asks for more than phone + amount + delivery zone, you lose them. Use native Daraja wiring (Till + Paybill + cards/PayPal) — not a plugin that breaks on WordPress updates. Test: can a customer finish with one hand while standing? <a href="/mpesa-till-vs-paybill" class="text-electric hover:underline">Till vs Paybill →</a></p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">2. Stock that subtracts itself</h3>
+					<p class="mt-2 text-sm text-slate-400">Every sale drops inventory automatically. Low-stock alert at 5 items left. Without this you oversell on WhatsApp, promise delivery, then refund with shame and lose the customer forever. Your system should show current stock on every product page — customers trust transparent sellers.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">3. Orders ping WhatsApp instantly</h3>
+					<p class="mt-2 text-sm text-slate-400">Items + amount + delivery zone + customer phone — pushed to your WhatsApp the second payment lands. No dashboard babysitting, no "let me check" delays. You see it, you pack it, you ship it. Speed to first reply is the #1 predictor of whether a customer completes purchase.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">4. Pages Google can find</h3>
+					<p class="mt-2 text-sm text-slate-400">Each product and category page targets one buyer phrase Kenyans actually type. "Ankara dresses Nairobi delivery" not "Beautiful ankara collection." Titles, descriptions, images — all optimised. See our <a href="/blog/seo-small-business-kenya" class="text-electric hover:underline">SEO guide</a> for the 30-day version.</p>
+				</div>
 			</div>
 
-			<h2 class="mt-10 text-xl font-bold text-white">Margin math (do this before stocking)</h2>
+			<h2 class="mt-10 text-2xl font-bold text-white">Margin math (do this before stocking anything)</h2>
+			<p class="mt-3 text-sm text-slate-400">Most new stores price by "what others charge" without calculating their actual margin. One sale example:</p>
 			<div class="mt-4 rounded-xl border border-edge bg-panel p-5 text-sm text-slate-300">
-				<p>Price = 2,500, M-Pesa fee (calc) = 33, delivery you pay = 300, packaging = 50 → <strong class="text-white">keep 2,117</strong>. Skip the fee math and your "margin" is fantasy — the calculator takes 10 seconds.</p>
+				<p>Selling price = KES 2,500</p>
+				<p class="mt-1">M-Pesa fee (use calculator) = ~33</p>
+				<p class="mt-1">Delivery you pay (boda/fargo) = 300</p>
+				<p class="mt-1">Packaging = 50</p>
+				<p class="mt-1">Your cost price = 1,800</p>
+				<p class="mt-2 font-semibold text-white">You keep: KES 317 per sale (12.7% margin)</p>
+				<p class="mt-2 text-slate-400">Is 317 enough to cover Instagram ads, returns, and your time? Probably not. Skip the fee math and your "margin" is fantasy — the calculator takes 10 seconds.</p>
 				<a href="/mpesa-fee-calculator" class="mt-3 inline-flex text-electric hover:underline">→ Open calculator and punch your real prices</a>
 			</div>
+			<p class="mt-4 text-sm text-slate-400">Rule of thumb: if your margin after all costs is under 25%, you need to either raise price, find a cheaper supplier, or sell volume. The calculator makes this real in seconds.</p>
 
-			<h2 class="mt-10 text-xl font-bold text-white">Launch checklist — copy this</h2>
+			<h2 class="mt-10 text-2xl font-bold text-white">Launch checklist — copy this</h2>
 			<ul class="mt-4 grid gap-2 text-sm text-slate-300">
-				<li>☐ 10 products shot on phone with price + weight</li>
-				<li>☐ Delivery fee + zones written (Nairobi, upcountry, pickup)</li>
-				<li>☐ Paybill & Till active, tested KES 10 in/out</li>
-				<li>☐ WhatsApp order template + labels (New/Paid/Shipped)</li>
-				<li>☐ Returns line: "7 days, unworn, tags on"</li>
+				<li>☐ 10 products shot on phone (clear photos, white background or lifestyle, price + weight visible)</li>
+				<li>☐ Delivery fee + zones written (Nairobi same-day, upcountry 1–3 days, pickup free)</li>
+				<li>☐ Paybill & Till active, tested KES 10 in and out — confirm both land in your account</li>
+				<li>☐ WhatsApp order template + labels set up (New → Paid → Shipped → Done)</li>
+				<li>☐ Returns policy clear: "7 days, unworn, tags on, refund via M-Pesa"</li>
+				<li>☐ Google Business Profile active with your store address and WhatsApp number</li>
+				<li>☐ First 5 product pages live with buyer-keyword titles (not "new collection")</li>
 			</ul>
-			<p class="mt-4 text-sm text-slate-400">Platform pick: Shopify = fastest to start; Woo = cheapest long-run; custom (Orbit Master) = you own checkout + speed + no plugin tax. Pick by margin, not hype.</p>
+			<p class="mt-4 text-sm text-slate-400">Platform pick: Shopify = fastest to start but monthly fees add up. WooCommerce = cheapest long-run, you own everything. Custom (Orbit Master 59,999) = you own checkout + speed + no plugin tax. Pick by margin, not hype.</p>
 
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<p class="text-sm font-semibold text-white">Where Orbit fits</p>
-				<p class="mt-1 text-sm text-slate-400">Master (59,999) ships all 4 in 2 weeks with training. Or just steal the checklist. <a href={whatsappLink("Hi Orbit! I want an online store for [your products]. What do I need?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat your products →</a></p>
+				<p class="mt-1 text-sm text-slate-400">Master (59,999) ships all 4 systems in 2 weeks with training. Or just steal the checklist above and DIY. <a href={whatsappLink("Hi Orbit! I want an online store for [your products]. What do I need?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat your products →</a></p>
 			</div>
 		</article>
 

@@ -27,50 +27,64 @@ import { whatsappLink } from "../../config";
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<div class="grid gap-6 md:grid-cols-2">
+			<p class="text-sm leading-relaxed text-slate-400">M-Pesa is how Kenya pays — but choosing between Till and Paybill locks you into a workflow for years. Pick wrong and you'll fight reconciliation nightmares, miss online sales, or bleed fees unnecessarily. Here's the real difference, with numbers.</p>
+
+			<div class="mt-8 grid gap-6 md:grid-cols-2">
 				<div class="glow-border rounded-2xl p-8">
 					<h2 class="text-xl font-bold text-white">Till — walk-in</h2>
-					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer pays to your store number in person, no account number. Money lands instantly. Best for shops, salons, eateries, counters.</p>
-					<ul class="mt-4 grid gap-1.5 text-xs text-slate-300"><li>→ No account field = faster but untracked</li><li>→ Staff sees payment instantly</li></ul>
+					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer pays to your store number in person — no account number needed. Money lands in your M-Pesa float instantly. Best for shops, salons, eateries, counters, market stalls.</p>
+					<ul class="mt-4 grid gap-2 text-xs text-slate-300">
+						<li>→ No account field = faster checkout (3 seconds vs 10)</li>
+						<li>→ Staff sees payment instantly on their phone</li>
+						<li>→ Works with STK Push (you initiate from your phone)</li>
+						<li>→ No auto-matching — you reconcile manually or by amount</li>
+						<li>→ Lower fees for in-person transactions</li>
+					</ul>
 				</div>
 				<div class="glow-border rounded-2xl p-8">
 					<h2 class="text-xl font-bold text-white">Paybill — tracked</h2>
-					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer enters business no. + account no. That field auto-matches to invoice/client — gold for online/retainer.</p>
-					<ul class="mt-4 grid gap-1.5 text-xs text-slate-300"><li>→ Account = auto-reconciliation</li><li>→ Needed for website checkout API</li></ul>
+					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer enters your business number + an account reference (invoice #, phone, name). That field auto-matches payments to orders — gold for online stores, invoices, subscriptions, retainer clients.</p>
+					<ul class="mt-4 grid gap-2 text-xs text-slate-300">
+						<li>→ Account field = automatic reconciliation</li>
+						<li>→ Needed for website checkout via Daraja API</li>
+						<li>→ C2B callback sends payment data to your system in real-time</li>
+						<li>→ Supports business-to-business bulk payments</li>
+						<li>→ Slightly higher fees but saves hours of admin</li>
+					</ul>
 				</div>
 			</div>
 
-			<div class="mt-6 rounded-2xl border border-edge bg-panel p-6">
+			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<h3 class="font-mono text-xs uppercase tracking-widest text-electric">Decision tree</h3>
-				<ol class="mt-3 grid gap-2 text-sm text-slate-300 list-decimal list-inside">
-					<li>Payment happens <strong class="text-white">face-to-face</strong>? → Till</li>
-					<li>Payment happens <strong class="text-white">online/invoice</strong> with needing to know WHO paid? → Paybill</li>
-					<li>Both? → Run both: Till at counter, Paybill on website/API. Our stores wire both.</li>
+				<ol class="mt-4 grid gap-3 text-sm text-slate-300 list-decimal list-inside">
+					<li>Payment happens <strong class="text-white">face-to-face</strong> with no need to track who paid? → <strong class="text-electric">Till</strong></li>
+					<li>Payment happens <strong class="text-white">online or via invoice</strong> and you need to know WHO paid? → <strong class="text-electric">Paybill</strong></li>
+					<li><strong class="text-white">Both?</strong> → Run both: Till at counter, Paybill on website/API. Most of our Master stores wire both — they complement each other.</li>
 				</ol>
 			</div>
 
-			<h2 class="mt-10 text-xl font-bold text-white">Fee math (do before choosing)</h2>
-			<p class="mt-3 text-sm text-slate-400">Safaricom fees shift — so don't trust a screenshot. Use live math:</p>
+			<h2 class="mt-10 text-2xl font-bold text-white">Fee math (do before choosing)</h2>
+			<p class="mt-3 text-sm text-slate-400">Safaricom fees change regularly — don't trust a blog screenshot from 2024. Use live math with our calculator, which pulls current published bands:</p>
 			<div class="mt-4 flex flex-wrap gap-3">
 				<a href="/mpesa-fee-calculator" class="inline-flex rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Open M-Pesa fee calculator →</a>
 				<span class="inline-flex items-center text-xs text-slate-400">Try: Till 1,500 vs Paybill 1,500 → see what you actually keep</span>
 			</div>
 			<div class="mt-6 overflow-hidden rounded-xl border border-edge">
 				<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-2">Example sale</th><th class="px-4 py-2">Fee range*</th><th class="px-4 py-2">You keep</th></tr></thead>
-				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">KES 1,000</td><td class="px-4 py-2">~ 10–20</td><td class="px-4 py-2">980–990</td></tr><tr><td class="px-4 py-2">KES 5,000</td><td class="px-4 py-2">~ 45–65</td><td class="px-4 py-2">4,935–4,955</td></tr><tr><td class="px-4 py-2">KES 1,500 online</td><td class="px-4 py-2">calc →</td><td class="px-4 py-2"><a href="/mpesa-fee-calculator" class="text-electric hover:underline">calculate</a></td></tr></tbody></table>
+				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">KES 500</td><td class="px-4 py-2">~ 7–12</td><td class="px-4 py-2">488–493</td></tr><tr><td class="px-4 py-2">KES 1,000</td><td class="px-4 py-2">~ 10–20</td><td class="px-4 py-2">980–990</td></tr><tr><td class="px-4 py-2">KES 2,500</td><td class="px-4 py-2">~ 25–40</td><td class="px-4 py-2">2,460–2,475</td></tr><tr><td class="px-4 py-2">KES 5,000</td><td class="px-4 py-2">~ 45–65</td><td class="px-4 py-2">4,935–4,955</td></tr><tr><td class="px-4 py-2">KES 10,000</td><td class="px-4 py-2">~ 80–110</td><td class="px-4 py-2">9,890–9,920</td></tr></tbody></table>
 			</div>
-			<p class="mt-2 text-xs text-slate-500">*Calculator uses Safaricom's published 2026 bands — still confirm before pricing.</p>
+			<p class="mt-2 text-xs text-slate-500">*Calculator uses Safaricom's published 2026 bands. Till fees are typically lower for in-person; Paybill fees are higher but save reconciliation time. Always confirm before pricing products.</p>
 
-			<h2 class="mt-10 text-xl font-bold text-white">How each wires to a website</h2>
-			<ul class="mt-4 grid gap-2 text-sm text-slate-300">
-				<li>→ Till via STK Push or API still works — but no account reference for auto-matching orders.</li>
-				<li>→ Paybill via Daraja C2B gives you account ref = order ID, so inventory + receipts auto.</li>
-				<li>→ Orbit wires both; pick after fee math, not before.</li>
+			<h2 class="mt-10 text-2xl font-bold text-white">How each wires to a website</h2>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex gap-2"><span class="text-electric">→</span> Till via STK Push works on a website — you initiate from your phone after order. But there's no account reference for auto-matching orders, so you reconcile manually.</li>
+				<li class="flex gap-2"><span class="text-electric">→</span> Paybill via Daraja C2B gives you account ref = order ID. Payment arrives, your system auto-matches it to the order, marks it paid, and sends confirmation. Fully automated.</li>
+				<li class="flex gap-2"><span class="text-electric">→</span> Both: our Master stores wire Till (counter) + Paybill (website) via separate Daraja connections. Customer chooses at checkout.</li>
 			</ul>
 
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<p class="text-sm font-semibold text-white">Where Orbit fits</p>
-				<p class="mt-1 text-sm text-slate-400">We connect either/both to your store with STK + callback, test on Till & Paybill, hand over credentials. <a href={whatsappLink("Hi Orbit! I need help choosing Till vs Paybill for my business.")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Ask free on WhatsApp →</a></p>
+				<p class="mt-1 text-sm text-slate-400">We connect either/both to your store with STK + callback, test on Till & Paybill, and hand over credentials in your name. <a href={whatsappLink("Hi Orbit! I need help choosing Till vs Paybill for my business.")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Ask free on WhatsApp →</a></p>
 			</div>
 		</article>
 
