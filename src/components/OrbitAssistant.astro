@@ -3,18 +3,19 @@ import { whatsappLink } from "../config";
 ---
 
 <div id="orbit-assistant" class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-3" client:load>
-	<div id="oa-panel" class="hidden w-80 max-w-[calc(100vw-3rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur">
+	<div id="oa-panel" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex items-center gap-2">
-				<div class="h-2 w-2 rounded-full bg-electric/30 animate-pulse"></div>
+				<div class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
 				<p class="font-semibold text-white">Orbit AI</p>
+				<span class="rounded-full bg-electric/10 px-2 py-0.5 text-[10px] font-bold tracking-widest text-electric">POWERED</span>
 			</div>
 			<span id="oa-status" class="text-[10px] text-slate-500">…</span>
 		</div>
-			<p class="text-xs text-slate-400">Ask me anything · Tap chips for quick answers</p>
+			<p class="text-xs text-slate-400">Quotes • M-Pesa math • best fit — then WhatsApp</p>
 		</div>
-		<div id="oa-log" class="grid max-h-72 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
+		<div id="oa-log" class="grid max-h-80 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
 		<div id="oa-typing" class="hidden px-5 h-6">
 			<div class="flex items-center gap-1.5 text-slate-400 text-xs">
 				<span class="h-1.5 w-1.5 rounded-full bg-electric animate-bounce" style="animation-delay: 0ms;"></span>
@@ -90,15 +91,15 @@ import { whatsappLink } from "../config";
 		];
 
 		const KB: Array<{ keys: string[]; text: string; link?: [string, string]; wa?: string; t?: string }> = [
-			{ keys: ["starter", "35,999", "29999", "landing", "cheap", "basic"], t: "Starter", text: "Starter is **KES 35,999** — up to 3 pages, WhatsApp chat, basic SEO, live 5 days. + Care 7,499/mo.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter package (KES 35,999). My business is..." },
-			{ keys: ["business", "47,999", "39999", "booking"], t: "Business", text: "Business is **KES 47,999** — up to 7 pages, full SEO, bookings, live 1 week. Most popular. + Care 10,999/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business package (KES 47,999) for bookings. My business is..." },
-			{ keys: ["master", "59,999", "49999", "store", "shop", "sell"], t: "Master", text: "Master is **KES 59,999** — store/bookings, native M-Pesa + cards, automations, live 2 weeks.", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want the Master package (KES 59,999) for my store." },
-			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 59,999** — auth, dashboards, M-Pesa, deployed + 3 months support.", link: ["/packages", "See SaaS →"] },
-			{ keys: ["logo", "brand", "design", "17,999", "14999", "graphic", "flyer"], t: "Design", text: "Design from **KES 17,999** — logos, kits to 24,999, social kits, flyers, files included.", link: ["/packages", "See design →"] },
-			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], t: "AI Agent", text: "AI Agent **KES 59,999** (WhatsApp/site/email + tuning). WhatsApp Responder setup **35,999**.", link: ["/automation", "See agents →"] },
-			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 47,999** each — M-Pesa → Sheets, auto-invoices. Bundle deals for 3+.", link: ["/automation", "See workflows →"] },
-			{ keys: ["dashboard", "35,999", "19,999", "report", "track"], t: "Dashboards", text: "Dashboards: Add-on **19,999** or Standalone **35,999** — M-Pesa feed, bookings, stock.", link: ["/dashboards", "See dashboards →"] },
-			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **7,499** · Business **10,999** · Master **13,999/mo**. Cancel anytime. Custom: SaaS 17,999 · Dash 5,999 · Agent 7,999 · Design 9,999.", link: ["/care", "See Care →"] },
+			{ keys: ["starter", "35,999", "35999", "landing", "cheap", "basic", "5 pages"], t: "Starter", text: "Starter is **KES 35,999** — 5 pages, WhatsApp+call, basic SEO + GBP, copy for 3 pages, Analytics, live 5 days. + Care 7,499/mo. → WhatsApp direct.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter website (35,999) — my business is..." },
+			{ keys: ["business", "47,999", "47999", "booking", "10 pages"], t: "Business", text: "Business is **KES 47,999** — 10 pages+blog, full SEO (schema 90+), bookings/Calendly, copy all pages, <2s, live 1 week. Most popular. + Care 10,999/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business website (47,999) — bookings for..." },
+			{ keys: ["master", "59,999", "59999", "store", "shop", "sell", "15 pages"], t: "Master", text: "Master is **KES 59,999** — 15+ pages or store, native M-Pesa Till+Paybill+cards, inventory sync, automations, training, 2 weeks.", link: ["/packages", "See Master →"], wa: "Hi Orbit! I want the Master package (59,999) for my store." },
+			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 59,999** — auth/roles, dashboards, M-Pesa, CSV, 3mo support. You own it.", link: ["/saas", "See SaaS →"] },
+			{ keys: ["logo", "brand", "design", "17,999", "17999", "graphic", "flyer"], t: "Design", text: "Design from **KES 17,999** — logos, kits to 29,999, social kits, flyers, files included. You own it.", link: ["/design", "See design →"] },
+			{ keys: ["agent", "ai", "bot", "chatbot", "responder"], t: "AI Agent", text: "AI Agent **KES 59,999** (WhatsApp/site/email, qualify+book, handover, 30d tuning). WhatsApp Responder **35,999**.", link: ["/automation", "See agents →"] },
+			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 47,999** each — M-Pesa → Sheets, auto-invoices. Bundle 3 = 15% off.", link: ["/automation", "See workflows →"] },
+			{ keys: ["dashboard", "18,999", "32,999", "report", "track"], t: "Dashboards", text: "Dashboards: Add-on **18,999** or Standalone **32,999** — M-Pesa feed, bookings, stock on one screen.", link: ["/dashboards", "See dashboards →"] },
+			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **7,499** · Business **10,999** · Master **13,999/mo**. Cancel anytime. SaaS 15,999 · Dash 5,999 · Agent 7,999.", link: ["/care", "See Care →"] },
 			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **35,999** · Business **47,999** · Master **59,999**. SaaS **59,999+**. Design **17,999+**. Agent **59,999**.", link: ["/packages", "Full pricelist →"] },
 			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter **5 days**, Business **1 week**, Master **2 weeks** — once we have your photos, text + logo." },
 			{ keys: ["mpesa", "m-pesa", "paybill", "till", "stk", "daraja", "pay"], text: "Till = walk-in, Paybill = tracked/online. We wire both natively.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill →"] },
