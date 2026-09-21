@@ -67,6 +67,7 @@ const testimonials = [
 	</div>
 	<script>
 		(() => {
+		function initSlider() {
 			const root = document.getElementById('testimonial-slider');
 			if (!root || root.dataset.bound) return; root.dataset.bound='1';
 			const slides = root.querySelectorAll('[data-slide]');
@@ -86,7 +87,14 @@ const testimonials = [
 			root.addEventListener('mouseenter', stop);
 			root.addEventListener('mouseleave', start);
 			start();
-		})();
+		}
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", initSlider, { once: true });
+		} else {
+			initSlider();
+		}
+		document.addEventListener("astro:page-load", initSlider);
+	})();
 	</script>
 </section>
 

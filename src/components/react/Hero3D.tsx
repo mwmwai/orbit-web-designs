@@ -291,7 +291,8 @@ export default function Hero3D() {
     const update = () => setMobile(mq.matches);
     update();
     mq.addEventListener?.("change", update);
-    // Mount 3D only after full page load + idle: text/menu/paint first, orbit fades in after.
+    // Mount 3D as soon as the browser is idle — don't wait for full page
+    // load (images/fonts). The hero CSS glow covers the first paint.
     let idleId = 0;
     let timer = 0;
     const mount = () => setMounted(true);
@@ -303,10 +304,10 @@ export default function Hero3D() {
         timer = window.setTimeout(mount, 900);
       }
     };
-    if (document.readyState === "complete") {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
       schedule();
     } else {
-      window.addEventListener("load", schedule, { once: true });
+      document.addEventListener("DOMContentLoaded", schedule, { once: true });
     }
     return () => {
       mq.removeEventListener?.("change", update);
