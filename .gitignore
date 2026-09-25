@@ -30,3 +30,8 @@ marketing-agent/
 flick-app/higgsfield.local.json
 flick-output/
 FlickStudio.exe
+
+gods-eye-view/
+start-phone.ps1
+skills-lock.json
+.agents/skills/higgsfield-*/
