@@ -4,13 +4,26 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink } from "../../config";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const articleLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "Website Care in Kenya: DIY Checklist vs Managed (2026)",
+	description: "What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care covers.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-13",
+	dateModified: "2026-09-22",
+	mainEntityOfPage: `${SITE_URL}/blog/website-care-kenya`,
+};
 ---
 
 <Layout
 	title="Website Care in Kenya: DIY Checklist vs Managed (2026) | Orbit"
 	description="What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care 6,999–12,999 covers."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -70,6 +83,9 @@ import { whatsappLink } from "../../config";
 			</div>
 		</article>
 
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/care" class="text-electric hover:underline">Orbit Care plans</a> · <a href="/packages" class="text-electric hover:underline">website packages</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a designer</a></p>
+		</div>
 		<Comments slug="website-care-kenya" />
 		<CtaBand title="Rather just have it handled?" text="From 6,999/mo — watched, updated and backed up." />
 	</main>

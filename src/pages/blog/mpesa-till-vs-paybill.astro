@@ -4,13 +4,26 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink } from "../../config";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const articleLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "M-Pesa Till vs Paybill: Fees & Which to Pick (2026)",
+	description: "Till vs Paybill 2026: fees, account numbers, settlement and which suits you. Decision tree + fee calculator.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-10",
+	dateModified: "2026-09-22",
+	mainEntityOfPage: `${SITE_URL}/blog/mpesa-till-vs-paybill`,
+};
 ---
 
 <Layout
 	title="M-Pesa Till vs Paybill: Fees & Which to Pick (2026) | Orbit"
 	description="Till vs Paybill 2026: fees, account numbers, settlement and which suits you. Decision tree + fee calculator."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -88,6 +101,9 @@ import { whatsappLink } from "../../config";
 			</div>
 		</article>
 
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">store launch checklist</a></p>
+		</div>
 		<Comments slug="mpesa-till-vs-paybill" />
 		<CtaBand title="Selling online or at the counter?" text="We wire both — tell us what you sell." />
 	</main>

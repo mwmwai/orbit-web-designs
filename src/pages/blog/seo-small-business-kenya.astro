@@ -4,13 +4,26 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink } from "../../config";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const articleLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "SEO for Small Businesses in Kenya: 30-Day Plan",
+	description: "DIY SEO for Kenyan SMEs: Business Profile, buyer keywords, speed and reviews. 30-day checklist with free tools.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-08",
+	dateModified: "2026-09-22",
+	mainEntityOfPage: `${SITE_URL}/blog/seo-small-business-kenya`,
+};
 ---
 
 <Layout
 	title="SEO for Small Businesses in Kenya: 30-Day Plan | Orbit"
 	description="DIY SEO for Kenyan SMEs: Business Profile, buyer keywords, speed and reviews. 30-day checklist with free tools — works with any designer."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -72,6 +85,9 @@ import { whatsappLink } from "../../config";
 			</div>
 		</article>
 
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/seo-services-kenya" class="text-electric hover:underline">SEO services Kenya</a> · <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">e-commerce launch checklist</a> · <a href="/packages" class="text-electric hover:underline">website packages</a></p>
+		</div>
 		<Comments slug="seo-small-business-kenya" />
 		<CtaBand title="Want customers from Google?" text="Send what you sell + where — free read on what ranking actually takes." />
 	</main>

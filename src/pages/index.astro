@@ -10,9 +10,27 @@ import FAQ from "../components/FAQ.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Footer from "../components/Footer.astro";
 import FloatingActions from "../components/FloatingActions.astro";
+import { SITE_URL, SITE_NAME } from "../config";
+
+const websiteLd = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: SITE_NAME,
+	url: SITE_URL,
+	publisher: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+	},
+	inLanguage: "en-KE",
+};
 ---
 
-<Layout>
+<Layout
+	title="M-Pesa Websites Kenya from KES 33,999 | Orbit Web Designs"
+	description="Fast M-Pesa websites for Kenyan businesses — live in 5 days from KES 33,999. Native Till + Paybill, full SEO, you own everything."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
 	<Navbar />
 	<main id="main">
 		<Hero />
@@ -62,7 +80,7 @@ import FloatingActions from "../components/FloatingActions.astro";
 			<div class="relative mx-auto max-w-7xl px-5">
 				<div class="grid gap-8 lg:grid-cols-2 lg:items-center">
 					<div>
-						<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom SaaS Apps — KES 56,999</p>
+						<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom SaaS Apps — KES 57,999</p>
 						<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">Your idea as a real app.</h2>
 						<p class="mt-4 text-slate-400">Auth, roles, onboarding, admin + user dashboards and M-Pesa — deployed, documented, handed over with 3 months support.</p>
 						<div class="mt-6 flex flex-wrap gap-2">
@@ -70,7 +88,7 @@ import FloatingActions from "../components/FloatingActions.astro";
 						</div>
 						<p class="mt-3 text-xs text-slate-500">Stay live with <a href="/care" class="text-electric hover:underline">SaaS Care 16,999/mo</a> — DB, auth & bug watch</p>
 						<div class="mt-8 flex flex-wrap gap-3">
-							<a href="/packages" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20 magnetic">See SaaS — 56,999</a>
+							<a href="/packages" class="rounded-full btn-gradient px-8 py-3.5 font-semibold text-white shadow-lg shadow-electric/20 magnetic">See SaaS — 57,999</a>
 							<a href="/contact" class="rounded-full border border-edge bg-panel px-8 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Start yours</a>
 						</div>
 					</div>
@@ -133,7 +151,7 @@ import FloatingActions from "../components/FloatingActions.astro";
 				</div>
 				<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 magnetic hover-lift"><div class="flex items-center justify-between"><p class="text-sm font-semibold text-white">Starter Care</p><span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span></div><p class="mt-2 text-2xl font-extrabold text-gradient">6,999<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="text-xs text-slate-400">For 33,999 sites</p><div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full w-[92%] bg-gradient-to-r from-electric to-neon"></div></div><p class="mt-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">Uptime 99.9%</p></div>
-					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 border-electric/40 bg-gradient-to-b from-electric/10 to-transparent magnetic hover-lift"><div class="flex items-center justify-between"><p class="text-sm font-semibold text-white">Business Care</p><span class="rounded-full bg-electric px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-white">Popular</span></div><p class="mt-2 text-2xl font-extrabold text-gradient">9,999<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="text-xs text-slate-400">For 44,999 sites</p><div class="mt-4 flex gap-1"><span class="h-1.5 flex-1 rounded-full bg-electric"></span><span class="h-1.5 flex-1 rounded-full bg-electric"></span><span class="h-1.5 flex-1 rounded-full bg-white/10"></span></div><p class="mt-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">2 tasks/mo included</p></div>
+					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 border-electric/40 bg-gradient-to-b from-electric/10 to-transparent magnetic hover-lift"><div class="flex items-center justify-between"><p class="text-sm font-semibold text-white">Business Care</p><span class="rounded-full bg-electric px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-white">Popular</span></div><p class="mt-2 text-2xl font-extrabold text-gradient">9,999<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="text-xs text-slate-400">For 45,999 sites</p><div class="mt-4 flex gap-1"><span class="h-1.5 flex-1 rounded-full bg-electric"></span><span class="h-1.5 flex-1 rounded-full bg-electric"></span><span class="h-1.5 flex-1 rounded-full bg-white/10"></span></div><p class="mt-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">2 tasks/mo included</p></div>
 					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 magnetic hover-lift"><div class="flex items-center justify-between"><p class="text-sm font-semibold text-white">Master Care</p><span class="h-2 w-2 rounded-full bg-electric"></span></div><p class="mt-2 text-2xl font-extrabold text-gradient">12,999<span class="text-sm font-normal text-slate-400">/mo</span></p><p class="text-xs text-slate-400">Stores & bookings</p><div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full w-[88%] bg-neon"></div></div><p class="mt-1 text-[10px] font-mono uppercase tracking-widest text-slate-500">M-Pesa watched</p></div>
 					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-6 magnetic hover-lift"><p class="text-sm font-semibold text-white">Custom Care</p><p class="mt-1 text-xs text-electric">SaaS 14,999 · Dash 4,999</p><p class="mt-1 text-xs text-slate-400">Agent 6,999 · Design 9,999</p><div class="mt-4 grid grid-cols-2 gap-2 text-[10px] font-mono"><span class="rounded-full bg-charcoal border border-white/5 px-2 py-1 text-center text-slate-300">SaaS</span><span class="rounded-full bg-charcoal border border-white/5 px-2 py-1 text-center text-slate-300">Dash</span><span class="rounded-full bg-charcoal border border-white/5 px-2 py-1 text-center text-slate-300">Agent</span><span class="rounded-full bg-charcoal border border-white/5 px-2 py-1 text-center text-slate-300">Design</span></div></div>
 				</div>
@@ -169,14 +187,14 @@ import FloatingActions from "../components/FloatingActions.astro";
 				<div class="mt-8 grid gap-6 lg:grid-cols-2">
 					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-8 flex flex-col magnetic hover-lift">
 						<div class="inline-flex w-fit rounded-xl bg-gradient-to-br from-electric to-neon p-3 ring-1 ring-white/10"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M12 8V4H8M12 8l4-4M12 8v8m-4 4h8M9 16h6"/></svg></div>
-						<h3 class="mt-5 text-xl font-semibold text-white">Custom AI Agents — 56,999</h3>
+						<h3 class="mt-5 text-xl font-semibold text-white">Custom AI Agents — 57,999</h3>
 						<p class="mt-2 text-sm text-slate-400">Trained on your data — WhatsApp / site chat / email, qualifies & books, hands to human. <span class="text-slate-300">+ Agent Care 6,999/mo</span></p>
 						<div class="mt-4 flex flex-wrap gap-2">{["WhatsApp","Site chat","Email","Booking"].map(t=> <span class="rounded-full border border-edge bg-charcoal px-3 py-1 font-mono text-xs text-slate-300">{t}</span> )}</div>
 						<a href="/automation" class="mt-6 inline-flex w-fit rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-electric/20">See agents →</a>
 					</div>
 					<div data-tilt class="glow-border edge-glow card-shine rounded-2xl p-8 flex flex-col magnetic hover-lift">
 						<div class="inline-flex w-fit rounded-xl bg-gradient-to-br from-violet-500 to-electric p-3 ring-1 ring-white/10"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-						<h3 class="mt-5 text-xl font-semibold text-white">Workflow Automation — 44,999</h3>
+						<h3 class="mt-5 text-xl font-semibold text-white">Workflow Automation — 45,999</h3>
 						<p class="mt-2 text-sm text-slate-400">M-Pesa → Sheets/CRM, inquiry → WhatsApp → calendar, invoices auto. You own it.</p>
 						<div class="mt-4 rounded-xl bg-charcoal border border-white/5 p-3 font-mono text-xs text-slate-400">M-Pesa <span class="text-electric">→</span> Sheets <span class="text-electric">→</span> WhatsApp <span class="text-electric">→</span> Calendar</div>
 						<a href="/automation" class="mt-6 inline-flex w-fit rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 hover:border-electric/60 hover:text-white">See workflows →</a>

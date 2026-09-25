@@ -4,13 +4,26 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink } from "../../config";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const articleLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "E-commerce in Kenya: Launch Checklist (M-Pesa, Stock, Orders)",
+	description: "Checklist to launch an online store in Kenya: M-Pesa, inventory, WhatsApp orders and SEO — with margin math.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-09",
+	dateModified: "2026-09-22",
+	mainEntityOfPage: `${SITE_URL}/blog/ecommerce-kenya-guide`,
+};
 ---
 
 <Layout
 	title="E-commerce in Kenya: Launch Checklist (M-Pesa, Stock, Orders) | Orbit"
 	description="Checklist to launch an online store in Kenya: M-Pesa, inventory, WhatsApp orders and SEO — with margin math."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -73,14 +86,17 @@ import { whatsappLink } from "../../config";
 				<li>☐ Google Business Profile active with your store address and WhatsApp number</li>
 				<li>☐ First 5 product pages live with buyer-keyword titles (not "new collection")</li>
 			</ul>
-			<p class="mt-4 text-sm text-slate-400">Platform pick: Shopify = fastest to start but monthly fees add up. WooCommerce = cheapest long-run, you own everything. Custom (Orbit Master 56,999) = you own checkout + speed + no plugin tax. Pick by margin, not hype.</p>
+			<p class="mt-4 text-sm text-slate-400">Platform pick: Shopify = fastest to start but monthly fees add up. WooCommerce = cheapest long-run, you own everything. Custom (Orbit Master 57,999) = you own checkout + speed + no plugin tax. Pick by margin, not hype.</p>
 
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<p class="text-sm font-semibold text-white">Where Orbit fits</p>
-				<p class="mt-1 text-sm text-slate-400">Master (56,999) ships all 4 systems in 2 weeks with training. Or just steal the checklist above and DIY. <a href={whatsappLink("Hi Orbit! I want an online store for [your products]. What do I need?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat your products →</a></p>
+				<p class="mt-1 text-sm text-slate-400">Master (57,999) ships all 4 systems in 2 weeks with training. Or just steal the checklist above and DIY. <a href={whatsappLink("Hi Orbit! I want an online store for [your products]. What do I need?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat your products →</a></p>
 			</div>
 		</article>
 
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/blog/mpesa-till-vs-paybill" class="text-electric hover:underline">Till vs Paybill</a></p>
+		</div>
 		<Comments slug="ecommerce-kenya-guide" />
 		<CtaBand title="Ready to sell while you sleep?" text="Tell us what you sell — we reply with package, timeline and honest price." />
 	</main>

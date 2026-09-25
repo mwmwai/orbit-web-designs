@@ -9,11 +9,15 @@ import "../styles/global.css";
 interface Props {
 	title?: string;
 	description?: string;
+	noindex?: boolean;
+	breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
 const {
 	title = `${SITE_NAME} | Nairobi Web Designer`,
 	description = "Orbit designs fast websites that get businesses found, trusted and paid. Custom builds from KES 33,999 — worldwide, fully remote.",
+	noindex = false,
+	breadcrumbs,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
@@ -24,14 +28,98 @@ const META_PIXEL_ID = "1397340971942619";
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "ProfessionalService",
+	"@id": `${SITE_URL}#business`,
 	name: SITE_NAME,
 	url: SITE_URL,
 	email: SITE_EMAIL,
 	telephone: `+${WHATSAPP_NUMBER}`,
 	description,
-	areaServed: "Worldwide",
-	priceRange: "KES 16,999 - KES 56,999",
+	areaServed: ["Kenya", "Worldwide"],
+	priceRange: "KES 16,999 - KES 57,999",
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: "Nairobi",
+		addressCountry: "KE",
+	},
+	geo: {
+		"@type": "GeoCoordinates",
+		latitude: -1.2921,
+		longitude: 36.8219,
+	},
+	openingHoursSpecification: {
+		"@type": "OpeningHoursSpecification",
+		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		opens: "08:00",
+		closes: "19:00",
+	},
+	sameAs: [
+		"https://www.instagram.com/orbitwebdesigns",
+		"https://www.facebook.com/orbitwebdesigns",
+		"https://www.tiktok.com/@orbitwebdesigns",
+		"https://www.linkedin.com/company/orbitwebdesigns",
+	],
 };
+
+const CRUMB_NAMES: Record<string, string> = {
+	packages: "Packages & Pricing",
+	automation: "AI Agents & Automation",
+	saas: "Custom SaaS",
+	dashboards: "Business Dashboards",
+	design: "Graphic Design",
+	care: "Website Care",
+	guides: "Guides",
+	blog: "Blog",
+	contact: "Contact",
+	about: "About",
+	faq: "FAQ",
+	start: "Get Started",
+	services: "Services",
+	reviews: "Reviews",
+	review: "Leave a Review",
+	"web-design-nairobi": "Web Design Nairobi",
+	"seo-services-kenya": "SEO Services Kenya",
+	"mpesa-fee-calculator": "M-Pesa Fee Calculator",
+	"mpesa-ecommerce-kenya": "M-Pesa E-commerce",
+	cases: "Case Studies",
+	"terms-of-service": "Terms of Service",
+	"privacy-policy": "Privacy Policy",
+	"cookie-policy": "Cookie Policy",
+	"security-policy": "Security Policy",
+};
+
+function crumbName(slug: string): string {
+	if (CRUMB_NAMES[slug]) return CRUMB_NAMES[slug];
+	return slug
+		.split("-")
+		.map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+		.join(" ");
+}
+
+const pathSegs = Astro.url.pathname.split("/").filter(Boolean);
+const effectiveCrumbs =
+	breadcrumbs ??
+	(pathSegs.length > 0
+		? [
+				{ name: "Home", url: SITE_URL },
+				...pathSegs.map((s, i) => ({
+					name: crumbName(s),
+					url: `${SITE_URL}/${pathSegs.slice(0, i + 1).join("/")}`,
+				})),
+			]
+		: undefined);
+
+const breadcrumbLd = effectiveCrumbs
+	? {
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			itemListElement: effectiveCrumbs.map((b, i) => ({
+				"@type": "ListItem",
+				position: i + 1,
+				name: b.name,
+				item: b.url,
+			})),
+		}
+	: null;
 ---
 
 <!doctype html>
@@ -53,20 +141,25 @@ const jsonLd = {
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
+		<meta name="theme-color" content="#080B14" />
 		<meta name="generator" content={Astro.generator} />
 
 		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="en_KE" />
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={new URL("/logo.png", SITE_URL).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="Orbit Web Designs & Marketing logo" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={new URL("/logo.png", SITE_URL).href} />
-		<meta name="robots" content="index, follow" />
+		<meta name="twitter:image:alt" content="Orbit Web Designs & Marketing logo" />
+		<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
 		{import.meta.env.PUBLIC_GSC_VERIFICATION && (
 			<meta name="google-site-verification" content={import.meta.env.PUBLIC_GSC_VERIFICATION} />
 		)}
@@ -104,7 +197,6 @@ const jsonLd = {
 		{import.meta.env.PUBLIC_TURNSTILE_SITE_KEY && (
 			<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
 		)}
-		<ClientRouter />
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
@@ -117,6 +209,7 @@ const jsonLd = {
 		<OrbitAssistant />
 		<CookieBanner />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		{breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
 		<script is:inline>
 			(function() {
 				document.addEventListener('click', function(e) {

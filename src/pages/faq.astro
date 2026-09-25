@@ -4,12 +4,28 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import FAQ from "../components/FAQ.astro";
 import CtaBand from "../components/CtaBand.astro";
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "How long does it take?", acceptedAnswer: { "@type": "Answer", text: "Starter sites go live in 5 days once we have your photos, text and logo. Business takes 1 week, Master 2 weeks. You approve the design before anything goes live." } },
+		{ "@type": "Question", name: "Do I need to pay monthly?", acceptedAnswer: { "@type": "Answer", text: "Orbit Care keeps your site fast, safe and online: hosting, security, updates and priority support at KES 6,999/month (Starter), 9,999 (Business) or 12,999 (Master). No surprise bills, cancel anytime." } },
+		{ "@type": "Question", name: "What do you need from me?", acceptedAnswer: { "@type": "Answer", text: "Only 3 things: photos of your business, text about what you do, and your logo. No logo? We design one for you from KES 16,999." } },
+		{ "@type": "Question", name: "How much does a website cost?", acceptedAnswer: { "@type": "Answer", text: "Starter KES 33,999 (5 pages), Business KES 45,999 (10 pages) and Master KES 57,999 (online store or booking system)." } },
+		{ "@type": "Question", name: "Will customers find me on Google?", acceptedAnswer: { "@type": "Answer", text: "Every site ships with SEO setup — titles, descriptions and Google Business Profile. Master adds advanced SEO that targets the searches bringing paying customers." } },
+		{ "@type": "Question", name: "What if I don't like the design?", acceptedAnswer: { "@type": "Answer", text: "You approve the design before anything goes live — we revise until you're happy. If we part ways early, you only pay for work already done." } },
+		{ "@type": "Question", name: "Can I pay in parts?", acceptedAnswer: { "@type": "Answer", text: "Yes. 50% to start, 50% on launch. After that, a small monthly covers hosting, security and support — no big surprise bills." } },
+		{ "@type": "Question", name: "Who owns my website?", acceptedAnswer: { "@type": "Answer", text: "You do — your content, your domain, your business. You get a full license to use everything we build." } },
+	],
+};
 ---
 
 <Layout
 	title="FAQ — Frequently Asked Questions | Orbit Web Designs & Marketing"
-	description="Answers about Orbit pricing (Starter 33,999, Business 44,999, Master 56,999), 3–5 day delivery, monthly care, M-Pesa and Google ranking."
+	description="Answers about Orbit pricing (Starter 33,999, Business 45,999, Master 57,999), 3–5 day delivery, monthly care, M-Pesa and Google ranking."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
