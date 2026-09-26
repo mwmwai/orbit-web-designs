@@ -36,7 +36,7 @@ const { slug } = Astro.props;
 		<div>
 			<button type="submit" class="rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Post comment</button>
 		</div>
-		<p class="hidden text-xs text-slate-400" data-comment-msg></p>
+		<p class="hidden text-xs text-slate-400" data-comment-msg role="status" aria-live="polite"></p>
 	</form>
 </section>
 

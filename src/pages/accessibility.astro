@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { whatsappLink } from "../config";
+---
+
+<Layout
+	title="Accessibility Statement | Orbit Web Designs & Marketing"
+	description="Orbit's commitment to an accessible website: WCAG 2.1 AA target, keyboard support, screen-reader compatibility and how to report barriers."
+>
+	<Navbar />
+	<main id="main" class="mx-auto max-w-3xl px-5 py-24">
+		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Accessibility</p>
+		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">This site is for <span class="text-gradient">everyone.</span></h1>
+		<p class="mt-5 text-lg text-slate-400">We aim for WCAG 2.1 level AA — the standard behind the ADA's digital expectations. Accessibility isn't a feature here; it's how we build every site we ship.</p>
+		<div class="mt-10 grid gap-4 text-sm text-slate-300">
+			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Keyboard first</p><p class="mt-2">Every button, link, menu and form works with Tab / Shift+Tab / Enter. A visible focus ring shows where you are. Press <kbd class="rounded border border-edge bg-charcoal px-1.5 py-0.5 font-mono text-xs text-white">Esc</kbd> to close the chat panel.</p></div>
+			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Screen readers</p><p class="mt-2">One H1 per page, logical headings, labeled forms, announced results (fee calculator, comments, newsletter, chat) and alt text on meaningful images. Decorative graphics are hidden from assistive tech.</p></div>
+			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Motion & vision</p><p class="mt-2">We honor <span class="text-white">prefers-reduced-motion</span> — animations calm down automatically. Text meets AA contrast on our dark theme, and touch targets are at least 44px.</p></div>
+			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Known limits</p><p class="mt-2">Third-party widgets (Turnstile captcha, payment iframes) follow their own providers' accessibility. If one blocks you, WhatsApp us and we'll complete the task with you directly.</p></div>
+			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Report a barrier</p><p class="mt-2">Hit something you can't use? <a href={whatsappLink("Hi Orbit! I found an accessibility barrier on your site:")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">WhatsApp us</a> or email mwmwai@gmail.com — tell us the page and what happened. We respond within 48 hours.</p></div>
+		</div>
+		<p class="mt-8 text-xs text-slate-500">Last reviewed: September 2026. We re-check with every major redesign.</p>
+	</main>
+	<CtaBand title="Need an accessible site?" text="We build WCAG-aware websites from KES 33,999 — keyboard, reader and motion friendly." />
+	<Footer />
+</Layout>

@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /card/
+Disallow: /business-card/
 
 Sitemap: https://orbitwebdesigns.co.ke/sitemap-index.xml
 

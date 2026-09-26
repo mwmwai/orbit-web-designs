@@ -4,6 +4,22 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
+
+const faqs = [
+	{ q: "Who owns the code?", a: "You do — repo, DB, domain, payments all on your accounts. We hand over everything." },
+	{ q: "What about hosting?", a: "We deploy where you want (Vercel/Supabase/your VPS). Hosting bills to you, no markup." },
+	{ q: "Do you maintain it after?", a: "3 months included. After that SaaS Care 14,999/mo covers hosting, DB, auth, bug fixes and uptime." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
 ---
 
 <Layout
@@ -102,6 +118,7 @@ import { whatsappLink } from "../config";
 			</div>
 		</section>
 
+		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 		<CtaBand title="Have an idea?" text="Tell us what it does — we reply with scope, timeline and honest price." />
 	</main>
 	<Footer />

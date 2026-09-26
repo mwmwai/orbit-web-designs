@@ -8,7 +8,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: 'https://orbitwebdesigns.co.ke',
 	compressHTML: true,
-	integrations: [react(), sitemap()],
+	integrations: [react(), sitemap({
+		filter: (page) => !page.includes('/card') && !page.includes('/business-card'),
+	})],
 	vite: {
 		plugins: [tailwindcss()],
 		build: {

@@ -3,7 +3,7 @@ import { whatsappLink } from "../config";
 ---
 
 <div id="orbit-assistant" class="fixed bottom-6 left-6 z-[110] flex flex-col items-start gap-3" client:load>
-	<div id="oa-panel" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
+	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex items-center gap-2">
@@ -15,7 +15,7 @@ import { whatsappLink } from "../config";
 		</div>
 			<p class="text-xs text-slate-400">Quotes • M-Pesa math • best fit — then WhatsApp</p>
 		</div>
-		<div id="oa-log" class="grid max-h-80 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
+		<div id="oa-log" role="log" aria-live="polite" aria-label="Chat messages" class="grid max-h-80 gap-3 overflow-y-auto px-5 py-4 text-sm"></div>
 		<div id="oa-typing" class="hidden px-5 h-6">
 			<div class="flex items-center gap-1.5 text-slate-400 text-xs">
 				<span class="h-1.5 w-1.5 rounded-full bg-electric animate-bounce" style="animation-delay: 0ms;"></span>
@@ -34,9 +34,11 @@ import { whatsappLink } from "../config";
 		id="oa-toggle"
 		type="button"
 		aria-label="Chat with Orbit AI"
+		aria-expanded="false"
+		aria-controls="oa-panel"
 		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
 	>
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
+		<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
 	</button>
 </div>
 
@@ -348,21 +350,25 @@ import { whatsappLink } from "../config";
 			}
 		}
 
-		toggle.addEventListener("click", () => {
-			panel.classList.toggle("hidden");
-			if (!panel.classList.contains("hidden")) {
+		function setOpen(open: boolean) {
+			panel.classList.toggle("hidden", !open);
+			toggle.setAttribute("aria-expanded", String(open));
+			if (open) {
 				if (log!.childElementCount === 0) greet();
 				input.focus();
 			}
+		}
+		toggle.addEventListener("click", () => {
+			setOpen(panel.classList.contains("hidden"));
 		});
 		// Always usable: keyboard shortcut + auto-prompt
 		document.addEventListener("keydown", (e) => {
-			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); panel.classList.remove("hidden"); if (log!.childElementCount === 0) greet(); input.focus(); }
-			if (e.key === "/" && !["INPUT","TEXTAREA"].includes((document.activeElement as HTMLElement)?.tagName)) { e.preventDefault(); panel.classList.remove("hidden"); if (log!.childElementCount === 0) greet(); input.focus(); }
-			if (e.key === "Escape") panel.classList.add("hidden");
+			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setOpen(true); }
+			if (e.key === "/" && !["INPUT","TEXTAREA"].includes((document.activeElement as HTMLElement)?.tagName)) { e.preventDefault(); setOpen(true); }
+			if (e.key === "Escape") { setOpen(false); (toggle as HTMLElement).focus(); }
 		});
 		if (!mem.visits || mem.visits <= 1) {
-			setTimeout(() => { if (panel.classList.contains("hidden") && !localStorage.getItem("orbit_ai_prompted")) { panel.classList.remove("hidden"); greet(); localStorage.setItem("orbit_ai_prompted","1"); } }, 10000);
+			setTimeout(() => { if (panel.classList.contains("hidden") && !localStorage.getItem("orbit_ai_prompted")) { setOpen(true); localStorage.setItem("orbit_ai_prompted","1"); } }, 10000);
 		}
 		send.addEventListener("click", () => {
 			const q = input.value.trim();

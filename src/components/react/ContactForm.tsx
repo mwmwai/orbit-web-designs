@@ -121,7 +121,7 @@ export default function ContactForm() {
 			</label>
 			<label className="sm:col-span-2">
 				<div id="cf-turnstile" />
-				{submitError && <p className="mt-2 text-sm text-red-400">{submitError}</p>}
+				{submitError && <p role="alert" className="mt-2 text-sm text-red-400">{submitError}</p>}
 			</label>
 			<button
 				type="submit"
