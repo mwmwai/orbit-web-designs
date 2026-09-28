@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://orbitwebdesigns.co.ke',
+	site: 'https://www.orbitwebdesigns.co.ke',
 	compressHTML: true,
 	integrations: [react(), sitemap({
 		filter: (page) => !page.includes('/card') && !page.includes('/business-card'),
