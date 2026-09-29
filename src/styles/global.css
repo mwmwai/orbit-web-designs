@@ -786,3 +786,22 @@ img[width][height] { height: auto; }
 	nav a, footer a { min-height: 44px; display: inline-flex; align-items: center; }
 }
 
+/* Cookie banner open: shift floating action containers up */
+body.cookie-open #floating-actions { bottom: 140px; }
+body.cookie-open #orbit-assistant { bottom: 140px; }
+
+/* Mature polish: softer glows, cleaner edges */
+.glow-border { background: linear-gradient(var(--color-panel), var(--color-panel)) padding-box, linear-gradient(135deg, rgb(0 200 255 / 0.35), rgb(47 123 255 / 0.25)) border-box; }
+.btn-gradient { background: linear-gradient(135deg, var(--color-electric), var(--color-neon)); box-shadow: 0 4px 14px -4px rgb(0 200 255 / 0.4); }
+.btn-gradient:hover { box-shadow: 0 6px 20px -4px rgb(0 200 255 / 0.5); }
+.edge-glow { box-shadow: 0 0 0 1px rgb(0 200 255 / 0.15), 0 20px 40px -12px rgb(0 200 255 / 0.15); }
+@media (prefers-reduced-motion: no-preference) {
+	.aurora span { opacity: 0.35; }
+}
+
+/* Consistent section rhythm */
+section[id] { padding-block: clamp(4rem, 8vw, 7rem); }
+@media (max-width: 640px) {
+	section[id] { padding-block: clamp(3rem, 7vw, 5rem); }
+}
+
