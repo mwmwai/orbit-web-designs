@@ -1,0 +1,959 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import agentsData from "../data/agents.json";
+
+const agents = agentsData.agents;
+const GROUP_ORDER = ["Academic","Design","Engineering","Finance","Game","Marketing","Paid Media","Product","Project Mgmt","Research","Sales","Security","Spatial","Specialized","Support","Testing"];
+const groupCount = (label: string) => agents.filter((a) => a.groupLabel === label).length;
+const displayName = (name: string) => (name.includes("·") ? name.split("·")[1].trim() : name);
+const groupList = GROUP_ORDER.map((g) => `${g} ${groupCount(g)}`).join(", ");
+---
+<Layout
+  title="Agent Command Center | Orbit Web Designs"
+  description="Internal tool: invoke the Boss, browse 217 agents, and compose agent pipelines on a visual canvas."
+  noindex={true}
+>
+  <Navbar />
+  <main id="main" class="mx-auto max-w-7xl px-5 font-sans">
+    <!-- Page header strip -->
+    <section class="py-10" aria-labelledby="cc-title">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">■ Agent Command Center · internal</p>
+      <h1 id="cc-title" class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-white">Agent Command Center</h1>
+      <p class="mt-2 text-sm text-slate-400">Invoke the Boss, find any agent, wire pipelines — nothing leaves the browser.</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="rounded-full border border-edge bg-charcoal px-3 py-1 font-mono text-xs text-slate-300"><span class="text-electric">{agents.length}</span> agents</span>
+        <span class="rounded-full border border-edge bg-charcoal px-3 py-1 font-mono text-xs text-slate-300" title={groupList}><span class="text-electric">{GROUP_ORDER.length}</span> groups</span>
+      </div>
+    </section>
+
+    <!-- Zone 1 — Boss hero panel -->
+    <section id="cc-boss" class="glow-border edge-glow card-shine rounded-2xl p-6 sm:p-8 bg-panel relative overflow-hidden" aria-labelledby="cc-boss-title">
+      <div class="absolute -top-20 right-0 h-64 w-64 bg-electric/10 blur-[100px]" aria-hidden="true"></div>
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">■ Boss · command agent</p>
+      <h2 id="cc-boss-title" class="mt-2 text-2xl font-bold tracking-tight text-white">@boss</h2>
+      <p class="mt-2 max-w-2xl text-sm text-slate-400">One commander for the whole crew. Copy the invoke, describe your goal, or wire a pipeline on the canvas and generate a paste-ready brief.</p>
+      <div class="mt-5 flex flex-wrap items-center gap-3">
+        <code id="cc-invoke-text" class="rounded-xl border border-edge bg-charcoal px-4 py-2.5 font-mono text-sm text-electric">@boss</code>
+        <button type="button" id="cc-copy-invoke" class="btn-gradient rounded-full px-5 py-2.5 text-sm font-semibold text-white">Copy invoke</button>
+      </div>
+      <div class="mt-6 max-w-2xl">
+        <label for="cc-goal" class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Describe your goal</label>
+        <div class="mt-2 flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            id="cc-goal"
+            class="w-full flex-1 rounded-xl border border-edge bg-charcoal px-4 py-2.5 text-sm text-white placeholder:text-slate-500"
+            placeholder="e.g. audit my checkout flow and propose 3 fixes"
+            autocomplete="off"
+          />
+          <button type="button" id="cc-copy-brief" class="btn-gradient rounded-full px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap">Copy @boss + goal</button>
+        </div>
+        <p class="mt-2 font-mono text-xs text-slate-500">Preview: <span id="cc-brief-preview" class="text-slate-400">@boss</span></p>
+      </div>
+    </section>
+
+    <!-- Zone 2 + 3 wrapper -->
+    <div class="grid gap-6 py-10 lg:grid-cols-[380px_1fr]">
+      <!-- Zone 2 — Agent library -->
+      <section id="cc-library" class="rounded-2xl border border-edge bg-panel/60 p-4 sm:p-5" aria-labelledby="cc-library-title">
+        <h2 id="cc-library-title" class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Agent library</h2>
+        <div class="relative mt-3">
+          <label for="cc-search" class="sr-only">Search agents</label>
+          <input
+            type="text"
+            id="cc-search"
+            class="w-full rounded-xl border border-edge bg-charcoal px-4 py-2.5 pr-10 text-sm text-white placeholder:text-slate-500"
+            placeholder={`Search ${agents.length} agents… (name, @id, description)`}
+            autocomplete="off"
+          />
+          <button type="button" id="cc-search-clear" class="hidden absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-2 py-1 text-sm text-slate-400 hover:text-white" aria-label="Clear search">×</button>
+        </div>
+        <div id="cc-chips" class="flex flex-wrap gap-2 mt-3" role="group" aria-label="Filter by group">
+          <button type="button" data-group="" aria-pressed="true" class="cc-chip rounded-full border px-3 py-1.5 font-mono text-xs transition border-electric bg-electric/15 text-white shadow-[0_0_12px_rgba(0,200,255,0.25)]" title="All groups">All</button>
+          {GROUP_ORDER.map((g) => (
+            <button
+              type="button"
+              data-group={g}
+              aria-pressed="false"
+              title={`${g} · ${groupCount(g)}`}
+              class="cc-chip rounded-full border px-3 py-1.5 font-mono text-xs transition border-edge bg-charcoal text-slate-300 hover:border-electric/60 hover:text-white"
+            >{g}</button>
+          ))}
+        </div>
+        <p id="cc-count" class="mt-3 font-mono text-xs text-slate-500" aria-live="polite">Showing {agents.length} of {agents.length}</p>
+        <div id="cc-grid" class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 max-h-[640px] overflow-y-auto pr-1">
+          {agents.map((a) => (
+            <article
+              class="cc-agent glow-border rounded-xl p-4 flex flex-col gap-2 bg-panel"
+              data-id={a.id}
+              data-group={a.groupLabel}
+              data-search={(a.name + " " + a.id + " " + a.description).toLowerCase()}
+            >
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full shrink-0" style={`background:${a.color};box-shadow:0 0 8px ${a.color}66`} aria-hidden="true"></span>
+                <h3 class="text-sm font-semibold text-white truncate" title={a.name}>{displayName(a.name)}</h3>
+              </div>
+              <p class="font-mono text-xs text-electric truncate">@{a.id}</p>
+              <p class="text-xs leading-relaxed text-slate-400 line-clamp-2" title={a.description}>{a.description}</p>
+              <div class="mt-1 flex flex-wrap gap-2">
+                <button type="button" data-copy={`@${a.id}`} class="rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-electric/60 hover:text-white">Copy @</button>
+                <button type="button" data-add={a.id} class="btn-gradient rounded-full px-3 py-1.5 text-xs font-semibold text-white">Add to canvas</button>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div id="cc-empty" class="hidden mt-3 rounded-xl border border-dashed border-edge p-6 text-center text-sm text-slate-400">
+          <p>No agents match. Clear search or pick another group.</p>
+          <button type="button" id="cc-reset-filters" class="mt-3 rounded-full border border-edge bg-charcoal px-4 py-2 text-xs text-slate-200 hover:border-electric/60 hover:text-white">Reset filters</button>
+        </div>
+      </section>
+
+      <!-- Zone 3 — Workflow canvas -->
+      <section id="cc-canvas-wrap" class="rounded-2xl border border-edge bg-panel/60 p-4 sm:p-5 flex flex-col" aria-labelledby="cc-canvas-title">
+        <h2 id="cc-canvas-title" class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Workflow canvas</h2>
+        <div class="mt-3 flex flex-wrap items-center gap-2" role="toolbar" aria-label="Canvas actions">
+          <button type="button" id="cc-brief" class="btn-gradient rounded-full px-3 py-1.5 text-xs text-white font-semibold">Generate Boss Brief</button>
+          <button type="button" id="cc-save" class="rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-electric/60 hover:text-white">Save</button>
+          <button type="button" id="cc-load" class="rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-electric/60 hover:text-white" aria-expanded="false" aria-controls="cc-saved-list">Load</button>
+          <button type="button" id="cc-export" class="rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-electric/60 hover:text-white">Export JSON</button>
+          <label for="cc-import-file" class="cursor-pointer rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-electric/60 hover:text-white">Import JSON</label>
+          <input type="file" id="cc-import-file" accept="application/json" class="sr-only" />
+          <button type="button" id="cc-clear" class="rounded-full border border-edge bg-charcoal px-3 py-1.5 text-xs text-slate-200 hover:border-red-500/60 hover:text-red-300">Clear</button>
+          <p id="cc-mode-hint" class="ml-auto font-mono text-[11px] text-slate-500" aria-live="polite">Canvas: drag nodes · click edge to delete</p>
+        </div>
+        <div id="cc-saved-list" class="hidden mt-3 rounded-xl border border-edge bg-charcoal p-4">
+          <div class="flex flex-col sm:flex-row gap-2">
+            <label for="cc-save-name" class="sr-only">Workflow name</label>
+            <input type="text" id="cc-save-name" class="w-full flex-1 rounded-lg border border-edge bg-ink px-3 py-2 text-xs text-slate-200 placeholder:text-slate-500" placeholder="Workflow name…" autocomplete="off" maxlength="60" />
+            <button type="button" id="cc-save-confirm" class="rounded-full border border-edge bg-panel px-4 py-2 text-xs text-slate-200 hover:border-electric/60 hover:text-white whitespace-nowrap">Save workflow</button>
+          </div>
+          <ul id="cc-load-list" class="mt-3 flex flex-col gap-1"></ul>
+        </div>
+        <div id="cc-canvas" class="cc-canvas-grid relative mt-3 min-h-[420px] lg:min-h-[560px] rounded-xl border border-edge bg-ink overflow-auto" role="application" aria-label="Workflow canvas">
+          <svg id="cc-edges" class="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true"></svg>
+          <div id="cc-nodes" class="absolute inset-0"></div>
+          <div id="cc-canvas-empty" class="absolute inset-0 grid place-items-center pointer-events-none">
+            <p class="rounded-xl border border-dashed border-edge px-5 py-4 text-center text-sm text-slate-400">Add agents from the library to start a pipeline</p>
+          </div>
+        </div>
+        <ul id="cc-canvas-alt" class="sr-only" aria-label="Canvas text alternative"></ul>
+      </section>
+    </div>
+  </main>
+
+  <!-- Brief modal -->
+  <div id="cc-modal" class="hidden fixed inset-0 z-[80] items-center justify-center bg-black/70 p-4">
+    <div class="w-full max-w-2xl rounded-2xl glow-border bg-panel p-6 max-h-[90vh] overflow-auto" role="dialog" aria-modal="true" aria-labelledby="cc-modal-title">
+      <h3 id="cc-modal-title" class="text-lg font-bold text-white">Boss brief — paste anywhere</h3>
+      <pre id="cc-modal-text" class="mt-4 max-h-[50vh] overflow-auto rounded-xl bg-charcoal p-4 font-mono text-xs leading-relaxed text-slate-200 whitespace-pre-wrap"></pre>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <button type="button" id="cc-modal-copy" class="btn-gradient rounded-full px-5 py-2.5 text-sm font-semibold text-white">Copy brief</button>
+        <button type="button" id="cc-modal-close" class="rounded-full border border-edge bg-charcoal px-5 py-2.5 text-sm text-slate-200 hover:border-electric/60 hover:text-white">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="cc-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] rounded-full border border-electric/40 bg-charcoal px-4 py-2 text-sm text-white opacity-0 transition pointer-events-none" role="status" aria-live="polite"></div>
+
+  <script type="application/json" id="cc-data" set:html={JSON.stringify(agents)} />
+
+  <style>
+    .cc-canvas-grid {
+      background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .cc-node { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .cc-node:hover { border-color: #64748b; }
+    .cc-node.cc-selected { border-color: var(--color-electric); box-shadow: 0 0 0 1px var(--color-electric), 0 10px 30px rgb(0 0 0 / 0.5); }
+    .cc-node-head { cursor: grab; touch-action: none; }
+    .cc-node-head:active { cursor: grabbing; }
+    .cc-port { transition: transform 0.15s ease, border-color 0.15s ease; }
+    .cc-port:hover { transform: scale(1.2); border-color: var(--color-electric); }
+    .cc-port-active { border-color: var(--color-electric) !important; background: var(--color-electric) !important; box-shadow: 0 0 12px rgb(0 200 255 / 0.8); }
+    .cc-port-target { border-color: var(--color-electric) !important; animation: cc-port-pulse 150ms ease-in-out infinite alternate; }
+    @keyframes cc-port-pulse {
+      from { box-shadow: 0 0 0 0 rgb(0 200 255 / 0.7); }
+      to { box-shadow: 0 0 0 7px rgb(0 200 255 / 0); }
+    }
+    #cc-edges path:hover { stroke-width: 3; }
+    @media (prefers-reduced-motion: reduce) {
+      .cc-port-target { animation: none; box-shadow: 0 0 0 2px rgb(0 200 255 / 0.6); }
+    }
+  </style>
+
+  <script>
+    function initCC() {
+      var canvas = document.getElementById("cc-canvas");
+      if (!canvas || canvas.dataset.ccBound) return;
+      canvas.dataset.ccBound = "1";
+
+      var BOSS = "@boss";
+      var LS_KEY = "cc.workflows.v1";
+      var CAP = 60;
+      var CONNECT_HINT = "Connect: pick an output \u25CF then an input \u25CF";
+      var IDLE_HINT = "Canvas: drag nodes \u00B7 click edge to delete";
+
+      var AGENTS = {};
+      try {
+        var raw = JSON.parse(document.getElementById("cc-data").textContent);
+        raw.forEach(function (a) { AGENTS[a.id] = a; });
+      } catch (e) { AGENTS = {}; }
+
+      var S = { nodes: [], edges: [], seq: 0, eseq: 0, pendingFrom: null, selectedEdge: null, selectedNode: null };
+
+      var svg = document.getElementById("cc-edges");
+      var nodesLayer = document.getElementById("cc-nodes");
+      var emptyBox = document.getElementById("cc-canvas-empty");
+      var hint = document.getElementById("cc-mode-hint");
+      var toastEl = document.getElementById("cc-toast");
+      var toastTimer = null;
+
+      function toast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.remove("opacity-0");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.add("opacity-0"); }, 1800);
+      }
+
+      function copyText(t, okMsg) {
+        function done(ok) {
+          if (ok) toast(okMsg || "Copied \u2713");
+          else toast("Copy failed \u2014 select and copy manually");
+        }
+        function fallback() {
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = t;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = document.execCommand("copy");
+            ta.remove();
+            done(!!ok);
+          } catch (e) { done(false); }
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(t).then(function () { done(true); }, function () { fallback(); });
+        } else fallback();
+      }
+
+      function flashButton(btn, holdMs) {
+        var orig = btn.textContent;
+        btn.textContent = "Copied \u2713";
+        setTimeout(function () { btn.textContent = orig; }, holdMs);
+      }
+
+      function displayOf(agent) {
+        if (!agent) return "";
+        var i = agent.name.indexOf("\u00B7");
+        return i >= 0 ? agent.name.slice(i + 1).trim() : agent.name;
+      }
+
+      /* ---------- Boss panel ---------- */
+      var goalInput = document.getElementById("cc-goal");
+      var preview = document.getElementById("cc-brief-preview");
+      function goalText() { return goalInput.value.trim(); }
+      function briefHeadline() { var g = goalText(); return g ? BOSS + " " + g : BOSS; }
+      goalInput.addEventListener("input", function () { preview.textContent = briefHeadline(); });
+
+      document.getElementById("cc-copy-invoke").addEventListener("click", function () {
+        copyText(BOSS, "Copied \u2713");
+        flashButton(this, 1600);
+      });
+      document.getElementById("cc-copy-brief").addEventListener("click", function () {
+        var g = goalText();
+        if (!g) {
+          if (goalInput.animate) {
+            goalInput.animate(
+              [{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }],
+              { duration: 300 }
+            );
+          }
+          goalInput.focus();
+          toast("Type a goal first");
+          return;
+        }
+        copyText(BOSS + " " + g, "Copied \u2713");
+        flashButton(this, 1600);
+      });
+
+      /* ---------- Library ---------- */
+      var search = document.getElementById("cc-search");
+      var searchClear = document.getElementById("cc-search-clear");
+      var chipsBox = document.getElementById("cc-chips");
+      var countEl = document.getElementById("cc-count");
+      var grid = document.getElementById("cc-grid");
+      var empty = document.getElementById("cc-empty");
+      var cards = Array.prototype.slice.call(grid.querySelectorAll(".cc-agent"));
+      var total = cards.length;
+      var activeGroup = "";
+
+      function applyFilters() {
+        var q = search.value.trim().toLowerCase();
+        var shown = 0;
+        cards.forEach(function (card) {
+          var okGroup = !activeGroup || card.getAttribute("data-group") === activeGroup;
+          var okQ = !q || (card.getAttribute("data-search") || "").indexOf(q) >= 0;
+          var show = okGroup && okQ;
+          card.classList.toggle("hidden", !show);
+          if (show) shown++;
+        });
+        countEl.textContent = "Showing " + shown + " of " + total;
+        empty.classList.toggle("hidden", shown !== 0);
+        grid.classList.toggle("hidden", shown === 0);
+        searchClear.classList.toggle("hidden", !search.value);
+      }
+
+      search.addEventListener("input", applyFilters);
+      searchClear.addEventListener("click", function () { search.value = ""; applyFilters(); search.focus(); });
+      chipsBox.addEventListener("click", function (e) {
+        var chip = e.target.closest(".cc-chip");
+        if (!chip) return;
+        activeGroup = chip.getAttribute("data-group") || "";
+        chipsBox.querySelectorAll(".cc-chip").forEach(function (c) {
+          var on = c === chip;
+          c.setAttribute("aria-pressed", on ? "true" : "false");
+          c.className = "cc-chip rounded-full border px-3 py-1.5 font-mono text-xs transition " + (on
+            ? "border-electric bg-electric/15 text-white shadow-[0_0_12px_rgba(0,200,255,0.25)]"
+            : "border-edge bg-charcoal text-slate-300 hover:border-electric/60 hover:text-white");
+        });
+        applyFilters();
+      });
+      document.getElementById("cc-reset-filters").addEventListener("click", function () {
+        search.value = "";
+        activeGroup = "";
+        var all = chipsBox.querySelector('[data-group=""]');
+        if (all) all.click();
+        else applyFilters();
+      });
+
+      grid.addEventListener("click", function (e) {
+        var cp = e.target.closest("[data-copy]");
+        if (cp) {
+          copyText(cp.getAttribute("data-copy"), "Copied \u2713");
+          flashButton(cp, 1200);
+          return;
+        }
+        var add = e.target.closest("[data-add]");
+        if (add) addNode(add.getAttribute("data-add"));
+      });
+
+      /* ---------- Canvas: nodes ---------- */
+      function findNode(nid) {
+        for (var i = 0; i < S.nodes.length; i++) if (S.nodes[i].nid === nid) return S.nodes[i];
+        return null;
+      }
+      function syncTasks() {
+        nodesLayer.querySelectorAll(".cc-node").forEach(function (el) {
+          var n = findNode(el.getAttribute("data-node-id"));
+          var ta = el.querySelector("[data-task]");
+          if (n && ta) n.task = ta.value;
+        });
+      }
+      function updateEmpty() { emptyBox.classList.toggle("hidden", S.nodes.length > 0); }
+      function updateHint() { hint.textContent = S.pendingFrom ? CONNECT_HINT : IDLE_HINT; }
+
+      function clampPos(x, y) {
+        var maxX = Math.max(0, canvas.clientWidth - 232);
+        var maxY = Math.max(0, canvas.clientHeight - 120);
+        return { x: Math.min(maxX, Math.max(0, x)), y: Math.min(maxY, Math.max(0, y)) };
+      }
+
+      function addNode(agentId, preset) {
+        if (!AGENTS[agentId]) return;
+        if (S.nodes.length >= CAP) { toast("Canvas cap reached (60)"); return; }
+        syncTasks();
+        var nid = (preset && preset.nid) || ("n" + (++S.seq));
+        var k = S.nodes.length;
+        var base = preset ? { x: preset.x, y: preset.y } : { x: 24 + (k % 6) * 40, y: 24 + (k % 6) * 36 };
+        var p = clampPos(Number(base.x) || 0, Number(base.y) || 0);
+        S.nodes.push({ nid: nid, agentId: agentId, x: p.x, y: p.y, task: (preset && preset.task) || "" });
+        renderNodes();
+      }
+
+      function deleteNode(nid) {
+        syncTasks();
+        S.nodes = S.nodes.filter(function (n) { return n.nid !== nid; });
+        S.edges = S.edges.filter(function (e) { return e.from !== nid && e.to !== nid; });
+        if (S.pendingFrom === nid) S.pendingFrom = null;
+        if (S.selectedNode === nid) S.selectedNode = null;
+        renderNodes();
+      }
+
+      function buildNode(n) {
+        var agent = AGENTS[n.agentId];
+        var color = agent ? agent.color : "#00c8ff";
+        var el = document.createElement("div");
+        el.className = "cc-node absolute w-[220px] rounded-xl border border-edge bg-charcoal shadow-xl" + (S.selectedNode === n.nid ? " cc-selected" : "");
+        el.style.left = n.x + "px";
+        el.style.top = n.y + "px";
+        el.setAttribute("data-node-id", n.nid);
+        el.setAttribute("data-agent-id", n.agentId);
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("aria-label", "Node " + displayOf(agent));
+
+        var head = document.createElement("div");
+        head.className = "cc-node-head flex items-center gap-2 p-2.5 pb-1";
+        head.setAttribute("data-drag", "1");
+        var dot = document.createElement("span");
+        dot.className = "h-2.5 w-2.5 rounded-full shrink-0";
+        dot.style.background = color;
+        dot.style.boxShadow = "0 0 8px " + color + "66";
+        dot.setAttribute("aria-hidden", "true");
+        var nm = document.createElement("span");
+        nm.className = "text-xs font-semibold text-white truncate flex-1";
+        nm.textContent = displayOf(agent);
+        nm.title = agent ? agent.name : n.agentId;
+        var del = document.createElement("button");
+        del.type = "button";
+        del.className = "rounded px-1.5 py-0.5 text-sm leading-none text-slate-400 hover:text-red-300";
+        del.setAttribute("data-del", "1");
+        del.setAttribute("aria-label", "Remove node");
+        del.textContent = "\u00D7";
+        head.appendChild(dot); head.appendChild(nm); head.appendChild(del);
+
+        var sub = document.createElement("p");
+        sub.className = "px-2.5 text-[11px] text-electric truncate font-mono";
+        sub.textContent = "@" + n.agentId;
+
+        var ta = document.createElement("textarea");
+        ta.className = "mx-2.5 mt-2 w-[calc(100%-20px)] rounded-lg border border-edge bg-ink p-2 text-xs text-slate-200";
+        ta.setAttribute("rows", "2");
+        ta.setAttribute("maxlength", "280");
+        ta.setAttribute("data-task", "1");
+        ta.setAttribute("placeholder", "Task for this agent\u2026");
+        ta.setAttribute("aria-label", "Task for " + displayOf(agent));
+        ta.value = n.task || "";
+
+        var portIn = document.createElement("button");
+        portIn.type = "button";
+        portIn.className = "cc-port absolute top-10 grid h-7 w-7 place-items-center rounded-full border border-edge bg-panel text-[10px] text-electric";
+        portIn.style.left = "-14px";
+        portIn.setAttribute("data-port", "in");
+        portIn.setAttribute("aria-label", "Input port");
+        var inDot = document.createElement("span");
+        inDot.textContent = "\u25CF";
+        inDot.setAttribute("aria-hidden", "true");
+        portIn.appendChild(inDot);
+
+        var portOut = document.createElement("button");
+        portOut.type = "button";
+        portOut.className = "cc-port absolute top-10 grid h-7 w-7 place-items-center rounded-full border border-edge bg-panel text-[10px] text-electric";
+        portOut.style.right = "-14px";
+        portOut.setAttribute("data-port", "out");
+        portOut.setAttribute("aria-label", "Output port");
+        var outDot = document.createElement("span");
+        outDot.textContent = "\u25CF";
+        outDot.setAttribute("aria-hidden", "true");
+        portOut.appendChild(outDot);
+
+        el.appendChild(head); el.appendChild(sub); el.appendChild(ta);
+        el.appendChild(portIn); el.appendChild(portOut);
+        return el;
+      }
+
+      function renderNodes() {
+        nodesLayer.textContent = "";
+        S.nodes.forEach(function (n) { nodesLayer.appendChild(buildNode(n)); });
+        updateEmpty();
+        markPorts();
+        updateHint();
+        renderEdges();
+      }
+
+      function paintSelection() {
+        nodesLayer.querySelectorAll(".cc-node").forEach(function (el) {
+          el.classList.toggle("cc-selected", el.getAttribute("data-node-id") === S.selectedNode);
+        });
+      }
+
+      /* ---------- Canvas: edges ---------- */
+      function portCenter(nid, port) {
+        var nodeEl = nodesLayer.querySelector('[data-node-id="' + nid + '"]');
+        if (!nodeEl) return null;
+        var p = nodeEl.querySelector('[data-port="' + port + '"]');
+        if (!p) return null;
+        var c = canvas.getBoundingClientRect();
+        var r = p.getBoundingClientRect();
+        return { x: r.left - c.left + canvas.scrollLeft + r.width / 2, y: r.top - c.top + canvas.scrollTop + r.height / 2 };
+      }
+
+      function renderEdges() {
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+        var W = Math.max(canvas.clientWidth, canvas.scrollWidth);
+        var H = Math.max(canvas.clientHeight, canvas.scrollHeight);
+        svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+        S.edges.forEach(function (e) {
+          var a = portCenter(e.from, "out");
+          var b = portCenter(e.to, "in");
+          if (!a || !b) return;
+          var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("d", "M " + a.x + " " + a.y + " C " + (a.x + 60) + " " + a.y + ", " + (b.x - 60) + " " + b.y + ", " + b.x + " " + b.y);
+          p.setAttribute("fill", "none");
+          var sel = S.selectedEdge === e.eid;
+          p.setAttribute("stroke", sel ? "#f87171" : "#00c8ff");
+          p.setAttribute("stroke-width", sel ? "3" : "2");
+          p.setAttribute("opacity", "0.85");
+          p.style.pointerEvents = "auto";
+          p.style.cursor = "pointer";
+          (function (eid) {
+            p.addEventListener("click", function (ev) {
+              ev.stopPropagation();
+              onEdgeClick(eid);
+            });
+          })(e.eid);
+          svg.appendChild(p);
+        });
+      }
+
+      function onEdgeClick(eid) {
+        if (S.selectedEdge === eid) {
+          S.edges = S.edges.filter(function (e) { return e.eid !== eid; });
+          S.selectedEdge = null;
+          renderEdges();
+        } else {
+          S.selectedEdge = eid;
+          S.selectedNode = null;
+          paintSelection();
+          renderEdges();
+          toast("Edge selected \u2014 click again to delete");
+        }
+      }
+
+      /* ---------- Connect mode ---------- */
+      function markPorts() {
+        nodesLayer.querySelectorAll(".cc-port").forEach(function (p) {
+          p.classList.remove("cc-port-active", "cc-port-target");
+        });
+        if (!S.pendingFrom) return;
+        var out = nodesLayer.querySelector('[data-node-id="' + S.pendingFrom + '"] [data-port="out"]');
+        if (out) out.classList.add("cc-port-active");
+        nodesLayer.querySelectorAll(".cc-node").forEach(function (el) {
+          if (el.getAttribute("data-node-id") === S.pendingFrom) return;
+          var inp = el.querySelector('[data-port="in"]');
+          if (inp) inp.classList.add("cc-port-target");
+        });
+      }
+      function disarm() { S.pendingFrom = null; markPorts(); updateHint(); }
+
+      function armConnect(nid) {
+        if (S.pendingFrom === nid) { disarm(); return; }
+        S.pendingFrom = nid;
+        S.selectedEdge = null;
+        S.selectedNode = null;
+        paintSelection();
+        markPorts();
+        updateHint();
+        renderEdges();
+      }
+
+      function completeConnect(nid) {
+        if (!S.pendingFrom) return;
+        var from = S.pendingFrom, to = nid;
+        if (from === to) { toast("Pick an input port \u25CF on another node"); return; }
+        var dup = S.edges.some(function (e) { return e.from === from && e.to === to; });
+        if (dup) { toast("Already connected \u2014 pick a different pair"); disarm(); return; }
+        var fanIn = S.edges.some(function (e) { return e.to === to; });
+        syncTasks();
+        S.edges.push({ eid: "e" + (++S.eseq), from: from, to: to });
+        disarm();
+        renderEdges();
+        if (fanIn) toast("Input already has a feed \u2014 adding another");
+      }
+
+      nodesLayer.addEventListener("click", function (e) {
+        var del = e.target.closest("[data-del]");
+        if (del) {
+          var ndel = e.target.closest(".cc-node");
+          if (ndel) deleteNode(ndel.getAttribute("data-node-id"));
+          return;
+        }
+        var out = e.target.closest('[data-port="out"]');
+        if (out) {
+          var nout = e.target.closest(".cc-node");
+          if (nout) armConnect(nout.getAttribute("data-node-id"));
+          return;
+        }
+        var inp = e.target.closest('[data-port="in"]');
+        if (inp) {
+          var nin = e.target.closest(".cc-node");
+          if (nin) completeConnect(nin.getAttribute("data-node-id"));
+          return;
+        }
+        var node = e.target.closest(".cc-node");
+        if (node) {
+          S.selectedNode = node.getAttribute("data-node-id");
+          S.selectedEdge = null;
+          paintSelection();
+          renderEdges();
+        }
+      });
+
+      nodesLayer.addEventListener("input", function (e) {
+        var ta = e.target.closest("[data-task]");
+        if (!ta) return;
+        var node = e.target.closest(".cc-node");
+        if (!node) return;
+        var n = findNode(node.getAttribute("data-node-id"));
+        if (n) n.task = ta.value;
+      });
+
+      /* Drag (pointer events, rAF-throttled edge render) */
+      var drag = null;
+      nodesLayer.addEventListener("pointerdown", function (e) {
+        var head = e.target.closest("[data-drag]");
+        if (!head) return;
+        if (e.target.closest("button, textarea, input")) return;
+        var nodeEl = e.target.closest(".cc-node");
+        if (!nodeEl) return;
+        var nid = nodeEl.getAttribute("data-node-id");
+        var n = findNode(nid);
+        if (!n) return;
+        S.selectedNode = nid;
+        S.selectedEdge = null;
+        paintSelection();
+        renderEdges();
+        var c = canvas.getBoundingClientRect();
+        drag = { nid: nid, dx: e.clientX - (c.left + n.x), dy: e.clientY - (c.top + n.y), raf: null };
+        e.preventDefault();
+      });
+      document.addEventListener("pointermove", function (e) {
+        if (!drag) return;
+        var n = findNode(drag.nid);
+        if (!n) { drag = null; return; }
+        var c = canvas.getBoundingClientRect();
+        var p = clampPos(e.clientX - c.left - drag.dx, e.clientY - c.top - drag.dy);
+        n.x = p.x; n.y = p.y;
+        var el = nodesLayer.querySelector('[data-node-id="' + drag.nid + '"]');
+        if (el) { el.style.left = n.x + "px"; el.style.top = n.y + "px"; }
+        if (!drag.raf) {
+          drag.raf = requestAnimationFrame(function () { if (drag) drag.raf = null; renderEdges(); });
+        }
+      });
+      document.addEventListener("pointerup", function () { drag = null; });
+
+      canvas.addEventListener("click", function (e) {
+        if (e.target === canvas || e.target === nodesLayer || e.target === svg) {
+          S.selectedEdge = null;
+          S.selectedNode = null;
+          paintSelection();
+          renderEdges();
+        }
+      });
+      window.addEventListener("resize", renderEdges);
+
+      /* ---------- Brief serialization ---------- */
+      function topo() {
+        var idx = {};
+        S.nodes.forEach(function (n) { idx[n.nid] = parseInt(n.nid.slice(1), 10) || 0; });
+        var indeg = {}, adj = {};
+        S.nodes.forEach(function (n) { indeg[n.nid] = 0; adj[n.nid] = []; });
+        S.edges.forEach(function (e) {
+          if (indeg[e.from] !== undefined && indeg[e.to] !== undefined) {
+            adj[e.from].push(e.to);
+            indeg[e.to]++;
+          }
+        });
+        function byCreate(a, b) { return idx[a] - idx[b]; }
+        var q = S.nodes.filter(function (n) { return indeg[n.nid] === 0; }).map(function (n) { return n.nid; });
+        q.sort(byCreate);
+        var out = [];
+        while (q.length) {
+          var cur = q.shift();
+          out.push(cur);
+          adj[cur].forEach(function (m) {
+            indeg[m]--;
+            if (indeg[m] === 0) { q.push(m); q.sort(byCreate); }
+          });
+        }
+        var hasCycle = false;
+        if (out.length < S.nodes.length) {
+          hasCycle = true;
+          var rest = S.nodes.map(function (n) { return n.nid; }).filter(function (id) { return out.indexOf(id) < 0; });
+          rest.sort(byCreate);
+          out = out.concat(rest);
+        }
+        return { order: out, hasCycle: hasCycle };
+      }
+
+      function agentOf(nid) {
+        var n = findNode(nid);
+        return n ? AGENTS[n.agentId] : null;
+      }
+      function agentIdOf(nid) {
+        var n = findNode(nid);
+        return n ? n.agentId : "";
+      }
+
+      var modal = document.getElementById("cc-modal");
+      var modalText = document.getElementById("cc-modal-text");
+      var modalCopy = document.getElementById("cc-modal-copy");
+      var modalClose = document.getElementById("cc-modal-close");
+      var briefBtn = document.getElementById("cc-brief");
+      var altList = document.getElementById("cc-canvas-alt");
+      var lastFocus = null;
+
+      function openModal(text) {
+        modalText.textContent = text;
+        lastFocus = document.activeElement;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        modalCopy.focus();
+      }
+      function closeModal() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+        else briefBtn.focus();
+      }
+
+      function generateBrief() {
+        syncTasks();
+        var g = goalText();
+        if (S.nodes.length === 0) {
+          var t = g ? BOSS + " " + g : BOSS + " ready to brief \u2014 add agents to the canvas first";
+          openModal(t);
+          toast("Canvas is empty \u2014 add agents first");
+          return;
+        }
+        var r = topo();
+        var steps = r.order.map(function (nid, i) {
+          var n = findNode(nid);
+          var agent = AGENTS[n.agentId];
+          var task = (n.task || "").trim();
+          if (task.length > 140) task = task.slice(0, 140) + "\u2026";
+          task = task.split('"').join("'");
+          var label = task || displayOf(agent);
+          return (i + 1) + ". @" + n.agentId + " \u2014 \"" + label + "\"";
+        });
+        var flowLine = S.edges.length
+          ? "Flow: " + S.edges.map(function (e) { return "@" + agentIdOf(e.from) + " -> @" + agentIdOf(e.to); }).join(", ")
+          : "Flow: (unordered \u2014 no connections yet)";
+        var lines = ["@boss run this pipeline: " + (g || "execute the workflow below"), "Steps (" + S.nodes.length + "):"].concat(steps);
+        if (r.hasCycle) lines.push("Warning: connection cycle detected \u2014 execution order is best-effort. Break the loop on canvas.");
+        lines.push(flowLine);
+        lines.push("Notes: built in the Agent Command Center (" + S.nodes.length + " nodes, " + S.edges.length + " edges).");
+        var text = lines.join("\n");
+        openModal(text);
+        altList.textContent = "";
+        steps.forEach(function (s) {
+          var li = document.createElement("li");
+          li.textContent = s;
+          altList.appendChild(li);
+        });
+      }
+
+      briefBtn.addEventListener("click", generateBrief);
+      modalClose.addEventListener("click", closeModal);
+      modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+      modalCopy.addEventListener("click", function () {
+        copyText(modalText.textContent, "Copied \u2713");
+        flashButton(this, 1600);
+      });
+
+      /* ---------- Persistence / export / import / clear ---------- */
+      var savedBox = document.getElementById("cc-saved-list");
+      var saveName = document.getElementById("cc-save-name");
+      var saveConfirm = document.getElementById("cc-save-confirm");
+      var loadList = document.getElementById("cc-load-list");
+      var loadBtn = document.getElementById("cc-load");
+      var overwriteArmed = false;
+      var overwriteTimer = null;
+
+      function readStore() {
+        try {
+          var v = JSON.parse(localStorage.getItem(LS_KEY) || "{}");
+          return v && typeof v === "object" ? v : {};
+        } catch (e) { return {}; }
+      }
+      function refreshLoadList() {
+        loadList.textContent = "";
+        var store = readStore();
+        var names = Object.keys(store);
+        if (!names.length) {
+          var li = document.createElement("li");
+          li.className = "font-mono text-xs text-slate-500";
+          li.textContent = "No saved workflows yet";
+          loadList.appendChild(li);
+          return;
+        }
+        names.sort().forEach(function (name) {
+          var item = document.createElement("li");
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "w-full text-left rounded-lg border border-edge bg-panel px-3 py-2 text-xs text-slate-200 hover:border-electric/60 hover:text-white";
+          var d = "";
+          try { d = new Date(store[name].savedAt).toLocaleString(); } catch (e) { d = ""; }
+          b.textContent = name + (d ? " \u00B7 " + d : "");
+          b.setAttribute("data-load", name);
+          item.appendChild(b);
+          loadList.appendChild(item);
+        });
+      }
+      function toggleSaved(open) {
+        var show = open !== undefined ? open : savedBox.classList.contains("hidden");
+        savedBox.classList.toggle("hidden", !show);
+        loadBtn.setAttribute("aria-expanded", show ? "true" : "false");
+        if (show) refreshLoadList();
+      }
+
+      document.getElementById("cc-save").addEventListener("click", function () { toggleSaved(); saveName.focus(); });
+      loadBtn.addEventListener("click", function () {
+        var store = readStore();
+        if (!Object.keys(store).length) toast("No saved workflows yet");
+        toggleSaved();
+      });
+      saveConfirm.addEventListener("click", function () {
+        syncTasks();
+        var name = saveName.value.trim() || "untitled";
+        var store = readStore();
+        if (store[name] && !overwriteArmed) {
+          overwriteArmed = true;
+          saveConfirm.textContent = "Overwrite?";
+          overwriteTimer = setTimeout(function () {
+            overwriteArmed = false;
+            saveConfirm.textContent = "Save workflow";
+          }, 3000);
+          return;
+        }
+        if (overwriteTimer) clearTimeout(overwriteTimer);
+        overwriteArmed = false;
+        saveConfirm.textContent = "Save workflow";
+        store[name] = { nodes: S.nodes, edges: S.edges, seq: S.seq, eseq: S.eseq, savedAt: Date.now() };
+        try {
+          localStorage.setItem(LS_KEY, JSON.stringify(store));
+          toast("Saved \u201c" + name + "\u201d \u2713");
+          refreshLoadList();
+        } catch (e) { toast("Could not save (storage full?)"); }
+      });
+      loadList.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-load]");
+        if (!b) return;
+        var store = readStore();
+        var w = store[b.getAttribute("data-load")];
+        if (!w || !validWorkflow(w)) { toast("No saved workflows yet"); return; }
+        applyWorkflow(w);
+        toggleSaved(false);
+        toast("Loaded \u201c" + b.getAttribute("data-load") + "\u201d \u2713");
+      });
+
+      document.getElementById("cc-export").addEventListener("click", function () {
+        syncTasks();
+        var nm = (saveName.value.trim() || "untitled").replace(/[^a-z0-9\-_]+/gi, "-");
+        var blob = new Blob([JSON.stringify({ name: nm, nodes: S.nodes, edges: S.edges, seq: S.seq, eseq: S.eseq, savedAt: Date.now() }, null, 2)], { type: "application/json" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "workflow-" + nm + ".json";
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+      });
+
+      document.getElementById("cc-import-file").addEventListener("change", function () {
+        var f = this.files && this.files[0];
+        if (!f) return;
+        var rd = new FileReader();
+        rd.onload = function () {
+          try {
+            var w = JSON.parse(rd.result);
+            if (!validWorkflow(w)) { toast("Invalid workflow file"); return; }
+            applyWorkflow(w);
+            toast("Workflow imported \u2713");
+          } catch (e) { toast("Invalid workflow file"); }
+        };
+        rd.readAsText(f);
+        this.value = "";
+      });
+
+      function validWorkflow(o) {
+        if (!o || !Array.isArray(o.nodes) || !Array.isArray(o.edges)) return false;
+        var ids = {};
+        for (var i = 0; i < o.nodes.length; i++) {
+          var n = o.nodes[i];
+          if (!n || typeof n.agentId !== "string" || !AGENTS[n.agentId]) return false;
+          if (typeof n.x !== "number" || typeof n.y !== "number") return false;
+          if (typeof n.nid !== "string") return false;
+          ids[n.nid] = 1;
+        }
+        for (var j = 0; j < o.edges.length; j++) {
+          var e = o.edges[j];
+          if (!e || !ids[e.from] || !ids[e.to]) return false;
+        }
+        if (o.nodes.length > CAP) return false;
+        return true;
+      }
+
+      function applyWorkflow(w) {
+        S.nodes = w.nodes.map(function (n) { return { nid: n.nid, agentId: n.agentId, x: n.x, y: n.y, task: n.task || "" }; });
+        S.edges = w.edges.map(function (e) { return { eid: e.eid || ("e" + (++S.eseq)), from: e.from, to: e.to }; });
+        var maxN = 0, maxE = 0;
+        S.nodes.forEach(function (n) { var v = parseInt(String(n.nid).slice(1), 10) || 0; if (v > maxN) maxN = v; });
+        S.edges.forEach(function (e) { var v = parseInt(String(e.eid).slice(1), 10) || 0; if (v > maxE) maxE = v; });
+        S.seq = Math.max(Number(w.seq) || 0, maxN);
+        S.eseq = Math.max(Number(w.eseq) || 0, maxE);
+        S.pendingFrom = null;
+        S.selectedEdge = null;
+        S.selectedNode = null;
+        // Clamp imported positions into current canvas bounds
+        S.nodes.forEach(function (n) { var p = clampPos(n.x, n.y); n.x = p.x; n.y = p.y; });
+        renderNodes();
+      }
+
+      document.getElementById("cc-clear").addEventListener("click", function () {
+        S.nodes = [];
+        S.edges = [];
+        S.pendingFrom = null;
+        S.selectedEdge = null;
+        S.selectedNode = null;
+        renderNodes();
+        toast("Canvas cleared");
+      });
+
+      /* ---------- Keyboard ---------- */
+      document.addEventListener("keydown", function (e) {
+        var modalOpen = !modal.classList.contains("hidden");
+        if (e.key === "Escape") {
+          if (modalOpen) { closeModal(); return; }
+          if (S.pendingFrom) { disarm(); return; }
+          if (S.selectedEdge || S.selectedNode) {
+            S.selectedEdge = null;
+            S.selectedNode = null;
+            paintSelection();
+            renderEdges();
+          }
+          return;
+        }
+        if ((e.key === "Delete" || e.key === "Backspace") && !modalOpen) {
+          var t = e.target;
+          var typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
+          if (typing) return;
+          if (S.selectedEdge) {
+            var eid = S.selectedEdge;
+            S.edges = S.edges.filter(function (x) { return x.eid !== eid; });
+            S.selectedEdge = null;
+            renderEdges();
+            e.preventDefault();
+          } else if (S.selectedNode) {
+            deleteNode(S.selectedNode);
+            e.preventDefault();
+          }
+        }
+      });
+
+      applyFilters();
+      updateEmpty();
+      updateHint();
+      renderEdges();
+    }
+
+    document.addEventListener("DOMContentLoaded", initCC);
+    document.addEventListener("astro:page-load", initCC);
+    initCC();
+  </script>
+  <Footer />
+</Layout>
