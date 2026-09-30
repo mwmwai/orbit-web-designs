@@ -1,4 +1,4 @@
----
+﻿---
 interface Props {
 	only?: string[];
 }
@@ -10,14 +10,14 @@ const { only } = Astro.props;
 const 	allPlans = [
 	{
 		name: "Starter",
-		price: "KES 33,999",
-		usd: "≈ $277",
-		eur: "≈ €255",
-		care: "+ KES 6,999/mo Orbit Care",
-		blurb: "5 pages that sell — live in 5 days, no excuses.",
+		price: "KES 29,999",
+		usd: "â‰ˆ $277",
+		eur: "â‰ˆ â‚¬255",
+		care: "+ KES 5,999/mo Orbit Care",
+		blurb: "5 pages that sell â€” live in 5 days, no excuses.",
 		features: [
 			"5 custom pages (Home, About, Services, Contact +1)",
-			"Mobile-first — perfect on every phone",
+			"Mobile-first â€” perfect on every phone",
 			"WhatsApp + call buttons on every page",
 			"Basic SEO + Google Business Profile done",
 			"Selling copy polished for 3 pages",
@@ -30,14 +30,14 @@ const 	allPlans = [
 	},
 	{
 		name: "Business",
-		price: "KES 45,999",
-		usd: "≈ $369",
-		eur: "≈ €340",
-		care: "+ KES 9,999/mo Orbit Care",
-		blurb: "10 pages + blog & bookings — you rank, they book.",
+		price: "KES 43,999",
+		usd: "â‰ˆ $369",
+		eur: "â‰ˆ â‚¬340",
+		care: "+ KES 8,999/mo Orbit Care",
+		blurb: "10 pages + blog & bookings â€” you rank, they book.",
 		features: [
 			"10 custom pages + blog setup",
-			"Full SEO — titles, schema, sitemap, 90+ score",
+			"Full SEO â€” titles, schema, sitemap, 90+ score",
 			"Booking / lead capture (WhatsApp / Calendly)",
 			"Copywriting for every page",
 			"Free domain + hosting + email forwards",
@@ -50,20 +50,20 @@ const 	allPlans = [
 	},
 	{
 		name: "Master",
-		price: "KES 57,999",
-		usd: "≈ $462",
-		eur: "≈ €425",
-		care: "+ KES 12,999/mo Orbit Care",
-		blurb: "15+ pages or full store — M-Pesa native, you own it.",
+		price: "KES 55,999",
+		usd: "â‰ˆ $462",
+		eur: "â‰ˆ â‚¬425",
+		care: "+ KES 11,999/mo Orbit Care",
+		blurb: "15+ pages or full store â€” M-Pesa native, you own it.",
 		features: [
 			"15+ pages or full store / booking system",
-			"M-Pesa Till+Paybill, cards & PayPal — native Daraja",
+			"M-Pesa Till+Paybill, cards & PayPal â€” native Daraja",
 			"Advanced buyer SEO (product + local schema)",
 			"Inventory / bookings auto-sync + low-stock alerts",
 			"Everything in Business included",
-			"Priority support — jump the queue",
+			"Priority support â€” jump the queue",
 			"Abandoned-cart + review-request automations",
-			"Training + handover video — run it yourself",
+			"Training + handover video â€” run it yourself",
 			"Free domain + hosting + SSL + backups",
 			"Live in 2 weeks",
 		],
@@ -72,10 +72,10 @@ const 	allPlans = [
 	},
 	{
 		name: "Custom SaaS App",
-		price: "from KES 57,999",
-		usd: "≈ $462",
-		eur: "≈ €425",
-		blurb: "Your idea as a real app — dashboards, payments, ready to sell.",
+		price: "from KES 55,999",
+		usd: "â‰ˆ $462",
+		eur: "â‰ˆ â‚¬425",
+		blurb: "Your idea as a real app â€” dashboards, payments, ready to sell.",
 		features: [
 			"Auth, roles & onboarding flow",
 			"Admin + user dashboards",
@@ -92,14 +92,14 @@ const 	allPlans = [
 	},
 	{
 		name: "Graphic Design",
-		price: "KES 16,999+",
-		usd: "≈ $138+",
-		eur: "≈ €127+",
-		blurb: "Logos to full brand kits — 16,999 to 28,999, you own it.",
+		price: "KES 15,999+",
+		usd: "â‰ˆ $138+",
+		eur: "â‰ˆ â‚¬127+",
+		blurb: "Logos to full brand kits â€” 15,999 to 26,999, you own it.",
 		features: [
-			"Logos from KES 16,999 — 3 concepts, unlimited polish",
+			"Logos from KES 15,999 â€” 3 concepts, unlimited polish",
 			"Social kits that actually match your site",
-			"Full brand identity up to KES 28,999",
+			"Full brand identity up to KES 26,999",
 			"Marketing creatives & flyers that convert",
 			"Source files + brand guideline sheet",
 			"Print-ready + social-ready exports",
@@ -110,14 +110,14 @@ const 	allPlans = [
 	},
 	{
 		name: "Custom AI Agent",
-		price: "KES 57,999",
-		usd: "≈ $462",
-		eur: "≈ €425",
-		blurb: "Trained on YOUR business — replies in seconds, books while you sleep.",
+		price: "KES 55,999",
+		usd: "â‰ˆ $462",
+		eur: "â‰ˆ â‚¬425",
+		blurb: "Trained on YOUR business â€” replies in seconds, books while you sleep.",
 		features: [
-			"WhatsApp / site chat / email — one brain",
+			"WhatsApp / site chat / email â€” one brain",
 			"Lead qualification + booking on autopilot",
-			"Human handover — never loses a hot lead",
+			"Human handover â€” never loses a hot lead",
 			"30 days tuning + hallucination guards",
 			"Your API keys, you own it forever",
 		],
@@ -126,13 +126,13 @@ const 	allPlans = [
 	},
 	{
 		name: "Workflow Automation",
-		price: "KES 45,999",
-		usd: "≈ $369",
-		eur: "≈ €340",
-		blurb: "Per workflow — manual work, gone for good.",
+		price: "KES 43,999",
+		usd: "â‰ˆ $369",
+		eur: "â‰ˆ â‚¬340",
+		blurb: "Per workflow â€” manual work, gone for good.",
 		features: [
-			"M-Pesa → Sheets / CRM — no copy-paste",
-			"Inquiry → WhatsApp → calendar — auto",
+			"M-Pesa â†’ Sheets / CRM â€” no copy-paste",
+			"Inquiry â†’ WhatsApp â†’ calendar â€” auto",
 			"Invoices & receipts auto-sent",
 			"You own it, documented + handover",
 			"Bundle 3+ workflows = 15% off",
@@ -142,10 +142,10 @@ const 	allPlans = [
 	},
 	{
 		name: "Business Dashboard",
-		price: "KES 31,999",
-		usd: "≈ $254",
-		eur: "≈ €234",
-		blurb: "Your money, bookings, stock — one screen, no guessing.",
+		price: "KES 29,999",
+		usd: "â‰ˆ $254",
+		eur: "â‰ˆ â‚¬234",
+		blurb: "Your money, bookings, stock â€” one screen, no guessing.",
 		features: [
 			"Live sales, M-Pesa feed, bookings",
 			"Password login for staff",
@@ -159,7 +159,7 @@ const 	allPlans = [
 ];
 
 function linkForPlan(p: typeof allPlans[number]) {
-	if (["Starter","Business","Master"].includes(p.name)) return whatsappLink(`Hi Orbit! I want ${p.name} website (${p.price}) — my business is...`);
+	if (["Starter","Business","Master"].includes(p.name)) return whatsappLink(`Hi Orbit! I want ${p.name} website (${p.price}) â€” my business is...`);
 	if (p.name === "Custom AI Agent") return "/automation";
 	if (p.name === "Workflow Automation") return "/automation";
 	if (p.name === "Custom SaaS App") return "/saas";
@@ -174,73 +174,58 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 <section id="pricing" class="section-glow border-t border-white/5 py-24">
 	<div class="mx-auto max-w-7xl px-5">
 		<div class="text-reveal mb-14 max-w-2xl">
-			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pricelist</p>
-			<p class="mt-3 text-sm text-slate-400">★★★★★ Trusted by 50+ Kenyan businesses — salons, shops, restaurants.</p>
-			<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-				Straight-line pricing.
-			</h2>
-			<p class="mt-4 max-w-xl text-slate-400">
-				{plans.length === 3 ? "Three packages" : "Five packages"} built for growing businesses — flexible payment, delivered fast.
+			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">â–  Pricelist</p>
+			<p class="mt-3 text-sm text-slate-400">â˜…â˜…â˜…â˜…â˜… Trusted by 50+ Kenyan businesses â€” salons, shops, restaurants.</p>
+			<h2 class="mt-4 display-lg text-white">Straight-line pricing.</h2>
+			<p class="mt-4 max-w-xl text-slate-400 text-wrap-pretty">
+				{plans.length === 3 ? "Three packages" : "Five packages"} built for growing businesses â€” flexible payment, delivered fast.
 			</p>
 		</div>
 
-		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+		<div class="bento">
 			{
 				plans.map((p, i) => (
-					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
-						<div
-							data-tilt
-							class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${
-								p.featured
-									? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10"
-									: "glow-border"
-							}`}
-						>
-							{p.featured && (
-								<span class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">
-									Most popular
-								</span>
-							)}
-							<h3 class="text-lg font-semibold text-white">{p.name}</h3>
-							<p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
-							<p class="mt-6">
-								<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
-								<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span>
-								{p.care && <span class="mt-1 block text-xs font-medium text-electric">{p.care}</span>}
-							</p>
-							<ul class="mt-8 grid flex-1 content-start gap-3">
-								{p.features.map((f) => (
-									<li class="flex items-start gap-3 text-sm text-slate-300">
-										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-1 shrink-0">
-											<path d="M20 6L9 17l-5-5" />
-										</svg>
-										{f}
-									</li>
-								))}
-							</ul>
-							{p.name === "Master" && (
-								<a href="/mpesa-fee-calculator" class="mt-4 inline-flex text-xs font-medium text-electric hover:underline">→ Price your margins with M-Pesa fee calculator</a>
-							)}
-							<a
-								href={linkForPlan(p)}
-								target={linkForPlan(p).startsWith("https://wa.me") ? "_blank" : undefined}
-								rel={linkForPlan(p).startsWith("https://wa.me") ? "noopener noreferrer" : undefined}
-								class={`promo-cta mt-8 block rounded-full py-3 text-center font-semibold transition ${
-									p.featured
-										? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
-										: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
-								}`}
-							>
-								{p.cta}
-							</a>
+					<article class="reveal glass hover-lift rounded-2xl p-6 press" style={`transition-delay:${i * 70}ms`}>
+						{p.featured && (
+							<span class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-electric/20 to-neon/20 px-3 py-1 font-mono text-xs uppercase tracking-widest text-white ring-1 ring-electric/30">
+								Most popular
+							</span>
+						)}
+						<h3 class="display-sm text-white">{p.name}</h3>
+						<p class="mt-2 text-sm text-slate-400 text-wrap-pretty">{p.blurb}</p>
+						<div class="mt-5 flex items-baseline gap-3 flex-wrap">
+							<span class="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-electric to-neon bg-clip-text text-transparent">{p.price}</span>
+							<span class="text-sm font-semibold text-slate-400">{p.usd} <span class="text-stone">Â·</span> {p.eur}</span>
 						</div>
+						{p.care && <p class="mt-1 text-xs font-medium text-electric">{p.care}</p>}
+						<ul class="mt-6 flex-1 space-y-2.5">
+							{p.features.map((f) => (
+								<li class="flex items-start gap-2.5 text-sm text-slate-300">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-electric)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+									{f}
+								</li>
+							))}
+						</ul>
+						{p.name === "Master" && (
+							<a href="/mpesa-fee-calculator" class="mt-3 inline-flex text-xs font-medium text-electric hover:underline focus-ring">â†’ Price your margins with M-Pesa fee calculator</a>
+						)}
+						<a
+							href={linkForPlan(p)}
+							target={linkForPlan(p).startsWith("https://wa.me") ? "_blank" : undefined}
+							rel={linkForPlan(p).startsWith("https://wa.me") ? "noopener noreferrer" : undefined}
+							class={`mt-6 block rounded-full py-3 text-center font-semibold transition focus-ring ${p.featured ? "btn-gradient text-white press" : "border border-edge/50 bg-panel/50 text-slate-200 hover:border-electric/60 hover:text-white press"}`}
+						>
+							{p.cta}
+						</a>
 					</article>
 				))
 			}
 		</div>
 
-		<p class="reveal mt-8 text-sm text-slate-500">
-			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">Agents & Workflows</a>
+		<p class="reveal mt-8 text-sm text-slate-500 text-wrap-pretty">
+			Need something different? <a href="/contact" class="text-electric hover:underline focus-ring">Ask for a custom quote</a> â€” <a href="/mpesa-fee-calculator" class="text-electric hover:underline focus-ring">M-Pesa calculator</a> Â· <a href="/blog/website-care-kenya" class="text-electric hover:underline focus-ring">Care plans</a> Â· <a href="/automation" class="text-electric hover:underline focus-ring">Agents & Workflows</a>
 		</p>
 	</div>
 
@@ -248,18 +233,19 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 
 <section id="payments" class="border-t border-white/5 pb-8 pt-4">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="glow-border reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-8 md:flex-row md:items-center md:justify-between">
+		<div class="glass reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-8 md:flex-row md:items-center md:justify-between">
 			<div>
-				<h3 class="text-lg font-semibold text-white">Payments, handled quietly.</h3>
-				<p class="mt-1 max-w-md text-sm text-slate-400">M-Pesa, cards and PayPal — secure, verified, no drama.</p>
+				<h3 class="display-sm text-white">Payments, handled quietly.</h3>
+				<p class="mt-1 max-w-md text-sm text-slate-400 text-wrap-pretty">M-Pesa, cards and PayPal â€” secure, verified, no drama.</p>
 			</div>
-			<div class="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest">
-				<span class="border border-edge px-4 py-2 text-stone">M-Pesa</span>
-				<span class="border border-edge px-4 py-2 text-stone">Card</span>
-				<span class="border border-edge px-4 py-2 text-stone">PayPal</span>
+			<div class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest">
+				<span class="glass px-4 py-2 rounded-lg text-stone">M-Pesa</span>
+				<span class="glass px-4 py-2 rounded-lg text-stone">Card</span>
+				<span class="glass px-4 py-2 rounded-lg text-stone">PayPal</span>
 			</div>
 		</div>
 	</div>
 </section>
+
 
 

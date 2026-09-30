@@ -1,6 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+﻿import { createClient } from '@supabase/supabase-js';
 
-const RATE_LIMIT = 15; // chat calls per window — each one costs money
+const RATE_LIMIT = 15; // chat calls per window â€” each one costs money
 const WINDOW_MS = 3_600_000; // 1 hour
 const MAX_MSGS = 10;
 const MAX_MSG_CHARS = 600;
@@ -29,22 +29,29 @@ function checkRateLimit(ip: string): { allowed: boolean; reset: number } {
   return { allowed: true, reset: record.reset };
 }
 
-const SYSTEM = `You are Orbit — the powerful AI sales & support assistant for Orbit Web Designs & Marketing (Nairobi, worldwide remote). Be concise but genuinely helpful. Use 1-4 short sentences, plain text, no emojis unless the user uses them. Use **bold** for prices.
+const SYSTEM = `You are Orbit â€” the powerful AI sales & support assistant for Orbit Web Designs & Marketing (Nairobi, worldwide remote). Be concise but genuinely helpful. Use 1-4 short sentences, plain text, no emojis unless the user uses them. Use **bold** for prices.
+
+TOOLS (you can invoke these by including the JSON block in your reply):
+- {"tool": "mpesa_calc", "amount": 5000, "type": "paybill"} â€” calculates M-Pesa fee instantly
+- {"tool": "package_compare", "need": "store|bookings|info", "budget": "under_30k|30k_40k|40k_plus|unsure"} â€” returns exact package match
+- {"tool": "schedule_call", "name": "", "phone": "", "preferred": ""} â€” books a human callback (returns WhatsApp link)
 
 TRUTH (never invent):
-- Websites: Starter 33,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 45,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 57,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
-- Care: Starter 6,999/mo, Business 9,999/mo, Master 12,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
-- SaaS from 57,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
-- Design from 16,999 (kits to 28,999) -> /design
-- AI Agent 57,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
-- Workflow 45,999/workflow (M-Pesa->Sheets, invoices, bundle 3=15% off) -> /automation
-- Dashboards: Add-on 16,999, Standalone 31,999 -> /dashboards
-- WhatsApp Responder 33,999
+- Websites: Starter 29,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 43,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 55,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
+- Care: Starter 5,999/mo, Business 8,999/mo, Master 11,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
+- SaaS from 55,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
+- Design from 15,999 (kits to 26,999) -> /design
+- AI Agent 55,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
+- Workflow 43,999/workflow (M-Pesa->Sheets, invoices, bundle 3=15% off) -> /automation
+- Dashboards: Add-on 15,999, Standalone 29,999 -> /dashboards
+- WhatsApp Responder 29,999
 - M-Pesa: Till = walk-in, Paybill = tracked/online. Calculator at /mpesa-fee-calculator
 - Humans: WhatsApp +254 741 992 308, Mon-Sat, minutes. You are the AI, but always offer WhatsApp handoff for quotes/booking.
 - If unsure, say you don't have it and point to /packages, /guides, or WhatsApp. Never invent reviews, guarantees, or prices.
 
-STYLE: Be useful and powerful. If asked for a recommendation, ask 1 qualifying question (need + budget) then point to the exact package. If asked to calculate M-Pesa fee, estimate from Safaricom 2026 bands (e.g., ~1.5% for 1k-5k) and link to calculator. Always end with a next step: link or WhatsApp.`;
+STYLE: Be useful and powerful. If asked for a recommendation, ask 1 qualifying question (need + budget) then point to the exact package. If asked to calculate M-Pesa fee, use the mpesa_calc tool and give the exact number. Always end with a next step: link or WhatsApp.
+
+RESPONSE FORMAT: Plain text. If you use a tool, include the JSON block on its own line. You can use multiple tools. After tool results, synthesize the answer.`;
 
 export const config = {
   runtime: 'edge',
@@ -115,53 +122,149 @@ export default async function handler(request: Request): Promise<Response> {
 
   const system = name ? `${SYSTEM} The visitor's name is ${name}.` : SYSTEM;
 
-  try {
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://orbitwebdesigns.co.ke',
-        'X-Title': 'Orbit Assistant',
-      },
-      body: JSON.stringify({
-        model,
-        max_tokens: MAX_TOKENS,
-        temperature: 0.4,
-        messages: [{ role: 'system', content: system }, ...clean],
-      }),
-    });
-    if (!res.ok) {
-      return json({ error: 'AI unavailable', fallback: true }, 502);
-    }
-    const data = await res.json();
-    const reply =
-      data?.choices?.[0]?.message?.content?.toString().trim().slice(0, 1200) || '';
-    if (!reply) {
-      return json({ error: 'AI unavailable', fallback: true }, 502);
-    }
-    // Powerful engine: auto-save lead if name/phone/email shared (fire-and-forget)
-    try {
-      const lastUser = clean[clean.length - 1].content;
-      const emailM = lastUser.match(/[\w.+-]+@[\w-]+\.[\w.+-]+/);
-      const phoneM = lastUser.match(/(\+?254[\s.-]?\d{9}|0?7\d{8})/);
-      if ((name || emailM || phoneM) && lastUser.length > 12) {
-        const sbUrl = process.env.PUBLIC_SUPABASE_URL;
-        const sbKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
-        if (sbUrl && sbKey) {
-          const sb = createClient(sbUrl, sbKey);
-          await sb.from('leads').insert({
-            name: (name || 'Orbit AI chat').slice(0, 80),
-            email: emailM ? emailM[0].slice(0, 120) : null,
-            phone: phoneM ? phoneM[0].replace(/\s/g, '').slice(0, 20) : null,
-            details: `AI: ${lastUser.slice(0, 400)} | Reply: ${reply.slice(0, 400)}`,
-            source: 'orbit-ai',
-          });
+try {
+      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://orbitwebdesigns.co.ke',
+          'X-Title': 'Orbit Assistant',
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: MAX_TOKENS,
+          temperature: 0.4,
+          messages: [{ role: 'system', content: system }, ...clean],
+        }),
+      });
+      if (!res.ok) {
+        return json({ error: 'AI unavailable', fallback: true }, 502);
+      }
+      const data = await res.json();
+      let reply =
+        data?.choices?.[0]?.message?.content?.toString().trim().slice(0, 1200) || '';
+      if (!reply) {
+        return json({ error: 'AI unavailable', fallback: true }, 502);
+      }
+
+      // Execute tool calls embedded in the reply
+      const toolCalls: Array<{ tool: string; args: any }> = [];
+      const toolRegex = /\{("tool":\s*".+?")\s*,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*".+?"\s*(?:,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*".+?"\s*)*?\}/g;
+      let match;
+      while ((match = toolRegex.exec(reply)) !== null) {
+        try {
+          toolCalls.push(JSON.parse(match[0]));
+        } catch {}
+      }
+
+      const toolResults: string[] = [];
+      for (const call of toolCalls) {
+        if (call.tool === 'mpesa_calc') {
+          const amount = Number(call.args.amount);
+          const type = call.args.type || 'paybill';
+          let fee = 0;
+          if (type === 'stk' || type === 'paybill') {
+            if (amount <= 100) fee = 0;
+            else if (amount <= 500) fee = 11;
+            else if (amount <= 1000) fee = 18;
+            else if (amount <= 1500) fee = 25;
+            else if (amount <= 2500) fee = 35;
+            else if (amount <= 3500) fee = 44;
+            else if (amount <= 5000) fee = 53;
+            else if (amount <= 7500) fee = 66;
+            else if (amount <= 10000) fee = 75;
+            else if (amount <= 15000) fee = 89;
+            else if (amount <= 20000) fee = 99;
+            else if (amount <= 35000) fee = 109;
+            else if (amount <= 50000) fee = 117;
+            else if (amount <= 70000) fee = 125;
+            else if (amount <= 150000) fee = 150;
+            else fee = 200;
+          } else if (type === 'till') {
+            if (amount <= 100) fee = 0;
+            else if (amount <= 500) fee = 6;
+            else if (amount <= 1000) fee = 11;
+            else if (amount <= 1500) fee = 18;
+            else if (amount <= 2500) fee = 25;
+            else if (amount <= 3500) fee = 35;
+            else if (amount <= 5000) fee = 44;
+            else if (amount <= 7500) fee = 53;
+            else if (amount <= 10000) fee = 62;
+            else if (amount <= 15000) fee = 75;
+            else if (amount <= 20000) fee = 84;
+            else if (amount <= 35000) fee = 109;
+            else if (amount <= 50000) fee = 124;
+            else if (amount <= 70000) fee = 144;
+            else if (amount <= 150000) fee = 194;
+            else fee = 200;
+          } else if (type === 'p2p') {
+            fee = Math.min(Math.max(Math.round(amount * 0.012), 4), 200);
+          } else if (type === 'withdraw') {
+            if (amount <= 500) fee = 0;
+            else if (amount <= 1000) fee = 27;
+            else if (amount <= 1500) fee = 33;
+            else if (amount <= 2500) fee = 54;
+            else if (amount <= 3500) fee = 72;
+            else if (amount <= 5000) fee = 86;
+            else if (amount <= 7500) fee = 108;
+            else if (amount <= 10000) fee = 135;
+            else if (amount <= 15000) fee = 157;
+            else if (amount <= 20000) fee = 175;
+            else if (amount <= 35000) fee = 210;
+            else if (amount <= 50000) fee = 240;
+            else if (amount <= 70000) fee = 270;
+            else if (amount <= 150000) fee = 300;
+            else fee = 300;
+          }
+          toolResults.push(`M-Pesa ${type} fee for KES ${amount.toLocaleString()}: **KES ${fee}** (total **KES ${amount + fee}**) â€” see /mpesa-fee-calculator for details`);
+        } else if (call.tool === 'package_compare') {
+          const need = call.args.need || 'info';
+          const budget = call.args.budget || 'unsure';
+          let pkg = 'Starter', price = '29,999', link = '/packages';
+          if (need === 'store') { pkg = 'Master'; price = '55,999'; link = '/mpesa-ecommerce-kenya'; }
+          else if (need === 'bookings') { pkg = 'Business'; price = '43,999'; link = '/packages'; }
+          if (budget === 'under_30k' && pkg !== 'Starter') {
+            pkg = 'Starter'; price = '29,999'; link = '/packages';
+          }
+          toolResults.push(`Recommendation: **${pkg} (${price})** â€” ${need === 'store' ? 'online store with M-Pesa' : need === 'bookings' ? 'bookings + 10 pages' : '5-page site to get found'}. ${pkg === 'Starter' && budget === 'under_30k' ? 'Fits your budget.' : ''} See ${link}`);
+        } else if (call.tool === 'schedule_call') {
+          const name = call.args.name || 'Orbit AI chat';
+          const phone = call.args.phone || '';
+          const msg = `Hi Orbit! ${name} here. ${call.args.preferred || 'Please call me back.'}`;
+          const link = `https://wa.me/254741992308?text=${encodeURIComponent(msg)}`;
+          toolResults.push(`Booked a callback â€” ${link}`);
         }
       }
-    } catch {}
-    return json({ reply });
-  } catch {
-    return json({ error: 'AI unavailable', fallback: true }, 502);
-  }
+
+      if (toolResults.length > 0) {
+        reply = reply.replace(toolRegex, '').trim();
+        reply = (reply + '\n\n' + toolResults.join('\n')).trim();
+      }
+
+      // Powerful engine: auto-save lead if name/phone/email shared (fire-and-forget)
+      try {
+        const lastUser = clean[clean.length - 1].content;
+        const emailM = lastUser.match(/[\w.+-]+@[\w-]+\.[\w.+-]+/);
+        const phoneM = lastUser.match(/(\+?254[\s.-]?\d{9}|0?7\d{8})/);
+        if ((name || emailM || phoneM) && lastUser.length > 12) {
+          const sbUrl = process.env.PUBLIC_SUPABASE_URL;
+          const sbKey = process.env.PUBLIC_SUPABASE_ANON_KEY;
+          if (sbUrl && sbKey) {
+            const sb = createClient(sbUrl, sbKey);
+            await sb.from('leads').insert({
+              name: (name || 'Orbit AI chat').slice(0, 80),
+              email: emailM ? emailM[0].slice(0, 120) : null,
+              phone: phoneM ? phoneM[0].replace(/\s/g, '').slice(0, 20) : null,
+              details: `AI: ${lastUser.slice(0, 400)} | Reply: ${reply.slice(0, 400)}`,
+              source: 'orbit-ai',
+            });
+          }
+        }
+      } catch {}
+      return json({ reply });
+    } catch {
+      return json({ error: 'AI unavailable', fallback: true }, 502);
+    }
 }
+

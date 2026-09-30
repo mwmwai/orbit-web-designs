@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
@@ -6,8 +6,8 @@ import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
 
 const faqs = [
-	{ q: "What does Orbit Care cover?", a: "Hosting, SSL, daily off-site backups, weekly security patches, monthly speed tuning and WhatsApp support Mon–Sat. Tier determines priority and content tasks." },
-	{ q: "Can I cancel?", a: "Yes — cancel anytime. Your domain, files and site stay yours; we just stop watching it." },
+	{ q: "What does Orbit Care cover?", a: "Hosting, SSL, daily off-site backups, weekly security patches, monthly speed tuning and WhatsApp support Monâ€“Sat. Tier determines priority and content tasks." },
+	{ q: "Can I cancel?", a: "Yes â€” cancel anytime. Your domain, files and site stay yours; we just stop watching it." },
 	{ q: "Do I need Care if I can DIY?", a: "If you do the 30-min monthly routine in our Website Care guide, you can skip it. Most SMEs delegate because they won't." },
 ];
 const faqJsonLd = {
@@ -18,8 +18,8 @@ const faqJsonLd = {
 ---
 
 <Layout
-	title="Orbit Care — Hosting, Security & Support from 6,999/mo | Orbit"
-	description="Orbit Care: hosting, SSL, backups, security patches, speed tuning and WhatsApp support. 6,999/mo Starter, 9,999 Business, 12,999 Master — cancel anytime."
+	title="Orbit Care â€” Hosting, Security & Support from 5,999/mo | Orbit"
+	description="Orbit Care: hosting, SSL, backups, security patches, speed tuning and WhatsApp support. 5,999/mo Starter, 9,999 Business, 12,999 Master â€” cancel anytime."
 >
 	<Navbar />
 	<main id="main">
@@ -28,12 +28,12 @@ const faqJsonLd = {
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[130px]"></div>
 			</div>
 			<div class="relative mx-auto max-w-7xl px-5 pb-16 pt-20 md:pt-28">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Orbit Care</p>
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">â–  Orbit Care</p>
 				<h1 class="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
 					A site you <span class="text-gradient">never worry about.</span>
 				</h1>
-				<p class="mt-5 max-w-2xl text-lg text-slate-400">Hosting, SSL, daily backups, weekly security, monthly speed tuning and human WhatsApp support — the recurring work that keeps you found, trusted and paid.</p>
-				<p class="mt-4 text-sm text-slate-400">Cancel anytime. Your site, domain and files stay yours — we just stop watching it.</p>
+				<p class="mt-5 max-w-2xl text-lg text-slate-400">Hosting, SSL, daily backups, weekly security, monthly speed tuning and human WhatsApp support â€” the recurring work that keeps you found, trusted and paid.</p>
+				<p class="mt-4 text-sm text-slate-400">Cancel anytime. Your site, domain and files stay yours â€” we just stop watching it.</p>
 			</div>
 		</section>
 
@@ -43,86 +43,86 @@ const faqJsonLd = {
 					<div class="glow-border rounded-2xl p-8 transition duration-300 hover:-translate-y-1 hover:border-electric/30 hover:shadow-xl hover:shadow-electric/10">
 						<h3 class="text-lg font-semibold text-white">Starter Care</h3>
 						<p class="mt-2 text-3xl font-extrabold text-gradient">6,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
-						<p class="mt-1 text-xs text-slate-400">For Starter 33,999 sites</p>
+						<p class="mt-1 text-xs text-slate-400">For Starter 29,999 sites</p>
 						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
-							<li class="flex gap-2"><span class="text-electric">✓</span> Hosting + SSL + daily backups</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Weekly security patches</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Monthly speed check</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> WhatsApp support Mon–Sat</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Hosting + SSL + daily backups</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Weekly security patches</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Monthly speed check</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> WhatsApp support Monâ€“Sat</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want Starter Care 6,999/mo for my site.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full border border-edge bg-panel py-3 text-center font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Get Starter Care</a>
+						<a href={whatsappLink("Hi Orbit! I want Starter Care 5,999/mo for my site.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full border border-edge bg-panel py-3 text-center font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Get Starter Care</a>
 					</div>
 					<div class="glow-border rounded-2xl p-8 border-electric/30 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10 transition duration-300 hover:-translate-y-1 hover:shadow-electric/25">
 						<span class="mb-3 inline-flex rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">Most popular</span>
 						<h3 class="text-lg font-semibold text-white">Business Care</h3>
 						<p class="mt-2 text-3xl font-extrabold text-gradient">9,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
-						<p class="mt-1 text-xs text-slate-400">For Business 45,999 sites</p>
+						<p class="mt-1 text-xs text-slate-400">For Business 43,999 sites</p>
 						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
-							<li class="flex gap-2"><span class="text-electric">✓</span> Everything in Starter</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Uptime monitored (alert in minutes)</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Content updates (2 small tasks/mo)</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Priority queue</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Everything in Starter</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Uptime monitored (alert in minutes)</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Content updates (2 small tasks/mo)</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Priority queue</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want Business Care 9,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full btn-gradient py-3 text-center font-semibold text-white shadow-lg shadow-electric/20 transition hover:-translate-y-0.5 hover:shadow-electric/40">Get Business Care</a>
+						<a href={whatsappLink("Hi Orbit! I want Business Care 8,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full btn-gradient py-3 text-center font-semibold text-white shadow-lg shadow-electric/20 transition hover:-translate-y-0.5 hover:shadow-electric/40">Get Business Care</a>
 					</div>
 					<div class="glow-border rounded-2xl p-8 transition duration-300 hover:-translate-y-1 hover:border-electric/30 hover:shadow-xl hover:shadow-electric/10">
 						<h3 class="text-lg font-semibold text-white">Master Care</h3>
 						<p class="mt-2 text-3xl font-extrabold text-gradient">12,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
 						<p class="mt-1 text-xs text-slate-400">For stores, bookings & SaaS</p>
 						<ul class="mt-6 grid gap-2 text-sm text-slate-300">
-							<li class="flex gap-2"><span class="text-electric">✓</span> Everything in Business</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> M-Pesa / payment monitoring</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> Inventory/booking sanity checks</li>
-							<li class="flex gap-2"><span class="text-electric">✓</span> 4 content tasks/mo</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Everything in Business</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> M-Pesa / payment monitoring</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> Inventory/booking sanity checks</li>
+							<li class="flex gap-2"><span class="text-electric">âœ“</span> 4 content tasks/mo</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want Master Care 12,999/mo for my store.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full border border-edge bg-panel py-3 text-center font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Get Master Care</a>
+						<a href={whatsappLink("Hi Orbit! I want Master Care 11,999/mo for my store.")} target="_blank" rel="noopener noreferrer" class="mt-6 block rounded-full border border-edge bg-panel py-3 text-center font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white">Get Master Care</a>
 					</div>
 				</div>
-				<p class="mt-6 text-center text-xs text-slate-500">DIY instead? See the 30-min/month routine in <a href="/blog/website-care-kenya" class="text-electric hover:underline">Website Care guide →</a></p>
+				<p class="mt-6 text-center text-xs text-slate-500">DIY instead? See the 30-min/month routine in <a href="/blog/website-care-kenya" class="text-electric hover:underline">Website Care guide â†’</a></p>
 			</div>
 		</section>
 
 		<section class="border-t border-white/5 py-16">
 			<div class="mx-auto max-w-7xl px-5">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Custom Care — beyond websites</p>
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">â–  Custom Care â€” beyond websites</p>
 				<h2 class="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">Every product stays alive.</h2>
-				<p class="mt-3 text-slate-400">Website Care is above. For SaaS, Dashboards, Agents & Design you get a plan tuned to that product — not a copy-paste.</p>
+				<p class="mt-3 text-slate-400">Website Care is above. For SaaS, Dashboards, Agents & Design you get a plan tuned to that product â€” not a copy-paste.</p>
 				<div class="mt-8 grid gap-6 md:grid-cols-3">
 					<div class="glow-border rounded-2xl p-6">
 						<p class="font-mono text-xs uppercase tracking-widest text-electric">SaaS Care</p>
 						<p class="mt-2 text-2xl font-extrabold text-white">14,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
-						<p class="text-xs text-slate-500">for 57,999 SaaS apps</p>
+						<p class="text-xs text-slate-500">for 55,999 SaaS apps</p>
 						<ul class="mt-4 grid gap-1.5 text-xs text-slate-300">
-							<li>✓ Hosting + DB + backups</li>
-							<li>✓ Auth & roles monitored</li>
-							<li>✓ Bug fixes (4h/mo)</li>
-							<li>✓ M-Pesa + uptime pings</li>
+							<li>âœ“ Hosting + DB + backups</li>
+							<li>âœ“ Auth & roles monitored</li>
+							<li>âœ“ Bug fixes (4h/mo)</li>
+							<li>âœ“ M-Pesa + uptime pings</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want SaaS Care 14,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get SaaS Care</a>
+						<a href={whatsappLink("Hi Orbit! I want SaaS Care 14,499/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get SaaS Care</a>
 					</div>
 					<div class="glow-border rounded-2xl p-6 border-electric/20">
 						<p class="font-mono text-xs uppercase tracking-widest text-electric">Dashboard Care</p>
 						<p class="mt-2 text-2xl font-extrabold text-white">4,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
-						<p class="text-xs text-slate-500">for 16,999 / 31,999 dashboards</p>
+						<p class="text-xs text-slate-500">for 15,999 / 29,999 dashboards</p>
 						<ul class="mt-4 grid gap-1.5 text-xs text-slate-300">
-							<li>✓ 3 sources watched</li>
-							<li>✓ Data sanity + alerts</li>
-							<li>✓ New chart / filter /mo</li>
-							<li>✓ CSV/export health</li>
+							<li>âœ“ 3 sources watched</li>
+							<li>âœ“ Data sanity + alerts</li>
+							<li>âœ“ New chart / filter /mo</li>
+							<li>âœ“ CSV/export health</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want Dashboard Care 4,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get Dashboard Care</a>
+						<a href={whatsappLink("Hi Orbit! I want Dashboard Care 4,499/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get Dashboard Care</a>
 					</div>
 					<div class="glow-border rounded-2xl p-6">
 						<p class="font-mono text-xs uppercase tracking-widest text-electric">Agent Care</p>
 						<p class="mt-2 text-2xl font-extrabold text-white">6,999<span class="text-sm font-normal text-slate-400">/mo</span></p>
-						<p class="text-xs text-slate-500">for 57,999 agents / 45,999 workflows</p>
+						<p class="text-xs text-slate-500">for 55,999 agents / 43,999 workflows</p>
 						<ul class="mt-4 grid gap-1.5 text-xs text-slate-300">
-							<li>✓ Prompt tuning (monthly)</li>
-							<li>✓ Hallucination checks</li>
-							<li>✓ API cost watch</li>
-							<li>✓ Human handover test</li>
+							<li>âœ“ Prompt tuning (monthly)</li>
+							<li>âœ“ Hallucination checks</li>
+							<li>âœ“ API cost watch</li>
+							<li>âœ“ Human handover test</li>
 						</ul>
-						<a href={whatsappLink("Hi Orbit! I want Agent Care 6,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get Agent Care</a>
+						<a href={whatsappLink("Hi Orbit! I want Agent Care 5,999/mo.")} target="_blank" rel="noopener noreferrer" class="mt-4 block rounded-full border border-edge bg-panel py-2 text-center text-sm font-semibold text-slate-200">Get Agent Care</a>
 					</div>
 				</div>
 			</div>
@@ -133,7 +133,7 @@ const faqJsonLd = {
 				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">What you actually get</h2>
 				<div class="mt-8 overflow-hidden rounded-xl border border-edge">
 					<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-2">Task</th><th class="px-4 py-2">DIY</th><th class="px-4 py-2">Orbit Care</th></tr></thead>
-					<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">Hosting + SSL + backups</td><td class="px-4 py-2">You buy/manage</td><td class="px-4 py-2 text-white">Included, daily off-site</td></tr><tr><td class="px-4 py-2">Security</td><td class="px-4 py-2">You patch</td><td class="px-4 py-2 text-white">Weekly, scanned</td></tr><tr><td class="px-4 py-2">Speed</td><td class="px-4 py-2">You test</td><td class="px-4 py-2 text-white">Monthly re-checked, tuned</td></tr><tr><td class="px-4 py-2">Support</td><td class="px-4 py-2">—</td><td class="px-4 py-2 text-white">WhatsApp, minutes, Mon–Sat</td></tr></tbody></table>
+					<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">Hosting + SSL + backups</td><td class="px-4 py-2">You buy/manage</td><td class="px-4 py-2 text-white">Included, daily off-site</td></tr><tr><td class="px-4 py-2">Security</td><td class="px-4 py-2">You patch</td><td class="px-4 py-2 text-white">Weekly, scanned</td></tr><tr><td class="px-4 py-2">Speed</td><td class="px-4 py-2">You test</td><td class="px-4 py-2 text-white">Monthly re-checked, tuned</td></tr><tr><td class="px-4 py-2">Support</td><td class="px-4 py-2">â€”</td><td class="px-4 py-2 text-white">WhatsApp, minutes, Monâ€“Sat</td></tr></tbody></table>
 				</div>
 			</div>
 		</section>
@@ -152,7 +152,8 @@ const faqJsonLd = {
 			</div>
 		</section>
 		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
-		<CtaBand title="Keep it alive without thinking about it." text="One message — your site is watched, backed up and fast from 6,999/mo." />
+		<CtaBand title="Keep it alive without thinking about it." text="One message â€” your site is watched, backed up and fast from 5,999/mo." />
 	</main>
 	<Footer />
 </Layout>
+
