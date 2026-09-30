@@ -1,12 +1,12 @@
 ---
-description: Usage guide for the 217 installed subagents — documentation only, do not invoke
+description: Usage guide for the 233 installed subagents — documentation only, do not invoke
 mode: subagent
 hidden: true
 ---
 
 # OpenCode Subagents — Usage Guide
 
-217 specialized agents live in this folder, organized in 16 group subfolders (`engineering/`, `marketing/`, `research/`, ...). Each agent's ID is its **folder path** (drop the `.md`, e.g. `engineering/code-reviewer`). Full list with descriptions: [../INVENTORY.md](../INVENTORY.md).
+217 specialized agents live in this folder, organized in 16 group subfolders (`engineering/`, `marketing/`, `research/`, ...), plus one **Lead** per group (the strongest agent in the group — it assigns work to its members, e.g. `engineering/lead`). Each agent's ID is its **folder path** (drop the `.md`, e.g. `engineering/code-reviewer`). Full list with descriptions: [../INVENTORY.md](../INVENTORY.md).
 
 Want one throat to choke? Use **`@boss`** — the command agent. It recruits the right specialists, runs them in parallel, and reports back with a debrief.
 
@@ -20,7 +20,7 @@ Want one throat to choke? Use **`@boss`** — the command agent. It recruits the
    @testing/accessibility-auditor check the contact form against WCAG 2.2 AA
    ```
 2. **Ask naturally (auto-dispatch)** — just describe the job; the primary agent matches it to an agent's `description` and runs it via the task tool: *"have the performance benchmarker measure the homepage LCP"*.
-3. **Tab** cycles the **primary** agents: Build, Plan, and **Boss**. The other 217 are `mode: subagent`, so they're reached via `@` or by dispatch, never by Tab.
+3. **Tab** cycles the **primary** agents: Build, Plan, and **Boss**. The other 233 are `mode: subagent`, so they're reached via `@` or by dispatch, never by Tab.
 
 Check what's loaded any time: `opencode agent list`.
 
@@ -29,6 +29,7 @@ Check what's loaded any time: `opencode agent list`.
 | Job | Agent |
 | --- | --- |
 | Command the whole roster, multi-step jobs | `boss` |
+| Whole-group job (Lead picks the crew) | `<group>/lead`, e.g. `engineering/lead` |
 | Build UI / front-end code | `engineering/frontend-developer` |
 | APIs, services, cloud infra | `engineering/backend-architect` |
 | System design, DDD, trade-offs | `engineering/software-architect` |

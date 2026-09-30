@@ -4,23 +4,25 @@ Generated from `.opencode/agents/`. Agents are grouped by name prefix so they si
 
 Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with `convert.sh --tool opencode`.
 
-## Academic (5)
+## Academic (6)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `academic/anthropologist` | Academic · Anthropologist | Expert in cultural systems, rituals, kinship, belief systems, and ethnographic method — builds culturally coherent societies that feel lived-in rather than invented |
 | `academic/geographer` | Academic · Geographer | Expert in physical and human geography, climate systems, cartography, and spatial analysis — builds geographically coherent worlds where terrain, climate, resources, and settlement patterns make scientific sense |
 | `academic/historian` | Academic · Historian | Expert in historical analysis, periodization, material culture, and historiography — validates historical coherence and enriches settings with authentic period detail grounded in primary and secondary sources |
+| `academic/lead` | Academic · Lead | 'Commands the Academic group (5 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `academic/narratologist` | Academic · Narratologist | Expert in narrative theory, story structure, character arcs, and literary analysis — grounds advice in established frameworks from Propp to Campbell to modern narratology |
 | `academic/psychologist` | Academic · Psychologist | Expert in human behavior, personality theory, motivation, and cognitive patterns — builds psychologically credible characters and interactions grounded in clinical and research frameworks |
 
-## Design (9)
+## Design (10)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `design/brand-guardian` | Design · Brand Guardian | Expert brand strategist and guardian specializing in brand identity development, consistency maintenance, and strategic brand positioning |
 | `design/image-prompt-engineer` | Design · Image Prompt Engineer | Expert photography prompt engineer specializing in crafting detailed, evocative prompts for AI image generation. Masters the art of translating visual concepts into precise language that produces stunning, professional-quality photography through generative AI tools. |
 | `design/inclusive-visuals-specialist` | Design · Inclusive Visuals Specialist | Representation expert who defeats systemic AI biases to generate culturally accurate, affirming, and non-stereotypical images and video. |
+| `design/lead` | Design · Lead | 'Commands the Design group (9 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `design/persona-walkthrough-specialist` | Design · Persona Walkthrough Specialist | Simulate cognitive walkthroughs of web pages from a defined persona's psychological perspective — captures emotional reactions and rational thought at each scroll position, then delivers structured CRO reports grounded in LIFT, Cialdini, and Fogg frameworks |
 | `design/ui-designer` | Design · UI Designer | Expert UI designer specializing in visual design systems, component libraries, and pixel-perfect interface creation. Creates beautiful, consistent, accessible user interfaces that enhance UX and reflect brand identity |
 | `design/ux-architect` | Design · UX Architect | Technical architecture and UX specialist who provides developers with solid foundations, CSS systems, and clear implementation guidance |
@@ -28,7 +30,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `design/visual-storyteller` | Design · Visual Storyteller | Expert visual communication specialist focused on creating compelling visual narratives, multimedia content, and brand storytelling through design. Specializes in transforming complex information into engaging visual stories that connect with audiences and drive emotional engagement. |
 | `design/whimsy-injector` | Design · Whimsy Injector | Expert creative specialist focused on adding personality, delight, and playful elements to brand experiences. Creates memorable, joyful interactions that differentiate brands through unexpected moments of whimsy |
 
-## Engineering (30)
+## Engineering (31)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -50,6 +52,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `engineering/git-workflow-master` | Engineering · Git Workflow Master | Expert in Git workflows, branching strategies, and version control best practices including conventional commits, rebasing, worktrees, and CI-friendly branch management. |
 | `engineering/incident-response-commander` | Engineering · Incident Response Commander | Expert incident commander specializing in production incident management, structured response coordination, post-mortem facilitation, SLO/SLI tracking, and on-call process design for reliable engineering organizations. |
 | `engineering/it-service-manager` | Engineering · IT Service Manager | Expert IT service management specialist using ITIL 4 framework for service catalog design, incident and problem management, change control, SLA governance, CMDB maintenance, and continual service improvement — ensuring IT delivers reliable, measurable business value across any organization size |
+| `engineering/lead` | Engineering · Lead | 'Commands the Engineering group (30 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `engineering/minimal-change-engineer` | Engineering · Minimal Change Engineer | Engineering specialist focused on minimum-viable diffs — fixes only what was asked, refuses scope creep, prefers three similar lines over a premature abstraction. The discipline that prevents bug-fix PRs from becoming refactor avalanches. |
 | `engineering/mobile-app-builder` | Engineering · Mobile App Builder | Specialized mobile application developer with expertise in native iOS/Android development and cross-platform frameworks |
 | `engineering/orgscript-engineer` | Engineering · OrgScript Engineer | Expert in designing, parsing, and implementing OrgScript grammar, AST validation, and business logic definitions. |
@@ -63,7 +66,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `engineering/voice-ai-integration-engineer` | Engineering · Voice AI Integration Engineer | Expert in building end-to-end speech transcription pipelines using Whisper-style models and cloud ASR services — from raw audio ingestion through preprocessing, transcript cleanup, subtitle generation, speaker diarization, and structured downstream integration into apps, APIs, and CMS platforms. |
 | `engineering/wechat-mini-program-developer` | Engineering · WeChat Mini Program Developer | Expert WeChat Mini Program developer specializing in 小程序 development with WXML/WXSS/WXS, WeChat API integration, payment systems, subscription messaging, and the full WeChat ecosystem. |
 
-## Finance (5)
+## Finance (6)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -71,9 +74,10 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `finance/financial-analyst` | Finance · Financial Analyst | Expert financial analyst specializing in financial modeling, forecasting, scenario analysis, and data-driven decision support. Transforms raw financial data into actionable business intelligence that drives strategic planning, investment decisions, and operational optimization. |
 | `finance/fp-a-analyst` | Finance · FP&A Analyst | Expert Financial Planning & Analysis (FP&A) analyst specializing in budgeting, variance analysis, financial planning, rolling forecasts, and strategic decision support. Bridges the gap between the numbers and the business narrative to drive operational performance and strategic resource allocation. |
 | `finance/investment-researcher` | Finance · Investment Researcher | Expert investment researcher specializing in market research, due diligence, portfolio analysis, and asset valuation. Conducts rigorous fundamental and quantitative analysis to identify investment opportunities, assess risks, and support data-driven portfolio decisions across public equities, private markets, and alternative assets. |
+| `finance/lead` | Finance · Lead | 'Commands the Finance group (5 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `finance/tax-strategist` | Finance · Tax Strategist | Expert tax strategist specializing in tax optimization, multi-jurisdictional compliance, transfer pricing, and strategic tax planning. Navigates complex tax codes to minimize liability while ensuring full regulatory compliance across local, state, federal, and international tax regimes. |
 
-## Game (20)
+## Game (21)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -81,6 +85,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `game/godot-gameplay-scripter` | Game · Godot Gameplay Scripter | Composition and signal integrity specialist - Masters GDScript 2.0, C# integration, node-based architecture, and type-safe signal design for Godot 4 projects |
 | `game/godot-multiplayer-engineer` | Game · Godot Multiplayer Engineer | Godot 4 networking specialist - Masters the MultiplayerAPI, scene replication, ENet/WebRTC transport, RPCs, and authority models for real-time multiplayer games |
 | `game/godot-shader-developer` | Game · Godot Shader Developer | Godot 4 visual effects specialist - Masters the Godot Shading Language (GLSL-like), VisualShader editor, CanvasItem and Spatial shaders, post-processing, and performance optimization for 2D/3D effects |
+| `game/lead` | Game · Lead | 'Commands the Game group (20 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `game/level-designer` | Game · Level Designer | Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines |
 | `game/narrative-designer` | Game · Narrative Designer | Story systems and dialogue architect - Masters GDD-aligned narrative design, branching dialogue, lore architecture, and environmental storytelling across all game engines |
 | `game/roblox-avatar-creator` | Game · Roblox Avatar Creator | Roblox UGC and avatar pipeline specialist - Masters Roblox's avatar system, UGC item creation, accessory rigging, texture standards, and the Creator Marketplace submission pipeline |
@@ -98,7 +103,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `game/game-audio-engineer` | Game Audio Engineer | Interactive audio specialist - Masters FMOD/Wwise integration, adaptive music systems, spatial audio, and audio performance budgeting across all game engines |
 | `game/game-designer` | Game Designer | Systems and mechanics architect - Masters GDD authorship, player psychology, economy balancing, and gameplay loop design across all engines and genres |
 
-## Marketing (36)
+## Marketing (37)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -120,6 +125,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `marketing/growth-hacker` | Marketing · Growth Hacker | Expert growth strategist specializing in rapid user acquisition through data-driven experimentation. Develops viral loops, optimizes conversion funnels, and finds scalable growth channels for exponential business growth. |
 | `marketing/instagram-curator` | Marketing · Instagram Curator | Expert Instagram marketing specialist focused on visual storytelling, community building, and multi-format content optimization. Masters aesthetic development and drives meaningful engagement. |
 | `marketing/kuaishou-strategist` | Marketing · Kuaishou Strategist | Expert Kuaishou marketing strategist specializing in short-video content for China's lower-tier city markets, live commerce operations, community trust building, and grassroots audience growth on 快手. |
+| `marketing/lead` | Marketing · Lead | 'Commands the Marketing group (36 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `marketing/linkedin-content-creator` | Marketing · LinkedIn Content Creator | Expert LinkedIn content strategist focused on thought leadership, personal brand building, and high-engagement professional content. Masters LinkedIn's algorithm and culture to drive inbound opportunities for founders, job seekers, developers, and anyone building a professional presence. |
 | `marketing/livestream-commerce-coach` | Marketing · Livestream Commerce Coach | Veteran livestream e-commerce coach specializing in host training and live room operations across Douyin, Kuaishou, Taobao Live, and Channels, covering script design, product sequencing, paid-vs-organic traffic balancing, conversion closing techniques, and real-time data-driven optimization. |
 | `marketing/multi-platform-publisher` | Marketing · Multi-Platform Publisher | Expert orchestrator for one-click Chinese blog publishing. Routes a single article to 知乎 / 小红书 / CSDN / B站 / 公众号 / 掘金 via Wechatsync (main channel) with xhs-mcp and biliup as specialized fallbacks. Handles per-platform content adaptation, draft-first publishing, rate control, and risk-avoidance. Does NOT auto-publish — always stops at draft for human review. |
@@ -139,11 +145,12 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `marketing/xiaohongshu-specialist` | Marketing · Xiaohongshu Specialist | Expert Xiaohongshu marketing specialist focused on lifestyle content, trend-driven strategies, and authentic community engagement. Masters micro-content creation and drives viral growth through aesthetic storytelling. |
 | `marketing/zhihu-strategist` | Marketing · Zhihu Strategist | Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing. |
 
-## Paid Media (7)
+## Paid Media (8)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `paid-media/ad-creative-strategist` | Paid Media · Ad Creative Strategist | Paid media creative specialist focused on ad copywriting, RSA optimization, asset group design, and creative testing frameworks across Google, Meta, Microsoft, and programmatic platforms. Bridges the gap between performance data and persuasive messaging. |
+| `paid-media/lead` | Paid Media · Lead | 'Commands the Paid Media group (7 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `paid-media/paid-social-strategist` | Paid Media · Paid Social Strategist | Cross-platform paid social advertising specialist covering Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, X, and Snapchat. Designs full-funnel social ad programs from prospecting through retargeting with platform-specific creative and audience strategies. |
 | `paid-media/ppc-campaign-strategist` | Paid Media · PPC Campaign Strategist | Senior paid media strategist specializing in large-scale search, shopping, and performance max campaign architecture across Google, Microsoft, and Amazon ad platforms. Designs account structures, budget allocation frameworks, and bidding strategies that scale from $10K to $10M+ monthly spend. |
 | `paid-media/programmatic-display-buyer` | Paid Media · Programmatic & Display Buyer | Display advertising and programmatic media buying specialist covering managed placements, Google Display Network, DV360, trade desk platforms, partner media (newsletters, sponsored content), and ABM display strategies via platforms like Demandbase and 6Sense. |
@@ -151,29 +158,31 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `paid-media/tracking-measurement-specialist` | Paid Media · Tracking & Measurement Specialist | Expert in conversion tracking architecture, tag management, and attribution modeling across Google Tag Manager, GA4, Google Ads, Meta CAPI, LinkedIn Insight Tag, and server-side implementations. Ensures every conversion is counted correctly and every dollar of ad spend is measurable. |
 | `paid-media/paid-media-auditor` | Paid Media Auditor | Comprehensive paid media auditor who systematically evaluates Google Ads, Microsoft Ads, and Meta accounts across 200+ checkpoints spanning account structure, tracking, bidding, creative, audiences, and competitive positioning. Produces actionable audit reports with prioritized recommendations and projected impact. |
 
-## Product (5)
+## Product (6)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `product/behavioral-nudge-engine` | Product · Behavioral Nudge Engine | Behavioral psychology specialist that adapts software interaction cadences and styles to maximize user motivation and success. |
 | `product/feedback-synthesizer` | Product · Feedback Synthesizer | Expert in collecting, analyzing, and synthesizing user feedback from multiple channels to extract actionable product insights. Transforms qualitative feedback into quantitative priorities and strategic recommendations. |
+| `product/lead` | Product · Lead | 'Commands the Product group (5 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `product/sprint-prioritizer` | Product · Sprint Prioritizer | Expert product manager specializing in agile sprint planning, feature prioritization, and resource allocation. Focused on maximizing team velocity and business value delivery through data-driven prioritization frameworks. |
 | `product/trend-researcher` | Product · Trend Researcher | Expert market intelligence analyst specializing in identifying emerging trends, competitive analysis, and opportunity assessment. Focused on providing actionable insights that drive product strategy and innovation decisions. |
 | `product/product-manager` | Product Manager | Holistic product leader who owns the full product lifecycle — from discovery and strategy through roadmap, stakeholder alignment, go-to-market, and outcome measurement. Bridges business goals, user needs, and technical reality to ship the right thing at the right time. |
 
-## Project Mgmt (7)
+## Project Mgmt (8)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `project/experiment-tracker` | Project Mgmt · Experiment Tracker | Expert project manager specializing in experiment design, execution tracking, and data-driven decision making. Focused on managing A/B tests, feature experiments, and hypothesis validation through systematic experimentation and rigorous analysis. |
 | `project/jira-workflow-steward` | Project Mgmt · Jira Workflow Steward | Expert delivery operations specialist who enforces Jira-linked Git workflows, traceable commits, structured pull requests, and release-safe branch strategy across software teams. |
+| `project/lead` | Project Mgmt · Lead | 'Commands the Project Mgmt group (7 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `project/meeting-notes-specialist` | Project Mgmt · Meeting Notes Specialist | Extract structured decisions, action items, and open questions from meeting transcripts or rough notes into a clean 4-section summary. |
 | `project/project-shepherd` | Project Mgmt · Project Shepherd | Expert project manager specializing in cross-functional project coordination, timeline management, and stakeholder alignment. Focused on shepherding projects from conception to completion while managing resources, risks, and communications across multiple teams and departments. |
 | `project/senior-project-manager` | Project Mgmt · Senior Project Manager | Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements |
 | `project/studio-operations` | Project Mgmt · Studio Operations | Expert operations manager specializing in day-to-day studio efficiency, process optimization, and resource coordination. Focused on ensuring smooth operations, maintaining productivity standards, and supporting all teams with the tools and processes needed for success. |
 | `project/studio-producer` | Project Mgmt · Studio Producer | Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations. |
 
-## Research (8)
+## Research (9)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -182,17 +191,19 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `research/data-statistics-researcher` | Research · Data & Statistics Researcher | Datasets and official statistics specialist delivering chart-ready numbers with methods and sources. |
 | `research/deep-researcher` | Research · Deep Researcher | Long-form multi-source investigator producing cited findings with confidence levels and gap analysis for complex questions. |
 | `research/fact-checker` | Research · Fact Checker | Claim verification specialist using source triangulation with graded verdicts and confidence ratings. |
+| `research/lead` | Research · Lead | 'Commands the Research group (8 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `research/market-researcher` | Research · Market Researcher | Market sizing and segmentation specialist covering TAM SAM SOM competitor mapping and entry analysis. |
 | `research/osint-researcher` | Research · OSINT Researcher | Open-source intelligence specialist covering public web records and provenance verification with ethical collection. |
 | `research/technical-researcher` | Research · Technical Researcher | Technical source specialist covering official docs RFCs standards changelogs and codebase history. |
 
-## Sales (9)
+## Sales (10)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `sales/account-strategist` | Sales · Account Strategist | Expert post-sale account strategist specializing in land-and-expand execution, stakeholder mapping, QBR facilitation, and net revenue retention. Turns closed deals into long-term platform relationships through systematic expansion planning and multi-threaded account development. |
 | `sales/deal-strategist` | Sales · Deal Strategist | Senior deal strategist specializing in MEDDPICC qualification, competitive positioning, and win planning for complex B2B sales cycles. Scores opportunities, exposes pipeline risk, and builds deal strategies that survive forecast review. |
 | `sales/discovery-coach` | Sales · Discovery Coach | Coaches sales teams on elite discovery methodology — question design, current-state mapping, gap quantification, and call structure that surfaces real buying motivation. |
+| `sales/lead` | Sales · Lead | 'Commands the Sales group (9 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `sales/offer-lead-gen-strategist` | Sales · Offer & Lead Gen Strategist | Top-of-funnel architect who designs irresistible offers and lead magnets that attract qualified buyers at scale. Specializes in value-equation offer construction, lead magnet typology, multi-channel lead generation, and compounding reach through customers, employees, agencies, and affiliates. |
 | `sales/outbound-strategist` | Sales · Outbound Strategist | Signal-based outbound specialist who designs multi-channel prospecting sequences, defines ICPs, and builds pipeline through research-driven personalization — not volume. |
 | `sales/pipeline-analyst` | Sales · Pipeline Analyst | Revenue operations analyst specializing in pipeline health diagnostics, deal velocity analysis, forecast accuracy, and data-driven sales coaching. Turns CRM data into actionable pipeline intelligence that surfaces risks before they become missed quarters. |
@@ -200,7 +211,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `sales/sales-coach` | Sales Coach | Expert sales coaching specialist focused on rep development, pipeline review facilitation, call coaching, deal strategy, and forecast accuracy. Makes every rep and every deal better through structured coaching methodology and behavioral feedback. |
 | `sales/sales-engineer` | Sales Engineer | Senior pre-sales engineer specializing in technical discovery, demo engineering, POC scoping, competitive battlecards, and bridging product capabilities to business outcomes. Wins the technical decision so the deal can close. |
 
-## Security (10)
+## Security (11)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -209,16 +220,18 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `security/cloud-security-architect` | Security · Cloud Security Architect | Cloud-native security specialist designing zero trust architectures, implementing defense-in-depth across AWS, Azure, and GCP, and securing infrastructure-as-code pipelines from day one. |
 | `security/compliance-auditor` | Security · Compliance Auditor | Expert technical compliance auditor specializing in SOC 2, ISO 27001, HIPAA, and PCI-DSS audits — from readiness assessment through evidence collection to certification. |
 | `security/incident-responder` | Security · Incident Responder | Digital forensics and incident response specialist who leads breach investigations, contains active threats, coordinates crisis response, and writes post-mortems that prevent recurrence. |
+| `security/lead` | Security · Lead | 'Commands the Security group (10 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `security/penetration-tester` | Security · Penetration Tester | Offensive security specialist conducting authorized penetration tests, red team operations, and vulnerability assessments across networks, web applications, and cloud infrastructure. |
 | `security/senior-secops-engineer` | Security · Senior SecOps Engineer | Defensive application security specialist who scans every code submission for secrets and sensitive data exposure before anything else, then implements or audits security controls following the organization's security standard — covering authentication, authorization, tokens, cookies, HTTP headers, CORS, rate limiting, CSP, secrets management, input validation, and secure logging. |
 | `security/threat-detection-engineer` | Security · Threat Detection Engineer | Expert detection engineer specializing in SIEM rule development, MITRE ATT&CK coverage mapping, threat hunting, alert tuning, and detection-as-code pipelines for security operations teams. |
 | `security/threat-intelligence-analyst` | Security · Threat Intelligence Analyst | Cyber threat intelligence specialist who tracks adversary groups, maps attack campaigns to MITRE ATT&CK, produces actionable intelligence reports, and builds detection rules that catch real threats. |
 | `security/security-architect` | Security Architect | Expert security architect specializing in threat modeling, secure-by-design architecture, trust-boundary analysis, defense-in-depth, and risk-based security reviews across web, API, cloud-native, and distributed systems. Designs the security model; hands code-level SAST/DAST and SDLC work to the AppSec Engineer. |
 
-## Spatial (6)
+## Spatial (7)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
+| `spatial/lead` | Spatial · Lead | 'Commands the Spatial group (6 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `spatial/macos-spatial-metal-engineer` | Spatial · macOS Spatial/Metal Engineer | Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro |
 | `spatial/terminal-integration-specialist` | Spatial · Terminal Integration Specialist | Terminal emulation, text rendering optimization, and SwiftTerm integration for modern Swift applications |
 | `spatial/visionos-spatial-engineer` | Spatial · visionOS Spatial Engineer | Native visionOS spatial computing, SwiftUI volumetric interfaces, and Liquid Glass design implementation |
@@ -226,7 +239,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `spatial/xr-immersive-developer` | Spatial · XR Immersive Developer | Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications |
 | `spatial/xr-interface-architect` | Spatial · XR Interface Architect | Spatial interaction designer and interface strategist for immersive AR/VR/XR environments |
 
-## Specialized (46)
+## Specialized (47)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -255,6 +268,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `specialized/identity-graph-operator` | Specialized · Identity Graph Operator | Operates a shared identity graph that multiple AI agents resolve against. Ensures every agent in a multi-agent system gets the same canonical answer for "who is this entity?" - deterministically, even under concurrent writes. |
 | `specialized/korean-business-navigator` | Specialized · Korean Business Navigator | Korean business culture for foreign professionals — 품의 decision process, nunchi reading, KakaoTalk business etiquette, hierarchy navigation, and relationship-first deal mechanics |
 | `specialized/language-translator` | Specialized · Language Translator | Real-time Spanish ↔ English translation specialist with cultural context, regional dialect awareness, travel phrase guidance, and tone-appropriate communication for everyday, business, and emergency situations |
+| `specialized/lead` | Specialized · Lead | 'Commands the Specialized group (46 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `specialized/legal-billing-time-tracking` | Specialized · Legal Billing & Time Tracking | Comprehensive legal billing and time tracking specialist for accurate time capture, invoice generation, billing narrative writing, collections management, trust account compliance, and billing analysis — maximizing revenue recovery while maintaining client relationships and ethical compliance across any firm size or billing model |
 | `specialized/legal-client-intake` | Specialized · Legal Client Intake | Comprehensive legal client intake specialist for qualifying prospects, collecting case information, scheduling consultations, managing conflict checks, and delivering attorney-ready intake summaries across any practice area and firm size |
 | `specialized/legal-document-review` | Specialized · Legal Document Review | Comprehensive legal document review specialist for contracts, litigation documents, and real estate agreements — summarizing documents, flagging risk clauses, comparing contract versions, and checking compliance across any law firm size or practice area |
@@ -277,7 +291,7 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `specialized/workflow-architect` | Specialized · Workflow Architect | Workflow design specialist who maps complete workflow trees for every system, user journey, and agent interaction — covering happy paths, all branch conditions, failure modes, recovery paths, handoff contracts, and observable states to produce build-ready specs that agents can implement against and QA can test against. |
 | `specialized/zk-steward` | Specialized · ZK Steward | "Knowledge-base steward in the spirit of Niklas Luhmann's Zettelkasten. Default perspective: Luhmann; switches to domain experts (Feynman, Munger, Ogilvy, etc.) by task. Enforces atomic notes, connectivity, and validation loops. Use for knowledge-base building, note linking, complex task breakdown, and cross-domain decision support." |
 
-## Support (6)
+## Support (7)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
@@ -285,16 +299,18 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `support/executive-summary-generator` | Support · Executive Summary Generator | Consultant-grade AI specialist trained to think and communicate like a senior strategy consultant. Transforms complex business inputs into concise, actionable executive summaries using McKinsey SCQA, BCG Pyramid Principle, and Bain frameworks for C-suite decision-makers. |
 | `support/finance-tracker` | Support · Finance Tracker | Expert financial analyst and controller specializing in financial planning, budget management, and business performance analysis. Maintains financial health, optimizes cash flow, and provides strategic financial insights for business growth. |
 | `support/infrastructure-maintainer` | Support · Infrastructure Maintainer | Expert infrastructure specialist focused on system reliability, performance optimization, and technical operations management. Maintains robust, scalable infrastructure supporting business operations with security, performance, and cost efficiency. |
+| `support/lead` | Support · Lead | 'Commands the Support group (6 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `support/legal-compliance-checker` | Support · Legal Compliance Checker | Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions. |
 | `support/support-responder` | Support Responder | Expert customer support specialist delivering exceptional customer service, issue resolution, and user experience optimization. Specializes in multi-channel support, proactive customer care, and turning support interactions into positive brand experiences. |
 
-## Testing (8)
+## Testing (9)
 
 | ID (`@`-mention) | Name | Description |
 | --- | --- | --- |
 | `testing/accessibility-auditor` | Testing · Accessibility Auditor | Expert accessibility specialist who audits interfaces against WCAG standards, tests with assistive technologies, and ensures inclusive design. Defaults to finding barriers — if it's not tested with a screen reader, it's not accessible. |
 | `testing/api-tester` | Testing · API Tester | Expert API testing specialist focused on comprehensive API validation, performance testing, and quality assurance across all systems and third-party integrations |
 | `testing/evidence-collector` | Testing · Evidence Collector | Screenshot-obsessed, fantasy-allergic QA specialist - Default to finding 3-5 issues, requires visual proof for everything |
+| `testing/lead` | Testing · Lead | 'Commands the Testing group (8 specialists): triages group-scoped jobs, runs the right members in parallel, and reports merged results upward.' |
 | `testing/performance-benchmarker` | Testing · Performance Benchmarker | Expert performance testing and optimization specialist focused on measuring, analyzing, and improving system performance across all applications and infrastructure |
 | `testing/reality-checker` | Testing · Reality Checker | Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness |
 | `testing/test-results-analyzer` | Testing · Test Results Analyzer | Expert test analysis specialist focused on comprehensive test result evaluation, quality metrics analysis, and actionable insight generation from testing activities |
@@ -302,4 +318,4 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `testing/workflow-optimizer` | Testing · Workflow Optimizer | Expert process improvement specialist focused on analyzing, optimizing, and automating workflows across all business functions for maximum productivity and efficiency |
 
 ---
-Total: 217 grouped subagents + Boss (mode: all, `@boss` or Tab).
+Total: 233 grouped subagents + Boss (mode: all, `@boss` or Tab).
