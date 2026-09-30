@@ -1,0 +1,177 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "How do I know if a web designer is any good?",
+		a: "Ask for 3 live sites they built. Test each on your phone — load speed, mobile layout, M-Pesa checkout. If they can't show you live work, they haven't done the work.",
+	},
+	{
+		q: "Should I hire a freelancer or an agency?",
+		a: "For a standard business site (1-10 pages), a professional freelancer or small studio is the sweet spot. Agencies make sense for 20+ pages, brand systems, or complex integrations. For most Kenyan SMEs, a studio like Orbit is the right fit.",
+	},
+	{
+		q: "What questions should I ask before hiring a web designer?",
+		a: "Five: (1) What's the exact price? (2) What's the live date? (3) Can I see a live M-Pesa payment? (4) Who owns the domain and files? (5) What happens after launch? If they dodge any of these, walk away.",
+	},
+	{
+		q: "How long should a website take to build?",
+		a: "A 5-page business site: 5-7 days. A 10-page site: 1-2 weeks. An e-commerce store: 2-3 weeks. If someone promises faster, they're cutting corners. If someone takes longer, they're overcomplicating it.",
+	},
+	{
+		q: "What's the biggest red flag when hiring a web designer?",
+		a: "No fixed price. \"It depends on your requirements\" means \"we haven't done this before and we'll charge you whatever we feel like.\" A professional knows what a 5-page site costs and will tell you.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "How to Choose a Web Designer in Kenya: The Decision Framework",
+	description: "A step-by-step decision framework for choosing a web designer in Kenya. Budget, timeline, M-Pesa, ownership, support — with scoring rubric.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-30",
+	dateModified: "2026-09-30",
+	mainEntityOfPage: `${SITE_URL}/blog/choose-web-designer-kenya`,
+	wordCount: 2400,
+	keywords: "choose web designer Kenya, hire web designer Nairobi, web design Kenya, how to pick a web designer",
+};
+---
+
+<Layout
+	title="How to Choose a Web Designer in Kenya: Decision Framework (2026) | Orbit"
+	description="A step-by-step decision framework for choosing a web designer in Kenya. Budget, timeline, M-Pesa, ownership, support — with scoring rubric."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Buyer's Guide · Decision Framework · 8 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					How to choose a web designer <span class="text-gradient">in Kenya.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">A decision framework that works whether you hire us or not. Budget, timeline, M-Pesa, ownership, support — score each 0–2, add up, decide.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<p class="text-sm leading-relaxed text-slate-400">Choosing a web designer in Kenya is hard. Everyone promises the same thing. Prices range from KES 5,000 to 250,000+. And the person who seems most confident on WhatsApp might be the one who disappears after payment. This framework gives you a structured way to evaluate any designer — including us. It takes 10 minutes and could save you 50,000 shillings.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Step 1: Define your budget (before you talk to anyone)</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">The biggest mistake is asking "how much does a website cost?" before knowing what you need. A 1-page landing site and a 20-page e-commerce store are different products. Here's how to think about budget:</p>
+			<div class="mt-6 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Your situation</th><th class="px-5 py-3">Budget range</th><th class="px-5 py-3">What you should expect</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">Just starting, testing an idea</td><td class="px-5 py-3">KES 5,000–15,000</td><td class="px-5 py-3">DIY on Wix/WordPress, or a very basic freelancer site. Your time is the cost.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Established business, need credibility</td><td class="px-5 py-3">KES 25,000–50,000</td><td class="px-5 py-3">Professional custom design, 5-10 pages, M-Pesa, SEO setup. The sweet spot.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Selling online, need a store</td><td class="px-5 py-3">KES 40,000–80,000</td><td class="px-5 py-3">E-commerce with native M-Pesa, inventory, order management.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Complex needs, custom app</td><td class="px-5 py-3">KES 80,000–250,000+</td><td class="px-5 py-3">Custom SaaS, ERP, multi-user systems. Agency territory.</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Rule:</strong> If a designer quotes you 50,000 for a 5-page site, they're overcharging. If they quote 5,000 for an e-commerce store, they're underdelivering. Price should match scope.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Step 2: Shortlist 3–5 designers</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">Don't just hire the first person who replies on WhatsApp. Here's how to build a shortlist:</p>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Google search:</strong> "web design Kenya" or "web designer Nairobi" — see who ranks. If they can rank themselves, they can rank you.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Ask your network:</strong> "Who built your site?" Personal recommendations beat cold outreach.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Check Instagram/Facebook:</strong> Look for designers who post their work consistently. A designer with no portfolio is a red flag.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Look for specialization:</strong> A designer who builds e-commerce sites is different from one who builds business card sites. Match the specialty to your need.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Step 3: Score each designer (0–2 per criterion)</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">This is the core of the framework. Score each designer on 6 criteria. Be honest — this is for your benefit, not theirs.</p>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">1. Exact price in writing? <span class="text-xs text-slate-500">(0 = vague, 1 = range, 2 = fixed line-item)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "it depends on your requirements." 1 = "25k–50k." 2 = "KES 27,999 — here's exactly what's included." A fixed price means they've done this before. A range means they'll surprise you later. <strong class="text-white">Our score: 2.</strong> Fixed prices, exact deliverables, no hidden costs.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">2. Live date, not a range? <span class="text-xs text-slate-500">(0 = "2-4 weeks", 1 = "about a week", 2 = specific date)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "2–4 weeks." 1 = "about a week." 2 = "5 days for Starter, 1 week for Business, 2 weeks for Master — with a written approval gate before launch." A date means they control their process. <strong class="text-white">Our score: 2.</strong> We commit to dates in writing.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">3. M-Pesa native or plugin? <span class="text-xs text-slate-500">(0 = "we'll add it later", 1 = plugin, 2 = native Daraja)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "we'll add M-Pesa later" or "use Paystack." 1 = WooCommerce plugin. 2 = native Daraja API wiring (Till + Paybill) you can see in your own Safaricom portal. Ask to screen-share a test KES 10 payment. <strong class="text-white">Our score: 2.</strong> Native Daraja on every e-commerce build.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">4. Speed on cheap phone data? <span class="text-xs text-slate-500">(0 = "fast", no number, 1 = 70-89 PageSpeed, 2 = 90+ mobile)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "fast" with no number. 1 = 70–89 PageSpeed. 2 = 90+ on <a href="https://pagespeed.web.dev" class="text-electric hover:underline">pagespeed.web.dev</a> mobile. Most Kenyans browse on 3G/4G. A site that loads in 5 seconds loses 53% of mobile visitors. <strong class="text-white">Our score: 2.</strong> We target 90+ on mobile.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">5. Who owns what? <span class="text-xs text-slate-500">(0 = they own everything, 1 = you own domain, 2 = you own everything)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "we host it for you" (they own your site). 1 = "you own the domain." 2 = your domain + content + files + full license + M-Pesa credentials in your name. Read the terms before paying. <strong class="text-white">Our score: 2.</strong> You own everything from day one. See our <a href="/terms-of-service" class="text-electric hover:underline">Terms</a>.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">6. What happens after launch? <span class="text-xs text-slate-500">(0 = "good luck", 1 = "we're available", 2 = care plan with SLA)</span></h3>
+					<p class="mt-2 text-sm text-slate-400">0 = "good luck." 1 = "we're available if you need us." 2 = monthly care plan listed with hosting/security/backups/support and a reply-time SLA. A site without care rots. <strong class="text-white">Our score: 2.</strong> Orbit Care: 6,999–9,999/mo, cancel anytime. Or DIY with our <a href="/blog/website-care-kenya" class="text-electric hover:underline">care guide</a>.</p>
+				</div>
+			</div>
+
+			<div class="mt-8 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm text-slate-300">
+				<p class="font-semibold text-white">Scoring: 10–12 = hire. 7–9 = ask more questions. Below 7 = walk away.</p>
+				<p class="mt-2 text-slate-400">Red flags: won't put price/date in writing, no PageSpeed number, "lifetime hosting free" (nobody gives free hosting forever), won't let you own domain/files, no post-launch support.</p>
+			</div>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Step 4: The first call — 5 questions that reveal everything</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">Once you've scored them, have a call. These 5 questions will tell you everything:</p>
+			<ul class="mt-6 grid gap-3 text-sm text-slate-300">
+				<li class="flex gap-3"><span class="font-bold text-electric">1.</span> "Can you send me 3 live sites you built so I can test them on my phone?" — Tests honesty and speed.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">2.</span> "What happens if I want to leave you after 6 months?" — Tests ownership and lock-in.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">3.</span> "Do you use native M-Pesa or a plugin? Can I see a test payment?" — Tests technical depth.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">4.</span> "What's the exact price and what's included? Can I see it in writing?" — Tests transparency.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">5.</span> "What happens after launch? What does support look like?" — Tests long-term thinking.</li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Step 5: Make the decision</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">Add up the scores. If one designer is clearly ahead, hire them. If two are tied, go with the one who answered your questions most directly. If all score below 7, keep looking — the right designer is out there.</p>
+			<p class="mt-4 text-sm text-slate-400">And if you want a second opinion on any quote — including ours — <a href={whatsappLink("Hi Orbit! I'm comparing designers — can you score this quote?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">send it on WhatsApp</a>. We'll score it honestly, even if the answer is "they're fine, hire them."</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+
+			<div class="mt-14 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-6">
+				<p class="font-semibold text-white">Want us to score your current quote?</p>
+				<p class="mt-1 text-sm text-slate-400">Send any competitor quote — we'll score both honestly, even if the answer is "they're fine, hire them."</p>
+				<a href={whatsappLink("Hi Orbit! I'm comparing designers — score my quote vs yours?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-8 py-3 font-semibold text-white">WhatsApp the quote</a>
+			</div>
+		</article>
+
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/web-design-kenya-guide" class="text-electric hover:underline">web design Kenya guide</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">designer scorecard</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a></p>
+		</div>
+		<Comments slug="choose-web-designer-kenya" />
+		<CtaBand title="Still comparing?" text="Send any quote — we'll tell you if you're overpaying, even if it means not hiring us." />
+	</main>
+	<Footer />
+</Layout>

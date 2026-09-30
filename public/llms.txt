@@ -1,0 +1,75 @@
+# Orbit Web Designs & Marketing
+
+> Web design company in Nairobi, Kenya. We build fast, M-Pesa-ready websites, SaaS apps, AI agents, dashboards, and graphic design for Kenyan businesses. Live in days, not months.
+
+## Key Pages
+
+- [Home](https://www.orbitwebdesigns.co.ke/) — M-Pesa websites from KES 28,999, live in 5 days
+- [Services](https://www.orbitwebdesigns.co.ke/services) — Web design, marketing, e-commerce, SaaS, AI agents, automation, dashboards
+- [Packages](https://www.orbitwebdesigns.co.ke/packages) — Website pricing: Starter 28,999 / Business 39,999 / Master 49,999 KES
+- [FAQ](https://www.orbitwebdesigns.co.ke/faq) — Answers about pricing, timelines, payments, support
+- [About](https://www.orbitwebdesigns.co.ke/about) — Meet the founder, built hungry in Nairobi
+- [Contact](https://www.orbitwebdesigns.co.ke/contact) — Get a free quote, chat on WhatsApp
+- [Reviews](https://www.orbitwebdesigns.co.ke/reviews) — Verified client reviews and testimonials
+- [Guides](https://www.orbitwebdesigns.co.ke/guides) — 7 actionable guides on pricing, care, SEO, M-Pesa, WhatsApp
+- [Orbit Care](https://www.orbitwebdesigns.co.ke/care) — Monthly care plans: hosting, security, updates, support
+- [AI Agents & Workflows](https://www.orbitwebdesigns.co.ke/automation) — Custom AI agents and workflow automation
+- [Dashboards](https://www.orbitwebdesigns.co.ke/dashboards) — Business dashboards with live M-Pesa, bookings, stock
+- [Graphic Design](https://www.orbitwebdesigns.co.ke/design) — Logos, brand kits, marketing creatives
+- [Custom SaaS](https://www.orbitwebdesigns.co.ke/saas) — Your idea as a real app with auth, dashboards, payments
+- [M-Pesa Fee Calculator](https://www.orbitwebdesigns.co.ke/mpesa-fee-calculator) — Calculate M-Pesa transaction fees
+- [Web Design Nairobi](https://www.orbitwebdesigns.co.ke/web-design-nairobi) — Web design services in Nairobi
+- [M-Pesa E-commerce](https://www.orbitwebdesigns.co.ke/mpesa-ecommerce-kenya) — Online stores with native M-Pesa
+- [SEO Services Kenya](https://www.orbitwebdesigns.co.ke/seo-services-kenya) — SEO that gets you found on Google
+
+## Services
+
+- **Web Design & Development** — Landing pages, business websites, custom web apps, redesigns
+- **Digital Marketing** — Social media advertising, SEO, Google Business Profile, email campaigns
+- **E-commerce & Custom Features** — Online stores, M-Pesa & card payments, inventory, booking systems
+- **Custom SaaS App Development** — Auth, roles, dashboards, M-Pesa payments, deployed & documented
+- **Graphic Design** — Logos, brand kits, social media kits, flyers, marketing creatives
+- **Custom AI Agent** — WhatsApp/site chat/email agents that qualify leads and book jobs
+- **Workflow Automation** — M-Pesa to Sheets/CRM, inquiry to WhatsApp to calendar, auto-invoices
+- **Business Dashboard** — Live sales, M-Pesa feed, bookings, stock on one screen
+
+## Pricing
+
+- **Starter Website** — KES 28,999 (5 pages, live in 5 days)
+- **Business Website** — KES 39,999 (10 pages + blog, live in 1 week)
+- **Master Website** — KES 49,999 (15+ pages or full store, live in 2 weeks)
+- **Custom SaaS App** — from KES 49,999
+- **Graphic Design** — from KES 14,999
+- **Custom AI Agent** — KES 49,999
+- **Workflow Automation** — KES 39,999 per workflow
+- **Business Dashboard** — KES 27,999
+- **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)
+
+## Contact
+
+- **Email:** mwmwai@gmail.com
+- **WhatsApp:** +254 741 992 308
+- **Location:** Nairobi, Kenya
+- **Hours:** Monday–Saturday, 8:00–19:00 EAT
+
+## Topic Structure
+
+- `/` — Homepage with overview, pricing, testimonials, FAQ
+- `/services` — All services with descriptions and deliverables
+- `/packages` — Website pricing tiers and deliverables comparison
+- `/faq` — Frequently asked questions about pricing, process, support
+- `/about` — Founder story, values, ways to work
+- `/contact` — Contact form and WhatsApp CTA
+- `/reviews` — Client testimonials and reviews
+- `/guides` — Educational content on web design, SEO, M-Pesa, care
+- `/care` — Monthly care plans for websites, SaaS, dashboards, agents
+- `/automation` — AI agents and workflow automation services
+- `/dashboards` — Business dashboard service
+- `/design` — Graphic design services
+- `/saas` — Custom SaaS app development
+- `/mpesa-fee-calculator` — M-Pesa transaction fee calculator tool
+- `/web-design-nairobi` — Web design services in Nairobi
+- `/mpesa-ecommerce-kenya` — M-Pesa e-commerce stores
+- `/seo-services-kenya` — SEO services in Kenya
+- `/blog` — Blog with guides and articles
+- `/cases` — Case studies (law firm, M-Pesa store, advocacy site)

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
+import { SITE_URL, SITE_NAME } from "../config";
 
 const services = [
 	{
@@ -126,6 +127,31 @@ const steps = [
 	["Build", "Fast, responsive development with weekly progress updates."],
 	["Launch & Grow", "We deploy, monitor, and help you market it."],
 ];
+
+const servicesLd = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"@id": `${SITE_URL}/services#services`,
+	provider: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+	serviceType: "Web Design and Development",
+	areaServed: ["Kenya", "Worldwide"],
+	hasOfferCatalog: {
+		"@type": "OfferCatalog",
+		name: "Orbit Web Designs Services",
+		itemListElement: services.map((s) => ({
+			"@type": "Offer",
+			itemOffered: {
+				"@type": "Service",
+				name: s.title,
+				description: s.description,
+			},
+		})),
+	},
+};
 ---
 
 <Layout
@@ -206,5 +232,6 @@ const steps = [
 
 		<CtaBand title="Have a project in mind?" text="Tell us what you need — we'll send a free quote and timeline within hours." />
 	</main>
+	<script type="application/ld+json" set:html={JSON.stringify(servicesLd)} />
 	<Footer />
 </Layout>

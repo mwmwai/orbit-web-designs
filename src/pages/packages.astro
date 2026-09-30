@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import Pricing from "../components/Pricing.astro";
 import CtaBand from "../components/CtaBand.astro";
+import { SITE_URL, SITE_NAME } from "../config";
 
 const faqs = [
 	{
@@ -20,7 +21,7 @@ const faqs = [
 	},
 	{
 		q: "What happens after launch? Orbit Care?",
-		a: "Orbit Care keeps it alive: hosting, SSL, security, updates, backups and WhatsApp support â€” 5,999/mo Starter, 9,999 Business, 12,999 Master. Cancel anytime, site stays yours. Details in our Website Care guide.",
+		a: "Orbit Care keeps it alive: hosting, SSL, security, updates, backups and WhatsApp support â€” 4,999/mo Starter, 9,999 Business, 12,999 Master. Cancel anytime, site stays yours. Details in our Website Care guide.",
 	},
 ];
 
@@ -36,11 +37,52 @@ const faqJsonLd = {
 		},
 	})),
 };
+
+const productsLd = {
+	"@context": "https://schema.org",
+	"@type": "Product",
+	"@id": `${SITE_URL}/packages#products`,
+	name: "Orbit Web Designs Website Packages",
+	description: "Professional website packages for Kenyan businesses. M-Pesa native, SEO optimized, live in days.",
+	brand: {
+		"@type": "Brand",
+		name: SITE_NAME,
+	},
+	offers: [
+		{
+			"@type": "Offer",
+			name: "Starter Website",
+			description: "5 pages that sell — live in 5 days. Mobile-first, basic SEO, WhatsApp + call buttons.",
+			price: "29999",
+			priceCurrency: "KES",
+			availability: "https://schema.org/InStock",
+			url: `${SITE_URL}/packages`,
+		},
+		{
+			"@type": "Offer",
+			name: "Business Website",
+			description: "10 pages + blog & bookings — full SEO, copywriting, loads in under 2 seconds. Live in 1 week.",
+			price: "43999",
+			priceCurrency: "KES",
+			availability: "https://schema.org/InStock",
+			url: `${SITE_URL}/packages`,
+		},
+		{
+			"@type": "Offer",
+			name: "Master Website",
+			description: "15+ pages or full store — M-Pesa native Till+Paybill, cards & PayPal, advanced SEO. Live in 2 weeks.",
+			price: "55999",
+			priceCurrency: "KES",
+			availability: "https://schema.org/InStock",
+			url: `${SITE_URL}/packages`,
+		},
+	],
+};
 ---
 
 <Layout
-	title="Website Packages from KES 29,999 | Orbit Web Designs"
-	description="Honest flexible pricing in Kenyan shillings. Professional websites from KES 29,999 â€” pay securely via M-Pesa, card, or PayPal. No hidden fees."
+	title="Website Packages from KES 27,999 | Orbit Web Designs"
+	description="Honest flexible pricing in Kenyan shillings. Professional websites from KES 27,999 â€” pay securely via M-Pesa, card, or PayPal. No hidden fees."
 >
 	<Navbar />
 	<main id="main">
@@ -55,7 +97,7 @@ const faqJsonLd = {
 					Simple packages, <span class="text-gradient">serious results.</span>
 				</h1>
 				<p class="mt-5 max-w-2xl text-lg text-slate-400">
-					Honest KES pricing â€” websites 29,999â€“55,999 Â· SaaS from 55,999 Â· Design 15,999 Â· Agents 55,999 Â· Dashboards 17,999. No hidden fees. M-Pesa, card, PayPal.
+					Honest KES pricing â€” websites 27,999â€“49,999 Â· SaaS from 49,999 Â· Design 14,999 Â· Agents 49,999 Â· Dashboards 17,999. No hidden fees. M-Pesa, card, PayPal.
 				</p>
 				<div class="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
 					<div class="glow-border rounded-xl p-3 text-center"><p class="text-gradient text-xl font-extrabold">50+</p><p class="text-xs text-slate-400">sites shipped</p></div>
@@ -77,7 +119,7 @@ const faqJsonLd = {
 			<div class="mx-auto max-w-7xl px-5">
 				<h2 class="text-xl font-bold text-white">What you get â€” deliverables per package</h2>
 				<div class="mt-6 overflow-hidden rounded-xl border border-edge">
-					<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-3">Deliverable</th><th class="px-4 py-3">Starter 29,999</th><th class="px-4 py-3">Business 43,999</th><th class="px-4 py-3">Master 55,999</th></tr></thead>
+					<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-3">Deliverable</th><th class="px-4 py-3">Starter 27,999</th><th class="px-4 py-3">Business 39,999</th><th class="px-4 py-3">Master 49,999</th></tr></thead>
 					<tbody class="divide-y divide-edge text-slate-300">
 						<tr><td class="px-4 py-2 font-semibold text-white">Pages</td><td class="px-4 py-2">1â€“3</td><td class="px-4 py-2">Up to 7</td><td class="px-4 py-2">Store / booking</td></tr>
 						<tr><td class="px-4 py-2 font-semibold text-white">Domain + SSL + hosting setup</td><td class="px-4 py-2">âœ“</td><td class="px-4 py-2">âœ“</td><td class="px-4 py-2">âœ“</td></tr>
@@ -95,17 +137,17 @@ const faqJsonLd = {
 				<div class="grid gap-4 md:grid-cols-3">
 					<a href="/care" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
 						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-electric to-neon flex items-center justify-center text-white">âœ“</span>
-						<div><p class="font-semibold text-white">Orbit Care</p><p class="text-xs text-slate-400">6,999â€“11,999/mo + custom SaaS/Dash/Agent</p></div>
+						<div><p class="font-semibold text-white">Orbit Care</p><p class="text-xs text-slate-400">6,999â€“9,999/mo + custom SaaS/Dash/Agent</p></div>
 						<span class="ml-auto text-electric">â†’</span>
 					</a>
 					<a href="/automation" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
 						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 to-electric flex items-center justify-center text-white">â—ˆ</span>
-						<div><p class="font-semibold text-white">Agents & Workflows</p><p class="text-xs text-slate-400">55,999 Â· 43,999 + API honesty</p></div>
+						<div><p class="font-semibold text-white">Agents & Workflows</p><p class="text-xs text-slate-400">49,999 Â· 39,999 + API honesty</p></div>
 						<span class="ml-auto text-electric">â†’</span>
 					</a>
 					<a href="/dashboards" class="glow-border edge-glow card-shine rounded-2xl p-6 flex items-center gap-4 hover-lift">
 						<span class="h-10 w-10 rounded-xl bg-gradient-to-br from-neon to-electric flex items-center justify-center text-white">â–¦</span>
-						<div><p class="font-semibold text-white">Dashboards</p><p class="text-xs text-slate-400">17,999 Add-on Â· 29,999 Standalone</p></div>
+						<div><p class="font-semibold text-white">Dashboards</p><p class="text-xs text-slate-400">17,999 Add-on Â· 27,999 Standalone</p></div>
 						<span class="ml-auto text-electric">â†’</span>
 					</a>
 				</div>
@@ -144,10 +186,12 @@ const faqJsonLd = {
 		</section>
 
 		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+		<script type="application/ld+json" set:html={JSON.stringify(productsLd)} />
 
 		<CtaBand />
 	</main>
 	<Footer />
 </Layout>
+
 
 

@@ -1,4 +1,6 @@
 ---
+import { SITE_URL, SITE_NAME } from "../config";
+
 const testimonials = [
 	{
 		quote: "Within weeks of launch we were getting inquiries from Google searches we never ranked for before.",
@@ -31,6 +33,27 @@ const testimonials = [
 		role: "Fashion label",
 	},
 ];
+
+const reviewsLd = {
+	"@context": "https://schema.org",
+	"@type": "Review",
+	"@id": `${SITE_URL}#reviews`,
+	itemReviewed: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+	reviewRating: {
+		"@type": "Rating",
+		ratingValue: "5",
+		bestRating: "5",
+	},
+	author: {
+		"@type": "Organization",
+		name: "Orbit Web Designs & Marketing",
+	},
+	reviewBody: testimonials.map((t) => t.quote).join(" "),
+};
 ---
 
 <section id="testimonials" class="section-glow border-t border-white/5 py-24">
@@ -61,5 +84,6 @@ const testimonials = [
 	</div>
 	<p class="mt-4 text-center"><a href="/reviews" class="text-sm text-electric hover:underline">All reviews →</a></p>
 </section>
+<script type="application/ld+json" set:html={JSON.stringify(reviewsLd)} />
 
 

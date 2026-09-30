@@ -1,0 +1,242 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "What makes web design different in Kenya vs other countries?",
+		a: "Three things: M-Pesa is the dominant payment rail (not Stripe), most traffic is mobile on 3G/4G (not fibre), and Google Business Profile matters more than in markets with denser competition. A site built for the US/EU market will underperform here.",
+	},
+	{
+		q: "How long does it take to build a website in Kenya?",
+		a: "A professional 5-page business site takes 5-7 days once we have your content. A 10-page site with bookings takes 1-2 weeks. A full e-commerce store takes 2-3 weeks. Timelines depend on how fast you provide photos, text, and logo.",
+	},
+	{
+		q: "Do I need a .ke domain for my Kenyan business?",
+		a: "Not required, but recommended. A .ke domain signals local trust and can help with local Google rankings. We can register one for you (around KES 2,500/year) or you can bring your own.",
+	},
+	{
+		q: "What is M-Pesa integration and do I need it?",
+		a: "M-Pesa integration lets customers pay you directly from their phone. If you sell products or services online, yes — it's the most trusted payment method in Kenya. We wire native Daraja API (Till + Paybill) so payments land directly in your Safaricom account.",
+	},
+	{
+		q: "Will my website show up on Google?",
+		a: "Yes, if it's built right. We include SEO setup (titles, descriptions, Business Profile) on every package. Ranking takes 2-6 months of consistent content and reviews, but the technical foundation is done from day one.",
+	},
+	{
+		q: "Can I update the website myself after launch?",
+		a: "Yes. We build on a stack you can edit — text, images, pages. We include a 30-minute training walkthrough. If you'd rather not touch it, Orbit Care handles updates for you.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "Web Design Kenya: The Complete Guide (2026)",
+	description: "Everything Kenyan businesses need to know about web design: pricing, process, M-Pesa, SEO, and how to pick the right designer. 3000+ word guide.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-30",
+	dateModified: "2026-09-30",
+	mainEntityOfPage: `${SITE_URL}/blog/web-design-kenya-guide`,
+	wordCount: 3200,
+	keywords: "web design Kenya, website design Nairobi, web designer Kenya, M-Pesa website, business website Kenya",
+};
+---
+
+<Layout
+	title="Web Design Kenya: The Complete Guide for Businesses (2026) | Orbit"
+	description="The definitive guide to web design in Kenya: pricing, process, M-Pesa integration, SEO, and how to choose the right designer. 3000+ words."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pillar Guide · Web Design Kenya · 12 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Web design in Kenya: <span class="text-gradient">the complete guide.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">Everything a Kenyan business needs to know before buying a website — pricing, process, payments, SEO, and how to pick a designer who won't waste your money.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<p class="text-sm leading-relaxed text-slate-400">This guide is for Kenyan business owners who need a website but don't know where to start. Whether you're a salon in Westlands, a restaurant in Kilimani, or a firm in Upper Hill — this will help you understand what you're buying, what it should cost, and how to avoid the mistakes that waste money. We'll be honest, including about when you should and shouldn't hire us.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">1. What web design actually means in Kenya</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">Web design in Kenya isn't just about making a site look good. It's about building a tool that works for how Kenyans actually use the internet. Three things make Kenya different:</p>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">M-Pesa is king.</strong> Over 30 million Kenyans use M-Pesa. If your site can't accept M-Pesa, you're turning away the majority of your customers. Native Daraja API integration (Till + Paybill) is the standard — not a plugin.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Mobile-first, not mobile-friendly.</strong> 87% of Kenyan internet traffic is mobile. Most of it is on 3G or 4G, not fibre. A site that loads in 2 seconds on fibre might take 8 seconds on a phone in Kibera. Speed isn't optional.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Google Business Profile matters.</strong> For local businesses, your Google Business Profile (GBP) is often more important than your website. It shows up in Maps, in local search, and it's where customers leave reviews. A website without GBP setup is half a job.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">2. What a website should cost in Kenya (2026)</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">The market is all over the place. Here's what you'll actually find:</p>
+			<div class="mt-6 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Who</th><th class="px-5 py-3">Price range</th><th class="px-5 py-3">What you get</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY (Wix, WordPress)</td><td class="px-5 py-3">KES 5,000–15,000</td><td class="px-5 py-3">You build it. Template design. Plugin M-Pesa. Your time, your problem.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Freelancer (junior)</td><td class="px-5 py-3">KES 15,000–30,000</td><td class="px-5 py-3">Basic custom design. May or may not include M-Pesa. Quality varies wildly.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Professional freelancer / small studio</td><td class="px-5 py-3">KES 25,000–60,000</td><td class="px-5 py-3">Custom design, copy, native M-Pesa, speed tuned, SEO setup. This is the sweet spot.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">KES 80,000–250,000+</td><td class="px-5 py-3">Team of specialists, brand system, project management. Often overkill for SMEs.</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Our position:</strong> We sit in the professional tier — KES 27,999 to 49,999. We're not the cheapest and we're not the most expensive. We're the fastest (5 days for Starter) and the most transparent (fixed prices, exact deliverables, no hidden costs). See <a href="/packages" class="text-electric hover:underline">our packages</a> for details.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">3. The 5 types of websites Kenyan businesses need</h2>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Business card site (1–3 pages)</h3>
+					<p class="mt-2 text-sm text-slate-400">Home, About, Contact. For businesses that just need to be found — salons, consultants, contractors. Loads fast, shows your WhatsApp, gets calls. <strong class="text-white">Our Starter package.</strong></p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Marketing site (5–10 pages)</h3>
+					<p class="mt-2 text-sm text-slate-400">Home, About, Services, Gallery, Blog, Contact. For businesses that need to explain what they do and rank on Google. Includes SEO setup and copywriting. <strong class="text-white">Our Business package.</strong></p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">E-commerce store</h3>
+					<p class="mt-2 text-sm text-slate-400">Product catalog, cart, M-Pesa + card checkout, order management. For businesses selling physical products. <strong class="text-white">Our Master package.</strong></p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Booking / appointment site</h3>
+					<p class="mt-2 text-sm text-slate-400">Service catalog, calendar booking, confirmation emails, payment. For clinics, salons, consultants, classes. <strong class="text-white">Our Master package.</strong></p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Custom web app</h3>
+					<p class="mt-2 text-sm text-slate-400">Auth, dashboards, user roles, integrations. For businesses with unique workflows — inventory, CRM, SaaS. <strong class="text-white">Custom SaaS package.</strong></p>
+				</div>
+			</div>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">4. M-Pesa integration: the Kenya-specific feature</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">If you're selling anything online in Kenya, you need M-Pesa. Here's what that actually means:</p>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Till number</strong> — for walk-in / in-person payments. Customer pays your till, you get an SMS. Good for shops, restaurants, service businesses.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Paybill</strong> — for online / invoice payments. Customer uses the Paybill menu, enters your business number and account. Good for e-commerce, bookings, invoicing.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Daraja API</strong> — the official Safaricom API. This is how you wire M-Pesa into a website so customers pay without leaving your site. This is what we build — not a plugin, not a redirect.</span></li>
+			</ul>
+			<p class="mt-4 text-sm text-slate-400">We also integrate cards (Visa, Mastercard) and PayPal for businesses with international customers. But M-Pesa is the priority — it's what 80% of your Kenyan customers will use.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">5. SEO: will your site get found?</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">A website without SEO is a billboard in the desert. Here's what SEO setup includes:</p>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Technical SEO</strong> — titles, descriptions, headings, speed, mobile, structured data. Done at build time.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Google Business Profile</strong> — setup, optimization, category selection, photo upload. Critical for local search.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Content</strong> — copy that answers what customers actually search for. We write this for you.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Reviews</strong> — the #1 local ranking factor. We can't fake these, but we can set up the system to ask for them.</span></li>
+			</ul>
+			<p class="mt-4 text-sm text-slate-400">Ranking takes 2–6 months. Anyone who promises #1 on Google in a week is lying. But the technical foundation — the part that makes ranking possible — is done from day one.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">6. How to choose a web designer in Kenya</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">This is the most important section. Here's what to look for:</p>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Fixed price in writing</h3>
+					<p class="mt-2 text-sm text-slate-400">"It depends on your requirements" is a red flag. A professional knows what a 5-page site costs and will tell you. If they won't commit to a number, they'll surprise you later.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Live date, not a range</h3>
+					<p class="mt-2 text-sm text-slate-400">"2–4 weeks" is a guess. "5 days for Starter, 1 week for Business" is a process. Ask: "What specific date will my site go live?"</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Native M-Pesa, not a plugin</h3>
+					<p class="mt-2 text-sm text-slate-400">Ask: "Can you show me a test KES 10 payment on a live site you built?" If they can't, they haven't built one. Plugins break on update and feel slow.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">PageSpeed 90+ on mobile</h3>
+					<p class="mt-2 text-sm text-slate-400">Ask for a live site URL and test it yourself on <a href="https://pagespeed.web.dev" class="text-electric hover:underline">pagespeed.web.dev</a>. Most Kenyans browse on 3G/4G. A slow site loses customers.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">You own everything</h3>
+					<p class="mt-2 text-sm text-slate-400">Domain, content, files, M-Pesa credentials — all in your name. Read the terms. Some designers hold your site hostage when you leave.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Post-launch support</h3>
+					<p class="mt-2 text-sm text-slate-400">A site without care rots. Plugins go unpatched, SSL expires, speed decays. Ask: "What happens after launch?" If the answer is "good luck," walk away.</p>
+				</div>
+			</div>
+			<p class="mt-6 text-sm text-slate-400">We wrote a detailed scorecard on our <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a web designer</a> page. It works on any quote — including ours.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">7. The process: what happens when you hire a designer</h2>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Week 1: Discovery & content</h3>
+					<p class="mt-2 text-sm text-slate-400">You tell us about your business. You provide photos, text, logo. We ask questions. This is the most important week — the quality of your content determines the quality of your site.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Week 2: Design approval</h3>
+					<p class="mt-2 text-sm text-slate-400">We build a mockup. You review it. You request changes. We revise. You approve. This is the only gate before we write code — use it.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Week 3: Build & test</h3>
+					<p class="mt-2 text-sm text-slate-400">We build the site, wire M-Pesa, set up SEO, test on mobile. You get a staging link to review.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">Week 4: Launch & handover</h3>
+					<p class="mt-2 text-sm text-slate-400">We deploy to your domain, set up SSL, configure analytics. You get a 30-minute training walkthrough. You own everything from day one.</p>
+				</div>
+			</div>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">8. Common mistakes Kenyan businesses make</h2>
+			<ul class="mt-6 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Buying on price alone.</strong> A KES 5,000 site will cost you more in lost customers than a KES 30,000 site costs in cash.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">No content ready.</strong> Every week you delay providing photos/text is a week your site isn't live. Prep before you brief.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Ignoring mobile.</strong> If your site doesn't load in under 3 seconds on a phone, you're losing 50%+ of visitors.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">No Google Business Profile.</strong> For local businesses, GBP is free and more important than your website. Set it up.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">No plan for after launch.</strong> A site is a living thing. Budget for care — updates, security, backups.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">9. When NOT to hire a web designer</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">We're not the right fit for everyone. Here's when you should DIY or wait:</p>
+			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You have no business yet.</strong> If you're still validating your idea, a landing page on Carrd or Canva is enough. Come back when you have customers.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You need 20+ pages and a custom ERP.</strong> That's an agency job, not a freelancer job. We'd refer you to someone else.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You want it tomorrow.</strong> Quality takes 5 days minimum. If you need it today, use a template.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">10. Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+
+			<div class="mt-14 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-6">
+				<p class="font-semibold text-white">Ready to talk about your project?</p>
+				<p class="mt-1 text-sm text-slate-400">One WhatsApp, honest fit — even if the answer is "start smaller" or "you don't need us."</p>
+				<a href={whatsappLink("Hi Orbit! I read your web design Kenya guide — what package fits my business?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-8 py-3 font-semibold text-white">Chat on WhatsApp</a>
+			</div>
+		</article>
+
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a web designer</a> · <a href="/web-design-nairobi" class="text-electric hover:underline">web design Nairobi</a></p>
+		</div>
+		<Comments slug="web-design-kenya-guide" />
+		<CtaBand title="Your business deserves to be found." text="Let's build you a website that works as hard as you do." />
+	</main>
+	<Footer />
+</Layout>

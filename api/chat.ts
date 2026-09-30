@@ -37,14 +37,14 @@ TOOLS (you can invoke these by including the JSON block in your reply):
 - {"tool": "schedule_call", "name": "", "phone": "", "preferred": ""} â€” books a human callback (returns WhatsApp link)
 
 TRUTH (never invent):
-- Websites: Starter 29,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 43,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 55,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
-- Care: Starter 5,999/mo, Business 8,999/mo, Master 11,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
-- SaaS from 55,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
-- Design from 15,999 (kits to 26,999) -> /design
-- AI Agent 55,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
-- Workflow 43,999/workflow (M-Pesa->Sheets, invoices, bundle 3=15% off) -> /automation
-- Dashboards: Add-on 15,999, Standalone 29,999 -> /dashboards
-- WhatsApp Responder 29,999
+- Websites: Starter 27,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 39,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 49,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
+- Care: Starter 4,999/mo, Business 7,999/mo, Master 9,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
+- SaaS from 49,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
+- Design from 14,999 (kits to 24,999) -> /design
+- AI Agent 49,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
+- Workflow 39,999/workflow (M-Pesa->Sheets, invoices, bundle 3=15% off) -> /automation
+- Dashboards: Add-on 14,999, Standalone 27,999 -> /dashboards
+- WhatsApp Responder 27,999
 - M-Pesa: Till = walk-in, Paybill = tracked/online. Calculator at /mpesa-fee-calculator
 - Humans: WhatsApp +254 741 992 308, Mon-Sat, minutes. You are the AI, but always offer WhatsApp handoff for quotes/booking.
 - If unsure, say you don't have it and point to /packages, /guides, or WhatsApp. Never invent reviews, guarantees, or prices.
@@ -221,11 +221,11 @@ try {
         } else if (call.tool === 'package_compare') {
           const need = call.args.need || 'info';
           const budget = call.args.budget || 'unsure';
-          let pkg = 'Starter', price = '29,999', link = '/packages';
-          if (need === 'store') { pkg = 'Master'; price = '55,999'; link = '/mpesa-ecommerce-kenya'; }
-          else if (need === 'bookings') { pkg = 'Business'; price = '43,999'; link = '/packages'; }
+          let pkg = 'Starter', price = '27,999', link = '/packages';
+          if (need === 'store') { pkg = 'Master'; price = '49,999'; link = '/mpesa-ecommerce-kenya'; }
+          else if (need === 'bookings') { pkg = 'Business'; price = '39,999'; link = '/packages'; }
           if (budget === 'under_30k' && pkg !== 'Starter') {
-            pkg = 'Starter'; price = '29,999'; link = '/packages';
+            pkg = 'Starter'; price = '27,999'; link = '/packages';
           }
           toolResults.push(`Recommendation: **${pkg} (${price})** â€” ${need === 'store' ? 'online store with M-Pesa' : need === 'bookings' ? 'bookings + 10 pages' : '5-page site to get found'}. ${pkg === 'Starter' && budget === 'under_30k' ? 'Fits your budget.' : ''} See ${link}`);
         } else if (call.tool === 'schedule_call') {
@@ -267,4 +267,5 @@ try {
       return json({ error: 'AI unavailable', fallback: true }, 502);
     }
 }
+
 

@@ -6,33 +6,46 @@ const faqs = [
 	},
 	{
 		q: "Do I need to pay monthly?",
-		a: "Yes â€” Orbit Care keeps your site fast, safe and online: hosting, security, updates and priority support at KES 5,999/month (Starter), 9,999 (Business) or 12,999 (Master). No surprise bills, cancel anytime.",
+		a: "Yes — Orbit Care keeps your site fast, safe and online: hosting, security, updates and priority support at KES 4,999/month (Starter), 9,999 (Business) or 12,999 (Master). No surprise bills, cancel anytime.",
 	},
 	{
 		q: "What do you need from me?",
-		a: "Only 3 things: photos of your business, text about what you do, and your logo. No logo? We design one for you from KES 15,999.",
+		a: "Only 3 things: photos of your business, text about what you do, and your logo. No logo? We design one for you from KES 14,999.",
 	},
 	{
 		q: "How much does a website cost?",
-		a: "Starter KES 29,999 (5 pages), Business KES 43,999 (10 pages) and Master KES 55,999 (online store or booking system).",
+		a: "Starter KES 27,999 (5 pages), Business KES 39,999 (10 pages) and Master KES 49,999 (online store or booking system).",
 	},
 	{
 		q: "Will customers find me on Google?",
-		a: "Yes. Every site ships with SEO setup â€” titles, descriptions and Google Business Profile. Master adds advanced SEO that targets the searches bringing paying customers.",
+		a: "Yes. Every site ships with SEO setup — titles, descriptions and Google Business Profile. Master adds advanced SEO that targets the searches bringing paying customers.",
 	},
 	{
 		q: "What if I don't like the design?",
-		a: "You approve the design before anything goes live â€” we revise until you're happy. If we part ways early, you only pay for work already done.",
+		a: "You approve the design before anything goes live — we revise until you're happy. If we part ways early, you only pay for work already done.",
 	},
 	{
 		q: "Can I pay in parts?",
-		a: "Yes. 50% to start, 50% on launch. After that, a small monthly covers hosting, security and support â€” no big surprise bills.",
+		a: "Yes. 50% to start, 50% on launch. After that, a small monthly covers hosting, security and support — no big surprise bills.",
 	},
 	{
 		q: "Who owns my website?",
-		a: "You do â€” your content, your domain, your business. You get a full license to use everything we build; the full details are in our Terms page.",
+		a: "You do — your content, your domain, your business. You get a full license to use everything we build; the full details are in our Terms page.",
 	},
 ];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: f.a,
+		},
+	})),
+};
 ---
 
 <section id="faq" class="section-glow border-t border-white/5 py-24">
@@ -59,10 +72,12 @@ const faqs = [
 						</details>
 					))
 				}
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
 
 
 

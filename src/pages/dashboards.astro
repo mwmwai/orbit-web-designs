@@ -6,10 +6,10 @@ import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
 
 const faqs = [
-	{ q: "Add-on or standalone â€” which do I need?", a: "Add-on (KES 17,999) plugs a dashboard into your existing Orbit website. Standalone (KES 29,999) is a separate login with its own data connections â€” pick it if your site wasn't built by us." },
+	{ q: "Add-on or standalone â€” which do I need?", a: "Add-on (KES 17,999) plugs a dashboard into your existing Orbit website. Standalone (KES 27,999) is a separate login with its own data connections â€” pick it if your site wasn't built by us." },
 	{ q: "What data can it show?", a: "Live M-Pesa sales (Till + Paybill), bookings, stock levels, expenses â€” whatever your business tracks. We wire your real sources, not demo numbers." },
 	{ q: "Do I need technical skills to use it?", a: "No. One screen, big numbers, plain language. We include a walkthrough video and WhatsApp support." },
-	{ q: "Is there a monthly fee?", a: "Dashboard Care is KES 4,499/mo â€” hosting, data connections, fixes and support. Cancel anytime; the dashboard stays yours." },
+	{ q: "Is there a monthly fee?", a: "Dashboard Care is KES 3,999/mo â€” hosting, data connections, fixes and support. Cancel anytime; the dashboard stays yours." },
 ];
 
 const faqJsonLd = {
@@ -44,7 +44,7 @@ const bookings = [
 	const tiers = [
 	{
 		name: "Dashboard Add-on",
-		price: "KES 15,999",
+		price: "KES 14,999",
 		usd: "â‰ˆ $146",
 		eur: "â‰ˆ â‚¬135",
 		blurb: "Bolted onto your website: your numbers at a glance.",
@@ -54,7 +54,7 @@ const bookings = [
 	},
 	{
 		name: "Standalone Dashboard",
-		price: "KES 29,999",
+		price: "KES 27,999",
 		usd: "â‰ˆ $254",
 		eur: "â‰ˆ â‚¬234",
 		blurb: "Its own private site for your whole business.",
@@ -67,7 +67,7 @@ const bookings = [
 
 <Layout
 	title="Business Dashboards â€” Track Sales, M-Pesa & Bookings | Orbit"
-	description="Private dashboards for Kenyan SMEs: live M-Pesa sales, bookings and stock at a glance. Add-on KES 17,999, standalone KES 29,999."
+	description="Private dashboards for Kenyan SMEs: live M-Pesa sales, bookings and stock at a glance. Add-on KES 17,999, standalone KES 27,999."
 >
 	<Navbar />
 	<main id="main">
@@ -208,4 +208,5 @@ const bookings = [
 	</main>
 	<Footer />
 </Layout>
+
 

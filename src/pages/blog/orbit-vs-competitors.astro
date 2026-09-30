@@ -1,0 +1,225 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "Is Orbit Web Designs the best web design company in Kenya?",
+		a: "We're the best fit for Kenyan SMEs that need a professional website fast (5 days to 2 weeks) at a fair price (KES 27,999–49,999). If you need a 20+ page custom ERP, an agency is better. If you just need a business site, store, or booking system, we're the right choice.",
+	},
+	{
+		q: "How is Orbit different from other web designers in Kenya?",
+		a: "Three things: (1) Speed — Starter live in 5 days, not weeks. (2) Transparency — fixed prices, exact deliverables, no hidden costs. (3) M-Pesa native — Daraja API wired from day one, not a plugin added later.",
+	},
+	{
+		q: "What are the cheapest web design options in Kenya?",
+		a: "DIY on Wix/WordPress (KES 5,000–15,000), junior freelancers (KES 15,000–30,000), or template sites. You get what you pay for — slow support, plugin M-Pesa, and you own the problems.",
+	},
+	{
+		q: "Should I hire a freelancer or a web design company in Kenya?",
+		a: "For a standard business site (1–10 pages), a professional freelancer or small studio is the sweet spot. Agencies make sense for 20+ pages, brand systems, or complex integrations. For most Kenyan SMEs, a studio like Orbit is the right fit.",
+	},
+	{
+		q: "Does Orbit Web Designs offer SEO services?",
+		a: "Yes. Every package includes SEO setup (titles, descriptions, structured data, Google Business Profile). Ongoing SEO (content, reviews, rankings) is available as a monthly service. We also have a dedicated <a href='/seo-services-kenya'>SEO services page</a>.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "Orbit vs Competitors: Honest Web Design Comparison Kenya (2026)",
+	description: "An honest comparison of Orbit Web Designs vs other web design options in Kenya: freelancers, agencies, DIY. Pricing, speed, M-Pesa, ownership, support.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` } },
+	datePublished: "2026-09-30",
+	dateModified: "2026-09-30",
+	mainEntityOfPage: `${SITE_URL}/blog/orbit-vs-competitors`,
+	wordCount: 2800,
+	keywords: "Orbit vs competitors, web design comparison Kenya, web design Kenya, best web designer Kenya, Orbit Web Designs review",
+};
+---
+
+<Layout
+	title="Orbit vs Competitors: Honest Web Design Comparison Kenya (2026) | Orbit"
+	description="An honest comparison of Orbit Web Designs vs other web design options in Kenya: freelancers, agencies, DIY. Pricing, speed, M-Pesa, ownership, support."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Comparison · Honest · 2026 · 9 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Orbit vs competitors: <span class="text-gradient">the honest comparison.</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">We'll compare ourselves to every alternative — freelancers, agencies, DIY — on the things that actually matter. Even when the answer favors them.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<p class="text-sm leading-relaxed text-slate-400">Most comparison pages are marketing fluff. This one isn't. We'll tell you exactly where we win, where we lose, and when you should pick someone else. We'd rather lose a sale than have a customer regret hiring us.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">The 4 options for web design in Kenya</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">Before comparing, here's what you're choosing between:</p>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">1. DIY (Wix, WordPress, Carrd)</h3>
+					<p class="mt-2 text-sm text-slate-400">You build it yourself. Cheapest option (KES 0–15,000). You own the time and the problems. Good for testing an idea, bad for a real business.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">2. Junior freelancer</h3>
+					<p class="mt-2 text-sm text-slate-400">KES 15,000–30,000. Quality varies wildly. Some are talented, some are learning on your budget. Hard to tell the difference before you pay.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6 border-electric/30">
+					<h3 class="font-semibold text-white">3. Professional studio (Orbit)</h3>
+					<p class="mt-2 text-sm text-slate-400">KES 27,999–49,999. Custom design, copy, native M-Pesa, speed tuned, SEO setup, post-launch support. The sweet spot for most Kenyan SMEs.</p>
+				</div>
+				<div class="glow-border rounded-2xl p-6">
+					<h3 class="font-semibold text-white">4. Agency</h3>
+					<p class="mt-2 text-sm text-slate-400">KES 80,000–250,000+. Team of specialists, brand system, project management. Overkill for most SMEs, but right for complex needs.</p>
+				</div>
+			</div>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Head-to-head: the 6 criteria that matter</h2>
+
+			<h3 class="mt-8 text-xl font-bold text-white">1. Price transparency</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">Price</th><th class="px-5 py-3">Transparency</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">KES 0–15,000</td><td class="px-5 py-3">You pay for templates, plugins, your time</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">KES 15,000–30,000</td><td class="px-5 py-3">Often vague — "it depends"</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">KES 27,999–49,999</td><td class="px-5 py-3">Fixed prices, exact deliverables, no hidden costs</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">KES 80,000–250,000+</td><td class="px-5 py-3">Detailed proposals, but often padded</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit.</strong> We publish our prices. We tell you exactly what's included. No surprises.</p>
+
+			<h3 class="mt-8 text-xl font-bold text-white">2. Speed to launch</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">Timeline</th><th class="px-5 py-3">What that means</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">Your pace</td><td class="px-5 py-3">Could be days, could be months — depends on you</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">2–6 weeks</td><td class="px-5 py-3">Often juggling multiple clients</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">5 days – 2 weeks</td><td class="px-5 py-3">Starter 5 days, Business 1 week, Master 2 weeks</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">4–12 weeks</td><td class="px-5 py-3">Process, meetings, revisions — thorough but slow</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit.</strong> We're the fastest professional option. 5 days for a business site is unheard of at this quality level.</p>
+
+			<h3 class="mt-8 text-xl font-bold text-white">3. M-Pesa integration</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">M-Pesa</th><th class="px-5 py-3">Quality</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">Plugin or redirect</td><td class="px-5 py-3">Breaks on update, feels slow</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">Varies</td><td class="px-5 py-3">Some do native, some don't know how</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">Native Daraja API</td><td class="px-5 py-3">Till + Paybill, test payment before launch</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">Native or plugin</td><td class="px-5 py-3">Depends on the team — ask specifically</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit.</strong> Native Daraja API on every e-commerce build. We test a KES 10 payment before launch. You own the Till/Paybill.</p>
+
+			<h3 class="mt-8 text-xl font-bold text-white">4. Speed on mobile (PageSpeed)</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">PageSpeed mobile</th><th class="px-5 py-3">Why it matters</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">40–70</td><td class="px-5 py-3">Templates are heavy, you don't know how to optimize</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">50–80</td><td class="px-5 py-3">Depends on their technical skill</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">90+</td><td class="px-5 py-3">We optimize for 3G/4G, not fibre</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">70–90</td><td class="px-5 py-3">Varies by team</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit.</strong> 87% of Kenyan internet traffic is mobile. Most of it is on 3G/4G. We optimize for the phone in your customer's pocket, not the fibre in your office.</p>
+
+			<h3 class="mt-8 text-xl font-bold text-white">5. Ownership</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">Who owns what</th><th class="px-5 py-3">Risk</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">You own everything</td><td class="px-5 py-3">None — but you also do everything</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">Varies</td><td class="px-5 py-3">Some hold your site hostage</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">You own everything</td><td class="px-5 py-3">Domain, content, files, M-Pesa credentials — your name</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">Usually you</td><td class="px-5 py-3">Read the terms — some lock you in</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit (tied with DIY).</strong> You own everything from day one. We don't hold your site hostage. See our <a href="/terms-of-service" class="text-electric hover:underline">Terms</a> for an example of what fair looks like.</p>
+
+			<h3 class="mt-8 text-xl font-bold text-white">6. Post-launch support</h3>
+			<div class="mt-4 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">Support</th><th class="px-5 py-3">What it covers</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">DIY</td><td class="px-5 py-3">You</td><td class="px-5 py-3">You fix everything yourself</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Junior freelancer</td><td class="px-5 py-3">"WhatsApp me"</td><td class="px-5 py-3">If they reply, you're lucky</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white border-electric/30">Orbit</td><td class="px-5 py-3">Orbit Care</td><td class="px-5 py-3">Hosting, SSL, security, updates, backups, WhatsApp support — 6,999–9,999/mo</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Agency</td><td class="px-5 py-3">Retainer</td><td class="px-5 py-3">Monthly fee, often KES 20,000+</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400"><strong class="text-white">Winner: Orbit.</strong> Orbit Care is the most affordable managed option in Kenya. Cancel anytime, site stays yours. Or DIY with our <a href="/blog/website-care-kenya" class="text-electric hover:underline">care guide</a>.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">When NOT to hire Orbit</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">We're not the right fit for everyone. Here's when you should pick someone else:</p>
+			<ul class="mt-6 grid gap-3 text-sm text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You need 20+ pages and a custom ERP.</strong> That's an agency job. We'd refer you to someone else.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You want the cheapest possible option.</strong> DIY on Wix or hire a junior freelancer. We're not the cheapest — we're the best value.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You need it tomorrow.</strong> Quality takes 5 days minimum. If you need it today, use a template.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">You want a brand system, not just a website.</strong> Logo, guidelines, brand book — that's a design agency. We do websites.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">The bottom line</h2>
+			<p class="mt-4 text-sm leading-relaxed text-slate-400">If you're a Kenyan SME that needs a professional website, store, or booking system — and you want it fast, at a fair price, with M-Pesa wired in — we're the right choice. If you need something more complex, we'll tell you honestly and refer you to someone better.</p>
+			<p class="mt-4 text-sm text-slate-400">The best way to evaluate us is to <a href="/reviews" class="text-electric hover:underline">read our reviews</a>, check our <a href="/packages" class="text-electric hover:underline">pricing</a>, and <a href={whatsappLink("Hi Orbit! I'm comparing designers — what makes you different?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">ask us anything on WhatsApp</a>. We'll give you a straight answer.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+
+			<div class="mt-14 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-6">
+				<p class="font-semibold text-white">Still deciding?</p>
+				<p class="mt-1 text-sm text-slate-400">Send any competitor quote — we'll score both honestly, even if the answer is "they're fine, hire them."</p>
+				<a href={whatsappLink("Hi Orbit! I'm comparing designers — score my quote vs yours?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-8 py-3 font-semibold text-white">WhatsApp the quote</a>
+			</div>
+		</article>
+
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/reviews" class="text-electric hover:underline">client reviews</a> · <a href="/blog/web-design-kenya-guide" class="text-electric hover:underline">web design Kenya guide</a> · <a href="/blog/choose-web-designer-kenya" class="text-electric hover:underline">choosing a designer</a></p>
+		</div>
+		<Comments slug="orbit-vs-competitors" />
+		<CtaBand title="Your competitors are online. Are you?" text="One message. One website. More customers." />
+	</main>
+	<Footer />
+</Layout>

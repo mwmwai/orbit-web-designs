@@ -6,7 +6,7 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 ## User
 
 - Name: mwmwa (GitHub: mwmwai)
-- Wants maximum leverage from the 209-agent roster via the Boss.
+- Wants maximum leverage from the 233-agent roster via the Boss.
 - Prefers action over questions: full permission granted to navigate, access, and run. Do the job, report back.
 - Communication: short, direct. No fluff.
 
@@ -29,4 +29,12 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 
 ## Lessons learned
 
-- (Boss appends durable lessons here after each job.)
+- Orbit entry price KES 33,999 sits in the gap between budget (15-45K) and premium custom (78K+); published fixed pricing itself is the differentiator in Nairobi.
+- Kenya buyer-decision stack: mobile-first + M-Pesa + WhatsApp + on-page SEO/GBP bundled at entry, not upsold.
+- Sourced 2026 KES bands: landing 15-60K, SME 20-85K, e-com 25-130K+, corporate/custom 130-400K+.
+- Orbit api/generate.mjs is an unauthenticated paid-credit burn surface; needs Turnstile + rate limit + model allowlist (open item, Sep 30).
+- Orbit Turnstile is fail-open when secret unset and newsletter path lacks it; fix to fail-closed (open item, Sep 30).
+- Orbit SEO gaps: robots sitemap URL non-www vs www canonicals; llms.txt pricing stale vs live (27,999/39,999/49,999) (open item, Sep 30).
+- Audit claims need verification before action: the Sep-30 audit's "duplicate organizationLd build-breaker" was false (single declaration at index.astro:28).
+- User runs live editing sessions in parallel: expect in-flight syntax breakage (Layout.astro llms.txt typo + breadcrumbLd TDZ + blog quote escaping all fixed Sep 30, left uncommitted in their tree).
+- PowerShell `>` redirect writes UTF-16: restore repo files with Start-Process -RedirectStandardOutput or cmd, never bare `>`.

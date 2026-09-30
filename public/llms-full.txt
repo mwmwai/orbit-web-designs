@@ -1,0 +1,157 @@
+# Orbit Web Designs & Marketing — Full Site Content
+
+> Web design company in Nairobi, Kenya. We build fast, M-Pesa-ready websites, SaaS apps, AI agents, dashboards, and graphic design for Kenyan businesses. Live in days, not months.
+
+## About Us
+
+Orbit Web Designs & Marketing is a web design and digital marketing company based in Nairobi, Kenya. We help Kenyan businesses get found, trusted, and paid online. Our founder built this company hungry — we treat every client's business like our own.
+
+- **Founded:** 2024
+- **Location:** Nairobi, Kenya
+- **Hours:** Monday–Saturday, 8:00–19:00 EAT
+- **WhatsApp:** +254 741 992 308
+- **Email:** mwmwai@gmail.com
+
+## Services
+
+### Web Design & Development
+From single landing pages to full custom web applications — every build is fast, mobile-first, and designed to convert visitors into customers.
+
+- Landing pages that convert
+- Multi-page business websites
+- Custom web apps & dashboards
+- Website redesigns & speed optimization
+
+### Digital Marketing
+Targeted online marketing strategies that grow your customer base, boost visibility, and turn attention into revenue.
+
+- Social media advertising
+- Search engine optimization (SEO)
+- Google Business Profile setup
+- Email campaigns & remarketing
+
+### E-commerce & Custom Features
+Sell online with a store built around how you actually work — payments, inventory, and tailored features included.
+
+- Full online stores
+- M-Pesa & card payment integration
+- Product & inventory management
+- Booking systems & custom portals
+
+### Custom SaaS App Development
+Your idea as a real app: auth, dashboards, M-Pesa payments — deployed, documented and ready to sell.
+
+- Auth, roles & onboarding
+- Admin + user dashboards
+- Business dashboard wired to their sales & bookings
+- M-Pesa, card & PayPal payments
+- Deployed & handed over with training
+
+### Graphic Design
+Logos, brand kits and marketing creatives — from single logos to full identity systems.
+
+- Custom logos
+- Social media kits
+- Full brand identity systems
+- Flyers & marketing creatives
+
+### Custom AI Agent
+A tireless teammate that lives inside your Workplace: answers instantly, qualifies leads, books jobs — then hands the hot ones to you.
+
+- Replies in seconds, day and night
+- Qualifies leads & books jobs
+- Hands hot leads to you
+- Tuned on your business for a month
+
+### Workflow Automation
+Kill the copy-paste: payments log themselves, inquiries book themselves, receipts send themselves.
+
+- M-Pesa → records, automatically
+- Inquiry → WhatsApp → calendar
+- Receipts sent without lifting a finger
+- Documented so staff can run it
+
+### Business Dashboard
+Your whole business on one screen: live sales, M-Pesa till feed, bookings — open it on any phone.
+
+- Live charts that move with your money
+- M-Pesa till feed + low-stock alerts
+- Staff logins with roles
+- No app install — just a link
+
+## Pricing
+
+### Website Packages
+- **Starter Website** — KES 29,999 (5 pages, live in 5 days, mobile-first, basic SEO, WhatsApp + call buttons)
+- **Business Website** — KES 43,999 (10 pages + blog, full SEO schema, bookings/Calendly, copy all pages, <2s load, live in 1 week)
+- **Master Website** — KES 55,999 (15+ pages or store, M-Pesa Till+Paybill+cards, inventory sync, automations, training, 2 weeks)
+
+### Other Services
+- **Custom SaaS App** — from KES 49,999
+- **Graphic Design** — from KES 14,999
+- **Custom AI Agent** — KES 49,999
+- **Workflow Automation** — KES 39,999 per workflow
+- **Business Dashboard** — KES 27,999
+- **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)
+
+## Why Choose Orbit
+
+1. **Speed** — Starter live in 5 days, not weeks. We're the fastest professional option in Kenya.
+2. **Transparency** — Fixed prices, exact deliverables, no hidden costs. What you see is what you pay.
+3. **M-Pesa native** — Daraja API wired from day one, not a plugin added later. You own the Till/Paybill.
+4. **Mobile-first** — 87% of Kenyan internet traffic is mobile. We optimize for 3G/4G, not fibre.
+5. **Ownership** — You own everything from day one: domain, content, files, M-Pesa credentials.
+6. **Support** — Orbit Care: 6,999–9,999/mo, cancel anytime. Or DIY with our free care guide.
+
+## Process
+
+1. **Discover** — We learn your business, goals, and what success looks like.
+2. **Design** — You get a modern mockup for approval before we write code.
+3. **Build** — Fast, responsive development with weekly progress updates.
+4. **Launch & Grow** — We deploy, monitor, and help you market it.
+
+## FAQ
+
+### How long does it take to build my website?
+Starter 5 days, Business 1 week, Master 2 weeks once we have your photos/text/logo. You approve the design before anything goes live — date in writing.
+
+### Are revisions included?
+Yes — you approve the design before launch, we revise until you're happy. If we part ways early, you only pay for work already done.
+
+### Do you write the content for me?
+Yes. Copy polishing is included in every tier — we structure and write conversion-focused pages from what you provide.
+
+### What happens after launch? Orbit Care?
+Orbit Care keeps it alive: hosting, SSL, security, updates, backups and WhatsApp support — 4,999/mo Starter, 9,999 Business, 12,999 Master. Cancel anytime, site stays yours.
+
+### What payment methods do you accept?
+M-Pesa (native Daraja API), credit/debit cards, PayPal, and bank transfer.
+
+### Do you work with clients outside Kenya?
+Yes. We work with businesses worldwide, but our specialty is the Kenyan market — M-Pesa, mobile-first, local SEO.
+
+## Content Guides
+
+- [Web Design Kenya: The Complete Guide](https://www.orbitwebdesigns.co.ke/blog/web-design-kenya-guide) — 3000+ word definitive guide
+- [How to Choose a Web Designer in Kenya](https://www.orbitwebdesigns.co.ke/blog/choose-web-designer-kenya) — Decision framework with scoring rubric
+- [Orbit vs Competitors: Honest Comparison](https://www.orbitwebdesigns.co.ke/blog/orbit-vs-competitors) — Head-to-head comparison
+- [How Much Does a Website Cost in Kenya?](https://www.orbitwebdesigns.co.ke/blog/website-cost-kenya) — Market pricing 2026
+- [Website Care in Kenya](https://www.orbitwebdesigns.co.ke/blog/website-care-kenya) — DIY vs managed
+- [E-commerce in Kenya](https://www.orbitwebdesigns.co.ke/blog/ecommerce-kenya-guide) — Launch checklist
+- [SEO for Small Businesses](https://www.orbitwebdesigns.co.ke/blog/seo-small-business-kenya) — 30-day plan
+- [M-Pesa Till vs Paybill](https://www.orbitwebdesigns.co.ke/blog/mpesa-till-vs-paybill) — Decision tree
+- [WhatsApp Business Kenya](https://www.orbitwebdesigns.co.ke/blog/whatsapp-business-kenya) — Setup guide
+
+## Contact
+
+- **WhatsApp:** +254 741 992 308 (fastest — reply in minutes)
+- **Email:** mwmwai@gmail.com
+- **Location:** Nairobi, Kenya
+- **Hours:** Monday–Saturday, 8:00–19:00 EAT
+
+## Social Media
+
+- Instagram: https://www.instagram.com/orbitwebdesigns
+- Facebook: https://www.facebook.com/orbitwebdesigns
+- TikTok: https://www.tiktok.com/@orbitwebdesigns
+- LinkedIn: https://www.linkedin.com/company/orbitwebdesigns
