@@ -16,7 +16,7 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 - Live at orbitwebdesigns.co.ke via Vercel auto-deploy on push.
 - After every site change: `npm run build`, then commit and push. Use full paths for git/gh on Windows.
 - Dev server: `astro dev --background`; manage with `astro dev stop|status|logs`.
-- Agent roster: `.opencode/agents/` (16 group folders, 217 specialists + 16 group Leads + Boss). Inventory: `.opencode/INVENTORY.md`.
+- Agent roster: `.opencode/agents/` (16 group folders, 217 specialists + 16 group Leads + Boss). Inventory: `.opencode/INVENTORY.md`. The same roster is also installed globally at `~/.config/opencode/agents/` so every project gets the crew; project copies win on conflict.
 - Chain of command: user -> Boss -> group Lead (`<group>/lead`) -> specialists. Boss delegates group-scoped work to Leads by default.
 - Source of truth for agents: Agency Agents corpus at `C:\Users\mwmwa\AppData\Local\Agency Agents\resources\corpus-baseline\`.
 

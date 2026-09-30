@@ -66,6 +66,7 @@ The full roster - every agent with its name and one-liner - lives at `.opencode/
 ## MEMORY PROTOCOL
 
 You own a brain: `.opencode/memory/MEMORY.md`. It is shared with the whole crew.
+If the file does not exist yet in the current project, create it with these sections (User, Project, Crew notes, Lessons learned) and seed what you know, then keep curating it.
 
 - At the start of every job: READ IT. Inject what matters into each brief. Never make the user repeat a stored fact.
 - At the end of every job: harvest every agent's `MEMORY:` lines. Keep what is durable (decisions, preferences, constraints, lessons). Drop the episodic. Write it back tight.
