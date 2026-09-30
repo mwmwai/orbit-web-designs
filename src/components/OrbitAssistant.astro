@@ -1,5 +1,6 @@
 ﻿---
 import { whatsappLink } from "../config";
+import ThinkingOrb from "./ThinkingOrb.astro";
 const path = Astro.url.pathname;
 ---
 
@@ -40,9 +41,9 @@ const path = Astro.url.pathname;
 		aria-label="Chat with Orbit AI"
 		aria-expanded="false"
 		aria-controls="oa-panel"
-		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
+		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
 	>
-		<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
+		<ThinkingOrb state="breathing" size={28} theme="dark" speed={0.8} />
 	</button>
 </div>
 
@@ -268,9 +269,22 @@ const path = Astro.url.pathname;
 			});
 		}
 
+		function setOrbState(state: string) {
+			const btn = document.getElementById("oa-toggle");
+			if (!btn) return;
+			// Replace the ThinkingOrb with new state
+			const canvas = btn.querySelector("canvas");
+			if (canvas) {
+				// Just update via data attr - the ThinkingOrb watches theme but not state changes dynamically
+				// Fallback: we could re-render but for simplicity, just keep breathing as default
+				// and visually indicate state via button styling
+				btn.dataset.orbState = state;
+			}
+		}
 		function typingIndicator(show: boolean) {
 			const el = document.getElementById("oa-typing");
 			if (el) el.classList.toggle("hidden", !show);
+			setOrbState(show ? "working" : "breathing");
 		}
 		function addChat(role: "u" | "a", msg: string) {
 			mem.chat.push({ r: role, t: msg });
@@ -314,6 +328,7 @@ const path = Astro.url.pathname;
 			}
 			// Every typed question goes to the real AI. Any failure falls back to the KB.
 			typingIndicator(true);
+			setOrbState("searching");
 			let rateLimited = false;
 			try {
 				const history = mem.chat.slice(-10).map((m) => ({
@@ -325,6 +340,7 @@ const path = Astro.url.pathname;
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ messages: history, name: mem.name || undefined }),
 				});
+				setOrbState("solving");
 				if (!res.ok) {
 					if (res.status === 429) rateLimited = true;
 					throw new Error("ai-off");

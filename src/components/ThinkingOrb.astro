@@ -1,0 +1,5 @@
+---
+import { ThinkingOrb } from 'thinking-orbs';
+const { state = "breathing", size = 20, theme = "dark", speed = 1, paused = false } = Astro.props;
+---
+<ThinkingOrb state={state} size={size} theme={theme} speed={speed} paused={paused} client:load />
