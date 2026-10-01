@@ -66,6 +66,17 @@ const posts = [
 		blurb: "Head-to-head vs freelancers, agencies, DIY — on price, speed, M-Pesa, ownership, support.",
 	},
 ];
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "What guides does Orbit Web Designs offer?", acceptedAnswer: { "@type": "Answer", text: "Free guides covering website pricing, SEO for small businesses, e-commerce launch, M-Pesa integration, WhatsApp Business, website care, and how to choose a web designer." } },
+		{ "@type": "Question", name: "Are the guides really free?", acceptedAnswer: { "@type": "Answer", text: "Yes. All guides are free to read. They include checklists, templates and real numbers you can use even if you don't hire us." } },
+		{ "@type": "Question", name: "What is the best guide for a beginner?", acceptedAnswer: { "@type": "Answer", text: "Start with the Web Design Kenya Complete Guide — it covers pricing, process, M-Pesa, SEO and how to pick a designer." } },
+		{ "@type": "Question", name: "Do I need technical skills to use the guides?", acceptedAnswer: { "@type": "Answer", text: "No. The guides are written for business owners, not developers. Step-by-step checklists and copy-paste templates included." } },
+	],
+};
 ---
 
 <Layout
@@ -104,5 +115,6 @@ const posts = [
 
 		<CtaBand title="Rather just have it done?" text="Read the guides or hand the whole job to us — reply in minutes, Mon–Sat." />
 	</main>
+	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 	<Footer />
 </Layout>
