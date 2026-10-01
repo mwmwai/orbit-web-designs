@@ -43,9 +43,11 @@ const path = Astro.url.pathname;
 		aria-label="Chat with Orbit AI"
 		aria-expanded="false"
 		aria-controls="oa-panel"
-		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
+		class="group relative grid h-14 w-14 place-items-center rounded-full btn-gradient text-white shadow-xl shadow-electric/40 transition hover:scale-105 hover:shadow-electric/60"
 	>
-		<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
+		<span class="absolute inset-0 rounded-full bg-electric opacity-25 blur-md transition group-hover:opacity-40" aria-hidden="true"></span>
+		<svg class="relative" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
+		<span class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border-2 border-ink bg-white text-[9px] font-black text-ink" aria-hidden="true">AI</span>
 	</button>
 </div>
 
@@ -94,13 +96,13 @@ const path = Astro.url.pathname;
 		}
 
 		const ACTIONS: Array<{ label: string; ask: string; reply: string; link?: [string, string]; wa: string }> = [
-			{ label: "🛒 I want an online store", ask: "I want an online store", reply: "Master **KES 49,999** is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 2 weeks. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 49,999). I sell..." },
-			{ label: "📅 I want bookings", ask: "I want to take bookings", reply: "Business **KES 39,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live 1 week.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 39,999). My business is..." },
-			{ label: "💬 Just get found", ask: "I just want to get found online", reply: "Starter **KES 27,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 5 days.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (27,999). My business is..." },
+			{ label: "Online store — sell on M-Pesa", ask: "I want an online store", reply: "Master **KES 49,999** is the store package: native M-Pesa + cards, stock that subtracts itself, WhatsApp order pings, buyer SEO. Live 2 weeks. First, price your margins:", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"], wa: "Hi Orbit! I want an online store (Master 49,999). I sell..." },
+			{ label: "Bookings — fill my calendar", ask: "I want to take bookings", reply: "Business **KES 39,999**: up to 7 pages, full SEO, booking integration, copy everywhere. Live 1 week.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want bookings on my site (Business 39,999). My business is..." },
+			{ label: "Just get found on Google", ask: "I just want to get found online", reply: "Starter **KES 28,999**: up to 3 pages, WhatsApp chat, basic SEO, live in 5 days.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want a Starter site (28,999). My business is..." },
 		];
 
 		const KB: Array<{ keys: string[]; text: string; link?: [string, string]; wa?: string; t?: string }> = [
-			{ keys: ["starter", "27,999", "33999", "landing", "cheap", "basic", "5 pages"], t: "Starter", text: "Starter is **KES 27,999** — 5 pages, WhatsApp+call, basic SEO + GBP, copy for 3 pages, Analytics, live 5 days. + Care 4,999/mo. → WhatsApp direct.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter website (27,999) — my business is..." },
+			{ keys: ["starter", "28,999", "28999", "landing", "cheap", "basic", "5 pages"], t: "Starter", text: "Starter is **KES 28,999** — 5 pages, WhatsApp+call, basic SEO + GBP, copy for 3 pages, Analytics, live 5 days. + Care 4,999/mo. → WhatsApp direct.", link: ["/packages", "See Starter →"], wa: "Hi Orbit! I want the Starter website (28,999) — my business is..." },
 			{ keys: ["business", "39,999", "45999", "booking", "10 pages"], t: "Business", text: "Business is **KES 39,999** — 10 pages+blog, full SEO (schema 90+), bookings/Calendly, copy all pages, <2s, live 1 week. Most popular. + Care 7,999/mo.", link: ["/packages", "See Business →"], wa: "Hi Orbit! I want the Business website (39,999) — bookings for..." },
 			{ keys: ["master", "49,999", "57999", "store", "shop", "sell", "15 pages"], t: "Master", text: "Master is **KES 49,999** — 15+ pages or store, native M-Pesa Till+Paybill+cards, inventory sync, automations, training, 2 weeks.", link: ["/packages", "See Master →"], wa: "Hi Orbit! I want the Master package (49,999) for my store." },
 			{ keys: ["saas", "app", "platform", "software"], t: "SaaS", text: "Custom SaaS from **KES 49,999** — auth/roles, dashboards, M-Pesa, CSV, 3mo support. You own it.", link: ["/saas", "See SaaS →"] },
@@ -109,7 +111,7 @@ const path = Astro.url.pathname;
 			{ keys: ["workflow", "automate", "automation", "zapier", "sheets", "invoice"], t: "Workflows", text: "Workflows **KES 39,999** each — M-Pesa → Sheets, auto-invoices. Bundle 3 = 15% off.", link: ["/automation", "See workflows →"] },
 			{ keys: ["dashboard", "14,999", "27,999", "report", "track"], t: "Dashboards", text: "Dashboards: Add-on **14,999** or Standalone **27,999** — M-Pesa feed, bookings, stock on one screen.", link: ["/dashboards", "See dashboards →"] },
 			{ keys: ["care", "maintain", "monthly", "hosting", "support", "update"], t: "Care", text: "Care: Starter **6,999** · Business **9,999** · Master **7,999/mo**. Cancel anytime. SaaS 14,999 · Dash 4,999 · Agent 6,999.", link: ["/care", "See Care →"] },
-			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **27,999** · Business **39,999** · Master **49,999**. SaaS **49,999+**. Design **14,999+**. Agent **49,999**.", link: ["/packages", "Full pricelist →"] },
+			{ keys: ["price", "cost", "much", "charge", "quote"], text: "Starter **28,999** · Business **39,999** · Master **49,999**. SaaS **49,999+**. Design **14,999+**. Agent **49,999**.", link: ["/packages", "Full pricelist →"] },
 			{ keys: ["long", "timeline", "when", "deliver", "live", "launch", "fast"], text: "Starter **5 days**, Business **1 week**, Master **2 weeks** — once we have your photos, text + logo." },
 			{ keys: ["mpesa", "m-pesa", "paybill", "till", "stk", "daraja", "pay"], text: "Till = walk-in, Paybill = tracked/online. We wire both natively.", link: ["/blog/mpesa-till-vs-paybill", "Till vs Paybill →"] },
 			{ keys: ["seo", "google", "rank", "found", "search"], text: "Every site ships SEO + Google Business Profile. Master adds buyer-keyword SEO.", link: ["/blog/seo-small-business-kenya", "SEO plan →"] },
@@ -223,7 +225,7 @@ const path = Astro.url.pathname;
 			const q = document.createElement("button");
 			q.type = "button";
 			q.className = "w-full rounded-xl border border-neon/40 bg-neon/10 px-4 py-2.5 text-left text-xs font-semibold text-white transition hover:bg-neon/20";
-			q.textContent = "🔍 Find my fit — 2 questions";
+			q.textContent = "Find my fit — 2 questions";
 			q.addEventListener("click", startQualify);
 			actionsBox!.appendChild(q);
 		}
@@ -253,9 +255,9 @@ const path = Astro.url.pathname;
 						? { pkg: "Master", price: "49,999", link: ["/mpesa-fee-calculator", "M-Pesa calculator →"] as [string, string] }
 						: need === "Bookings"
 						? { pkg: "Business", price: "39,999", link: ["/packages", "See Business →"] as [string, string] }
-						: { pkg: "Starter", price: "27,999", link: ["/packages", "See Starter →"] as [string, string] };
+						: { pkg: "Starter", price: "28,999", link: ["/packages", "See Starter →"] as [string, string] };
 					const fit = budget === "Under 30k" && base.pkg !== "Starter"
-						? " That's above 30k — **Starter (27,999)** gets you live now, upgrade later."
+						? " That's above 30k — **Starter (28,999)** gets you live now, upgrade later."
 						: " That fits your budget.";
 					const text = `For ${need.toLowerCase()} → **${base.pkg} (${base.price})**.${fit}`;
 					bubble(text, false, true);
@@ -298,7 +300,7 @@ const path = Astro.url.pathname;
 				else back += "Pick up where you left off.";
 				bubble(back, false);
 			} else {
-				bubble(`‘‹ **Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Ask me anything or tap an action below.`, false);
+				bubble(`**Habari!** I'm Orbit — your AI sidekick for websites, M-Pesa, SEO, and growth. Ask me anything or tap an action below.`, false, true);
 			}
 			renderActions();
 		}
