@@ -1,11 +1,10 @@
 ﻿---
 import { whatsappLink } from "../config";
-import ThinkingOrb from "./ThinkingOrb.astro";
 const path = Astro.url.pathname;
 ---
 
 <div id="orbit-assistant" class="fixed bottom-6 left-6 z-[110] flex flex-col items-start gap-3" client:load data-page={path}>
-	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge/50 bg-panel/95 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] shadow-2xl shadow-black/60 backdrop-blur md:w-96 animate-in slide-in-from-bottom-4 duration-200">
+	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex items-center gap-2">
@@ -44,16 +43,9 @@ const path = Astro.url.pathname;
 		aria-label="Chat with Orbit AI"
 		aria-expanded="false"
 		aria-controls="oa-panel"
-		class="group relative grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-electric/20 via-electric/10 to-neon/20 border-2 border-electric/40 shadow-[0_0_30px_rgba(0,200,255,0.4)] shadow-2xl shadow-electric/30 backdrop-blur transition-all duration-500 hover:scale-110 hover:shadow-[0_0_40px_rgba(0,200,255,0.6)] hover:border-electric/60 hover:rotate-3"
+		class="grid h-14 w-14 place-items-center rounded-full border border-electric/40 bg-panel/90 text-electric shadow-xl shadow-electric/20 backdrop-blur transition hover:scale-105"
 	>
-		<ThinkingOrb state="breathing" size={32} theme="dark" speed={0.7} />
-		<span class="absolute -inset-2 rounded-full bg-gradient-to-br from-electric via-neon to-electric opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-[30px] animate-ping" aria-hidden="true"></span>
-		<span class="absolute -inset-1 rounded-full bg-gradient-to-r from-electric to-neon opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-[10px] animate-pulse" aria-hidden="true"></span>
-		<span class="absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full bg-emerald-400 border-3 border-ink animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]" aria-hidden="true" title="AI is online"></span>
-		<!-- Floating particles around button -->
-		<span class="absolute -top-2 -right-2 h-2 w-2 rounded-full bg-electric/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-bounce" aria-hidden="true" style="animation-delay: 0ms;"></span>
-		<span class="absolute -bottom-3 -left-3 h-1.5 w-1.5 rounded-full bg-neon/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-bounce" aria-hidden="true" style="animation-delay: 150ms;"></span>
-		<span class="absolute top-1/2 -left-2 h-1 w-1 rounded-full bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" aria-hidden="true" style="animation-delay: 300ms;"></span>
+		<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
 	</button>
 </div>
 
@@ -283,14 +275,7 @@ const path = Astro.url.pathname;
 		function setOrbState(state: string) {
 			const btn = document.getElementById("oa-toggle");
 			if (!btn) return;
-			// Replace the ThinkingOrb with new state
-			const canvas = btn.querySelector("canvas");
-			if (canvas) {
-				// Just update via data attr - the ThinkingOrb watches theme but not state changes dynamically
-				// Fallback: we could re-render but for simplicity, just keep breathing as default
-				// and visually indicate state via button styling
-				btn.dataset.orbState = state;
-			}
+			btn.dataset.orbState = state;
 		}
 		function typingIndicator(show: boolean) {
 			const el = document.getElementById("oa-typing");

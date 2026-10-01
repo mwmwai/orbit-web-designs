@@ -359,10 +359,8 @@ if (breadcrumbLd) {
 						const r = el.getBoundingClientRect();
 						const px = (e.clientX - r.left) / r.width - 0.5;
 						const py = (e.clientY - r.top) / r.height - 0.5;
-						el.style.setProperty("--ry", (px * 12).toFixed(2) + "deg");
-						el.style.setProperty("--rx", (-py * 10).toFixed(2) + "deg");
-						el.style.setProperty("--gx", ((px + 0.5) * 100).toFixed(1) + "%");
-						el.style.setProperty("--gy", ((py + 0.5) * 100).toFixed(1) + "%");
+						el.style.setProperty("--ry", (px * 10).toFixed(2) + "deg");
+						el.style.setProperty("--rx", (-py * 8).toFixed(2) + "deg");
 						el.classList.add("is-tilting");
 					});
 					el.addEventListener("mouseleave", () => {

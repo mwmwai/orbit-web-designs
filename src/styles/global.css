@@ -1,22 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-	--color-ink: #0b0b12;
-	--color-ink-warm: #0e0e15;
-	--color-charcoal: #13131b;
-	--color-panel: #181822;
-	--color-panel-elevated: #1c1c28;
-	--color-edge: #2a2a3e;
-	--color-electric: #00d4ff;
-	--color-electric-dim: #00b8e0;
-	--color-neon: #3a8bff;
+	--color-ink: #0a0a0f;
+	--color-charcoal: #101018;
+	--color-panel: #14141f;
+	--color-edge: #23233a;
+	--color-electric: #00c8ff;
+	--color-neon: #2f7bff;
 	--color-stone: #8a8fa3;
-	--color-metal: #d0d6e3;
+	--color-metal: #c9d2e0;
 	--font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-	--font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-	--shadow-glass: 0 8px 32px -8px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.04) inset;
-	--shadow-card: 0 4px 24px -4px rgb(0 0 0 / 0.4), 0 0 0 1px rgb(0 212 255 / 0.06);
-	--shadow-elevated: 0 20px 48px -12px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(0 212 255 / 0.08);
 }
 
 @font-face {
@@ -87,54 +80,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
 	.aurora span { animation: none; }
 }
-
-/* ============ 2026 MATURE DESIGN SYSTEM ============ */
-/* Glassmorphism: refined frosted glass for nav, cards, modals */
-.glass {
-	background: linear-gradient(180deg, rgba(28,28,40,0.85), rgba(28,28,40,0.65));
-	backdrop-filter: blur(16px) saturate(180%);
-	border: 1px solid rgba(255,255,255,0.05);
-	box-shadow: var(--shadow-glass);
-}
-.glass-strong {
-	background: linear-gradient(180deg, rgba(28,28,40,0.95), rgba(28,28,40,0.8));
-	backdrop-filter: blur(24px) saturate(180%);
-	border: 1px solid rgba(255,255,255,0.06);
-	box-shadow: var(--shadow-elevated);
-}
-
-/* Bento grid: modular card layout */
-.bento {
-	display: grid;
-	gap: 1rem;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-@media (max-width: 640px) {
-	.bento { grid-template-columns: 1fr; gap: 0.875rem; }
-}
-.bento > * { min-width: 0; }
-
-/* Refined elevation scale */
-.elev-1 { box-shadow: var(--shadow-card); }
-.elev-2 { box-shadow: var(--shadow-glass); }
-.elev-3 { box-shadow: var(--shadow-elevated); }
-
-/* Typography: display scale with balance */
-.display-xl { font-size: clamp(2.75rem, 1.5rem + 6vw, 5.5rem); line-height: 1.0; letter-spacing: -0.03em; font-weight: 800; }
-.display-lg { font-size: clamp(2.25rem, 1.3rem + 4.5vw, 4.25rem); line-height: 1.02; letter-spacing: -0.025em; font-weight: 700; }
-.display-md { font-size: clamp(1.75rem, 1.2rem + 3vw, 3rem); line-height: 1.08; letter-spacing: -0.015em; font-weight: 700; }
-.display-sm { font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2rem); line-height: 1.15; letter-spacing: -0.01em; font-weight: 600; }
-
-/* Focus ring: consistent, accessible */
-.focus-ring:focus-visible { outline: 2px solid var(--color-electric); outline-offset: 3px; border-radius: 6px; }
-
-/* Interactive press feedback */
-.press { transition: transform 0.12s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s ease; }
-.press:active { transform: scale(0.97); }
-@media (hover: none) { .press:active { transform: none; } }
-
-/* Subtle divider */
-.divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
 
 .glow-border {
 	border: 1px solid transparent;
@@ -379,28 +324,11 @@ html[data-astro-transition] body::after {
 	transform-style: preserve-3d;
 	transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	will-change: transform;
-	position: relative;
 }
 .tilt.is-tilting {
 	transition: transform 0.06s linear;
 	box-shadow: 0 20px 50px rgb(0 200 255 / 0.12);
 }
-/* 3D depth layers — inner content floats above card surface */
-.tilt > * { transform: translateZ(0); transition: transform 0.3s ease; }
-.tilt.is-tilting > *:first-child { transform: translateZ(30px); }
-.tilt.is-tilting h3, .tilt.is-tilting .display-sm { transform: translateZ(20px); }
-/* 3D glare — light follows cursor */
-.tilt::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	border-radius: inherit;
-	background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / 0.08), transparent 60%);
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	pointer-events: none;
-}
-.tilt.is-tilting::after { opacity: 1; }
 .hero-orbit {
 	perspective: 900px;
 	transform-style: preserve-3d;
@@ -861,19 +789,4 @@ img[width][height] { height: auto; }
 /* Cookie banner open: shift floating action containers up */
 body.cookie-open #floating-actions { bottom: 140px; }
 body.cookie-open #orbit-assistant { bottom: 140px; }
-
-/* Mature polish: softer glows, cleaner edges */
-.glow-border { background: linear-gradient(var(--color-panel), var(--color-panel)) padding-box, linear-gradient(135deg, rgb(0 200 255 / 0.35), rgb(47 123 255 / 0.25)) border-box; }
-.btn-gradient { background: linear-gradient(135deg, var(--color-electric), var(--color-neon)); box-shadow: 0 4px 14px -4px rgb(0 200 255 / 0.4); }
-.btn-gradient:hover { box-shadow: 0 6px 20px -4px rgb(0 200 255 / 0.5); }
-.edge-glow { box-shadow: 0 0 0 1px rgb(0 200 255 / 0.15), 0 20px 40px -12px rgb(0 200 255 / 0.15); }
-@media (prefers-reduced-motion: no-preference) {
-	.aurora span { opacity: 0.35; }
-}
-
-/* Consistent section rhythm */
-section[id] { padding-block: clamp(4rem, 8vw, 7rem); }
-@media (max-width: 640px) {
-	section[id] { padding-block: clamp(3rem, 7vw, 5rem); }
-}
 

@@ -4,7 +4,6 @@ interface Props {
 }
 
 import { whatsappLink } from "../config";
-import FloatingOrbs from "./FloatingOrbs.astro";
 
 const { only } = Astro.props;
 
@@ -172,62 +171,76 @@ function linkForPlan(p: typeof allPlans[number]) {
 const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : allPlans;
 ---
 
-<section id="pricing" class="section-glow border-t border-white/5 py-24 relative">
-	<FloatingOrbs variant="left" />
-	<div class="mx-auto max-w-7xl px-5 relative">
+<section id="pricing" class="section-glow border-t border-white/5 py-24">
+	<div class="mx-auto max-w-7xl px-5">
 		<div class="text-reveal mb-14 max-w-2xl">
 			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Pricelist</p>
 			<p class="mt-3 text-sm text-slate-400">★★★★★ Trusted by 50+ Kenyan businesses — salons, shops, restaurants.</p>
-			<h2 class="mt-4 display-lg text-white">Straight-line pricing.</h2>
-			<p class="mt-4 max-w-xl text-slate-400 text-wrap-pretty">
+			<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+				Straight-line pricing.
+			</h2>
+			<p class="mt-4 max-w-xl text-slate-400">
 				{plans.length === 3 ? "Three packages" : "Five packages"} built for growing businesses — flexible payment, delivered fast.
 			</p>
 		</div>
 
-		<div class="bento">
+		<div class="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{
 				plans.map((p, i) => (
-					<article data-tilt class="reveal glass hover-lift rounded-2xl p-6 press" style={`transition-delay:${i * 70}ms`}>
-						{p.featured && (
-							<span class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-electric/20 to-neon/20 px-3 py-1 font-mono text-xs uppercase tracking-widest text-white ring-1 ring-electric/30">
-								Most popular
-							</span>
-						)}
-						<h3 class="display-sm text-white">{p.name}</h3>
-						<p class="mt-2 text-sm text-slate-400 text-wrap-pretty">{p.blurb}</p>
-						<div class="mt-5 flex items-baseline gap-3 flex-wrap">
-							<span class="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-electric to-neon bg-clip-text text-transparent">{p.price}</span>
-							<span class="text-sm font-semibold text-slate-400">{p.usd} <span class="text-stone">·</span> {p.eur}</span>
-						</div>
-						{p.care && <p class="mt-1 text-xs font-medium text-electric">{p.care}</p>}
-						<ul class="mt-6 flex-1 space-y-2.5">
-							{p.features.map((f) => (
-								<li class="flex items-start gap-2.5 text-sm text-slate-300">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-electric)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
-										<path d="M20 6L9 17l-5-5" />
-									</svg>
-									{f}
-								</li>
-							))}
-						</ul>
-						{p.name === "Master" && (
-							<a href="/mpesa-fee-calculator" class="mt-3 inline-flex text-xs font-medium text-electric hover:underline focus-ring">→ Price your margins with M-Pesa fee calculator</a>
-						)}
-						<a
-							href={linkForPlan(p)}
-							target={linkForPlan(p).startsWith("https://wa.me") ? "_blank" : undefined}
-							rel={linkForPlan(p).startsWith("https://wa.me") ? "noopener noreferrer" : undefined}
-							class={`mt-6 block rounded-full py-3 text-center font-semibold transition focus-ring ${p.featured ? "btn-gradient text-white press" : "border border-edge/50 bg-panel/50 text-slate-200 hover:border-electric/60 hover:text-white press"}`}
+					<article class="reveal" style={`transition-delay:${i * 70}ms`}>
+						<div
+							data-tilt
+							class={`relative flex h-full flex-col rounded-2xl p-8 card-shine edge-glow hover-lift magnetic ${
+								p.featured
+									? "border border-electric/50 bg-gradient-to-b from-electric/10 to-transparent shadow-2xl shadow-electric/10"
+									: "glow-border"
+							}`}
 						>
-							{p.cta}
-						</a>
+							{p.featured && (
+								<span class="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-electric to-neon px-3 py-1 font-mono text-xs uppercase tracking-widest text-white">
+									Most popular
+								</span>
+							)}
+							<h3 class="text-lg font-semibold text-white">{p.name}</h3>
+							<p class="mt-2 text-sm text-slate-400">{p.blurb}</p>
+							<p class="mt-6">
+								<span class="text-gradient text-4xl font-extrabold tracking-tight">{p.price}</span>
+								<span class="mt-2 block text-sm font-semibold text-slate-300">{p.usd} <span class="text-stone">·</span> {p.eur}</span>
+								{p.care && <span class="mt-1 block text-xs font-medium text-electric">{p.care}</span>}
+							</p>
+							<ul class="mt-8 grid flex-1 content-start gap-3">
+								{p.features.map((f) => (
+									<li class="flex items-start gap-3 text-sm text-slate-300">
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe6ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-1 shrink-0">
+											<path d="M20 6L9 17l-5-5" />
+										</svg>
+										{f}
+									</li>
+								))}
+							</ul>
+							{p.name === "Master" && (
+								<a href="/mpesa-fee-calculator" class="mt-4 inline-flex text-xs font-medium text-electric hover:underline">→ Price your margins with M-Pesa fee calculator</a>
+							)}
+							<a
+								href={linkForPlan(p)}
+								target={linkForPlan(p).startsWith("https://wa.me") ? "_blank" : undefined}
+								rel={linkForPlan(p).startsWith("https://wa.me") ? "noopener noreferrer" : undefined}
+								class={`promo-cta mt-8 block rounded-full py-3 text-center font-semibold transition ${
+									p.featured
+										? "btn-gradient text-white shadow-lg shadow-electric/25 hover:-translate-y-0.5"
+										: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
+								}`}
+							>
+								{p.cta}
+							</a>
+						</div>
 					</article>
 				))
 			}
 		</div>
 
-		<p class="reveal mt-8 text-sm text-slate-500 text-wrap-pretty">
-			Need something different? <a href="/contact" class="text-electric hover:underline focus-ring">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline focus-ring">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline focus-ring">Care plans</a> · <a href="/automation" class="text-electric hover:underline focus-ring">Agents & Workflows</a>
+		<p class="reveal mt-8 text-sm text-slate-500">
+			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">Agents & Workflows</a>
 		</p>
 	</div>
 
@@ -235,15 +248,15 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 
 <section id="payments" class="border-t border-white/5 pb-8 pt-4">
 	<div class="mx-auto max-w-7xl px-5">
-		<div class="glass reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-8 md:flex-row md:items-center md:justify-between">
+		<div class="glow-border reveal flex flex-col items-start gap-6 rounded-2xl px-8 py-8 md:flex-row md:items-center md:justify-between">
 			<div>
-				<h3 class="display-sm text-white">Payments, handled quietly.</h3>
-				<p class="mt-1 max-w-md text-sm text-slate-400 text-wrap-pretty">M-Pesa, cards and PayPal — secure, verified, no drama.</p>
+				<h3 class="text-lg font-semibold text-white">Payments, handled quietly.</h3>
+				<p class="mt-1 max-w-md text-sm text-slate-400">M-Pesa, cards and PayPal — secure, verified, no drama.</p>
 			</div>
-			<div class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest">
-				<span class="glass px-4 py-2 rounded-lg text-stone">M-Pesa</span>
-				<span class="glass px-4 py-2 rounded-lg text-stone">Card</span>
-				<span class="glass px-4 py-2 rounded-lg text-stone">PayPal</span>
+			<div class="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest">
+				<span class="border border-edge px-4 py-2 text-stone">M-Pesa</span>
+				<span class="border border-edge px-4 py-2 text-stone">Card</span>
+				<span class="border border-edge px-4 py-2 text-stone">PayPal</span>
 			</div>
 		</div>
 	</div>

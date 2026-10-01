@@ -13,23 +13,27 @@ const {
 ---
 
 <section class="border-t border-white/5 py-20">
-	<div class="reveal glass hover-lift relative mx-auto flex max-w-7xl flex-col items-start gap-8 rounded-2xl px-8 py-10 md:flex-row md:px-12">
-		<div class="relative flex-1 min-w-0">
-			<h2 class="display-md text-white">{title}</h2>
-			<p class="mt-3 max-w-lg text-slate-400 text-wrap-pretty">{text}</p>
+	<div class="reveal glow-border edge-glow hover-lift relative mx-auto flex max-w-7xl flex-col items-start gap-10 overflow-hidden rounded-2xl px-8 py-12 md:flex-row md:px-14">
+		<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+			<div class="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-electric/15 blur-[100px]"></div>
+			<div class="absolute -bottom-28 -left-16 h-56 w-56 rounded-full bg-neon/10 blur-[100px]"></div>
 		</div>
-		<div class="relative flex flex-wrap gap-3 shrink-0">
+		<div class="relative">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">{title}</h2>
+			<p class="mt-3 max-w-lg text-slate-400">{text}</p>
+		</div>
+		<div class="relative flex flex-wrap gap-4">
 			<a
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="btn-gradient rounded-full px-6 py-3 font-semibold text-white press"
+				class="btn-gradient rounded-full px-7 py-3 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 magnetic ripple"
 			>
 				Get a Free Quote
 			</a>
 			<a
 				href="/contact"
-				class="rounded-full border border-edge/50 bg-panel/50 px-6 py-3 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white press focus-ring"
+				class="rounded-full border border-edge bg-panel px-7 py-3 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
 			>
 				Contact Us
 			</a>
