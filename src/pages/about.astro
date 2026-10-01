@@ -4,6 +4,17 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "Who is behind Orbit Web Designs?", acceptedAnswer: { "@type": "Answer", text: "A solo web designer and developer based in Nairobi, Kenya. No agency, no hand-offs — you talk directly to the person building your site." } },
+		{ "@type": "Question", name: "Where is Orbit Web Designs located?", acceptedAnswer: { "@type": "Answer", text: "Nairobi, Kenya. We work with businesses across Kenya and worldwide, fully remote." } },
+		{ "@type": "Question", name: "How many websites has Orbit built?", acceptedAnswer: { "@type": "Answer", text: "50+ websites shipped for Kenyan businesses — salons, shops, restaurants, law firms, e-commerce stores, and advocacy organizations." } },
+		{ "@type": "Question", name: "What makes Orbit different from other web designers?", acceptedAnswer: { "@type": "Answer", text: "Speed (5 days for Starter), native M-Pesa integration, fixed pricing in writing, and you own everything — domain, content, files, credentials." } },
+	],
+};
 ---
 
 <Layout
@@ -151,6 +162,7 @@ import { whatsappLink } from "../config";
 
 		<CtaBand title="Work with the future, today." text="One message. One website. More customers — reply in minutes, Mon–Sat." />
 	</main>
+	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 	<Footer />
 </Layout>
 
