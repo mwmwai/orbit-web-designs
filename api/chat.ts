@@ -1,6 +1,7 @@
 ﻿import { createClient } from '@supabase/supabase-js';
+import { getFee as getMpesaFee } from '../src/lib/mpesa-tariffs';
 
-const RATE_LIMIT = 15; // chat calls per window â€” each one costs money
+const RATE_LIMIT = 15; // chat calls per window "” each one costs money
 const WINDOW_MS = 3_600_000; // 1 hour
 const MAX_MSGS = 10;
 const MAX_MSG_CHARS = 600;
@@ -8,6 +9,7 @@ const MAX_TOTAL_CHARS = 3000;
 const MAX_TOKENS = 500;
 
 const ipStore = new Map<string, { count: number; reset: number }>();
+const MAX_ENTRIES = 5000; // cap the Map so it can't grow unbounded
 
 function getClientIP(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for');
@@ -15,11 +17,23 @@ function getClientIP(request: Request): string {
   return request.headers.get('x-real-ip') || 'unknown';
 }
 
+// Normalize to /24 so trivial last-octet rotation doesn't dodge the limit.
+function rateKey(ip: string): string {
+  const m = ip.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.\d{1,3}$/);
+  if (m) return `${m[1]}.${m[2]}.${m[3]}.0/24`;
+  return ip.slice(0, 64);
+}
+
 function checkRateLimit(ip: string): { allowed: boolean; reset: number } {
   const now = Date.now();
-  const record = ipStore.get(ip);
+  const key = rateKey(ip);
+  const record = ipStore.get(key);
   if (!record || now > record.reset) {
-    ipStore.set(ip, { count: 1, reset: now + WINDOW_MS });
+    if (ipStore.size >= MAX_ENTRIES) {
+      const oldest = ipStore.keys().next().value;
+      if (oldest !== undefined) ipStore.delete(oldest);
+    }
+    ipStore.set(key, { count: 1, reset: now + WINDOW_MS });
     return { allowed: true, reset: now + WINDOW_MS };
   }
   if (record.count >= RATE_LIMIT) {
@@ -29,12 +43,12 @@ function checkRateLimit(ip: string): { allowed: boolean; reset: number } {
   return { allowed: true, reset: record.reset };
 }
 
-const SYSTEM = `You are Orbit â€” the powerful AI sales & support assistant for Orbit Web Designs & Marketing (Nairobi, worldwide remote). Be concise but genuinely helpful. Use 1-4 short sentences, plain text, no emojis unless the user uses them. Use **bold** for prices.
+const SYSTEM = `You are Orbit "” the powerful AI sales & support assistant for Orbit Web Designs & Marketing (Nairobi, worldwide remote). Be concise but genuinely helpful. Use 1-4 short sentences, plain text, no emojis unless the user uses them. Use **bold** for prices.
 
 TOOLS (you can invoke these by including the JSON block in your reply):
-- {"tool": "mpesa_calc", "amount": 5000, "type": "paybill"} â€” calculates M-Pesa fee instantly
-- {"tool": "package_compare", "need": "store|bookings|info", "budget": "under_30k|30k_40k|40k_plus|unsure"} â€” returns exact package match
-- {"tool": "schedule_call", "name": "", "phone": "", "preferred": ""} â€” books a human callback (returns WhatsApp link)
+- {"tool": "mpesa_calc", "amount": 5000, "type": "paybill"} "” calculates M-Pesa fee instantly
+- {"tool": "package_compare", "need": "store|bookings|info", "budget": "under_30k|30k_40k|40k_plus|unsure"} "” returns exact package match
+- {"tool": "schedule_call", "name": "", "phone": "", "preferred": ""} "” books a human callback (returns WhatsApp link)
 
 TRUTH (never invent):
 - Websites: Starter 27,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 39,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 49,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
@@ -149,8 +163,8 @@ try {
       }
 
       // Execute tool calls embedded in the reply
-      const toolCalls: Array<{ tool: string; args: any }> = [];
-      const toolRegex = /\{("tool":\s*".+?")\s*,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*".+?"\s*(?:,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*".+?"\s*)*?\}/g;
+      const toolCalls: Array<any> = [];
+      const toolRegex = /\{("tool":\s*".+?")\s*,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*(?:"[^"]*"|\d+(?:\.\d+)?)\s*(?:,\s*("amount"|"type"|"need"|"budget"|"name"|"phone"|"preferred"):\s*(?:"[^"]*"|\d+(?:\.\d+)?)\s*)*?\}/g;
       let match;
       while ((match = toolRegex.exec(reply)) !== null) {
         try {
@@ -161,79 +175,30 @@ try {
       const toolResults: string[] = [];
       for (const call of toolCalls) {
         if (call.tool === 'mpesa_calc') {
-          const amount = Number(call.args.amount);
-          const type = call.args.type || 'paybill';
-          let fee = 0;
-          if (type === 'stk' || type === 'paybill') {
-            if (amount <= 100) fee = 0;
-            else if (amount <= 500) fee = 11;
-            else if (amount <= 1000) fee = 18;
-            else if (amount <= 1500) fee = 25;
-            else if (amount <= 2500) fee = 35;
-            else if (amount <= 3500) fee = 44;
-            else if (amount <= 5000) fee = 53;
-            else if (amount <= 7500) fee = 66;
-            else if (amount <= 10000) fee = 75;
-            else if (amount <= 15000) fee = 89;
-            else if (amount <= 20000) fee = 99;
-            else if (amount <= 35000) fee = 109;
-            else if (amount <= 50000) fee = 117;
-            else if (amount <= 70000) fee = 125;
-            else if (amount <= 150000) fee = 150;
-            else fee = 200;
-          } else if (type === 'till') {
-            if (amount <= 100) fee = 0;
-            else if (amount <= 500) fee = 6;
-            else if (amount <= 1000) fee = 11;
-            else if (amount <= 1500) fee = 18;
-            else if (amount <= 2500) fee = 25;
-            else if (amount <= 3500) fee = 35;
-            else if (amount <= 5000) fee = 44;
-            else if (amount <= 7500) fee = 53;
-            else if (amount <= 10000) fee = 62;
-            else if (amount <= 15000) fee = 75;
-            else if (amount <= 20000) fee = 84;
-            else if (amount <= 35000) fee = 109;
-            else if (amount <= 50000) fee = 124;
-            else if (amount <= 70000) fee = 144;
-            else if (amount <= 150000) fee = 194;
-            else fee = 200;
-          } else if (type === 'p2p') {
-            fee = Math.min(Math.max(Math.round(amount * 0.012), 4), 200);
-          } else if (type === 'withdraw') {
-            if (amount <= 500) fee = 0;
-            else if (amount <= 1000) fee = 27;
-            else if (amount <= 1500) fee = 33;
-            else if (amount <= 2500) fee = 54;
-            else if (amount <= 3500) fee = 72;
-            else if (amount <= 5000) fee = 86;
-            else if (amount <= 7500) fee = 108;
-            else if (amount <= 10000) fee = 135;
-            else if (amount <= 15000) fee = 157;
-            else if (amount <= 20000) fee = 175;
-            else if (amount <= 35000) fee = 210;
-            else if (amount <= 50000) fee = 240;
-            else if (amount <= 70000) fee = 270;
-            else if (amount <= 150000) fee = 300;
-            else fee = 300;
+          const amount = Number(call.amount);
+          const type = call.type || 'paybill';
+          const fee = getMpesaFee(type, amount);
+          if (fee === null) {
+            toolResults.push(`M-Pesa ${type} fee for KES ${amount.toLocaleString()}: above the single-transaction limit — see /mpesa-fee-calculator for details`);
+          } else {
+            toolResults.push(`M-Pesa ${type} fee for KES ${amount.toLocaleString()}: **KES ${fee}** (total **KES ${amount + fee}**) "” see /mpesa-fee-calculator for details`);
           }
-          toolResults.push(`M-Pesa ${type} fee for KES ${amount.toLocaleString()}: **KES ${fee}** (total **KES ${amount + fee}**) â€” see /mpesa-fee-calculator for details`);
         } else if (call.tool === 'package_compare') {
-          const need = call.args.need || 'info';
-          const budget = call.args.budget || 'unsure';
+          const need = call.need || 'info';
+          const budget = call.budget || 'unsure';
           let pkg = 'Starter', price = '27,999', link = '/packages';
           if (need === 'store') { pkg = 'Master'; price = '49,999'; link = '/mpesa-ecommerce-kenya'; }
           else if (need === 'bookings') { pkg = 'Business'; price = '39,999'; link = '/packages'; }
           if (budget === 'under_30k' && pkg !== 'Starter') {
             pkg = 'Starter'; price = '27,999'; link = '/packages';
           }
-          toolResults.push(`Recommendation: **${pkg} (${price})** â€” ${need === 'store' ? 'online store with M-Pesa' : need === 'bookings' ? 'bookings + 10 pages' : '5-page site to get found'}. ${pkg === 'Starter' && budget === 'under_30k' ? 'Fits your budget.' : ''} See ${link}`);
+          toolResults.push(`Recommendation: **${pkg} (${price})** "” ${need === 'store' ? 'online store with M-Pesa' : need === 'bookings' ? 'bookings + 10 pages' : '5-page site to get found'}. ${pkg === 'Starter' && budget === 'under_30k' ? 'Fits your budget.' : ''} See ${link}`);
         } else if (call.tool === 'schedule_call') {
-          const name = call.args.name || 'Orbit AI chat';
-          const phone = call.args.phone || '';
-          const msg = `Hi Orbit! ${name} here. ${call.args.preferred || 'Please call me back.'}`;
+          const name = call.name || 'Orbit AI chat';
+          const phone = call.phone || '';
+          const msg = `Hi Orbit! ${name} here. ${call.preferred || 'Please call me back.'}`;
           const link = `https://wa.me/254741992308?text=${encodeURIComponent(msg)}`;
-          toolResults.push(`Booked a callback â€” ${link}`);
+          toolResults.push(`Booked a callback "” ${link}`);
         }
       }
 

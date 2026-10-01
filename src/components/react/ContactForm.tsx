@@ -1,4 +1,4 @@
-import { useState, type FormEvent, useEffect } from "react";
+import { useState, type FormEvent, useEffect, useRef } from "react";
 import { whatsappLink } from "../../config";
 
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
@@ -11,7 +11,7 @@ export default function ContactForm() {
 	const [turnstileToken, setTurnstileToken] = useState("");
 	const [submitting, setSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState("");
-	const widgetIdRef = useState<number | null>(null);
+	const widgetIdRef = useRef<number | null>(null);
 
 	useEffect(() => {
 		if (TURNSTILE_SITE_KEY && (window as any).turnstile) {

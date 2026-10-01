@@ -6,7 +6,7 @@ import FloatingActions from "../components/FloatingActions.astro";
 import { SITE_NAME, SITE_URL, WHATSAPP_NUMBER, DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 
 const canonical = `${SITE_URL}/mpesa-fee-calculator`;
-const title = "M-Pesa Fee Calculator Kenya 2026 | Orbit Web Designs & Marketing";
+const title = "M-Pesa Fee Calculator Kenya 2026 | Orbit";
 const description = "Free M-Pesa transaction fee calculator for Kenya. Calculate STK Push, Paybill, Till, and P2P charges instantly. Updated for 2026 Safaricom tariffs.";
 ---
 
@@ -118,88 +118,7 @@ const description = "Free M-Pesa transaction fee calculator for Kenya. Calculate
 </Layout>
 
 <script>
-	// Safaricom published M-Pesa tariffs — verified against safaricom.co.ke, Sept 2026.
-	// Send/STK/Paybill share one national banded tariff. Till is free to the customer.
-	const TARIFFS = {
-	stk: [
-		{ min: 1, max: 100, fee: 0 },
-		{ min: 101, max: 500, fee: 7 },
-		{ min: 501, max: 1000, fee: 13 },
-		{ min: 1001, max: 1500, fee: 23 },
-		{ min: 1501, max: 2500, fee: 33 },
-		{ min: 2501, max: 3500, fee: 53 },
-		{ min: 3501, max: 5000, fee: 57 },
-		{ min: 5001, max: 7500, fee: 78 },
-		{ min: 7501, max: 10000, fee: 90 },
-		{ min: 10001, max: 15000, fee: 100 },
-		{ min: 15001, max: 20000, fee: 105 },
-		{ min: 20001, max: 250000, fee: 108 },
-	],
-	paybill: [
-		{ min: 1, max: 100, fee: 0 },
-		{ min: 101, max: 500, fee: 7 },
-		{ min: 501, max: 1000, fee: 13 },
-		{ min: 1001, max: 1500, fee: 23 },
-		{ min: 1501, max: 2500, fee: 33 },
-		{ min: 2501, max: 3500, fee: 53 },
-		{ min: 3501, max: 5000, fee: 57 },
-		{ min: 5001, max: 7500, fee: 78 },
-		{ min: 7501, max: 10000, fee: 90 },
-		{ min: 10001, max: 15000, fee: 100 },
-		{ min: 15001, max: 20000, fee: 105 },
-		{ min: 20001, max: 250000, fee: 108 },
-	],
-	till: [
-		{ min: 1, max: 100, fee: 0 },
-		{ min: 101, max: 500, fee: 0 },
-		{ min: 501, max: 1000, fee: 0 },
-		{ min: 1001, max: 1500, fee: 0 },
-		{ min: 1501, max: 2500, fee: 0 },
-		{ min: 2501, max: 3500, fee: 0 },
-		{ min: 3501, max: 5000, fee: 0 },
-		{ min: 5001, max: 7500, fee: 0 },
-		{ min: 7501, max: 10000, fee: 0 },
-		{ min: 10001, max: 15000, fee: 0 },
-		{ min: 15001, max: 20000, fee: 0 },
-		{ min: 20001, max: 250000, fee: 0 },
-	],
-	p2p: [
-		{ min: 1, max: 100, fee: 0 },
-		{ min: 101, max: 500, fee: 7 },
-		{ min: 501, max: 1000, fee: 13 },
-		{ min: 1001, max: 1500, fee: 23 },
-		{ min: 1501, max: 2500, fee: 33 },
-		{ min: 2501, max: 3500, fee: 53 },
-		{ min: 3501, max: 5000, fee: 57 },
-		{ min: 5001, max: 7500, fee: 78 },
-		{ min: 7501, max: 10000, fee: 90 },
-		{ min: 10001, max: 15000, fee: 100 },
-		{ min: 15001, max: 20000, fee: 105 },
-		{ min: 20001, max: 250000, fee: 108 },
-	],
-	withdraw: [
-		{ min: 50, max: 100, fee: 11 },
-		{ min: 101, max: 500, fee: 29 },
-		{ min: 501, max: 1000, fee: 29 },
-		{ min: 1001, max: 1500, fee: 29 },
-		{ min: 1501, max: 2500, fee: 29 },
-		{ min: 2501, max: 3500, fee: 52 },
-		{ min: 3501, max: 5000, fee: 69 },
-		{ min: 5001, max: 7500, fee: 87 },
-		{ min: 7501, max: 10000, fee: 115 },
-		{ min: 10001, max: 15000, fee: 167 },
-		{ min: 15001, max: 20000, fee: 185 },
-		{ min: 20001, max: 35000, fee: 197 },
-		{ min: 35001, max: 50000, fee: 278 },
-		{ min: 50001, max: 250000, fee: 309 },
-	],
-	};
-
-	function getFee(type, amount) {
-		const bands = TARIFFS[type];
-		const band = bands.find(b => amount >= b.min && amount <= b.max);
-		return band ? band.fee : null;
-	}
+	import { TARIFFS, getFee } from "../lib/mpesa-tariffs";
 
 	function formatKES(n) {
 		return "KES " + n.toLocaleString();

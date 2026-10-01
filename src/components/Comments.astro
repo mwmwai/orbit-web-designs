@@ -59,11 +59,11 @@ const { slug } = Astro.props;
 
 		function esc(s: string) {
 			return s
-				.replace(/&/g, "&")
-				.replace(/</g, "<")
-				.replace(/>/g, ">")
-				.replace(/"/g, "\"")
-				.replace(/'/g, "'");
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#x27;");
 		}
 
 		if (TURNSTILE_SITE_KEY && (window as any).turnstile) {
@@ -112,10 +112,11 @@ const { slug } = Astro.props;
 			}
 			msg.textContent = "Posting…";
 			try {
-				const res = await fetch(`${URL}/rest/v1/comments`, {
+				// Server-validated path: Turnstile + slug allowlist enforced in /api/supabase/submit.
+				const res = await fetch('/api/supabase/submit', {
 					method: "POST",
-					headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json", Prefer: "return=minimal" },
-					body: JSON.stringify({ slug, name, text, turnstile_token: turnstileToken }),
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ table: "comments", data: { slug, name, text, turnstile_token: turnstileToken } }),
 				});
 				msg.textContent = res.ok
 					? "Thanks! Your comment appears after a quick review."

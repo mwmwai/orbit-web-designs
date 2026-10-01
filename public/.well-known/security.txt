@@ -1,8 +1,8 @@
 Contact: security@orbitwebdesigns.co.ke
 Preferred-Languages: en
-Canonical: https://orbitwebdesigns.co.ke/.well-known/security.txt
-Policy: https://orbitwebdesigns.co.ke/security-policy
-Acknowledgments: https://orbitwebdesigns.co.ke/security-policy#acknowledgments
+Canonical: https://www.orbitwebdesigns.co.ke/.well-known/security.txt
+Policy: https://www.orbitwebdesigns.co.ke/security-policy
+Acknowledgments: https://www.orbitwebdesigns.co.ke/security-policy#acknowledgments
 Preferred-Contact: email
-Hiring: https://orbitwebdesigns.co.ke/careers
+Hiring: https://www.orbitwebdesigns.co.ke/contact
 Expires: 2027-01-01T00:00:00.000Z
