@@ -68,6 +68,12 @@
 - [Website Cost Kenya](https://www.orbitwebdesigns.co.ke/blog/website-cost-kenya) — 2026 pricing guide: what a website should cost in Kenya
 - [WhatsApp Business Kenya](https://www.orbitwebdesigns.co.ke/blog/whatsapp-business-kenya) — How to use WhatsApp Business to get more customers in Kenya
 
+## Case Studies
+
+- [Law Firm Nairobi](https://www.orbitwebdesigns.co.ke/cases/law-firm-nairobi) — Page 5 to Page 1 for main service term in 3 months
+- [M-Pesa Store](https://www.orbitwebdesigns.co.ke/cases/mpesa-store) — Hundreds of M-Pesa payments monthly, zero gateway issues
+- [Advocacy Site](https://www.orbitwebdesigns.co.ke/cases/advocacy-site) — Under 2s load after 12 months with Orbit Care
+
 ## Topic Structure
 
 - `/` — Homepage with overview, pricing, testimonials, FAQ
