@@ -55,6 +55,19 @@
 - **Location:** Nairobi, Kenya
 - **Hours:** Monday–Saturday, 8:00–19:00 EAT
 
+## Blog Posts
+
+- [Web Design Kenya: The Complete Guide](https://www.orbitwebdesigns.co.ke/blog/web-design-kenya-guide) — Everything Kenyan businesses need to know before buying a website: pricing, process, payments, SEO
+- [How to Choose a Web Designer in Kenya](https://www.orbitwebdesigns.co.ke/blog/choose-web-designer-kenya) — Buyer's guide with decision framework for hiring a web designer in Kenya
+- [Orbit vs Competitors: Honest Comparison](https://www.orbitwebdesigns.co.ke/blog/orbit-vs-competitors) — Honest comparison of Orbit Web Designs vs other web design options in Kenya
+- [Best Web Designer Kenya](https://www.orbitwebdesigns.co.ke/blog/best-web-designer-kenya) — How to find and vet the best web designer for your Kenyan business
+- [E-commerce Kenya Guide](https://www.orbitwebdesigns.co.ke/blog/ecommerce-kenya-guide) — Complete guide to selling online in Kenya with M-Pesa integration
+- [M-Pesa Till vs Paybill](https://www.orbitwebdesigns.co.ke/blog/mpesa-till-vs-paybill) — Difference between Till and Paybill numbers and when to use each
+- [SEO for Small Business Kenya](https://www.orbitwebdesigns.co.ke/blog/seo-small-business-kenya) — Practical SEO strategies for small businesses in Kenya
+- [Website Care Kenya](https://www.orbitwebdesigns.co.ke/blog/website-care-kenya) — Why website maintenance matters and how to do it yourself
+- [Website Cost Kenya](https://www.orbitwebdesigns.co.ke/blog/website-cost-kenya) — 2026 pricing guide: what a website should cost in Kenya
+- [WhatsApp Business Kenya](https://www.orbitwebdesigns.co.ke/blog/whatsapp-business-kenya) — How to use WhatsApp Business to get more customers in Kenya
+
 ## Topic Structure
 
 - `/` — Homepage with overview, pricing, testimonials, FAQ
