@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { whatsappLink } from "../config";
+import { whatsappLink, SITE_URL, SITE_NAME } from "../config";
 
 const faqs = [
 	{ q: "Add-on or standalone — which do I need?", a: "Add-on (KES 17,999) plugs a dashboard into your existing Orbit website. Standalone (KES 27,999) is a separate login with its own data connections — pick it if your site wasn't built by us." },
@@ -41,7 +41,7 @@ const bookings = [
 	{ client: "Dennis", service: "Kids cut", when: "Sat 12:00", status: "Pending" },
 ];
 
-	const tiers = [
+const tiers = [
 	{
 		name: "Dashboard Add-on",
 		price: "KES 14,999",
@@ -63,6 +63,49 @@ const bookings = [
 		featured: true,
 	},
 ];
+
+const serviceLd = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"@id": `${SITE_URL}/dashboards#service`,
+	name: "Business Dashboards & Data Visualization",
+	description: "Private dashboards for Kenyan SMEs: live M-Pesa sales, bookings, stock, expenses — wired to your real data. Opens on any phone, no app install. Add-on or standalone.",
+	provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+	areaServed: ["Kenya", "Worldwide"],
+	hasOfferCatalog: {
+		"@type": "OfferCatalog",
+		name: "Orbit Dashboard Services",
+		itemListElement: [
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "Dashboard Add-on",
+					description: "Bolted onto your website: revenue + sales chart, live M-Pesa payments feed, bookings or orders table. Works on any phone.",
+					offers: { "@type": "Offer", price: "14999", priceCurrency: "KES", availability: "https://schema.org/InStock" },
+				},
+			},
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "Standalone Dashboard",
+					description: "Its own private site: password login for you + staff, charts + filters + CSV export, 3 data sources wired in (M-Pesa, bookings, stock or Sheets).",
+					offers: { "@type": "Offer", price: "27999", priceCurrency: "KES", availability: "https://schema.org/InStock" },
+				},
+			},
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "Dashboard Care",
+					description: "Hosting, data connections, fixes and support. 3 data sources wired in, new chart/filter/mo, CSV/export health.",
+					offers: { "@type": "Offer", price: "3999", priceCurrency: "KES", priceSpecification: { "@type": "UnitPriceSpecification", priceCurrency: "KES", billingIncrement: "P1M" }, availability: "https://schema.org/InStock" },
+				},
+			},
+		],
+	},
+};
 ---
 
 <Layout
@@ -204,9 +247,8 @@ const bookings = [
 		</section>
 
 		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+		<script type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 		<CtaBand title="Want your numbers on one screen?" text="Tell us what you track — sales, bookings, stock — and we'll scope your dashboard with an honest price." />
 	</main>
 	<Footer />
 </Layout>
-
-
