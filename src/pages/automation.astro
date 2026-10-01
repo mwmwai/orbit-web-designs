@@ -1,9 +1,9 @@
-﻿---
+---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { whatsappLink } from "../config";
+import { whatsappLink, SITE_URL, SITE_NAME } from "../config";
 
 const faqs = [
 	{ q: "How much does an AI agent cost?", a: "Custom AI Agent is KES 49,999 one-time — trained on your business, on WhatsApp/site/email, with 1 month tuning. You pay the AI API usage separately (a few dollars/month for most SMEs)." },
@@ -82,6 +82,49 @@ const plans = [
 		grad: "from-[#25D366] to-emerald-400",
 	},
 ];
+
+const serviceLd = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"@id": `${SITE_URL}/automation#service`,
+	name: "AI Agents & Workflow Automation",
+	description: "Custom AI agents and workflow automation for Kenyan businesses. Trained agents on WhatsApp/site/email, M-Pesa to Sheets/CRM, inquiry to WhatsApp to calendar.",
+	provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+	areaServed: ["Kenya", "Worldwide"],
+	hasOfferCatalog: {
+		"@type": "OfferCatalog",
+		name: "Orbit Automation Services",
+		itemListElement: [
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "Custom AI Agent",
+					description: "Trained on your business — WhatsApp/site/email, qualifies leads, books jobs, hands to human.",
+					offers: { "@type": "Offer", price: "49999", priceCurrency: "KES", availability: "https://schema.org/InStock" },
+				},
+			},
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "Workflow Automation",
+					description: "M-Pesa → Sheets/CRM, inquiry → WhatsApp → calendar, auto-invoices. You own it.",
+					offers: { "@type": "Offer", price: "39999", priceCurrency: "KES", availability: "https://schema.org/InStock" },
+				},
+			},
+			{
+				"@type": "Offer",
+				itemOffered: {
+					"@type": "Service",
+					name: "WhatsApp Responder",
+					description: "Your WhatsApp Business replies instantly — day and night. Greeting, away, quick replies, catalog, click-to-chat.",
+					offers: { "@type": "Offer", price: "27999", priceCurrency: "KES", availability: "https://schema.org/InStock" },
+				},
+			},
+		],
+	},
+};
 ---
 
 <Layout
@@ -100,10 +143,10 @@ const plans = [
 					AI agents & workflows that <span class="text-gradient">do the work.</span>
 				</h1>
 				<p class="mt-5 max-w-2xl text-lg text-slate-400">
-					We build one honest agent per job — no “24/7 employee” hype. Our fee is the build; the API bills stay in your name, on your accounts.
+					We build one honest agent per job — no "24/7 employee" hype. Our fee is the build; the API bills stay in your name, on your accounts.
 				</p>
 				<div class="mt-6 flex max-w-2xl items-start gap-3 rounded-2xl border border-electric/30 bg-electric/5 px-6 py-4">
-					<span class="text-electric">◈</span>
+					<span class="text-electric">✓</span>
 					<p class="text-sm leading-relaxed text-slate-300">
 						<strong class="text-white">You pay the APIs, we do the work.</strong> AI usage, connector tools and WhatsApp message fees bill directly to you (usually a few dollars a month for an SME). We set everything up under your accounts — you own it all, no middleman markup, cancel anything anytime.
 					</p>
@@ -177,9 +220,8 @@ const plans = [
 		</section>
 
 		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+		<script type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
 		<CtaBand title="Want an agent or workflow?" text="Tell us the one job you want off your plate — we reply with scope, timeline, honest price and the API costs upfront." />
 	</main>
 	<Footer />
 </Layout>
-
-
