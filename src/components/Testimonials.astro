@@ -1,5 +1,6 @@
 ---
 import { SITE_URL, SITE_NAME } from "../config";
+import FloatingOrbs from "./FloatingOrbs.astro";
 
 const testimonials = [
 	{
@@ -56,8 +57,9 @@ const reviewsLd = {
 };
 ---
 
-<section id="testimonials" class="section-glow border-t border-white/5 py-24">
-	<div class="mx-auto max-w-7xl px-5">
+<section id="testimonials" class="section-glow border-t border-white/5 py-24 relative">
+	<FloatingOrbs variant="center" />
+	<div class="mx-auto max-w-7xl px-5 relative">
 		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Signals</p>
 		<h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
 			Signals from clients, after launch.

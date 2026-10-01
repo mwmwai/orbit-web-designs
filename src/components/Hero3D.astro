@@ -87,13 +87,15 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 </div>
 
 <script>
-	import * as THREE from "three";
 	(() => {
-		function initHero3D() {
+		async function initHero3D() {
 			const canvas = document.getElementById("hero-canvas");
 			if (!canvas || canvas.dataset.bound) return;
 			canvas.dataset.bound = "1";
 			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+			// Lazy-load Three.js after first paint so LCP is never blocked
+			await new Promise((r) => requestIdleCallback ? requestIdleCallback(r, { timeout: 2000 }) : setTimeout(r, 800));
+			const THREE = await import("three");
 
 			const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
 			const dpr = Math.min(window.devicePixelRatio || 1, 2);
