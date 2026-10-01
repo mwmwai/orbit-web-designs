@@ -44,6 +44,9 @@
 - **Workflow Automation** — KES 39,999 per workflow
 - **Business Dashboard** — KES 27,999
 - **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)
+- **Custom SaaS Care** — KES 14,999/month
+- **Dashboard Care** — KES 4,999/month
+- **Agent Care** — KES 6,999/month
 
 ## Contact
 
