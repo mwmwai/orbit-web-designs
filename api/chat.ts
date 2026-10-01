@@ -52,7 +52,7 @@ TOOLS (you can invoke these by including the JSON block in your reply):
 
 TRUTH (never invent):
 - Websites: Starter 27,999 (5 days, 5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics) | Business 39,999 (1 week, 10 pages+blog, full SEO schema/sitemap 90+, bookings/Calendly, copy all pages, <2s) | Master 49,999 (2 weeks, 15+ pages or store/booking, M-Pesa Till+Paybill+cards/PayPal Daraja, inventory sync, abandoned-cart automations, training video)
-- Care: Starter 4,999/mo, Business 7,999/mo, Master 9,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
+- Care: Starter 4,999/mo, Business 7,999/mo, Master 7,999/mo. SaaS Care 14,999, Dashboard Care 4,999, Agent Care 6,999.
 - SaaS from 49,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
 - Design from 14,999 (kits to 24,999) -> /design
 - AI Agent 49,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
@@ -232,5 +232,6 @@ try {
       return json({ error: 'AI unavailable', fallback: true }, 502);
     }
 }
+
 
 
