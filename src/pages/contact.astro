@@ -3,6 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import Contact from "../components/Contact.astro";
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "How do I contact Orbit Web Designs?", acceptedAnswer: { "@type": "Answer", text: "Chat on WhatsApp (+254 741 992 308) for the fastest response — we reply within minutes Mon–Sat. Or use the contact form on this page." } },
+		{ "@type": "Question", name: "What information should I include in my inquiry?", acceptedAnswer: { "@type": "Answer", text: "Your business name, what you need (website, e-commerce, SaaS, etc.), your budget range, and any design preferences or examples you like." } },
+		{ "@type": "Question", name: "How long does it take to get a quote?", acceptedAnswer: { "@type": "Answer", text: "We send a free quote and timeline within hours of receiving your inquiry." } },
+		{ "@type": "Question", name: "Do you work with businesses outside Nairobi?", acceptedAnswer: { "@type": "Answer", text: "Yes. We work with businesses across Kenya and worldwide — fully remote. Based in Nairobi, serving everywhere." } },
+	],
+};
 ---
 
 <Layout
@@ -13,6 +24,7 @@ import Contact from "../components/Contact.astro";
 	<main id="main">
 		<Contact />
 	</main>
+	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 	<Footer />
 </Layout>
 
