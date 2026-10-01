@@ -3,8 +3,28 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import { SITE_URL } from "../../config";
+
+const caseStudyLd = {
+	"@context": "https://schema.org",
+	"@type": "CaseStudy",
+	"@id": `${SITE_URL}/cases/mpesa-store#case-study`,
+	name: "M-Pesa E-commerce Store Case Study",
+	description: "E-commerce store with native Daraja API (Till + Paybill), inventory automation, and WhatsApp order notifications. 100s of M-Pesa payments/month, zero gateway issues.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	datePublished: "2026-09-01",
+	about: {
+		"@type": "Service",
+		name: "M-Pesa E-commerce Development",
+		provider: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	},
+	result: "100s of M-Pesa payments/month; zero gateway calls; stock auto-subtract; WhatsApp order push; live in 8 days",
+	url: `${SITE_URL}/cases/mpesa-store`,
+};
 ---
 <Layout title="Case — M-Pesa Store 100s Payments/Month | Orbit" description="E-commerce store: native Till/Paybill, stock auto, WhatsApp pings. 100s M-Pesa payments/month, zero gateway calls.">
+	<script type="application/ld+json" set:html={JSON.stringify(caseStudyLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="border-b border-white/5 py-16 pt-24">

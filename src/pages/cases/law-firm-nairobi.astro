@@ -3,8 +3,28 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import { SITE_URL } from "../../config";
+
+const caseStudyLd = {
+	"@context": "https://schema.org",
+	"@type": "CaseStudy",
+	"@id": `${SITE_URL}/cases/law-firm-nairobi#case-study`,
+	name: "Nairobi Law Firm SEO Case Study",
+	description: "Nairobi law firm achieved Page 1 ranking for main service term in 3 months through SEO, GBP optimization, and speed improvements.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	datePublished: "2026-09-01",
+	about: {
+		"@type": "Service",
+		name: "Legal SEO",
+		provider: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	},
+	result: "Page 5 to Page 1 for main service term in 3 months; inquiries from previously unranked searches; 4.9★ Google rating; <2s load time",
+	url: `${SITE_URL}/cases/law-firm-nairobi`,
+};
 ---
 <Layout title="Case — Law Firm Page 5 → 1 in 3 Months | Orbit" description="Nairobi law firm: buyer keywords + GBP + speed, page 5 to 1 in 3 months. Anonymized case.">
+	<script type="application/ld+json" set:html={JSON.stringify(caseStudyLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="border-b border-white/5 py-16 pt-24">

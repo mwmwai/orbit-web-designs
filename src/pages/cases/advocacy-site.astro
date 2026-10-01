@@ -3,8 +3,28 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import { SITE_URL } from "../../config";
+
+const caseStudyLd = {
+	"@context": "https://schema.org",
+	"@type": "CaseStudy",
+	"@id": `${SITE_URL}/cases/advocacy-site#case-study`,
+	name: "Advocacy Website Speed Case Study",
+	description: "Advocacy website maintaining under 2s load time after 12 months through Orbit Care monthly speed tuning and optimization.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	datePublished: "2026-09-01",
+	about: {
+		"@type": "Service",
+		name: "Website Speed Optimization & Care",
+		provider: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	},
+	result: "95+ PageSpeed score maintained 12 months post-launch; Business Care 7,999/mo; built 5 days, Business 39,999",
+	url: `${SITE_URL}/cases/advocacy-site`,
+};
 ---
 <Layout title="Case — Advocacy Site Still <2s After 12 Months | Orbit" description="Advocacy site built for speed — still under 2s after a year via monthly Care tuning.">
+	<script type="application/ld+json" set:html={JSON.stringify(caseStudyLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="border-b border-white/5 py-16 pt-24">
