@@ -1,5 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "What do customers say about Orbit Web Designs?", acceptedAnswer: { "@type": "Answer", text: "Clients report 80% reduction in phone calls with online booking, 40% conversion increase with M-Pesa checkout, tripled wholesale inquiries, and 70% reduction in restaurant phone traffic. Average 5.0 stars across verified reviews." } },
+		{ "@type": "Question", name: "What types of businesses does Orbit work with?", acceptedAnswer: { "@type": "Answer", text: "Barbershops, farm-to-door grocery stores, artisan storefronts, real estate, restaurants, gyms, law firms, e-commerce stores, and advocacy organizations across Kenya." } },
+		{ "@type": "Question", name: "How fast does Orbit deliver websites?", acceptedAnswer: { "@type": "Answer", text: "Starter sites in 5 days, Business in 1 week, Master in 2 weeks once content is provided." } },
+		{ "@type": "Question", name: "Does Orbit integrate M-Pesa payments?", acceptedAnswer: { "@type": "Answer", text: "Yes. Native Daraja API integration (Till + Paybill) so customers pay without leaving the site. Cards and PayPal also supported." } },
+	],
+};
 ---
 <Layout title="Customer Reviews — Orbit Web Designs & Marketing" description="Real reviews from Kenyan businesses that chose Orbit for web design, e-commerce, and digital marketing.">
   <main class="mx-auto max-w-5xl px-5 py-24">
@@ -111,4 +122,5 @@ import Layout from "../layouts/Layout.astro";
       <p class="text-slate-400 mb-6">Want results like these? <a href="/contact" class="text-electric hover:underline">Start your project</a>.</p>
     </div>
   </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 </Layout>
