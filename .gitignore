@@ -36,3 +36,4 @@ start-phone.ps1
 skills-lock.json
 .agents/skills/higgsfield-*/
 .agents/
+astro-dev.log
