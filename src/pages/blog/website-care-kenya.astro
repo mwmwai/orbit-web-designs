@@ -9,21 +9,39 @@ import { whatsappLink, SITE_URL } from "../../config";
 const articleLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "Website Care in Kenya: DIY Checklist vs Managed (2026)",
 	description: "What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care covers.",
 	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` } },
 	datePublished: "2026-09-13",
-	dateModified: "2026-09-22",
+	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/website-care-kenya`,
+};
+const faqs = [
+	{ q: "How much does website maintenance cost in Kenya per month?", a: "DIY costs about 30 minutes a month with free tools (updates, backups, PageSpeed, Search Console). Managed plans like Orbit Care run 4,999 (Starter) / 7,999 (Business) / 9,999 (Master) monthly — hosting, SSL, backups, security, updates and WhatsApp support, cancel anytime." },
+	{ q: "What happens if I never update my website?", a: "Plugins go unpatched, SSL expires, speed decays, backups do not exist — then one hack or host failure wipes years of work. Our advocacy case stayed under 2s after 12 months purely via monthly Care checks." },
+	{ q: "Who owns my website if I cancel care?", a: "You do — domain, content, files and credentials stay yours at Orbit. Cancel anytime; the site keeps running. Ask any provider this before paying: ownership in writing on day one." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
 };
 ---
 
 <Layout
 	title="Website Care in Kenya: DIY Checklist vs Managed (2026) | Orbit"
-	description="What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care 6,999–12,999 covers."
+	description="What keeps a site alive: hosting, SSL, backups, updates. DIY checklist with free tools + what Orbit Care 4,999–9,999 covers."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -64,7 +82,7 @@ const articleLd = {
 			<div class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
 				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Starter 4,999/mo</p><p class="text-xs text-slate-400">for 28,999 sites — hosting, backups, patches</p></div>
 				<div class="rounded-xl border border-electric/30 p-4"><p class="font-semibold text-white">Business 7,999/mo</p><p class="text-xs text-slate-400">+ speed tuning + priority support</p></div>
-				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Master 7,999/mo</p><p class="text-xs text-slate-400">+ stores/bookings — full monitoring</p></div>
+				<div class="rounded-xl border border-edge p-4"><p class="font-semibold text-white">Master 9,999/mo</p><p class="text-xs text-slate-400">+ stores/bookings — full monitoring</p></div>
 			</div>
 			<p class="mt-3 text-xs text-slate-500">Cancel anytime — site stays yours, we just stop watching it.</p>
 
@@ -82,6 +100,18 @@ const articleLd = {
 				<p class="mt-1 text-sm text-slate-400">One message and it's handled — patches, backups, speed, the lot. <a href={whatsappLink("Hi Orbit! I want Orbit Care — which tier fits my site?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Get Care on WhatsApp →</a></p>
 			</div>
 		</article>
+
+		<section class="mx-auto max-w-3xl px-5 pb-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</section>
 
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/care" class="text-electric hover:underline">Orbit Care plans</a> · <a href="/packages" class="text-electric hover:underline">website packages</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a designer</a></p>

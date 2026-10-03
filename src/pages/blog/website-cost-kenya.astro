@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink } from "../../config";
+import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
 	{
@@ -34,9 +34,11 @@ const faqJsonLd = {
 const articleJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "How Much Does a Website Cost in Kenya?",
 	description: "Market prices 2026: DIY to agency, what drives the price, hidden costs checklist and where Orbit 28,999–49,999 sits.",
-	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	datePublished: "2026-09-14",
 	dateModified: "2026-09-30",
 };

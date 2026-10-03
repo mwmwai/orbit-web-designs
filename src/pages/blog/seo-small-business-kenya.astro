@@ -9,13 +9,30 @@ import { whatsappLink, SITE_URL } from "../../config";
 const articleLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "SEO for Small Businesses in Kenya: 30-Day Plan",
 	description: "DIY SEO for Kenyan SMEs: Business Profile, buyer keywords, speed and reviews. 30-day checklist with free tools.",
 	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` } },
 	datePublished: "2026-09-08",
-	dateModified: "2026-09-22",
+	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/seo-small-business-kenya`,
+};
+const faqs = [
+	{ q: "How much does SEO cost for a small business in Kenya?", a: "Freelancer retainers run 15k-50k/month; one-off GBP + on-page setups 10k-30k. Every Orbit site ships SEO + Google Business Profile bundled — Master adds buyer-keyword SEO. Beware anyone guaranteeing position 1." },
+	{ q: "How long does SEO take to work in Kenya?", a: "Claim and category fixes show in hours to days; top-3 map rankings take 1-6 months of reviews, photos and content. Our law-firm case went page 5 to page 1 in 3 months with structure + GBP + speed." },
+	{ q: "Do I need SEO or Facebook ads first?", a: "If people search what you sell (salon, lawyer, shop), fix Google and Maps first — it is intent you already earned. If nobody searches it yet, ads create demand. Most Nairobi SMEs need Maps + reviews before a shilling on ads." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
 };
 ---
 
@@ -24,6 +41,7 @@ const articleLd = {
 	description="DIY SEO for Kenyan SMEs: Business Profile, buyer keywords, speed and reviews. 30-day checklist with free tools — works with any designer."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -84,6 +102,18 @@ const articleLd = {
 				<p class="mt-1 text-sm text-slate-400">Every Orbit site ships 95+ speed, GBP setup and buyer-keyword titles. Want it done? <a href={whatsappLink("Hi Orbit! I want my business to rank on Google. Where do I show up now?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat on WhatsApp →</a></p>
 			</div>
 		</article>
+
+		<section class="mx-auto max-w-3xl px-5 pb-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</section>
 
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/seo-services-kenya" class="text-electric hover:underline">SEO services Kenya</a> · <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">e-commerce launch checklist</a> · <a href="/packages" class="text-electric hover:underline">website packages</a></p>

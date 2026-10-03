@@ -9,13 +9,30 @@ import { whatsappLink, SITE_URL } from "../../config";
 const articleLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "E-commerce in Kenya: Launch Checklist (M-Pesa, Stock, Orders)",
 	description: "Checklist to launch an online store in Kenya: M-Pesa, inventory, WhatsApp orders and SEO — with margin math.",
 	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` } },
 	datePublished: "2026-09-09",
-	dateModified: "2026-09-22",
+	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/ecommerce-kenya-guide`,
+};
+const faqs = [
+	{ q: "How much does an e-commerce website cost in Kenya?", a: "DIY Shopify/WooCommerce runs 5k-60k plus monthly fees and plugins; a custom M-Pesa-native store like Orbit Master is KES 49,999 one-time with Till+Paybill+cards, stock sync and training, live in 2 weeks. Price by margin: fees + delivery + your time per order." },
+	{ q: "How do I accept M-Pesa payments on my online store?", a: "Wire Till for instant counter-style checkout and Paybill for tracked online orders via Daraja STK Push + callbacks, test with KES 10 both ways, show the number clearly at checkout. See our M-Pesa fee calculator and Till vs Paybill guide before you pick." },
+	{ q: "Shopify, WooCommerce or custom for a Kenyan store?", a: "Shopify is fastest but monthly fees add up; WooCommerce is cheapest long-run and you own everything; custom (Master 49,999) owns checkout + speed with no plugin tax. Pick by margin and order volume, not hype." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
 };
 ---
 
@@ -24,6 +41,7 @@ const articleLd = {
 	description="Checklist to launch an online store in Kenya: M-Pesa, inventory, WhatsApp orders and SEO — with margin math."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -93,6 +111,18 @@ const articleLd = {
 				<p class="mt-1 text-sm text-slate-400">Master (49,999) ships all 4 systems in 2 weeks with training. Or just steal the checklist above and DIY. <a href={whatsappLink("Hi Orbit! I want an online store for [your products]. What do I need?")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Chat your products →</a></p>
 			</div>
 		</article>
+
+		<section class="mx-auto max-w-3xl px-5 pb-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</section>
 
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/blog/mpesa-till-vs-paybill" class="text-electric hover:underline">Till vs Paybill</a></p>

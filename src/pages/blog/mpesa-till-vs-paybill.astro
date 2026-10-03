@@ -9,13 +9,30 @@ import { whatsappLink, SITE_URL } from "../../config";
 const articleLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "M-Pesa Till vs Paybill: Fees & Which to Pick (2026)",
 	description: "Till vs Paybill 2026: fees, account numbers, settlement and which suits you. Decision tree + fee calculator.",
 	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	publisher: { "@type": "Organization", name: "Orbit Web Designs & Marketing", logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` } },
 	datePublished: "2026-09-10",
-	dateModified: "2026-09-22",
+	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/mpesa-till-vs-paybill`,
+};
+const faqs = [
+	{ q: "Should I use Till or Paybill for my business in Kenya?", a: "Till (Buy Goods) for walk-in counter sales — no account number, instant float. Paybill for tracked online orders, invoices and anything needing an account reference. Most stores run Till at the counter + Paybill online." },
+	{ q: "What are M-Pesa transaction limits?", a: "KES 250,000 per transaction, 500,000 per day, 500,000 max balance. Confirm exact fees on the payment screen — Safaricom updates bands. Price margins with our M-Pesa fee calculator." },
+	{ q: "Can my website accept both Till and Paybill?", a: "Yes — Master (49,999) wires both natively via Daraja plus cards, tested with KES 10 both ways, credentials in your name. Show both clearly at checkout so buyers never ask where to pay." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
 };
 ---
 
@@ -24,6 +41,7 @@ const articleLd = {
 	description="Till vs Paybill 2026: fees, account numbers, settlement and which suits you. Decision tree + fee calculator."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="relative overflow-hidden border-b border-white/5">
@@ -100,6 +118,18 @@ const articleLd = {
 				<p class="mt-1 text-sm text-slate-400">We connect either/both to your store with STK + callback, test on Till & Paybill, and hand over credentials in your name. <a href={whatsappLink("Hi Orbit! I need help choosing Till vs Paybill for my business.")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Ask free on WhatsApp →</a></p>
 			</div>
 		</article>
+
+		<section class="mx-auto max-w-3xl px-5 pb-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</section>
 
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">store launch checklist</a></p>

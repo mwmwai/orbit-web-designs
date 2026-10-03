@@ -38,9 +38,11 @@ const faqJsonLd = {
 const articleJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
 	headline: "Why Your Business Isn't on Google Maps (Kenya Fix in 1 Day)",
 	description: "Business not showing on Google Maps in Kenya? Diagnostic checklist plus the 1-day fix: claim, verify, categories, reviews and website signals.",
-	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
 	datePublished: "2026-10-03",
 	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/business-not-showing-google-maps-kenya`,
