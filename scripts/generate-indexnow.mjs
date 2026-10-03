@@ -33,13 +33,23 @@ function main() {
     process.exit(1);
   }
 
-  // Generate key
-  const key = generateKey();
+  // Use the stable public key (deployed to site root so IndexNow can verify).
+  // Never regenerate — the key must stay constant across deploys.
+  const publicDir = path.resolve(__dirname, '../public');
+  const publicKeyPath = path.join(publicDir, 'indexnow-key.txt');
+  let key = '';
+  if (fs.existsSync(publicKeyPath)) {
+    key = fs.readFileSync(publicKeyPath, 'utf-8').trim();
+  } else {
+    key = generateKey();
+    fs.writeFileSync(publicKeyPath, key);
+    console.log('Created new public IndexNow key:', key);
+  }
 
-  // Write key file for future pings
+  // Mirror key into dist for reference
   const keyPath = path.join(distDir, 'indexnow-key.txt');
   fs.writeFileSync(keyPath, key);
-  console.log('Generated IndexNow key:', key);
+  console.log('IndexNow key ready:', key.slice(0, 12) + '...');
 
   // Generate indexnow.xml
   const today = new Date().toISOString().split('T')[0];
@@ -60,19 +70,20 @@ ${urls.map(u => `  <url>
   // Also create a simple ping script for CI/CD
   const pingScript = `#!/bin/bash
 # IndexNow ping script - run after deploy
-KEY=$(cat dist/indexnow-key.txt)
+KEY=$(cat public/indexnow-key.txt)
 HOST="www.orbitwebdesigns.co.ke"
-URLS=$(cat dist/indexnow.xml | grep -oP '(?<=<loc>)[^<]+' | tr '\\n' ',' | sed 's/,$//')
+URLS=$(grep -o '<loc>[^<]*</loc>' dist/sitemap-0.xml | sed 's/<[^>]*>//g' | sed 's/^/"/;s/$/"/' | tr '\\n' ',' | sed 's/,$//')
 
 curl -X POST "https://api.indexnow.org/indexnow" \\
   -H "Content-Type: application/json; charset=utf-8" \\
   -d "{
-    \"host\": \"\${HOST}\",
-    \"key\": \"\${KEY}\",
-    \"keyLocation\": \"https://\${HOST}/indexnow-key.txt\",
-    \"urlList\": [\${URLS}]
+    \\"host\\": \\"\${HOST}\\",
+    \\"key\\": \\"\${KEY}\\",
+    \\"keyLocation\\": \\"https://\${HOST}/indexnow-key.txt\\",
+    \\"urlList\\": [\${URLS}]
   }"
 `;
+
 
   const pingPath = path.join(__dirname, 'ping-indexnow.sh');
   fs.writeFileSync(pingPath, pingScript);
