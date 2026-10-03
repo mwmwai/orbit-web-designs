@@ -46,3 +46,8 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 - Oct 3 submit risk: all paths fail-closed 503 without Turnstile secret, local .env lacks keys — check Vercel TURNSTILE_SECRET_KEY + PUBLIC_TURNSTILE_SITE_KEY before deploy.
 - Oct 3 SEO: www canonical correct but vercel.json has zero redirects, both hosts 200 splitting equity; fastest cash is WhatsApp 50% M-Pesa deposit + date-in-writing (254741992308), Business 39,999 bump target.
 - DECISION NEEDED: care canonical 4,999/7,999/9,999 vs variants + confirm entry 28,999 canonical — do not guess.
+- Oct 3 customers kit: WA canonical 254741992308 via config.ts whatsappLink() verified Hero:55 Floating:18 start:28 Pricing:146; autonomous kit ready (auto-reply + 3-msg close + Day1/Day3 follow-ups) — deposit rail LOCKED Pochi 0741992308 Send Money (no STK), 50% = 14,500/20,000/25,000.
+- Oct 3 inbound sprint ready: GBP + IG + 2 WA statuses + calculator exit line all to wa.me/254741992308; high-ticket leak Pricing:147-150 SaaS/Agent/Dashboard detour internal vs direct WA.
+- Oct 3 lead-loss #1: ContactForm.tsx:28-31 dead-ends when Turnstile key unset (text-only error, no WA button); failover spec = preserve inputs + Send-via-WhatsApp + Copy-details panel.
+- Oct 3 verified autonomous: Layout:111 now 28999 fixed, packages:56 still 27999 stale, chat:245/249 27,999 stale, Pochi 0 hits not published; GO patch P0 packages+Pricing Master 9,999+chat+llms + P1 failover + P2 high-ticket WA ready, HOLD till tree clean + care confirm.
+- Oct 3 SHIPPED 9e9bbdb: entry 28,999 + Care 4,999/7,999/9,999 live, Pochi 0741992308 published /contact+/start, ContactForm WA failover live, high-ticket direct WA live; build PASS 42 pages, pushed 49b9d03..9e9bbdb.

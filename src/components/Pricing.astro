@@ -214,13 +214,18 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 										: "border border-edge bg-panel text-slate-200 hover:border-electric/60 hover:text-white"
 								}`}
 							>
-								{p.cta}
+								{["Starter","Business","Master"].includes(p.name) ? `WhatsApp: Get ${p.name} →` : p.cta}
 							</a>
+							{["Starter","Business","Master"].includes(p.name) && (
+								<p class="mt-2 text-center text-[11px] text-slate-500">Reply in mins Mon–Sat · 50% M-Pesa to start · Live date in writing</p>
+							)}
 						</div>
 					</article>
 				))
 			}
 		</div>
+
+		<p class="reveal mt-6 text-center text-sm text-slate-400">50% M-Pesa to start, balance on go-live · Live date in writing + receipt every payment · You own domain + site</p>
 
 		<p class="reveal mt-8 text-sm text-slate-500">
 			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">AI Agents</a>

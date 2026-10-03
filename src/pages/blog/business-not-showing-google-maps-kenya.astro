@@ -1,0 +1,145 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "Why is my business not showing on Google Maps in Kenya?",
+		a: "The top causes are an unclaimed or unverified Business Profile, a suspended or duplicate listing, wrong primary category, or an address hidden by a service-area setting. Check all four before assuming it is an SEO problem.",
+	},
+	{
+		q: "How long does it take to appear on Google Maps after fixing it?",
+		a: "Claim and category fixes reflect in hours. New verifications take 1–7 days depending on video or postcard review. Ranking into the top 3 map spots takes longer — reviews, photos and website signals compound over weeks.",
+	},
+	{
+		q: "Can I show on Google Maps without a physical shop?",
+		a: "Yes. Set a service area (for example Nairobi plus Kiambu) and hide the street address if customers do not visit you. Plumbers, mobile salons and delivery kitchens rank this way every day.",
+	},
+	{
+		q: "How much does it cost to fix Google Maps visibility?",
+		a: "Claiming and verifying is free. The cost is doing it right: correct categories, hours, photos, reviews and a fast website that matches your profile. Our Business build (39,999) ships the website plus Maps-ready SEO; Starter (28,999) covers the basics.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "Why Your Business Isn't on Google Maps (Kenya Fix in 1 Day)",
+	description: "Business not showing on Google Maps in Kenya? Diagnostic checklist plus the 1-day fix: claim, verify, categories, reviews and website signals.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	datePublished: "2026-10-03",
+	dateModified: "2026-10-03",
+	mainEntityOfPage: `${SITE_URL}/blog/business-not-showing-google-maps-kenya`,
+};
+---
+
+<Layout
+	title="Why Your Business Isn't on Google Maps (Kenya Fix in 1 Day) | Orbit"
+	description="Business not showing on Google Maps in Kenya? Run this 1-day diagnostic: claim, verify, category, duplicates, reviews — and the website fix that holds rankings."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Local SEO guide · 2026 · 6 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					Why your business <span class="text-gradient">isn't on Google Maps</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">If your business is not showing on Google Maps in Kenya, run this 1-day diagnostic before spending a shilling on ads.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">The 1-day diagnostic checklist</h2>
+			<div class="mt-6 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Check</th><th class="px-5 py-3">Symptom</th><th class="px-5 py-3">Fix today</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">Claimed?</td><td class="px-5 py-3">Profile says "Claim this business"</td><td class="px-5 py-3">Claim it on the exact Google account you will keep</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Verified?</td><td class="px-5 py-3">"Not verified" badge, edits never publish</td><td class="px-5 py-3">Complete video verification in one take</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Category?</td><td class="px-5 py-3">Wrong searches show you, right ones don't</td><td class="px-5 py-3">One exact primary category, 2–4 secondaries</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Duplicates?</td><td class="px-5 py-3">Two pins, old name, wrong pin location</td><td class="px-5 py-3">Report duplicate, keep newest, move pin to door</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400">Rule: most "not on Maps" cases are claim, verify, category or duplicate — not rankings. Fix those first, in that order.</p>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">The 1-day fix, hour by hour</h2>
+			<ul class="mt-6 grid gap-3 text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Morning — claim + verify</strong> — claim the profile, film verification (signage, interior, proof of business) and submit once, correctly.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Midday — NAP + categories</strong> — match Name, Address, Phone exactly to your website footer; set the one primary category customers search.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Afternoon — hours, photos, services</strong> — real opening hours (including holidays), 10+ real photos, full service list with Nairobi-area wording.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Evening — reviews + website link</strong> — ask 5 real customers for reviews today; link the profile to a fast site. Our <a href="/seo-services-kenya" class="text-electric hover:underline">SEO service →</a> holds the ranking after the fix.</span></li>
+			</ul>
+
+			<div class="mt-10 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
+				<h3 class="font-semibold text-white">Suspended or invisible? Check this before re-applying</h3>
+				<ul class="mt-3 grid gap-2 text-sm text-slate-300">
+					<li>→ Service-area business showing a home address — hide the address, keep the service area.</li>
+					<li>→ Keyword-stuffed name ("Best Salon Nairobi Cheap") — use the real signboard name only.</li>
+					<li>→ Two profiles for one shop — an old or ex-staff listing cannibalises the new one.</li>
+					<li>→ Website phone, hours or location differ from the profile — Google trusts consistency.</li>
+					<li>→ Zero reviews plus zero photos for months — looks dormant; post weekly like a social feed.</li>
+				</ul>
+			</div>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Where your website fits (and what we build)</h2>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Starter — 28,999</h3><p class="mt-2 text-sm text-slate-400">1–3 pages, matching NAP, click-to-call and WhatsApp, basic local SEO. Enough to verify and look legit. Live 5 days.</p></div>
+				<div class="glow-border rounded-2xl p-6 border-electric/30"><h3 class="font-semibold text-white">Business — 39,999 · most picked</h3><p class="mt-2 text-sm text-slate-400">10 pages, full local SEO and schema, location pages, reviews wired in. This is what holds map rankings. Live 1 week. See <a href="/packages" class="text-electric hover:underline">packages →</a></p></div>
+				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Master — 49,999</h3><p class="mt-2 text-sm text-slate-400">Store or booking plus M-Pesa, advanced SEO, service-area pages for every estate you serve. 2 weeks.</p></div>
+			</div>
+			<p class="mt-6 text-sm text-slate-400">If your pin, category and verification are wrong, no website outranks that. Fix Maps first, then let the site compound it — details in our <a href="/seo-services-kenya" class="text-electric hover:underline">Kenya SEO guide</a>.</p>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Keep the ranking — 4 weekly habits</h2>
+			<ol class="mt-6 grid gap-3 text-slate-300">
+				<li class="flex gap-3"><span class="font-bold text-electric">1.</span> Post one photo or offer weekly — dormant profiles sink within a month.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">2.</span> Reply to every review within 24 hours, good or bad, by name.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">3.</span> Keep hours honest on holidays — wrong-hours reports tank trust fast.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">4.</span> Add one local page per service area on your site and link it from the profile.</li>
+			</ol>
+
+			<div class="mt-14 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-6">
+				<p class="font-semibold text-white">Invisible on Maps right now?</p>
+				<p class="mt-1 text-sm text-slate-400">One WhatsApp with your business name — we diagnose it free, even if you don't hire us. +254 741 992 308.</p>
+				<a href={whatsappLink("Hi Orbit! My business is not showing on Google Maps. Here is my business name and location — can you diagnose it?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-8 py-3 font-semibold text-white">Diagnose my Maps listing</a>
+			</div>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</article>
+
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/seo-services-kenya" class="text-electric hover:underline">SEO services Kenya</a> · <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a></p>
+		</div>
+		<Comments slug="business-not-showing-google-maps-kenya" />
+		<CtaBand title="Still invisible on Maps?" text="Send your business name on WhatsApp — we'll tell you the exact blocker within a day." />
+	</main>
+	<Footer />
+</Layout>

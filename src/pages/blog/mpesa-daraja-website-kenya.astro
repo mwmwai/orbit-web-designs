@@ -1,0 +1,143 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "How do I accept M-Pesa payments on my website with Daraja in Kenya?",
+		a: "Register on the Safaricom Daraja portal, create an app in sandbox, test STK Push with your Till or Paybill shortcode, then apply for Go Live (typically 2-7 business days). On Go Live you swap sandbox keys for production keys and point callbacks to your live HTTPS site. Our Master build (49,999) ships this wired and tested.",
+	},
+	{
+		q: "Should my website use Till, Paybill, or cards?",
+		a: "Use Till (Buy Goods) for instant retail checkout, Paybill when you need an account/reference number per order or invoice, and add cards for diaspora and corporate buyers. Most Kenyan stores run Till first, Paybill second, cards third. See the live math on our M-Pesa fee calculator before you pick.",
+	},
+	{
+		q: "What are the M-Pesa limits and fees I should quote customers?",
+		a: "M-Pesa caps are KES 250,000 per transaction, KES 500,000 per day, and KES 500,000 max balance. Confirm current tariffs on the payment screen and with our fee calculator — Safaricom updates bands often.",
+	},
+	{
+		q: "How much does it cost to add M-Pesa Daraja to a website?",
+		a: "Daraja API access itself is free — Safaricom earns on per-transaction tariffs, not the API. Build cost is the work: shortcode setup, STK wiring, callbacks, receipts and reconciliation. At Orbit, Till plus Paybill plus cards checkout ships inside Master at 49,999, live in about 2 weeks.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: "M-Pesa Daraja on Your Site: Till + Paybill + Cards, How It Works",
+	description: "Accept M-Pesa payments on your website with Daraja in Kenya: Till vs Paybill vs cards, STK flow, fees and limits, and what it costs to set up.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing" },
+	datePublished: "2026-10-03",
+	dateModified: "2026-10-03",
+	mainEntityOfPage: `${SITE_URL}/blog/mpesa-daraja-website-kenya`,
+};
+---
+
+<Layout
+	title="M-Pesa Daraja on Your Site: Till + Paybill + Cards (Kenya Guide) | Orbit"
+	description="How to accept M-Pesa payments on your website with Daraja in Kenya: STK Push flow, Till vs Paybill vs cards, 2026 fees and limits, setup steps."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
+			</div>
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ M-Pesa guide · 2026 · 7 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					M-Pesa Daraja on your site: <span class="text-gradient">Till + Paybill + cards, how it works</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">If you want to accept M-Pesa payments on a website in Kenya with Daraja, here is the full path — shortcode choice, STK flow, fees, limits and setup timeline.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-16">
+			<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Till vs Paybill vs cards in 60 seconds</h2>
+			<div class="mt-6 overflow-hidden rounded-2xl border border-edge">
+				<table class="w-full text-left text-sm">
+					<thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-5 py-3">Option</th><th class="px-5 py-3">Best for</th><th class="px-5 py-3">What the buyer sees</th></tr></thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="px-5 py-3 font-semibold text-white">Till (Buy Goods)</td><td class="px-5 py-3">Shops, food, fast checkout</td><td class="px-5 py-3">STK prompt, enter PIN, done</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Paybill</td><td class="px-5 py-3">Invoices, fees, per-order refs</td><td class="px-5 py-3">Business no. + account no.</td></tr>
+						<tr><td class="px-5 py-3 font-semibold text-white">Cards (Visa/Mastercard)</td><td class="px-5 py-3">Diaspora, corporates</td><td class="px-5 py-3">Card form at checkout</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400">Rule: launch Till first if you sell to walk-in-style Kenyan buyers. Add Paybill when you need references. Add cards when diaspora or company cards pay you. Full breakdown on our <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce page →</a></p>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">How STK Push actually works (Daraja flow)</h2>
+			<ul class="mt-6 grid gap-3 text-slate-300">
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Buyer hits Pay</strong> — your site sends amount + phone + Till/Paybill shortcode to Daraja.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Phone buzzes</strong> — Safaricom pushes the STK prompt; buyer enters M-Pesa PIN.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Callback confirms</strong> — Daraja calls your HTTPS callback; your site marks the order paid and sends the receipt.</span></li>
+				<li class="flex items-start gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Reconcile</strong> — query stuck orders by receipt ID so nobody pays twice or gets marked unpaid.</span></li>
+			</ul>
+
+			<div class="mt-10 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
+				<h3 class="font-semibold text-white">Quotable fee and limit facts</h3>
+				<ul class="mt-3 grid gap-2 text-sm text-slate-300">
+					<li>→ M-Pesa ceiling: KES 250,000 per transaction, KES 500,000 per day, KES 500,000 max balance.</li>
+					<li>→ Daraja API access and sandbox are free; you pay Safaricom's per-transaction tariffs, not an API licence.</li>
+					<li>→ Confirm exact fees on the payment screen — Safaricom updates bands often.</li>
+					<li>→ Price your margins first: <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator →</a></li>
+				</ul>
+			</div>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Setup steps and timeline</h2>
+			<div class="mt-6 grid gap-4">
+				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Days 1–2 — Shortcode + Daraja app</h3><p class="mt-2 text-sm text-slate-400">Confirm Till or Paybill ownership, register on the Daraja portal, create sandbox app, store consumer key/secret safely.</p></div>
+				<div class="glow-border rounded-2xl p-6 border-electric/30"><h3 class="font-semibold text-white">Days 3–7 — Build + sandbox test</h3><p class="mt-2 text-sm text-slate-400">Wire STK Push, HTTPS callbacks, receipts, failed-payment retry and admin order view. Test success, cancel, timeout and wrong-PIN paths.</p></div>
+				<div class="glow-border rounded-2xl p-6"><h3 class="font-semibold text-white">Days 8–14 — Go Live + launch</h3><p class="mt-2 text-sm text-slate-400">Submit Go Live (approval typically 2–7 business days), swap to production keys, run a real KES 10 payment, then open checkout.</p></div>
+			</div>
+			<p class="mt-6 text-sm text-slate-400">Never launch on sandbox keys, never expose consumer secrets in frontend code, and always keep callbacks on HTTPS that return 200 fast. Details that matter are in our <a href="/packages" class="text-electric hover:underline">Master 49,999 build →</a></p>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Mistakes that kill checkout</h2>
+			<ol class="mt-6 grid gap-3 text-slate-300">
+				<li class="flex gap-3"><span class="font-bold text-electric">1.</span> One shortcode per brand at launch — Till and Paybill both live confuses buyers and splits your float.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">2.</span> Show the exact STK phone-number format (254...) before Pay — wrong prefixes are the top failed-payment cause.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">3.</span> Add a Paybill fallback for carts above STK limits instead of losing the sale.</li>
+				<li class="flex gap-3"><span class="font-bold text-electric">4.</span> Send receipt + WhatsApp confirmation instantly — silent success pages create double payments.</li>
+			</ol>
+
+			<div class="mt-14 rounded-2xl border border-electric/40 bg-gradient-to-r from-electric/10 via-transparent to-neon/10 px-8 py-6">
+				<p class="font-semibold text-white">Want M-Pesa checkout that just works?</p>
+				<p class="mt-1 text-sm text-slate-400">Master (49,999) ships Till + Paybill + cards wired, tested and reconciled — or WhatsApp +254 741 992 308 for a fit check.</p>
+				<a href={whatsappLink("Hi Orbit! I want to accept M-Pesa payments on my website with Daraja (Till + Paybill + cards). What do I need to prepare?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-8 py-3 font-semibold text-white">Get M-Pesa checkout on WhatsApp</a>
+			</div>
+
+			<h2 class="mt-14 text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+			<div class="mt-6 grid gap-4">
+				{faqs.map((f) => (
+					<details class="glow-border group rounded-2xl p-6">
+						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">{f.q}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</article>
+
+		<div class="mx-auto max-w-3xl px-5 pb-4">
+			<p class="text-sm text-slate-400">Related: <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce Kenya</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/packages" class="text-electric hover:underline">website packages & pricing</a></p>
+		</div>
+		<Comments slug="mpesa-daraja-website-kenya" />
+		<CtaBand title="Selling without M-Pesa checkout?" text="Tell us your Till or Paybill number — we'll map the fastest path to live STK payments." />
+	</main>
+	<Footer />
+</Layout>
