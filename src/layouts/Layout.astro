@@ -72,7 +72,8 @@ const jsonLd = [
 		telephone: `+${WHATSAPP_NUMBER}`,
 		description,
 		areaServed: ["Kenya", "Worldwide"],
-		priceRange: "KES 4,999 - KES 49,999",
+		priceRange: "KES 14,999 - KES 49,999",
+		knowsAbout: ["Web Design Kenya", "M-Pesa Daraja Integration", "Website Cost Kenya", "SEO Kenya", "WhatsApp Business Kenya"],
 		currenciesAccepted: "KES",
 		paymentAccepted: "Cash, Credit Card, M-Pesa, PayPal, Bank Transfer",
 		address: {
@@ -108,7 +109,7 @@ const jsonLd = [
 					name: "Starter Website",
 					description: "5 pages, WhatsApp+call, basic SEO, copy for 3 pages, Analytics, live 5 days",
 				},
-				price: "27999",
+				price: "28999",
 					priceCurrency: "KES",
 					availability: "https://schema.org/InStock",
 				},
@@ -321,7 +322,6 @@ if (breadcrumbLd) {
 		<OrbitAssistant />
 		<CookieBanner />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-		{breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
 		<script is:inline>
 			(function() {
 				document.addEventListener('click', function(e) {

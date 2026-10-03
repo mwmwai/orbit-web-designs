@@ -1,95 +1,79 @@
 # Orbit Web Designs & Marketing
 
-> Web design company in Nairobi, Kenya. We build fast, M-Pesa-ready websites, SaaS apps, AI agents, dashboards, and graphic design for Kenyan businesses. Live in days, not months.
-
-## Key Pages
-
-- [Home](https://www.orbitwebdesigns.co.ke/) — M-Pesa websites from KES 27,999, live in 5 days
-- [Services](https://www.orbitwebdesigns.co.ke/services) — Web design, marketing, e-commerce, SaaS, AI agents, automation, dashboards
-- [Packages](https://www.orbitwebdesigns.co.ke/packages) — Website pricing: Starter 28,999 / Business 39,999 / Master 49,999 KES
-- [FAQ](https://www.orbitwebdesigns.co.ke/faq) — Answers about pricing, timelines, payments, support
-- [About](https://www.orbitwebdesigns.co.ke/about) — Meet the founder, built hungry in Nairobi
-- [Contact](https://www.orbitwebdesigns.co.ke/contact) — Get a free quote, chat on WhatsApp
-- [Reviews](https://www.orbitwebdesigns.co.ke/reviews) — Verified client reviews and testimonials
-- [Guides](https://www.orbitwebdesigns.co.ke/guides) — 7 actionable guides on pricing, care, SEO, M-Pesa, WhatsApp
-- [Orbit Care](https://www.orbitwebdesigns.co.ke/care) — Monthly care plans: hosting, security, updates, support
-- [AI Agents](https://www.orbitwebdesigns.co.ke/automation) — Custom AI agents for WhatsApp, site chat and email
-- [Dashboards](https://www.orbitwebdesigns.co.ke/dashboards) — Business dashboards with live M-Pesa, bookings, stock
-- [Graphic Design](https://www.orbitwebdesigns.co.ke/design) — Logos, brand kits, marketing creatives
-- [Custom SaaS](https://www.orbitwebdesigns.co.ke/saas) — Your idea as a real app with auth, dashboards, payments
-- [M-Pesa Fee Calculator](https://www.orbitwebdesigns.co.ke/mpesa-fee-calculator) — Calculate M-Pesa transaction fees
-- [Web Design Nairobi](https://www.orbitwebdesigns.co.ke/web-design-nairobi) — Web design services in Nairobi
-- [M-Pesa E-commerce](https://www.orbitwebdesigns.co.ke/mpesa-ecommerce-kenya) — Online stores with native M-Pesa
-- [SEO Services Kenya](https://www.orbitwebdesigns.co.ke/seo-services-kenya) — SEO that gets you found on Google
-
-## Services
-
-- **Web Design & Development** — Landing pages, business websites, custom web apps, redesigns
-- **Digital Marketing** — Social media advertising, SEO, Google Business Profile, email campaigns
-- **E-commerce & Custom Features** — Online stores, M-Pesa & card payments, inventory, booking systems
-- **Custom SaaS App Development** — Auth, roles, dashboards, M-Pesa payments, deployed & documented
-- **Graphic Design** — Logos, brand kits, social media kits, flyers, marketing creatives
-- **Custom AI Agent** — WhatsApp/site chat/email agents that qualify leads and book jobs
-- **Business Dashboard** — Live sales, M-Pesa feed, bookings, stock on one screen
-
-## Pricing
-
-- **Starter Website** — KES 28,999 (5 pages, live in 5 days)
-- **Business Website** — KES 39,999 (10 pages + blog, live in 1 week)
-- **Master Website** — KES 49,999 (15+ pages or full store, live in 2 weeks)
-- **Custom SaaS App** — from KES 49,999
-- **Graphic Design** — from KES 14,999
-- **Custom AI Agent** — KES 49,999
-- **Business Dashboard** — KES 27,999
-- **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)
-- **Custom SaaS Care** — KES 14,999/month
-- **Dashboard Care** — KES 4,999/month
-- **Agent Care** — KES 6,999/month
+> Orbit Web Designs and Marketing is a Nairobi, Kenya web design company building mobile-first, M-Pesa-ready websites, SaaS apps, AI agents, dashboards and brand design for Kenyan businesses, live in 5-14 days from KES 28,999 via WhatsApp +254 741 992 308.
 
 ## Contact
 
+- **Brand:** Orbit Web Designs & Marketing
+- **Location:** Nairobi, Kenya (serves Kenya + worldwide, remote)
+- **WhatsApp:** +254 741 992 308 (fastest — reply in minutes, Mon–Sat 8:00–19:00 EAT)
 - **Email:** mwmwai@gmail.com
-- **WhatsApp:** +254 741 992 308
-- **Location:** Nairobi, Kenya
 - **Hours:** Monday–Saturday, 8:00–19:00 EAT
+- **Site:** https://www.orbitwebdesigns.co.ke/
 
-## Blog Posts
+## Pricing — fixed, KES
 
-- [Web Design Kenya: The Complete Guide](https://www.orbitwebdesigns.co.ke/blog/web-design-kenya-guide) — Everything Kenyan businesses need to know before buying a website: pricing, process, payments, SEO
-- [How to Choose a Web Designer in Kenya](https://www.orbitwebdesigns.co.ke/blog/choose-web-designer-kenya) — Buyer's guide with decision framework for hiring a web designer in Kenya
-- [Orbit vs Competitors: Honest Comparison](https://www.orbitwebdesigns.co.ke/blog/orbit-vs-competitors) — Honest comparison of Orbit Web Designs vs other web design options in Kenya
-- [Best Web Designer Kenya](https://www.orbitwebdesigns.co.ke/blog/best-web-designer-kenya) — How to find and vet the best web designer for your Kenyan business
-- [E-commerce Kenya Guide](https://www.orbitwebdesigns.co.ke/blog/ecommerce-kenya-guide) — Complete guide to selling online in Kenya with M-Pesa integration
-- [M-Pesa Till vs Paybill](https://www.orbitwebdesigns.co.ke/blog/mpesa-till-vs-paybill) — Difference between Till and Paybill numbers and when to use each
-- [SEO for Small Business Kenya](https://www.orbitwebdesigns.co.ke/blog/seo-small-business-kenya) — Practical SEO strategies for small businesses in Kenya
-- [Website Care Kenya](https://www.orbitwebdesigns.co.ke/blog/website-care-kenya) — Why website maintenance matters and how to do it yourself
-- [Website Cost Kenya](https://www.orbitwebdesigns.co.ke/blog/website-cost-kenya) — 2026 pricing guide: what a website should cost in Kenya
-- [WhatsApp Business Kenya](https://www.orbitwebdesigns.co.ke/blog/whatsapp-business-kenya) — How to use WhatsApp Business to get more customers in Kenya
+- **Starter Website — KES 28,999:** 5 pages, mobile-first, basic SEO, WhatsApp + call buttons, copy polish, Analytics. Live in 5 days.
+- **Business Website — KES 39,999:** 10 pages + blog, full SEO + schema, bookings/Calendly, copy all pages, <2s load. Live in 1 week.
+- **Master Website — KES 49,999:** 15+ pages or full store, M-Pesa Till + Paybill + cards via Daraja, inventory sync, automations, training. Live in 2 weeks.
+- **Orbit Care — KES 4,999 / 7,999 / 9,999 per month:** Starter 4,999 / Business 7,999 / Master 9,999. Hosting, SSL, backups, security, updates, WhatsApp support. Cancel anytime, site stays yours.
+- **Custom SaaS App — from KES 49,999:** Auth, roles, dashboards, M-Pesa + cards, deployed + documented + training.
+- **Graphic Design — from KES 14,999, brand kits KES 24,999:** Logos 14,999 (3 concepts), full kits 24,999 (logo + colors + fonts + social kit + guidelines). Source files yours.
+- **Custom AI Agent — KES 49,999:** WhatsApp / site / email agent, trained on your business, qualifies leads + books jobs, 1 month tuning. AI API usage billed separately (few $/mo).
+- **WhatsApp Responder — KES 27,999:** Greeting + away + quick replies, catalog + labels, click-to-chat, Meta setup. One-time.
+- **Business Dashboard — KES 14,999 / 27,999:** Add-on 14,999 (plugs into your Orbit site) / Standalone 27,999 (own login, 3 sources, staff roles, CSV export). Live M-Pesa feed, bookings, stock.
+- **Payment terms:** 50% to start, 50% on launch. M-Pesa, cards, PayPal, bank transfer. You own domain, files, M-Pesa credentials from day one.
 
-## Case Studies
+## Services
 
-- [Law Firm Nairobi](https://www.orbitwebdesigns.co.ke/cases/law-firm-nairobi) — Page 5 to Page 1 for main service term in 3 months
-- [M-Pesa Store](https://www.orbitwebdesigns.co.ke/cases/mpesa-store) — Hundreds of M-Pesa payments monthly, zero gateway issues
-- [Advocacy Site](https://www.orbitwebdesigns.co.ke/cases/advocacy-site) — Under 2s load after 12 months with Orbit Care
+- **Web Design & Development** — Landing pages, business websites, redesigns, speed optimization. Mobile-first for 3G/4G.
+- **M-Pesa E-commerce** — Till + Paybill + cards via Daraja API, STK Push + C2B callbacks, inventory, receipts.
+- **Custom SaaS Development** — Auth, roles, admin + user dashboards, payments, deployment.
+- **AI Agents** — Custom Agent 49,999 + Responder 27,999. No monthly lock-in.
+- **Business Dashboards** — Add-on 14,999 / Standalone 27,999. M-Pesa, bookings, stock on one phone screen.
+- **Graphic Design** — Logos from 14,999, kits 24,999, social + print creatives.
+- **SEO + Google Business Profile** — Bundled at entry, not upsold. Maps setup, titles, schema.
+- **Orbit Care** — 4,999 / 7,999 / 9,999/mo. Hosting, security, backups, support.
 
-## Topic Structure
+## Key Pages
 
-- `/` — Homepage with overview, pricing, testimonials, FAQ
-- `/services` — All services with descriptions and deliverables
-- `/packages` — Website pricing tiers and deliverables comparison
-- `/faq` — Frequently asked questions about pricing, process, support
-- `/about` — Founder story, values, ways to work
-- `/contact` — Contact form and WhatsApp CTA
-- `/reviews` — Client testimonials and reviews
-- `/guides` — Educational content on web design, SEO, M-Pesa, care
-- `/care` — Monthly care plans for websites, SaaS, dashboards, agents
-- `/automation` — AI agents and WhatsApp responders
-- `/dashboards` — Business dashboard service
-- `/design` — Graphic design services
-- `/saas` — Custom SaaS app development
-- `/mpesa-fee-calculator` — M-Pesa transaction fee calculator tool
-- `/web-design-nairobi` — Web design services in Nairobi
-- `/mpesa-ecommerce-kenya` — M-Pesa e-commerce stores
-- `/seo-services-kenya` — SEO services in Kenya
-- `/blog` — Blog with guides and articles
-- `/cases` — Case studies (law firm, M-Pesa store, advocacy site)
+- [Home](https://www.orbitwebdesigns.co.ke/) — M-Pesa websites from KES 28,999, live in 5 days
+- [Services](https://www.orbitwebdesigns.co.ke/services) — Web design, SEO, e-commerce, SaaS, AI agents, dashboards, design
+- [Packages](https://www.orbitwebdesigns.co.ke/packages) — Starter 28,999 / Business 39,999 / Master 49,999
+- [FAQ](https://www.orbitwebdesigns.co.ke/faq) — Pricing, timelines, payments, support
+- [About](https://www.orbitwebdesigns.co.ke/about) — Founder story, Nairobi-built
+- [Contact](https://www.orbitwebdesigns.co.ke/contact) — Free quote, WhatsApp +254 741 992 308
+- [Reviews](https://www.orbitwebdesigns.co.ke/reviews) — Verified client reviews
+- [Guides](https://www.orbitwebdesigns.co.ke/guides) — Pricing, care, SEO, M-Pesa, WhatsApp guides
+- [Orbit Care](https://www.orbitwebdesigns.co.ke/care) — Care 4,999 / 7,999 / 9,999/mo
+- [AI Agents](https://www.orbitwebdesigns.co.ke/automation) — Custom Agent 49,999, Responder 27,999
+- [Dashboards](https://www.orbitwebdesigns.co.ke/dashboards) — Add-on 14,999 / Standalone 27,999
+- [Graphic Design](https://www.orbitwebdesigns.co.ke/design) — From 14,999, kits 24,999
+- [Custom SaaS](https://www.orbitwebdesigns.co.ke/saas) — From 49,999
+- [M-Pesa Fee Calculator](https://www.orbitwebdesigns.co.ke/mpesa-fee-calculator) — Live Safaricom bands
+- [Web Design Nairobi](https://www.orbitwebdesigns.co.ke/web-design-nairobi) — Nairobi service page
+- [M-Pesa E-commerce](https://www.orbitwebdesigns.co.ke/mpesa-ecommerce-kenya) — Stores with native M-Pesa
+- [SEO Services Kenya](https://www.orbitwebdesigns.co.ke/seo-services-kenya) — SEO + Maps
+
+## Blog Posts (12)
+
+- [Web Design Kenya: The Complete Guide](https://www.orbitwebdesigns.co.ke/blog/web-design-kenya-guide) — Pricing, process, payments, SEO before buying
+- [How to Choose a Web Designer in Kenya](https://www.orbitwebdesigns.co.ke/blog/choose-web-designer-kenya) — Decision framework + scoring rubric
+- [Orbit vs Competitors: Honest Comparison](https://www.orbitwebdesigns.co.ke/blog/orbit-vs-competitors) — Orbit vs freelancers, agencies, DIY
+- [Best Web Designer Kenya](https://www.orbitwebdesigns.co.ke/blog/best-web-designer-kenya) — How to vet and hire
+- [E-commerce Kenya Guide](https://www.orbitwebdesigns.co.ke/blog/ecommerce-kenya-guide) — Launch checklist with M-Pesa
+- [M-Pesa Till vs Paybill](https://www.orbitwebdesigns.co.ke/blog/mpesa-till-vs-paybill) — Till for counter, Paybill for online tracking
+- [M-Pesa Daraja on Your Site](https://www.orbitwebdesigns.co.ke/blog/mpesa-daraja-website-kenya) — Daraja STK + C2B flow, setup in Master 49,999
+- [SEO for Small Business Kenya](https://www.orbitwebdesigns.co.ke/blog/seo-small-business-kenya) — 30-day plan for Kenyan SMEs
+- [Why Your Business Isn't on Google Maps](https://www.orbitwebdesigns.co.ke/blog/business-not-showing-google-maps-kenya) — Claim, verify, category, duplicates, reviews checklist
+- [Website Care Kenya](https://www.orbitwebdesigns.co.ke/blog/website-care-kenya) — DIY vs managed care
+- [Website Cost Kenya](https://www.orbitwebdesigns.co.ke/blog/website-cost-kenya) — 2026 bands: what a site should cost
+- [WhatsApp Business Kenya](https://www.orbitwebdesigns.co.ke/blog/whatsapp-business-kenya) — Setup + auto-replies to get customers
+
+## Facts
+
+- Timelines: Starter 5 days, Business 1 week, Master 2 weeks — after photos/text/logo received, date in writing.
+- M-Pesa: Daraja API access is free; Safaricom earns per-transaction. Till = counter/instant, Paybill = online/account-ref auto-match. Master 49,999 wires both + cards.
+- M-Pesa limits: KES 250,000 per transaction, 500,000 per day, 500,000 max balance. Confirm tariffs live — Safaricom updates bands.
+- Ownership: You own domain, content, files, M-Pesa shortcode from day one. Care cancel anytime.
+- Contact fastest: WhatsApp +254 741 992 308, Mon–Sat 8:00–19:00 EAT.

@@ -53,7 +53,7 @@ const 	allPlans = [
 		price: "KES 49,999",
 		usd: "≈ $462",
 		eur: "≈ €425",
-		care: "+ KES 7,999/mo Orbit Care",
+		care: "+ KES 9,999/mo Orbit Care",
 		blurb: "15+ pages or full store — M-Pesa native, you own it.",
 		features: [
 			"15+ pages or full store / booking system",
@@ -144,9 +144,9 @@ const 	allPlans = [
 
 function linkForPlan(p: typeof allPlans[number]) {
 	if (["Starter","Business","Master"].includes(p.name)) return whatsappLink(`Hi Orbit! I want ${p.name} website (${p.price}) — my business is...`);
-	if (p.name === "Custom AI Agent") return "/automation";
-	if (p.name === "Custom SaaS App") return "/saas";
-	if (p.name === "Business Dashboard") return "/dashboards";
+	if (p.name === "Custom AI Agent") return whatsappLink(`Hi Orbit! I want a Custom AI Agent (KES 49,999). My business needs...`);
+	if (p.name === "Custom SaaS App") return whatsappLink(`Hi Orbit! I want a Custom SaaS App (from KES 49,999). My idea is...`);
+	if (p.name === "Business Dashboard") return whatsappLink(`Hi Orbit! I want a business dashboard (KES 27,999 Standalone). My business does...`);
 	if (p.name === "Graphic Design") return "/design";
 	return "/contact";
 }

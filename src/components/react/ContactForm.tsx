@@ -11,6 +11,7 @@ export default function ContactForm() {
 	const [turnstileToken, setTurnstileToken] = useState("");
 	const [submitting, setSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState("");
+	const [copied, setCopied] = useState(false);
 	const widgetIdRef = useRef<number | null>(null);
 
 	useEffect(() => {
@@ -24,16 +25,8 @@ export default function ContactForm() {
 		}
 	}, [TURNSTILE_SITE_KEY]);
 
-	async function handleSubmit(e: FormEvent) {
-		e.preventDefault();
-		if (!turnstileToken) {
-			setSubmitError("Please complete the security check");
-			return;
-		}
-		setSubmitting(true);
-		setSubmitError("");
-
-		const message = [
+	function buildMessage() {
+		return [
 			`Hello Orbit Web Designs & Marketing!`,
 			`My name is ${name}.`,
 			email && `Email: ${email}`,
@@ -43,6 +36,30 @@ export default function ContactForm() {
 		]
 			.filter(Boolean)
 			.join("\n");
+	}
+
+	async function copyDetails() {
+		try {
+			await navigator.clipboard.writeText(buildMessage());
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2500);
+		} catch {
+			setSubmitError("Copy failed — long-press the text instead.");
+		}
+	}
+
+	async function handleSubmit(e: FormEvent) {
+		e.preventDefault();
+		if (!turnstileToken) {
+			// Failover: no security key configured — send straight via WhatsApp, keep inputs.
+			window.open(whatsappLink(buildMessage()), "_blank", "noopener");
+			setSubmitError("Sent via WhatsApp instead — your details are kept above.");
+			return;
+		}
+		setSubmitting(true);
+		setSubmitError("");
+
+		const message = buildMessage();
 
 		try {
 			const res = await fetch('/api/supabase/submit', {
@@ -123,13 +140,35 @@ export default function ContactForm() {
 				<div id="cf-turnstile" />
 				{submitError && <p role="alert" className="mt-2 text-sm text-red-400">{submitError}</p>}
 			</label>
-			<button
-				type="submit"
-				disabled={submitting || !turnstileToken}
-				className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2 disabled:opacity-50 disabled:cursor-not-allowed"
-			>
-				{submitting ? "Sending…" : "Send via WhatsApp"}
-			</button>
+		<button
+			type="submit"
+			disabled={submitting}
+			className="btn-gradient rounded-full px-8 py-3.5 font-semibold text-white shadow-lg shadow-neon/25 hover:-translate-y-0.5 sm:col-span-2 disabled:opacity-50 disabled:cursor-not-allowed"
+		>
+			{submitting ? "Sending…" : "Send via WhatsApp"}
+		</button>
+		{(!TURNSTILE_SITE_KEY || submitError) && (
+			<div className="grid gap-3 rounded-xl border border-edge bg-charcoal p-4 sm:col-span-2">
+				<p className="text-sm text-slate-300">Prefer chat? Your details above are kept — send them straight to us:</p>
+				<div className="flex flex-wrap gap-3">
+					<a
+						href={whatsappLink(buildMessage())}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="rounded-full bg-[#25D366] px-6 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+					>
+						Send via WhatsApp
+					</a>
+					<button
+						type="button"
+						onClick={copyDetails}
+						className="rounded-full border border-edge bg-panel px-6 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white"
+					>
+						{copied ? "Copied ✓" : "Copy details"}
+					</button>
+				</div>
+			</div>
+		)}
 		</form>
 	);
 }
