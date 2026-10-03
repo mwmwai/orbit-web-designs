@@ -4,6 +4,22 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { whatsappLink } from "../config";
+
+const faqs = [
+	{ q: "How much does an M-Pesa e-commerce website cost in Kenya?", a: "Master (49,999) ships Till + Paybill + cards, stock sync and training — live 2 weeks. DIY Shopify or WooCommerce runs 5k-60k plus monthly fees and plugins." },
+	{ q: "Till or Paybill for my online store?", a: "Till for instant counter-style checkout; Paybill when you need per-order references. Most stores wire both — full breakdown in our Till vs Paybill guide." },
+	{ q: "How long until my store takes payments?", a: "About 2 weeks on Master: build + Daraja Go Live (2-7 business days) + a KES 10 live test. Date in writing before deposit." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
 ---
 
 <Layout
@@ -54,6 +70,17 @@ import { whatsappLink } from "../config";
 			</div>
 		</section>
 
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Quick answers</h2>
+				<div class="mt-6 grid gap-4">
+					{faqs.map((f) => (
+						<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">{f.q}</summary><p class="mt-3 text-sm text-slate-400">{f.a}</p></details>
+					))}
+				</div>
+			</div>
+		</section>
+		<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 		<CtaBand title="Ready to sell online?" text="Tell us what you sell — we reply with package, timeline and honest price." />
 	</main>
 	<Footer />

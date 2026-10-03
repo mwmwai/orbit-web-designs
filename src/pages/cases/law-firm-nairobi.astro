@@ -22,9 +22,25 @@ const caseStudyLd = {
 	result: "Page 5 to Page 1 for main service term in 3 months; inquiries from previously unranked searches; 4.9★ Google rating; <2s load time",
 	url: `${SITE_URL}/cases/law-firm-nairobi`,
 };
+const faqs = [
+	{ q: "How did the law firm reach page 1 on Google?", a: "Buyer-phrase service pages, Business Profile rebuild, titles and H1s, compression and reviews — page 5 to page 1 for the main service term in 3 months." },
+	{ q: "What did the law firm website cost?", a: "Rebuilt on Business-tier structure (39,999) with full local SEO — service pages, GBP alignment, fast mobile load. Started Starter, upgraded to Business after results." },
+	{ q: "Do SEO results last?", a: "Yes with maintenance — rankings held via reviews, posts and speed checks. That is what monthly Care plans do: 4,999–9,999/mo depending on tier." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
 ---
 <Layout title="Case — Law Firm Page 5 → 1 in 3 Months | Orbit" description="Nairobi law firm: buyer keywords + GBP + speed, page 5 to 1 in 3 months. Anonymized case.">
 	<script type="application/ld+json" set:html={JSON.stringify(caseStudyLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="border-b border-white/5 py-16 pt-24">
@@ -38,6 +54,16 @@ const caseStudyLd = {
 					<div class="glow-border rounded-xl p-4"><p class="font-semibold text-white">After</p><p class="text-slate-400">Page 1, 4.9★, &lt;2s</p></div>
 				</div>
 				<p class="mt-6 text-xs text-slate-500">Anonymized — full name on request. <a href="/reviews" class="text-electric hover:underline">Reviews →</a></p>
+			</div>
+		</section>
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white">Case questions</h2>
+				<div class="mt-6 grid gap-4">
+					{faqs.map((f) => (
+						<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">{f.q}</summary><p class="mt-3 text-sm text-slate-400">{f.a}</p></details>
+					))}
+				</div>
 			</div>
 		</section>
 		<CtaBand />

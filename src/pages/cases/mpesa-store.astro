@@ -22,9 +22,25 @@ const caseStudyLd = {
 	result: "100s of M-Pesa payments/month; zero gateway calls; stock auto-subtract; WhatsApp order push; live in 8 days",
 	url: `${SITE_URL}/cases/mpesa-store`,
 };
+const faqs = [
+	{ q: "How long did the M-Pesa store take to build?", a: "Live in 8 days on Master (49,999) — Till + Paybill wired via Daraja, tested with live payments, stock sync and WhatsApp order push included." },
+	{ q: "How does the store handle M-Pesa payments?", a: "Native Daraja checkout: buyers pay via STK Push to Paybill or Till, callbacks mark orders paid instantly, stock subtracts automatically, low-stock alerts fire, WhatsApp pings the owner per order." },
+	{ q: "What does it cost to run each month?", a: "Master Care 9,999/mo covers hosting, M-Pesa monitoring, stock sanity checks and support. Daraja API itself is free — Safaricom per-transaction tariffs apply." },
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
 ---
 <Layout title="Case — M-Pesa Store 100s Payments/Month | Orbit" description="E-commerce store: native Till/Paybill, stock auto, WhatsApp pings. 100s M-Pesa payments/month, zero gateway calls.">
 	<script type="application/ld+json" set:html={JSON.stringify(caseStudyLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
 		<section class="border-b border-white/5 py-16 pt-24">
@@ -35,9 +51,19 @@ const caseStudyLd = {
 				<div class="mt-8 grid gap-4 sm:grid-cols-3 text-sm">
 					<div class="glow-border rounded-xl p-4"><p class="font-semibold text-white">Stack</p><p class="text-slate-400">Master, Paybill API, STK</p></div>
 					<div class="glow-border rounded-xl p-4"><p class="font-semibold text-white">Ops</p><p class="text-slate-400">Stock -1, WhatsApp ping</p></div>
-					<div class="glow-border rounded-xl p-4"><p class="font-semibold text-white">Care</p><p class="text-slate-400">Master Care 7,999/mo</p></div>
+					<div class="glow-border rounded-xl p-4"><p class="font-semibold text-white">Care</p><p class="text-slate-400">Master Care 9,999/mo</p></div>
 				</div>
 				<p class="mt-6 text-sm"><a href="/mpesa-fee-calculator" class="text-electric hover:underline">Price your margins →</a></p>
+			</div>
+		</section>
+		<section class="border-t border-white/5 py-16">
+			<div class="mx-auto max-w-3xl px-5">
+				<h2 class="text-2xl font-bold tracking-tight text-white">Case questions</h2>
+				<div class="mt-6 grid gap-4">
+					{faqs.map((f) => (
+						<details class="glow-border rounded-2xl p-6"><summary class="cursor-pointer list-none font-semibold text-white">{f.q}</summary><p class="mt-3 text-sm text-slate-400">{f.a}</p></details>
+					))}
+				</div>
 			</div>
 		</section>
 		<CtaBand />

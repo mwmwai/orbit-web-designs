@@ -3,12 +3,23 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { whatsappLink } from "../config";
+
+const startFaqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{ "@type": "Question", name: "How fast is Orbit's 5-day website?", acceptedAnswer: { "@type": "Answer", text: "Once we have your photos, text, and logo — we start. You see a live preview, approve it, we launch. No month-long sagas." } },
+		{ "@type": "Question", name: "What if I don't like the design?", acceptedAnswer: { "@type": "Answer", text: "We revise until you're happy. You approve before launch — in writing. If we part ways early, you only pay for work already done." } },
+		{ "@type": "Question", name: "What's the monthly cost after launch?", acceptedAnswer: { "@type": "Answer", text: "Orbit Care keeps it alive: 4,999/mo Starter, 7,999 Business, 9,999 Master — hosting, security, updates, backups, WhatsApp support. Cancel anytime, site stays yours." } },
+	],
+};
 ---
 
 <Layout
 	title="Get a Website That Gets You Paid — From 28,999 | Orbit"
 	description="Fast, M-Pesa-ready websites from KES 28,999. Live in 5 days. Reply in minutes on WhatsApp. Your brand, in motion."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(startFaqLd)} />
 	<Navbar />
 	<main id="main">
 		<!-- HERO — single CTA -->
@@ -125,7 +136,7 @@ import { whatsappLink } from "../config";
 					</details>
 					<details class="glow-border rounded-2xl p-6">
 						<summary class="cursor-pointer list-none font-semibold text-white marker:hidden [&::-webkit-details-marker]:hidden">What's the monthly cost after launch?</summary>
-						<p class="mt-3 text-sm leading-relaxed text-slate-400">Orbit Care keeps it alive: 4,999/mo Starter, 9,999 Business, 12,999 Master — hosting, security, updates, backups, WhatsApp support. Cancel anytime, site stays yours.</p>
+						<p class="mt-3 text-sm leading-relaxed text-slate-400">Orbit Care keeps it alive: 4,999/mo Starter, 7,999 Business, 9,999 Master — hosting, security, updates, backups, WhatsApp support. Cancel anytime, site stays yours.</p>
 					</details>
 				</div>
 			</div>
