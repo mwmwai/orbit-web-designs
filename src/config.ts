@@ -23,7 +23,7 @@ export const NAV_LINKS = [
 
 export const MORE_LINKS = [
 	{ href: "/care", label: "Orbit Care" },
-	{ href: "/automation", label: "Agents & Workflows" },
+	{ href: "/automation", label: "AI Agents" },
 	{ href: "/dashboards", label: "Dashboards" },
 	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
 	{ href: "/web-design-nairobi", label: "Web Design Nairobi" },

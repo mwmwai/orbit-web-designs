@@ -125,22 +125,6 @@ const 	allPlans = [
 		featured: false,
 	},
 	{
-		name: "Workflow Automation",
-		price: "KES 39,999",
-		usd: "≈ $369",
-		eur: "≈ €340",
-		blurb: "Per workflow — manual work, gone for good.",
-		features: [
-			"M-Pesa → Sheets / CRM — no copy-paste",
-			"Inquiry → WhatsApp → calendar — auto",
-			"Invoices & receipts auto-sent",
-			"You own it, documented + handover",
-			"Bundle 3+ workflows = 15% off",
-		],
-		cta: "Get started",
-		featured: false,
-	},
-	{
 		name: "Business Dashboard",
 		price: "KES 27,999",
 		usd: "≈ $254",
@@ -161,7 +145,6 @@ const 	allPlans = [
 function linkForPlan(p: typeof allPlans[number]) {
 	if (["Starter","Business","Master"].includes(p.name)) return whatsappLink(`Hi Orbit! I want ${p.name} website (${p.price}) — my business is...`);
 	if (p.name === "Custom AI Agent") return "/automation";
-	if (p.name === "Workflow Automation") return "/automation";
 	if (p.name === "Custom SaaS App") return "/saas";
 	if (p.name === "Business Dashboard") return "/dashboards";
 	if (p.name === "Graphic Design") return "/design";
@@ -240,7 +223,7 @@ const plans = only?.length ? allPlans.filter((p) => only.includes(p.name)) : all
 		</div>
 
 		<p class="reveal mt-8 text-sm text-slate-500">
-			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">Agents & Workflows</a>
+			Need something different? <a href="/contact" class="text-electric hover:underline">Ask for a custom quote</a> — <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa calculator</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care plans</a> · <a href="/automation" class="text-electric hover:underline">AI Agents</a>
 		</p>
 	</div>
 

@@ -56,7 +56,6 @@ TRUTH (never invent):
 - SaaS from 49,999 (auth/roles, admin+user dashboards, M-Pesa, CSV, 3mo support) -> /saas
 - Design from 14,999 (kits to 24,999) -> /design
 - AI Agent 49,999 (WhatsApp/site/email, qualify+book, handover, 30d tuning) -> /automation
-- Workflow 39,999/workflow (M-Pesa->Sheets, invoices, bundle 3=15% off) -> /automation
 - Dashboards: Add-on 14,999, Standalone 27,999 -> /dashboards
 - WhatsApp Responder 27,999
 - M-Pesa: Till = walk-in, Paybill = tracked/online. Calculator at /mpesa-fee-calculator

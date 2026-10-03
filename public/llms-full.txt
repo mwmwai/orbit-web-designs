@@ -63,14 +63,6 @@ A tireless teammate that lives inside your Workplace: answers instantly, qualifi
 - Hands hot leads to you
 - Tuned on your business for a month
 
-### Workflow Automation
-Kill the copy-paste: payments log themselves, inquiries book themselves, receipts send themselves.
-
-- M-Pesa → records, automatically
-- Inquiry → WhatsApp → calendar
-- Receipts sent without lifting a finger
-- Documented so staff can run it
-
 ### Business Dashboard
 Your whole business on one screen: live sales, M-Pesa till feed, bookings — open it on any phone.
 
@@ -82,7 +74,7 @@ Your whole business on one screen: live sales, M-Pesa till feed, bookings — op
 ## Pricing
 
 ### Website Packages
-- **Starter Website** — KES 27,999 (5 pages, live in 5 days, mobile-first, basic SEO, WhatsApp + call buttons)
+- **Starter Website** — KES 28,999 (5 pages, live in 5 days, mobile-first, basic SEO, WhatsApp + call buttons)
 - **Business Website** — KES 39,999 (10 pages + blog, full SEO schema, bookings/Calendly, copy all pages, <2s load, live in 1 week)
 - **Master Website** — KES 49,999 (15+ pages or store, M-Pesa Till+Paybill+cards, inventory sync, automations, training, 2 weeks)
 
@@ -90,7 +82,6 @@ Your whole business on one screen: live sales, M-Pesa till feed, bookings — op
 - **Custom SaaS App** — from KES 49,999
 - **Graphic Design** — from KES 14,999
 - **Custom AI Agent** — KES 49,999
-- **Workflow Automation** — KES 39,999 per workflow
 - **Business Dashboard** — KES 27,999
 - **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)
 
