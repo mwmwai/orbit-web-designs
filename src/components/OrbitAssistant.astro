@@ -3,7 +3,7 @@ import { whatsappLink } from "../config";
 const path = Astro.url.pathname;
 ---
 
-<div id="orbit-assistant" class="fixed bottom-6 left-6 z-[110] flex flex-col items-start gap-3" client:load data-page={path}>
+<div id="orbit-assistant" class="fixed bottom-6 right-6 z-[110] flex flex-col items-end gap-3" client:load data-page={path}>
 	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
@@ -47,7 +47,7 @@ const path = Astro.url.pathname;
 	>
 		<span class="absolute inset-0 rounded-full bg-electric opacity-25 blur-md transition group-hover:opacity-40" aria-hidden="true"></span>
 		<svg class="relative" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" /></svg>
-		<span class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border-2 border-ink bg-white text-[9px] font-black text-ink" aria-hidden="true">AI</span>
+		<span class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border-2 border-ink bg-white text-[9px] font-black text-white" aria-hidden="true">AI</span>
 	</button>
 </div>
 
