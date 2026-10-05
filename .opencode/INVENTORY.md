@@ -317,5 +317,14 @@ Source of truth: the Agency Agents corpus (`corpus-baseline/`), regenerable with
 | `testing/tool-evaluator` | Testing · Tool Evaluator | Expert technology assessment specialist focused on evaluating, testing, and recommending tools, software, and platforms for business use and productivity optimization |
 | `testing/workflow-optimizer` | Testing · Workflow Optimizer | Expert process improvement specialist focused on analyzing, optimizing, and automating workflows across all business functions for maximum productivity and efficiency |
 
+## Video (4) — custom local group, free rendering
+
+| ID (`@`-mention) | Name | Description |
+| --- | --- | --- |
+| `video/lead` | Video · Lead | Commands the Video crew: turns any marketing goal into finished videos using the full agent roster and free local rendering. Recruits script, build, and distribution talent in parallel and ships MP4s. |
+| `video/script-writer` | Video · Script Writer | Expert video scriptwriter for marketing videos. Writes scroll-stopping hooks, beat-by-beat scripts, storyboards, and transcript.json files that scene builders can animate directly. |
+| `video/scene-builder` | Video · Scene Builder | Builds animated video scenes in Remotion and renders finished MP4s locally for free. Turns approved scripts into watchable scene compositions with posters, no paid APIs involved. |
+| `video/distributor` | Video · Distributor | Turns finished video renders into post-ready packages. Writes captions, hashtags, thumbnails, and platform posting checklists for TikTok, Reels, Shorts, and YouTube — free tools only. |
+
 ---
 Total: 233 grouped subagents + Boss (mode: all, `@boss` or Tab).

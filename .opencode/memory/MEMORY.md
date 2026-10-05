@@ -44,7 +44,7 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 - Oct 3 money audit: live entry is 28,999 not 33,999 (grep 33,999=0 hits); llms.txt + llms-full.txt stale 27,999; Layout:111 + packages:56 schema 27999 stale; Pricing Master Care 7,999 vs care 9,999 (2K underquote).
 - Oct 3 dirty tree 16 files, workflow 39,999 removal half-propagated (chat.ts:59 + llms.txt still sell it); npm run build timed out 120s, dist sitemap 14:08 proves serialize fix works when build completes.
 - Oct 3 submit risk: all paths fail-closed 503 without Turnstile secret, local .env lacks keys — check Vercel TURNSTILE_SECRET_KEY + PUBLIC_TURNSTILE_SITE_KEY before deploy.
-- Oct 3 SEO: www canonical correct but vercel.json has zero redirects, both hosts 200 splitting equity; fastest cash is WhatsApp 50% M-Pesa deposit + date-in-writing (254741992308), Business 39,999 bump target.
+- Oct 3 SEO: www canonical correct but vercel.json has zero redirects, both hosts 200 splitting equity; fastest cash is WhatsApp 50% M-Pesa deposit + date-in-writing (254741992308), Business 39,999 bump target. [STALE re redirects — see Oct 4]
 - DECISION NEEDED: care canonical 4,999/7,999/9,999 vs variants + confirm entry 28,999 canonical — do not guess.
 - Oct 3 customers kit: WA canonical 254741992308 via config.ts whatsappLink() verified Hero:55 Floating:18 start:28 Pricing:146; autonomous kit ready (auto-reply + 3-msg close + Day1/Day3 follow-ups) — deposit rail LOCKED Pochi 0741992308 Send Money (no STK), 50% = 14,500/20,000/25,000.
 - Oct 3 inbound sprint ready: GBP + IG + 2 WA statuses + calculator exit line all to wa.me/254741992308; high-ticket leak Pricing:147-150 SaaS/Agent/Dashboard detour internal vs direct WA.
@@ -54,3 +54,18 @@ If this file grows past 100 lines, the Boss compresses it: keep decisions, drop 
 - Oct 3 SHIPPED bc9913b (SEO max): FAQPage+visible Q&As x6 posts, BlogPosting enrichment x12, homepage FAQPage+ItemList, Layout Offer 28999 + breadcrumb dupe removed + knowsAbout, Master Care fixes; build PASS 42 pages, IndexNow 200, live verified.
 - Oct 3 SHIPPED cea97e8 (SEO max 2): FAQPage money pages x3 + cases x3 + start.astro, stale care prices (start card, mpesa-store card, care-blog, orbit-vs table), nested-article bug pattern on script inserts (restore close tag); build PASS 42 pages, IndexNow 200, live verified.
 - Oct 3 SHIPPED [last]: price truth final pass — index.astro SaaS 12,999→14,999, Design 7,999→9,999, Dashboard 3,999→4,999; AI toggle moved right + AI badge white; cookie banner centered; FloatingActions moved left; build PASS 42 pages, IndexNow 200.
+
+## Executive seats (standing arrangement)
+
+- User wants the Boss to run Orbit as the exec team: CEO=Strategy, CFO=Money, CMO=Growth. Boss merges to one voice; user makes founder calls only.
+- Seat mapping: CEO → specialized/business-strategist, CFO → finance/lead, CMO → marketing/lead. Run in parallel, ≤250 words each, read-only, evidence = file paths/URLs.
+
+## Oct 4 exec standup (CEO+CFO+CMO merged)
+
+- P0 (all three seats): Vercel prod env keys TURNSTILE_SECRET_KEY + PUBLIC_TURNSTILE_SITE_KEY still UNVERIFIED — unset = every submit path 503s, inbound silently dead. Founder must check dashboard + send one test enquiry.
+- GA live: G-FWPQVVQ668 verified firing on homepage (CMO, live check) — CEO's code-read concern reduced to: confirm whatsapp_click event in GA4 Realtime + cookie-consent gating. No traffic/conversion numbers pulled yet; first sheet = clicks → sessions → WA starts.
+- Redirects: apex→www now 308 (verified live; line-47 claim about both-hosts-200 is stale), but vercel.json itself still has no redirects block AND /packages + /packages/ both 200 (trailing-slash dupes, 42 pages) — ship non-slash→slash 308s + IndexNow resubmit.
+- Pricing tree verified clean Oct 4: entry 28,999 (Pricing.astro:13, packages.astro:56, Layout.astro:112, llms.txt:16, chat.ts:245), Care 4,999/7,999/9,999 (care.astro:125/138/150). Remaining 27,999 hits = legitimate Responder/Dashboard SKUs (automation.astro:46). CEO flags chat.ts:66-111 six hardcoded prices — verify what SKUs those are before calling it drift.
+- Founder decision (CEO): ratify + FREEZE canonical list — 28,999 / 39,999 / Care 4,999-7,999-9,999 — else drift recurs (it has 3x).
+- CFO controls to build: deal log (date/tier/quote/deposit/balance/M-Pesa ref) — no P&L data exists anywhere; weekly number = cash collected KES split deposit vs balance from M-Pesa stmt 0741992308; pre-deploy grep rejecting 27,999/33,999 on website-SKU lines. generate.mjs gate re-verified fail-closed (Turnstile :41, allowlist :57, 10/hr cap :4) but rate-limit Map resets on serverless cold start (residual).
+- CMO growth call: double down on local organic — Nairobi SERP competitors quote 49,999-129,999; Orbit's published 28,999 is the only sub-30K number = the moat. GBP routine: 3 posts/week + seeded Q&A → wa.me/254741992308. davidesabwa.com mirrors Orbit layout/copy structure (competitor to watch).
