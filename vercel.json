@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/:path((?!api(?:\\/|$))(?!_vercel\\/)(?!.*\\..*)(?!.*\\/$).+)",
+      "destination": "/:path/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
