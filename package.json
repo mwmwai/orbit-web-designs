@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/generate-indexnow.mjs",
+    "build": "astro build && node scripts/check-api-imports.mjs && node scripts/generate-indexnow.mjs",
+    "check:api": "node scripts/check-api-imports.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "ping-indexnow": "bash scripts/ping-indexnow.sh"
