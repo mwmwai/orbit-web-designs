@@ -1,17 +1,28 @@
 // POST /api/ingest/sms — Pochi la Biashara + fallback SMS forwarder ingest.
-// Body: { secret, text, phone }. secret must equal INGEST_SECRET.
+// Body: { secret, text, phone }. secret must equal INGEST_SECRET — fail-closed:
+// if INGEST_SECRET is unset in the env, EVERY request is rejected (401).
 // Parses standard Safaricom M-Pesa SMS (received / sent / paid variants),
 // maps forwarding phone -> shop via POCHI_SHOP_MAP env JSON, dedupes on
 // mpesa_code. Owner does nothing: phone auto-forwards SMS to this endpoint.
+// Payer phone is masked in the visible note; the full SMS stays in raw.
 
-import { parseShopMap, insertDeduped, parseMpesaSms } from '../_lib/shop-ingest.js';
+import { parseShopMap, insertDeduped, parseMpesaSms, maskPhone } from '../_lib/shop-ingest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'POST only' });
     return;
   }
-  const body = await readJson(req);
+
+  let body;
+  try {
+    body = await readJson(req);
+  } catch {
+    res.status(400).json({ ok: false, error: 'Bad request body' });
+    return;
+  }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) body = {};
+
   const secret = String(body.secret || '');
   const expected = process.env.INGEST_SECRET || '';
   if (!expected || secret !== expected) {
@@ -19,7 +30,12 @@ export default async function handler(req, res) {
     return;
   }
 
-  const parsed = parseMpesaSms(body.text);
+  let parsed;
+  try {
+    parsed = parseMpesaSms(body.text);
+  } catch {
+    parsed = { error: 'Unrecognized M-Pesa SMS format' };
+  }
   if (parsed.error) {
     res.status(400).json({ ok: false, error: parsed.error });
     return;
@@ -42,14 +58,20 @@ export default async function handler(req, res) {
       amount: Math.round(parsed.amount * 100) / 100,
       category: parsed.direction === 'in' ? 'Sales' : 'Expense',
       method,
-      date: parsed.date,
-      note: parsed.counterparty.slice(0, 200),
+      date: parsed.date || new Date().toISOString(),
+      // Mask any 9+ digit number (the payer/counterparty phone) in the note.
+      note: String(parsed.counterparty || '').replace(/\d{9,}/g, (m) => maskPhone(m)).slice(0, 200),
       mpesa_code: parsed.code,
       raw: { sms: String(body.text).slice(0, 500), balance: parsed.balance, phone, _unmappedPhone: mapped ? undefined : phone || true },
     });
 
     res.status(200).json({ ok: true, ...result, shop, method });
   } catch (e) {
+    if (e?.name === 'ConfigError') {
+      console.error('sms ingest not recorded:', e.message);
+      res.status(503).json({ ok: false, error: 'Server not configured (supabase env missing)' });
+      return;
+    }
     console.error('sms ingest failed:', e?.message || e);
     res.status(500).json({ ok: false, error: 'Store failed' });
   }

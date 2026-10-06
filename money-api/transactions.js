@@ -11,7 +11,7 @@
 //   total         how many rows match the filters (before the limit)
 //   latestBalance newest M-Pesa balance seen anywhere in the range
 
-import { getServiceClient, getAuthUser, bearerToken, SHOPS, METHODS } from './_lib/shop-ingest.js';
+import { getServiceClient, getAuthUser, bearerToken, authEnvMissing, SHOPS, METHODS } from './_lib/shop-ingest.js';
 
 const TYPES = ['in', 'out'];
 const MAX_LIMIT = 1000;
@@ -21,6 +21,10 @@ export default async function handler(req, res) {
 
   const user = await getAuthUser(bearerToken(req));
   if (!user) {
+    // Distinguish a real "not logged in" (401) from a broken deploy (503) so
+    // the dashboard shows the truth instead of "Login required".
+    const authGap = authEnvMissing();
+    if (authGap.length) return send503(res, `missing env ${authGap.join(', ')}`, 'transactions auth');
     res.status(401).json({ ok: false, error: 'Login required' });
     return;
   }
@@ -119,18 +123,19 @@ async function handleGet(req, res) {
       limit,
     });
   } catch (e) {
+    if (e?.name === 'ConfigError') return send503(res, e.message, 'GET');
     console.error('transactions GET failed:', e?.message || e);
     res.status(500).json({ ok: false, error: 'Fetch failed' });
   }
 }
 
 async function handlePost(req, res, user) {
-  const body = await readJson(req);
   try {
+    const body = await readJson(req);
     const shop = String(body.shop || '');
     const type = String(body.type || '');
     const method = String(body.method || 'Manual');
-    const amount = Number(body.amount);
+    const amount = Number(String(body.amount ?? '').replace(/,/g, ''));
     const reason = String(body.reason || '').trim();
 
     if (!SHOPS.includes(shop)) return res.status(400).json({ ok: false, error: 'Pick a shop (Aggmart or Trade Star Shop)' });
@@ -166,9 +171,16 @@ async function handlePost(req, res, user) {
     }
     res.status(200).json({ ok: true, id: data.id });
   } catch (e) {
+    if (e?.name === 'ConfigError') return send503(res, e.message, 'POST');
     console.error('transactions POST failed:', e?.message || e);
     res.status(500).json({ ok: false, error: 'Save failed' });
   }
+}
+
+// Missing env is a deploy problem: say so plainly (503 JSON), never a 500.
+function send503(res, detail, where) {
+  console.error(`[transactions] ${where} 503:`, detail);
+  res.status(503).json({ ok: false, error: 'Server not configured (supabase env missing)' });
 }
 
 function readJson(req) {

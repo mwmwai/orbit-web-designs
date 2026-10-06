@@ -2,8 +2,82 @@
 // Never imported by Astro pages — api/ only. No secrets here; routes read
 // process.env (SUPABASE_SERVICE_ROLE_KEY etc.) and never expose them.
 
+import { createHash, timingSafeEqual } from 'node:crypto';
+
 export const SHOPS = ['Aggmart', 'Trade Star Shop'];
 export const METHODS = ['Till Number', 'Pochi la Biashara', 'M-Pesa Personal', 'Cash', 'Manual', 'Bank'];
+
+// --- configuration errors -----------------------------------------------------
+// Missing env is a DEPLOYMENT problem, not a request problem. Routes catch
+// ConfigError and answer 503 + JSON (clear for us, retryable for Safaricom)
+// instead of a generic 500 or a silent 200 that drops the row.
+export class ConfigError extends Error {
+  constructor(missing) {
+    super(`Server misconfigured (missing env: ${missing.join(', ')})`);
+    this.name = 'ConfigError';
+    this.missing = missing;
+  }
+}
+
+function missingOf(pairs) {
+  const out = [];
+  for (const [name, val] of pairs) if (!val) out.push(name);
+  return out;
+}
+
+// Env the JWT auth path needs — lets /api/transactions tell a real
+// "Login required" (401) apart from a broken deploy (503).
+export function authEnvMissing() {
+  return missingOf([
+    ['PUBLIC_SUPABASE_URL', process.env.PUBLIC_SUPABASE_URL],
+    ['PUBLIC_SUPABASE_ANON_KEY', process.env.PUBLIC_SUPABASE_ANON_KEY],
+  ]);
+}
+
+// --- callback auth ------------------------------------------------------------
+// Safaricom C2B callbacks are UNSIGNED: Daraja sends no signature, no HMAC,
+// nothing verifiable — an arbitrary POST that guesses the URL can claim a
+// payment. The only gate available is a shared token on the registered URL:
+//   * MPESA_CALLBACK_TOKEN set   -> the callback must carry it, as ?token=... on
+//     the URL registered in the Safaricom portal, or as an x-callback-token
+//     header. Mismatch => { required: true, ok: false }.
+//   * MPESA_CALLBACK_TOKEN unset -> accepted (INSECURE default). Safaricom
+//     cannot invent custom headers, so the token can only travel as a query
+//     param — until it is set, anyone who knows the URL could ingest fake rows.
+export function callbackTokenStatus(req) {
+  const expected = process.env.MPESA_CALLBACK_TOKEN || '';
+  if (!expected) return { required: false, ok: true };
+  let got = '';
+  try {
+    got = String(req?.query?.token ?? '').trim();
+    if (!got && req?.headers) {
+      got = String(req.headers['x-callback-token'] ?? req.headers['X-Callback-Token'] ?? '').trim();
+    }
+  } catch {
+    got = '';
+  }
+  return { required: true, ok: got.length > 0 && shaEq(got, expected) };
+}
+
+// Constant-time compare on SHA-256 digests (equal length by construction,
+// so timingSafeEqual never throws and length leaks nothing).
+function shaEq(a, b) {
+  try {
+    const ha = createHash('sha256').update(String(a)).digest();
+    const hb = createHash('sha256').update(String(b)).digest();
+    return timingSafeEqual(ha, hb);
+  } catch {
+    return false;
+  }
+}
+
+// Keep the payer's number out of the visible note / CSV export:
+// 0722123456 -> 0722•••456. The full value stays in the raw jsonb column.
+export function maskPhone(p) {
+  const digits = String(p || '').replace(/\D/g, '');
+  if (digits.length < 7) return String(p || '');
+  return digits.slice(0, 4) + '•••' + digits.slice(-3);
+}
 
 // Parse {"till":"shop"} / {"phone":"shop"} env maps. Returns {} on bad JSON.
 export function parseShopMap(raw) {
@@ -22,9 +96,16 @@ export function parseShopMap(raw) {
 
 let serviceClient = null;
 export async function getServiceClient() {
+  const missing = missingOf([
+    ['PUBLIC_SUPABASE_URL', process.env.PUBLIC_SUPABASE_URL],
+    ['SUPABASE_SERVICE_ROLE_KEY', process.env.SUPABASE_SERVICE_ROLE_KEY],
+  ]);
+  if (missing.length) {
+    console.error('[shop-ingest] missing env:', missing.join(', '));
+    throw new ConfigError(missing);
+  }
   const url = process.env.PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('Server misconfigured (supabase env missing)');
   if (!serviceClient) {
     const { createClient } = await import('@supabase/supabase-js');
     serviceClient = createClient(url, key, { auth: { persistSession: false } });
