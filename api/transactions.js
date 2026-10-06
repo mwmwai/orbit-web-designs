@@ -11,7 +11,7 @@
 //   total         how many rows match the filters (before the limit)
 //   latestBalance newest M-Pesa balance seen anywhere in the range
 
-import { getServiceClient, getAuthUser, bearerToken, SHOPS, METHODS } from '../_lib/shop-ingest.js';
+import { getServiceClient, getAuthUser, bearerToken, SHOPS, METHODS } from './_lib/shop-ingest.js';
 
 const TYPES = ['in', 'out'];
 const MAX_LIMIT = 1000;

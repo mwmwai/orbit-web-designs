@@ -4,7 +4,7 @@
 // maps forwarding phone -> shop via POCHI_SHOP_MAP env JSON, dedupes on
 // mpesa_code. Owner does nothing: phone auto-forwards SMS to this endpoint.
 
-import { parseShopMap, insertDeduped, parseMpesaSms } from '../../_lib/shop-ingest.js';
+import { parseShopMap, insertDeduped, parseMpesaSms } from '../_lib/shop-ingest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

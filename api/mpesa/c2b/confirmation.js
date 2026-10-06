@@ -3,7 +3,7 @@
 // TransID (mpesa_code). Shortcode -> shop via TILL_SHOP_MAP env JSON.
 // Always answers ResultCode 0 so Safaricom never retries in a loop.
 
-import { parseShopMap, insertDeduped, parseTransTime } from '../../../_lib/shop-ingest.js';
+import { parseShopMap, insertDeduped, parseTransTime } from '../../_lib/shop-ingest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
