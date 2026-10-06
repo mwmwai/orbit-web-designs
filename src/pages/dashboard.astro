@@ -1,0 +1,481 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Money Dashboard | Orbit Web Designs"
+  description="Private owner dashboard: automatic M-Pesa tracking for Aggmart and Trade Star Shop."
+  noindex={true}
+>
+  <main class="min-h-screen bg-slate-950 text-slate-100">
+    <div class="mx-auto max-w-6xl px-4 py-8">
+      <header class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 class="text-2xl font-bold">Money Dashboard</h1>
+          <p class="text-sm text-slate-400">Aggmart &middot; Trade Star Shop &middot; auto-tracked via M-Pesa</p>
+          <p id="updatedAt" class="mt-0.5 text-xs text-slate-500" aria-live="polite"></p>
+        </div>
+        <button id="logoutBtn" class="hidden rounded-lg border border-slate-700 px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800">Log out</button>
+      </header>
+
+      <!-- Logged-out: login only -->
+      <section id="loginBox" class="mx-auto max-w-sm rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 class="mb-1 text-lg font-semibold">Owner login</h2>
+        <p class="mb-4 text-sm text-slate-400">Private. Nothing here is indexed.</p>
+        <form id="loginForm" class="space-y-3">
+          <input id="email" type="email" required autocomplete="username" placeholder="Email"
+            class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm outline-none focus:border-emerald-500" />
+          <input id="password" type="password" required autocomplete="current-password" placeholder="Password"
+            class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm outline-none focus:border-emerald-500" />
+          <button class="w-full rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold hover:bg-emerald-500">Sign in</button>
+        </form>
+        <p id="loginErr" class="mt-3 hidden text-sm text-red-400"></p>
+        <p id="cfgErr" class="mt-3 hidden text-sm text-amber-400"></p>
+      </section>
+
+      <!-- Logged-in app -->
+      <section id="app" class="hidden space-y-6">
+        <!-- Load status -->
+        <p id="loadErr" role="alert" class="hidden rounded-lg border border-red-900 bg-red-950/60 px-3 py-2 text-sm text-red-300"></p>
+
+        <!-- Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="flex overflow-hidden rounded-lg border border-slate-700 text-sm" role="tablist" aria-label="Shop">
+            <button data-shop="Both" aria-pressed="true" class="shopBtn bg-emerald-600 px-4 py-1.5 font-semibold">Both</button>
+            <button data-shop="Aggmart" aria-pressed="false" class="shopBtn px-4 py-1.5 text-slate-300 hover:bg-slate-800">Aggmart</button>
+            <button data-shop="Trade Star Shop" aria-pressed="false" class="shopBtn px-4 py-1.5 text-slate-300 hover:bg-slate-800">Trade Star</button>
+          </div>
+          <input id="fromD" type="date" class="rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-sm" />
+          <input id="toD" type="date" class="rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-sm" />
+          <button id="reloadBtn" class="rounded-lg border border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-800">Reload</button>
+          <button id="csvBtn" class="rounded-lg border border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-800">Export CSV</button>
+        </div>
+
+        <!-- KPIs -->
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-400">Money in</p>
+            <p id="kpiIn" class="mt-1 text-2xl font-bold text-emerald-400">—</p>
+          </div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-400">Money out</p>
+            <p id="kpiOut" class="mt-1 text-2xl font-bold text-red-400">—</p>
+          </div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-400">Profit</p>
+            <p id="kpiProfit" class="mt-1 text-2xl font-bold">—</p>
+          </div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-400">Latest M-Pesa balance</p>
+            <p id="kpiBal" class="mt-1 text-2xl font-bold text-sky-400">—</p>
+          </div>
+        </div>
+
+        <!-- Compare -->
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-400">Shop vs shop</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-left text-slate-400">
+                <th class="py-1 pr-4">Shop</th><th class="py-1 pr-4 text-right">In</th>
+                <th class="py-1 pr-4 text-right">Out</th><th class="py-1 pr-4 text-right">Profit</th>
+                <th class="py-1 text-right">Txns</th>
+              </tr></thead>
+              <tbody id="compareBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Chart + categories -->
+        <div class="grid gap-3 md:grid-cols-2">
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">Last 14 days (in vs out)</h2>
+            <canvas id="chart" class="h-56 w-full" role="img" aria-label="Bar chart of money in versus money out for the last 14 days"></canvas>
+            <p class="mt-1 text-xs text-slate-500"><span class="text-emerald-400">■</span> In &nbsp;<span class="text-red-400">■</span> Out</p>
+          </div>
+          <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+            <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">By category</h2>
+            <div id="catBars" class="space-y-2 text-sm"></div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <div class="mb-3 flex flex-wrap gap-2">
+            <input id="q" type="search" placeholder="Search note / code / category"
+              class="min-w-52 flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-sm outline-none focus:border-emerald-500" />
+            <select id="typeF" class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 text-sm">
+              <option value="all">In + Out</option><option value="in">In only</option><option value="out">Out only</option>
+            </select>
+            <select id="catF" class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 text-sm">
+              <option value="all">All categories</option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-left text-slate-400">
+                <th class="py-1 pr-3">Date</th><th class="py-1 pr-3">Shop</th><th class="py-1 pr-3">Type</th>
+                <th class="py-1 pr-3 text-right">Amount</th><th class="py-1 pr-3">Category</th>
+                <th class="py-1 pr-3">Method</th><th class="py-1 pr-3">Note / code</th><th class="py-1"></th>
+              </tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <p id="emptyMsg" class="hidden py-6 text-center text-sm text-slate-500">No transactions yet — run the SQL schema, register the Daraja URLs, then send a test (see DARAJA-SETUP.md).</p>
+          <p id="rowCount" class="mt-2 text-xs text-slate-500"></p>
+        </div>
+
+        <!-- Manual correction -->
+        <details class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+          <summary class="cursor-pointer text-sm font-semibold">Manual correction (add / void with reason)</summary>
+          <form id="manualForm" class="mt-3 grid gap-2 text-sm md:grid-cols-4">
+            <select id="mShop" class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5">
+              <option>Aggmart</option><option>Trade Star Shop</option>
+            </select>
+            <select id="mType" class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5">
+              <option value="in">Money in</option><option value="out">Money out</option>
+            </select>
+            <input id="mAmt" type="number" min="1" step="0.01" required placeholder="Amount KES"
+              class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5" />
+            <input id="mCat" placeholder="Category (Sales, Stock, Rent…)" value="Correction"
+              class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5" />
+            <input id="mDate" type="date" class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5" />
+            <input id="mNote" placeholder="Note (e.g. Void SH…). Optional"
+              class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 md:col-span-2" />
+            <input id="mReason" required placeholder="Reason (required, audit trail)"
+              class="rounded-lg border border-slate-700 bg-slate-800 px-2 py-1.5 md:col-span-3" />
+            <button class="rounded-lg bg-emerald-600 px-3 py-1.5 font-semibold hover:bg-emerald-500 md:col-span-1">Save</button>
+          </form>
+          <p id="manualMsg" class="mt-2 hidden text-sm"></p>
+          <p class="mt-1 text-xs text-slate-500">To void: pick the opposite type, note “Void CODE”, give the reason. Ledger is append-only — nothing is deleted.</p>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from '@supabase/supabase-js';
+
+    // Guard, not throw. Vite inlines PUBLIC_SUPABASE_* at build time, so with
+    // them unset the minifier folds this branch and the page ships showing only
+    // the message below instead of a blank screen. Set both vars in Vercel
+    // (Settings → Environment Variables) and the full app is bundled instead.
+    // IIFE keeps the top-level await + early return in one scope.
+    (async () => {
+    const URL = import.meta.env.PUBLIC_SUPABASE_URL;
+    const KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+    const $ = (id) => document.getElementById(id);
+    const state = { rows: [], summary: {}, totals: null, latestBalance: null, total: 0, shop: 'Both', token: null, allCats: [], loading: false };
+    const fmt = (n) => 'KES ' + Number(n || 0).toLocaleString('en-KE', { maximumFractionDigits: 2 });
+
+    if (!URL || !KEY) {
+      $('loginBox').innerHTML = '<p class="text-sm text-amber-400">Dashboard is not configured yet (missing Supabase env). Deploy with PUBLIC_SUPABASE_URL + PUBLIC_SUPABASE_ANON_KEY set at build time.</p>';
+      return;
+    }
+    const sb = createClient(URL, KEY);
+
+    // ---- auth gate: logged-out shows login only ----
+    const { data: sess } = await sb.auth.getSession();
+    if (sess?.session) enterApp(sess.session.access_token);
+    sb.auth.onAuthStateChange((_ev, s) => { if (s?.access_token) enterApp(s.access_token); });
+
+    $('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('loginErr').classList.add('hidden');
+      const { data, error } = await sb.auth.signInWithPassword({
+        email: $('email').value.trim(), password: $('password').value,
+      });
+      if (error || !data.session) {
+        $('loginErr').textContent = 'Login failed — check email and password.';
+        $('loginErr').classList.remove('hidden');
+        return;
+      }
+      enterApp(data.session.access_token);
+    });
+
+    $('logoutBtn').addEventListener('click', async () => {
+      await sb.auth.signOut();
+      location.reload();
+    });
+
+    function enterApp(token) {
+      state.token = token;
+      $('loginBox').classList.add('hidden');
+      $('app').classList.remove('hidden');
+      $('logoutBtn').classList.remove('hidden');
+      load();
+    }
+
+    // ---- data ----
+    async function api(path, opts = {}) {
+      // always use a live session token (rotates on refresh) — never a stale copy
+      const { data } = await sb.auth.getSession();
+      const token = data?.session?.access_token || state.token;
+      const r = await fetch(path, {
+        ...opts,
+        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
+        cache: 'no-store',
+      });
+      if (r.status === 401) { await sb.auth.signOut(); location.reload(); throw new Error('unauthorized'); }
+      return r.json();
+    }
+
+    async function load() {
+      if (state.loading) return;
+      state.loading = true;
+      const err = $('loadErr');
+      err.classList.add('hidden');
+      try {
+        const p = new URLSearchParams({ shop: 'Both', limit: '1000' });
+        if ($('fromD').value) p.set('from', $('fromD').value);
+        if ($('toD').value) p.set('to', $('toD').value);
+        const j = await api('/api/transactions?' + p.toString());
+        if (!j.ok) throw new Error(j.error || 'Fetch failed');
+        state.rows = j.rows || [];
+        state.summary = j.summary || {};
+        state.totals = j.totals || null;
+        state.latestBalance = j.latestBalance;
+        state.total = j.total ?? state.rows.length;
+        state.allCats = [...new Set(state.rows.map((r) => r.category))].sort();
+        const cf = $('catF');
+        const keep = cf.value;
+        cf.innerHTML = '<option value="all">All categories</option>' + state.allCats.map((c) => '<option>' + esc(c) + '</option>').join('');
+        if (state.allCats.includes(keep)) cf.value = keep;
+        $('updatedAt').textContent = 'Updated ' + new Date().toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit' });
+        render();
+      } catch (e) {
+        if (String(e.message) !== 'unauthorized') {
+          err.textContent = 'Could not load transactions: ' + (e.message || 'network error') + '. Retrying automatically in 60s.';
+          err.classList.remove('hidden');
+        }
+      } finally {
+        state.loading = false;
+      }
+    }
+
+    $('reloadBtn').addEventListener('click', load);
+    ['fromD', 'toD'].forEach((id) => $(id).addEventListener('change', load));
+    document.querySelectorAll('.shopBtn').forEach((b) => b.addEventListener('click', () => {
+      state.shop = b.dataset.shop;
+      document.querySelectorAll('.shopBtn').forEach((x) => {
+        const on = x === b;
+        x.classList.toggle('bg-emerald-600', on);
+        x.classList.toggle('font-semibold', on);
+        x.classList.toggle('text-slate-300', !on);
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      render();
+    }));
+    ['q', 'typeF', 'catF'].forEach((id) => $(id).addEventListener('input', render));
+
+    function filtered() {
+      const q = $('q').value.trim().toLowerCase();
+      const tf = $('typeF').value, cf = $('catF').value;
+      return state.rows.filter((r) => {
+        if (state.shop !== 'Both' && r.shop !== state.shop) return false;
+        if (tf !== 'all' && r.type !== tf) return false;
+        if (cf !== 'all' && r.category !== cf) return false;
+        if (q && !((r.note || '') + ' ' + (r.mpesa_code || '') + ' ' + (r.category || '') + ' ' + (r.method || '')).toLowerCase().includes(q)) return false;
+        return true;
+      });
+    }
+
+    function kpis(rows) {
+      let inn = 0, out = 0;
+      for (const r of rows) { if (r.type === 'in') inn += Number(r.amount); else out += Number(r.amount); }
+      return { inn, out, profit: inn - out };
+    }
+
+    // Server-side totals for the current shop tab (uncapped, exact).
+    // Falls back to the visible rows only when a client filter narrows the view.
+    function currentTotals() {
+      const narrowed = $('typeF').value !== 'all' || $('catF').value !== 'all' || !!$('q').value.trim();
+      if (narrowed) return kpis(filtered());
+      const parts = state.shop === 'Both' ? Object.values(state.summary) : [state.summary[state.shop]].filter(Boolean);
+      const t = parts.reduce((a, s) => ({ inn: a.inn + (s.in || 0), out: a.out + (s.out || 0) }), { inn: 0, out: 0 });
+      return { inn: t.inn, out: t.out, profit: t.inn - t.out };
+    }
+
+    function render() {
+      const rows = filtered();
+      const k = currentTotals();
+      $('kpiIn').textContent = fmt(k.inn);
+      $('kpiOut').textContent = fmt(k.out);
+      $('kpiProfit').textContent = fmt(k.profit);
+      $('kpiProfit').className = 'mt-1 text-2xl font-bold ' + (k.profit >= 0 ? 'text-emerald-400' : 'text-red-400');
+      $('kpiBal').textContent = state.latestBalance != null ? fmt(state.latestBalance) : '—';
+
+      // compare (always both shops, current date range)
+      $('compareBody').innerHTML = ['Aggmart', 'Trade Star Shop'].map((s) => {
+        const t = state.summary[s] || { in: 0, out: 0, profit: 0, count: 0 };
+        return '<tr class="border-t border-slate-800"><td class="py-1 pr-4">' + s + '</td>'
+          + '<td class="py-1 pr-4 text-right text-emerald-400">' + fmt(t.in) + '</td>'
+          + '<td class="py-1 pr-4 text-right text-red-400">' + fmt(t.out) + '</td>'
+          + '<td class="py-1 pr-4 text-right font-semibold">' + fmt(t.profit) + '</td>'
+          + '<td class="py-1 text-right text-slate-400">' + t.count + '</td></tr>';
+      }).join('');
+
+      drawChart(rows);
+      drawCats(rows);
+
+      // table
+      $('emptyMsg').classList.toggle('hidden', rows.length > 0);
+      $('rows').innerHTML = rows.map((r) => '<tr class="border-t border-slate-800">'
+        + '<td class="py-1.5 pr-3 whitespace-nowrap text-slate-400">' + esc(day(r.date)) + '</td>'
+        + '<td class="py-1.5 pr-3">' + esc(r.shop) + '</td>'
+        + '<td class="py-1.5 pr-3 ' + (r.type === 'in' ? 'text-emerald-400' : 'text-red-400') + '">' + (r.type === 'in' ? 'IN' : 'OUT') + '</td>'
+        + '<td class="py-1.5 pr-3 text-right font-semibold">' + fmt(r.amount) + '</td>'
+        + '<td class="py-1.5 pr-3 text-slate-300">' + esc(r.category || '') + '</td>'
+        + '<td class="py-1.5 pr-3 text-slate-400">' + esc(r.method || '') + '</td>'
+        + '<td class="py-1.5 pr-3 text-slate-300">' + esc((r.note || '') + (r.mpesa_code ? ' · ' + r.mpesa_code : '')) + '</td>'
+        + '<td class="py-1.5"><button data-void="' + esc(r.mpesa_code || '') + '" data-amt="' + esc(String(r.amount)) + '" data-shop="' + esc(r.shop) + '" data-type="' + r.type + '" class="voidBtn text-xs text-slate-500 underline hover:text-slate-200">void</button></td>'
+        + '</tr>').join('');
+      document.querySelectorAll('.voidBtn').forEach((b) => b.addEventListener('click', () => {
+        $('mShop').value = b.dataset.shop;
+        $('mType').value = b.dataset.type === 'in' ? 'out' : 'in';
+        $('mAmt').value = b.dataset.amt;
+        $('mNote').value = b.dataset.void ? 'Void ' + b.dataset.void : 'Correction';
+        $('mReason').focus();
+        document.querySelector('details').open = true;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }));
+
+      const shown = rows.length.toLocaleString('en-KE');
+      const all = Number(state.total || 0).toLocaleString('en-KE');
+      $('rowCount').textContent = rows.length === Number(state.total || 0)
+        ? all + ' transactions in range'
+        : 'Showing ' + shown + ' of ' + all + ' transactions — narrow the date range to see the rest';
+    }
+
+    // M-Pesa statements are Africa/Nairobi (UTC+3). Bucket and label every day
+    // in that zone so the chart matches the statement, whatever the device tz.
+    const dayKey = (iso) => {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return '';
+      d.setUTCHours(d.getUTCHours() + 3);
+      return d.toISOString().slice(0, 10);
+    };
+
+    function day(iso) {
+      const k = dayKey(iso);
+      if (!k) return '';
+      const [, m, dd] = k.split('-');
+      const names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return Number(dd) + ' ' + names[Number(m) - 1];
+    }
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const todayLocal = () => {
+      const d = new Date();
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    };
+
+    function drawChart(rows) {
+      const c = $('chart'), ctx = c.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const W = c.clientWidth, H = c.clientHeight;
+      c.width = W * dpr; c.height = H * dpr; ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, W, H);
+      const days = [];
+      const base = new Date(dayKey(new Date().toISOString()) + 'T00:00:00Z');
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date(base);
+        d.setUTCDate(d.getUTCDate() - i);
+        days.push(d.toISOString().slice(0, 10));
+      }
+      const agg = Object.fromEntries(days.map((d) => [d, { inn: 0, out: 0 }]));
+      for (const r of rows) {
+        const k = dayKey(r.date);
+        if (!agg[k]) continue;
+        if (r.type === 'in') agg[k].inn += Number(r.amount); else agg[k].out += Number(r.amount);
+      }
+      const max = Math.max(1, ...days.map((d) => Math.max(agg[d].inn, agg[d].out)));
+      const bw = W / 14;
+      days.forEach((d, i) => {
+        const { inn, out } = agg[d];
+        const w = Math.min(14, bw / 3);
+        const x = i * bw + bw / 2;
+        const hi = (inn / max) * (H - 24), ho = (out / max) * (H - 24);
+        ctx.fillStyle = '#34d399';
+        ctx.fillRect(x - w - 1, H - 16 - hi, w, hi);
+        ctx.fillStyle = '#f87171';
+        ctx.fillRect(x + 1, H - 16 - ho, w, ho);
+        if (i % 2 === 0) {
+          ctx.fillStyle = '#64748b'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText(d.slice(5), x, H - 3);
+        }
+      });
+    }
+
+    function drawCats(rows) {
+      const sums = {};
+      for (const r of rows) {
+        const v = (r.type === 'in' ? 1 : -1) * Number(r.amount);
+        sums[r.category || 'Other'] = (sums[r.category || 'Other'] || 0) + v;
+      }
+      const top = Object.entries(sums).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 8);
+      const max = Math.max(1, ...top.map(([, v]) => Math.abs(v)));
+      $('catBars').innerHTML = top.length ? top.map(([c, v]) =>
+        '<div><div class="mb-0.5 flex justify-between"><span>' + esc(c) + '</span><span class="' + (v >= 0 ? 'text-emerald-400' : 'text-red-400') + '">' + fmt(v) + '</span></div>'
+        + '<div class="h-2 rounded bg-slate-800"><div class="h-2 rounded ' + (v >= 0 ? 'bg-emerald-500' : 'bg-red-500') + '" style="width:' + Math.round(Math.abs(v) / max * 100) + '%"></div></div></div>'
+      ).join('') : '<p class="text-slate-500">No data in range.</p>';
+    }
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // CSV — every field quoted; leading =+-@ stripped so Excel/Sheets can't execute a cell
+    $('csvBtn').addEventListener('click', () => {
+      const rows = filtered();
+      const cell = (v) => {
+        let s = String(v ?? '');
+        if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+        return '"' + s.replace(/"/g, '""') + '"';
+      };
+      const head = 'date,shop,type,amount,category,method,note,mpesa_code';
+      const lines = rows.map((r) => [r.date, r.shop, r.type, r.amount, r.category, r.method, r.note, r.mpesa_code].map(cell).join(','));
+      const blob = new Blob([[head, ...lines].join('\n')], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'transactions-' + (state.shop === 'Both' ? 'both-shops' : state.shop) + '-' + new Date().toISOString().slice(0, 10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // manual correction
+    $('mDate').value = todayLocal();
+    $('manualForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('manualMsg');
+      msg.classList.remove('hidden');
+      msg.className = 'mt-2 text-sm text-slate-400';
+      msg.textContent = 'Saving…';
+      const j = await api('/api/transactions', {
+        method: 'POST',
+        body: JSON.stringify({
+          shop: $('mShop').value, type: $('mType').value, amount: $('mAmt').value,
+          category: $('mCat').value || 'Correction', method: 'Manual',
+          date: $('mDate').value || undefined, note: $('mNote').value,
+          reason: $('mReason').value,
+        }),
+      });
+      if (j.ok) {
+        msg.className = 'mt-2 text-sm text-emerald-400';
+        msg.textContent = 'Saved.';
+        $('manualForm').reset();
+        $('mDate').value = todayLocal();
+        load();
+      } else {
+        msg.className = 'mt-2 text-sm text-red-400';
+        msg.textContent = j.error || 'Save failed.';
+      }
+    });
+
+    // Live ledger: refresh every 60s while visible, and immediately on tab focus.
+    const appVisible = () => !$('app').classList.contains('hidden') && !document.hidden;
+    setInterval(() => { if (appVisible()) load(); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (appVisible()) load(); });
+    })();
+  </script>
+</Layout>
