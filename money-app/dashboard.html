@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Pesa Admin — Ledger Dashboard</title>
+<style>
+:root{
+  --green:#00a94f;--green-d:#007a3d;--green-l:#e6f7ee;
+  --red:#e5484d;--red-l:#fdecec;
+  --ink:#101828;--sub:#667085;--line:#eaecf0;--bg:#f6f8fa;
+  --card:#fff;--blue:#2563eb;--amber:#f79009;--amber-l:#fff7e6;--amber-d:#7a4b00;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button{font-family:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+/* header */
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:16px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green-d));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px}
+.logo b{font-size:16px;display:block;line-height:1.1}
+.logo small{color:var(--sub);font-size:12px}
+.spacer{flex:1}
+.hbtn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.hbtn:hover{background:#f9fafb}
+.hbtn.green{background:var(--green);border-color:var(--green);color:#fff}
+.hbtn.green:hover{background:var(--green-d)}
+.hbtn:disabled{opacity:.45;cursor:not-allowed}
+.hbtn.on{background:var(--amber-l);border-color:var(--amber);color:var(--amber-d)}
+/* status banner — always visible, never a blank page */
+.banner{display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-radius:12px;padding:11px 16px;font-size:13.5px;margin-bottom:16px;border:1px solid var(--line);background:var(--card);box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.banner .tag{font-weight:800;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:#f2f4f7;color:#475467;white-space:nowrap}
+.banner .detail{color:var(--sub);font-size:12.5px}
+.banner .b-act{margin-left:auto;display:flex;gap:8px;align-items:center}
+.banner .b-act button{border:0;background:var(--ink);color:#fff;border-radius:7px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer}
+.b-live{background:var(--green-l);border-color:#a6f4c5}
+.b-live .tag{background:var(--green);color:#fff}
+.b-warn{background:var(--amber-l);border-color:#ffe7ba;color:var(--amber-d)}
+.b-warn .tag{background:var(--amber);color:#fff}
+.b-warn .detail{color:#93631f}
+.b-err{background:var(--red-l);border-color:#fecdca;color:#b42318}
+.b-err .tag{background:var(--red);color:#fff}
+.b-err .detail{color:#b42318}
+.b-info{background:#eff4ff;border-color:#d1e0ff;color:#1849a9}
+.b-info .tag{background:var(--blue);color:#fff}
+.b-sample{background:var(--amber-l);border-color:var(--amber);color:var(--amber-d);border-width:2px}
+.b-sample .tag{background:var(--amber-d);color:#fff}
+.b-sample .detail{color:#93631f}
+/* cards & grids */
+.grid{display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.card h3{margin:0 0 12px;font-size:14px;font-weight:700}
+.card h3 small{color:var(--sub);font-weight:500;margin-left:6px}
+.kpis{grid-template-columns:repeat(4,1fr)}
+.shops{grid-template-columns:1fr 1fr}
+@media(max-width:900px){.kpis,.shops{grid-template-columns:1fr}}
+.kpi small{color:var(--sub);font-size:12px}
+.kpi b{display:block;font-size:25px;margin:6px 0 2px;letter-spacing:-.5px}
+.kpi .in{color:var(--green)}
+.kpi .out{color:var(--red)}
+.kpi .blue{color:var(--blue)}
+.kpi .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:8px}
+.ico.g{background:var(--green-l)}.ico.r{background:var(--red-l)}.ico.b{background:#eff4ff}.ico.n{background:#f2f4f7}
+/* per-shop breakdown */
+.shopcard{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fcfcfd}
+.shopcard h4{margin:0 0 10px;font-size:13.5px;display:flex;align-items:center;gap:8px}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mini div{font-size:11.5px;color:var(--sub)}
+.mini b{display:block;font-size:15px;color:var(--ink);margin-top:3px;letter-spacing:-.3px}
+.mini .in b{color:var(--green)}.mini .out b{color:var(--red)}.mini .profit b{color:var(--blue)}
+/* filters + table */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.toolbar input{width:auto;min-width:220px;flex:1;padding:9px 11px;border:1px solid #d0d5dd;border-radius:9px;background:#fff;color:var(--ink);font-size:13.5px;font-family:inherit}
+.toolbar input:focus{outline:2px solid var(--green-l);border-color:var(--green)}
+.hint{font-size:12.5px;color:var(--sub)}
+.twrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--sub);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;user-select:none}
+th.sortable{cursor:pointer}
+th.sortable:hover{color:var(--ink)}
+th.sorted{color:var(--green-d)}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.amt{text-align:right;font-weight:700;white-space:nowrap}
+td.amt.in{color:var(--green)}
+td.amt.out{color:var(--red)}
+td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11.5px;font-weight:700}
+.pill.in{background:var(--green-l);color:var(--green-d)}
+.pill.out{background:var(--red-l);color:#b42318}
+.badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:600;background:#f2f4f7;color:#475467}
+.badge.shop{background:#eff4ff;color:#175cd3}
+.badge.till{background:#eff8ff;color:#175cd3}
+.badge.pochi{background:#ecfdf3;color:#067647}
+.empty{text-align:center;color:var(--sub);padding:30px 10px !important}
+.empty b{display:block;color:var(--ink);font-size:15px;margin-bottom:6px}
+footer{text-align:center;color:var(--sub);font-size:12px;margin:18px 0 8px}
+/* toast */
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:9}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">P</div>
+    <div><b>Pesa Admin</b><small>Aggmart &amp; Trade Star Shop · KES ledger</small></div>
+  </div>
+  <div class="spacer"></div>
+  <button class="hbtn" id="sampleBtn" title="Render clearly-labelled sample rows to verify the UI without a backend">SAMPLE DATA: off</button>
+  <button class="hbtn" id="exportBtn">Export CSV</button>
+  <button class="hbtn green" id="refreshBtn">Refresh</button>
+</header>
+
+<!-- status banner: one of these is ALWAYS shown (loading / live / 401 / 503 / unreachable / sample) -->
+<div class="banner b-info" id="banner" role="status" aria-live="polite">
+  <span class="tag" id="bannerTag">Loading</span>
+  <span id="bannerText">Fetching /api/transactions…</span>
+  <span class="detail" id="bannerDetail"></span>
+  <span class="b-act" id="bannerAct"></span>
+</div>
+
+<div class="grid kpis">
+  <div class="card kpi"><div class="ico g">&#8595;</div><small>MONEY IN — TODAY</small><b class="in" id="kTodayIn">KSh 0</b><small id="kTodaySub">out KSh 0 · net KSh 0 · 0 txns</small></div>
+  <div class="card kpi"><div class="ico b">&#9670;</div><small>MONEY IN — LAST 7 DAYS</small><b class="in" id="k7In">KSh 0</b><small id="k7Sub">out KSh 0 · net KSh 0 · 0 txns</small></div>
+  <div class="card kpi"><div class="ico n">&#9638;</div><small>MONEY IN — LAST 30 DAYS</small><b class="in" id="k30In">KSh 0</b><small id="k30Sub">out KSh 0 · net KSh 0 · 0 txns</small></div>
+  <div class="card kpi"><div class="ico r">&#9776;</div><small>TRANSACTIONS</small><b class="blue" id="kCount">0</b><small id="kCountSub">0 rows loaded</small></div>
+</div>
+
+<div class="grid shops" style="margin-top:16px">
+  <div class="card">
+    <h3>Per-shop breakdown <small id="shopScope">all time</small></h3>
+    <div class="grid shops" id="shopCards" style="gap:12px"></div>
+  </div>
+  <div class="card">
+    <h3>Latest recorded balance <small>M-Pesa</small></h3>
+    <div class="kpi"><b id="kBal">KSh 0</b><small id="kBalSub">newest balance seen by the ledger</small></div>
+    <p class="hint" id="refreshHint">KPI windows use local days. Counts come from the API aggregate when present.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <h3>Transactions <small id="rowHint"></small></h3>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Filter by shop, type, amount, method, note, M-Pesa code…" />
+    <span class="hint">Click a column header to sort</span>
+  </div>
+  <div class="twrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" data-k="date">Date <span class="ar"></span></th>
+          <th class="sortable" data-k="shop">Shop <span class="ar"></span></th>
+          <th class="sortable" data-k="type">Type <span class="ar"></span></th>
+          <th class="sortable" data-k="amount" style="text-align:right">Amount <span class="ar"></span></th>
+          <th class="sortable" data-k="method">Method <span class="ar"></span></th>
+          <th class="sortable" data-k="note">Note <span class="ar"></span></th>
+          <th class="sortable" data-k="mpesa_code">M-Pesa code <span class="ar"></span></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>Zero-dependency admin view · local only (127.0.0.1) · CSV export uses the filtered rows <span id="upd"></span></footer>
+</div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+const API = '/api/transactions';
+const $ = id => document.getElementById(id);
+// KES formatting kept identical to shop-tracker
+const fmt = n => 'KSh ' + Number(n || 0).toLocaleString('en-KE');
+const pad = n => String(n).padStart(2, '0');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+let rows = [];          // live rows from GET /api/transactions
+let apiSummary = null;  // per-shop aggregate straight from the API (uncapped)
+let apiTotal = null;    // how many rows match before the limit
+let apiLimit = null;
+let latestBalance = null;
+let sampleMode = false;
+let loading = false;
+let sortKey = 'date', sortDir = 'desc';
+
+function toast(m) {
+  const t = $('toast');
+  t.textContent = m;
+  t.classList.add('show');
+  clearTimeout(t._x);
+  t._x = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ---------- status banner: every backend state gets a visible message ---------- */
+function setBanner(cls, tag, text, detail, actHtml, actFn) {
+  const b = $('banner');
+  b.className = 'banner ' + cls;
+  $('bannerTag').textContent = tag;
+  $('bannerText').textContent = text;
+  $('bannerDetail').textContent = detail || '';
+  const act = $('bannerAct');
+  act.innerHTML = actHtml || '';
+  if (actFn) act.onclick = actFn; else act.onclick = null;
+}
+function nowStamp() {
+  const d = new Date();
+  return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+}
+function showLoading() {
+  setBanner('b-info', 'Loading', 'Fetching ' + API + '…', '', '', null);
+}
+
+/* ---------- date helpers (local day windows, date-only values kept literal) ---------- */
+function localDay(t) { return t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); }
+function dayKey(v) {
+  const s = String(v == null ? '' : v);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const t = new Date(s);
+  if (!Number.isNaN(t.getTime())) return localDay(t);
+  return s.slice(0, 10);
+}
+function daysAgoKey(n) { const d = new Date(); d.setDate(d.getDate() - n); return localDay(d); }
+function fmtDate(v) {
+  const s = String(v == null ? '' : v);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const t = new Date(s);
+  if (!Number.isNaN(t.getTime())) return localDay(t) + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes());
+  return s;
+}
+function within(key, fromKey, toKey) { return key >= fromKey && key <= toKey; }
+
+function windowSum(list) {
+  let i = 0, o = 0, n = 0;
+  for (const r of list) {
+    n++;
+    const amt = Number(r.amount) || 0;
+    if (r.type === 'out') o += amt; else i += amt;
+  }
+  i = Math.round(i * 100) / 100; o = Math.round(o * 100) / 100;
+  return { i: i, o: o, p: Math.round((i - o) * 100) / 100, n: n };
+}
+function buildSummary(list) {
+  const out = {};
+  for (const r of list) {
+    const s = r.shop || 'Unknown';
+    if (!out[s]) out[s] = { in: 0, out: 0, profit: 0, count: 0 };
+    const amt = Number(r.amount) || 0;
+    if (r.type === 'out') out[s].out += amt; else out[s].in += amt;
+    out[s].count += 1;
+  }
+  for (const t of Object.values(out)) {
+    t.in = Math.round(t.in * 100) / 100;
+    t.out = Math.round(t.out * 100) / 100;
+    t.profit = Math.round((t.in - t.out) * 100) / 100;
+  }
+  return out;
+}
+
+/* ---------- KPI render ---------- */
+function setWindow(id, s) {
+  $(id + 'In').textContent = fmt(s.i);
+  $(id + 'Sub').textContent = 'out ' + fmt(s.o) + ' · net ' + fmt(s.p) + ' · ' + s.n + ' txns';
+}
+function renderKpis() {
+  const keys = rows.map(r => dayKey(r.date));
+  const k0 = daysAgoKey(0), k6 = daysAgoKey(6), k29 = daysAgoKey(29);
+  const today = [], w7 = [], w30 = [];
+  rows.forEach((r, idx) => {
+    const k = keys[idx];
+    if (!k) return;
+    if (k === k0) today.push(r);
+    if (within(k, k6, k0)) w7.push(r);
+    if (within(k, k29, k0)) w30.push(r);
+  });
+  setWindow('kToday', windowSum(today));
+  setWindow('k7', windowSum(w7));
+  setWindow('k30', windowSum(w30));
+
+  const total = (apiTotal === null || apiTotal === undefined) ? rows.length : apiTotal;
+  $('kCount').textContent = Number(total).toLocaleString('en-KE');
+  $('kCountSub').textContent = rows.length + ' rows loaded' + (apiLimit ? ' (limit ' + apiLimit + ')' : '') +
+    (apiTotal !== null && apiTotal > rows.length ? ' of ' + Number(apiTotal).toLocaleString('en-KE') + ' total' : '');
+
+  $('kBal').textContent = latestBalance === null || latestBalance === undefined ? '—' : fmt(latestBalance);
+  $('kBalSub').textContent = latestBalance === null || latestBalance === undefined
+    ? 'no balance recorded in range'
+    : 'newest M-Pesa balance seen by the ledger';
+
+  // per-shop breakdown: prefer the API's uncapped aggregate, else derive from loaded rows
+  const summary = apiSummary && Object.keys(apiSummary).length ? apiSummary : buildSummary(rows);
+  const names = Object.keys(summary);
+  $('shopScope').textContent = apiSummary && Object.keys(apiSummary).length ? 'all time (API aggregate)' : 'loaded rows';
+  if (!names.length) {
+    $('shopCards').innerHTML = '<p class="hint">No shop data yet.</p>';
+    return;
+  }
+  $('shopCards').innerHTML = names.map(n => {
+    const t = summary[n];
+    return '<div class="shopcard"><h4><span class="badge shop">' + esc(n) + '</span></h4>' +
+      '<div class="mini">' +
+      '<div class="in">IN<b>' + fmt(t.in) + '</b></div>' +
+      '<div class="out">OUT<b>' + fmt(t.out) + '</b></div>' +
+      '<div class="profit">PROFIT<b>' + fmt(t.profit) + '</b></div>' +
+      '<div>TXNS<b>' + Number(t.count || 0).toLocaleString('en-KE') + '</b></div>' +
+      '</div></div>';
+  }).join('');
+}
+
+/* ---------- table: filter + sort ---------- */
+function tableRows() {
+  const q = $('q').value.trim().toLowerCase();
+  let list = rows.filter(r => {
+    if (!q) return true;
+    const hay = [r.date, r.shop, r.type, r.amount, r.method, r.category, r.note, r.mpesa_code].join(' ').toLowerCase();
+    return hay.indexOf(q) >= 0;
+  });
+  const dir = sortDir === 'asc' ? 1 : -1;
+  list = list.slice().sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey === 'amount') return ((Number(av) || 0) - (Number(bv) || 0)) * dir;
+    if (sortKey === 'date') {
+      const at = new Date(av).getTime(), bt = new Date(bv).getTime();
+      if (!Number.isNaN(at) && !Number.isNaN(bt) && at !== bt) return (at - bt) * dir;
+    }
+    av = String(av == null ? '' : av).toLowerCase();
+    bv = String(bv == null ? '' : bv).toLowerCase();
+    if (av < bv) return -1 * dir;
+    if (av > bv) return 1 * dir;
+    return 0;
+  });
+  return list;
+}
+function renderSortIndicators() {
+  const ths = document.querySelectorAll('th.sortable');
+  for (const th of ths) {
+    const on = th.dataset.k === sortKey;
+    th.classList.toggle('sorted', on);
+    th.querySelector('.ar').textContent = on ? (sortDir === 'asc' ? '▲' : '▼') : '';
+  }
+}
+function emptyRow(html) { return '<tr><td colspan="7" class="empty">' + html + '</td></tr>'; }
+function renderTable() {
+  const list = tableRows();
+  $('rowHint').textContent = list.length + ' shown of ' + rows.length + ' loaded';
+  renderSortIndicators();
+  if (!list.length) {
+    if (sampleMode) $('rows').innerHTML = emptyRow('<b>No sample rows match the filter</b>Clear the filter to see the sample set.');
+    else if (rows.length) $('rows').innerHTML = emptyRow('<b>No transactions match the filter</b>Clear the filter to see all ' + rows.length + ' rows.');
+    else $('rows').innerHTML = emptyRow('<b>No transactions to show</b>See the status banner above — enable SAMPLE DATA to preview this table without a backend.');
+    return;
+  }
+  $('rows').innerHTML = list.map(r => {
+    const isIn = r.type !== 'out';
+    const m = String(r.method || '');
+    const mCls = m.indexOf('Till') >= 0 ? 'till' : (m.indexOf('Pochi') >= 0 ? 'pochi' : '');
+    return '<tr>' +
+      '<td>' + esc(fmtDate(r.date)) + '</td>' +
+      '<td><span class="badge shop">' + esc(r.shop || '') + '</span></td>' +
+      '<td><span class="pill ' + (isIn ? 'in' : 'out') + '">' + (isIn ? 'IN' : 'OUT') + '</span></td>' +
+      '<td class="amt ' + (isIn ? 'in' : 'out') + '">' + (isIn ? '+' : '\u2212') + fmt(r.amount).slice(4) + '</td>' +
+      '<td><span class="badge ' + mCls + '">' + esc(m) + '</span></td>' +
+      '<td>' + esc(r.note || '') + (r.category ? ' <span class="badge">' + esc(r.category) + '</span>' : '') + '</td>' +
+      '<td class="mono">' + esc(r.mpesa_code || '') + '</td>' +
+      '</tr>';
+  }).join('');
+}
+function render() { renderKpis(); renderTable(); }
+
+/* ---------- CSV export (client-side Blob) ---------- */
+function exportCsv() {
+  if (sampleMode) { toast('Export disabled while SAMPLE DATA is on'); return; }
+  const list = tableRows();
+  if (!list.length) { toast('Nothing to export'); return; }
+  const cell = v => { const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const head = ['date', 'shop', 'type', 'amount', 'method', 'note', 'mpesa_code'];
+  const lines = [head.join(',')].concat(list.map(r => [
+    r.date, r.shop, r.type, r.amount, r.method, r.note, r.mpesa_code
+  ].map(cell).join(',')));
+  const blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ledger-' + localDay(new Date()) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  toast('CSV downloaded (' + list.length + ' rows)');
+}
+
+/* ---------- sample data (clearly labelled, export blocked) ---------- */
+function sampleRows() {
+  let seed = 20261008;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+  const pick = a => a[Math.floor(rnd() * a.length)];
+  const shops = ['Aggmart', 'Trade Star Shop'];
+  const methods = ['Till Number', 'Pochi la Biashara', 'M-Pesa Personal', 'Cash', 'Bank'];
+  const amounts = [150, 250, 400, 600, 850, 1200, 1800, 2400, 3500, 5200];
+  const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+  const code = () => { let s = ''; for (let i = 0; i < 10; i++) s += A[Math.floor(rnd() * A.length)]; return s; };
+  const out = [];
+  for (let d = 13; d >= 0; d--) {
+    const dt = new Date(); dt.setDate(dt.getDate() - d);
+    const day = localDay(dt);
+    for (const shop of shops) {
+      const n = 2 + Math.floor(rnd() * 4);
+      for (let i = 0; i < n; i++) {
+        out.push({
+          id: 's-' + d + '-' + shop[0] + '-' + i,
+          shop: shop,
+          type: 'in',
+          amount: pick(amounts),
+          category: 'Sales',
+          method: pick(methods),
+          date: day + 'T' + pad(9 + Math.floor(rnd() * 9)) + ':' + pad(Math.floor(rnd() * 60)) + ':00+03:00',
+          note: 'Counter sale',
+          mpesa_code: rnd() < 0.75 ? code() : null
+        });
+      }
+      if (rnd() < 0.85) {
+        const ex = pick([
+          ['Restock', 2000 + Math.floor(rnd() * 9000)],
+          ['Transport', 150 + Math.floor(rnd() * 500)],
+          ['Airtime/Data', 50 + Math.floor(rnd() * 100)],
+          ['M-Pesa Fees', 10 + Math.floor(rnd() * 50)],
+          ['Food', 120 + Math.floor(rnd() * 400)]
+        ]);
+        out.push({
+          id: 'e-' + d + '-' + shop[0],
+          shop: shop,
+          type: 'out',
+          amount: ex[1],
+          category: ex[0],
+          method: pick(['Cash', 'M-Pesa Personal', 'Bank']),
+          date: day + 'T' + pad(10 + Math.floor(rnd() * 8)) + ':' + pad(Math.floor(rnd() * 60)) + ':00+03:00',
+          note: ex[0] + ' — sample',
+          mpesa_code: rnd() < 0.4 ? code() : null
+        });
+      }
+    }
+  }
+  return out;
+}
+
+/* ---------- data load: maps every backend state to a banner ---------- */
+async function load() {
+  if (sampleMode) { render(); return; }
+  if (loading) return;
+  loading = true;
+  $('refreshBtn').disabled = true;
+  $('refreshBtn').textContent = 'Loading…';
+  showLoading();
+
+  let res = null, body = null, netErr = '';
+  try {
+    res = await fetch(API + '?limit=1000', { cache: 'no-store', headers: { 'Accept': 'application/json' } });
+    const text = await res.text();
+    try { body = JSON.parse(text); } catch (e) { body = null; }
+  } catch (e) {
+    netErr = (e && e.message) ? e.message : 'network error';
+  }
+
+  loading = false;
+  $('refreshBtn').disabled = false;
+  $('refreshBtn').textContent = 'Refresh';
+  const status = res ? res.status : 0;
+  $('upd').textContent = netErr
+    ? '· last check failed at ' + nowStamp()
+    : '· last fetch ' + nowStamp() + ' (HTTP ' + status + ')';
+
+  if (netErr) {
+    rows = []; apiSummary = null; apiTotal = null; apiLimit = null; latestBalance = null;
+    setBanner('b-err', 'API unreachable', 'Cannot reach ' + API + '.',
+      netErr + ' — is money-app/server.mjs running on 127.0.0.1:8390?',
+      'Use sample data', () => toggleSample(true));
+    render();
+    return;
+  }
+
+  const detail = body && body.error ? String(body.error) : '';
+
+  if (status === 200 && body && body.ok !== false) {
+    rows = Array.isArray(body.rows) ? body.rows : [];
+    apiSummary = body.summary && typeof body.summary === 'object' ? body.summary : null;
+    apiTotal = typeof body.total === 'number' ? body.total : rows.length;
+    apiLimit = typeof body.limit === 'number' ? body.limit : null;
+    latestBalance = (body.latestBalance === null || body.latestBalance === undefined) ? null : Number(body.latestBalance);
+    setBanner('b-live', 'Live', 'Connected — ' + rows.length + ' rows loaded at ' + nowStamp() + '.',
+      apiTotal !== null && apiTotal > rows.length ? 'showing latest ' + rows.length + ' of ' + apiTotal + ' matching' : '',
+      '', null);
+    render();
+    return;
+  }
+
+  rows = []; apiSummary = null; apiTotal = null; apiLimit = null; latestBalance = null;
+
+  if (status === 401) {
+    setBanner('b-warn', 'Sign-in required', 'Owner sign-in required.',
+      (detail || 'Login required') + ' — sign in as the ledger owner, then hit Refresh.',
+      'Use sample data', () => toggleSample(true));
+  } else if (status === 503) {
+    setBanner('b-warn', 'Not configured', 'Backend not configured — fill .env (money-app/README.md).',
+      detail || 'Supabase env missing (see README "Run" section).',
+      'Use sample data', () => toggleSample(true));
+  } else if (status === 404) {
+    setBanner('b-err', 'API unreachable', 'API unreachable — ' + API + ' returned 404.',
+      'The route is not mounted on this server yet.',
+      'Use sample data', () => toggleSample(true));
+  } else {
+    setBanner('b-err', 'API unreachable', 'API unreachable — unexpected response (HTTP ' + status + ').',
+      detail || 'Expected 200 from ' + API + '.',
+      'Use sample data', () => toggleSample(true));
+  }
+  render();
+}
+
+/* ---------- sample toggle ---------- */
+function toggleSample(force) {
+  const want = typeof force === 'boolean' ? force : !sampleMode;
+  if (want === sampleMode) return;
+  sampleMode = want;
+  if (sampleMode) {
+    rows = sampleRows();
+    apiSummary = null;          // derive from sample rows, never pretend it is live
+    apiTotal = rows.length;
+    apiLimit = null;
+    latestBalance = 18450;
+    setBanner('b-sample', 'SAMPLE DATA',
+      'Sample rows shown for UI verification — this is NOT real money.',
+      'Export is disabled and the live API is not being read.',
+      'Turn off', () => toggleSample(false));
+  } else {
+    rows = []; apiSummary = null; apiTotal = null; latestBalance = null;
+    syncSampleButton();
+    load();
+    return;
+  }
+  syncSampleButton();
+  render();
+}
+function syncSampleButton() {
+  $('sampleBtn').textContent = sampleMode ? 'SAMPLE DATA: on' : 'SAMPLE DATA: off';
+  $('sampleBtn').classList.toggle('on', sampleMode);
+  $('exportBtn').disabled = sampleMode;
+}
+
+/* ---------- wiring ---------- */
+$('refreshBtn').onclick = () => {
+  if (sampleMode) { render(); toast('Sample mode on — turn it off to read the live API'); return; }
+  load();
+};
+$('exportBtn').onclick = exportCsv;
+$('sampleBtn').onclick = () => toggleSample();
+$('q').oninput = renderTable;
+document.querySelector('thead').addEventListener('click', e => {
+  const th = e.target.closest('th.sortable');
+  if (!th) return;
+  const k = th.dataset.k;
+  if (sortKey === k) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  else { sortKey = k; sortDir = k === 'date' || k === 'amount' ? 'desc' : 'asc'; }
+  renderTable();
+});
+
+syncSampleButton();
+showLoading();
+render();
+load();
+</script>
+</body>
+</html>
