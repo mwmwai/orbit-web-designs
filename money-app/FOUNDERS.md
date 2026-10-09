@@ -90,7 +90,7 @@ and payments go **unrecorded**.
 
 1. Standing approval recorded: all pushes to `origin/main` (mwmwai/orbit-web-designs) are pre-approved.
 2. Standing conditions the team still enforces: `npm run build` green first; Vercel auto-deploys the push; full Windows paths for git (`C:\Program Files\Git\bin\git.exe`).
-3. **Not covered by this approval:** anything that puts money back on the public domain (dashboard page, `public/shop-tracker/`, moving `money-api/*` back into `api/`) — that stays a founder call.
+3. **Not covered by this approval:** anything that puts money back on the public domain (dashboard page, `shop-tracker/`, moving `money-api/*` back into `api/`) — that stays a founder call.
 
 **Done when:** the team ships green builds without waiting for push confirmation, and still escalates owner-override scope.
 **Rollback:** say so — approval is revoked from that moment.
