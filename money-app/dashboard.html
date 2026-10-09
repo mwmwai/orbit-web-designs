@@ -35,6 +35,7 @@ header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--
 .banner .detail{color:var(--sub);font-size:12.5px}
 .banner .b-act{margin-left:auto;display:flex;gap:8px;align-items:center}
 .banner .b-act button{border:0;background:var(--ink);color:#fff;border-radius:7px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer}
+.banner .b-act button.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .b-live{background:var(--green-l);border-color:#a6f4c5}
 .b-live .tag{background:var(--green);color:#fff}
 .b-warn{background:var(--amber-l);border-color:#ffe7ba;color:var(--amber-d)}
@@ -211,6 +212,14 @@ function setBanner(cls, tag, text, detail, actHtml, actFn) {
 function nowStamp() {
   const d = new Date();
   return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+}
+function errActs() {
+  return ['<button data-a="retry">Retry</button><button class="alt" data-a="sample">Use sample data</button>',
+    e => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      if (b.dataset.a === 'retry') load(); else toggleSample(true);
+    }];
 }
 function showLoading() {
   setBanner('b-info', 'Loading', 'Fetching ' + API + '…', '', '', null);
@@ -477,7 +486,7 @@ async function load() {
     rows = []; apiSummary = null; apiTotal = null; apiLimit = null; latestBalance = null;
     setBanner('b-err', 'API unreachable', 'Cannot reach ' + API + '.',
       netErr + ' — is money-app/server.mjs running on 127.0.0.1:8390?',
-      'Use sample data', () => toggleSample(true));
+      ...errActs());
     render();
     return;
   }
@@ -502,19 +511,19 @@ async function load() {
   if (status === 401) {
     setBanner('b-warn', 'Sign-in required', 'Owner sign-in required.',
       (detail || 'Login required') + ' — sign in as the ledger owner, then hit Refresh.',
-      'Use sample data', () => toggleSample(true));
+      ...errActs());
   } else if (status === 503) {
     setBanner('b-warn', 'Not configured', 'Backend not configured — fill .env (money-app/README.md).',
       detail || 'Supabase env missing (see README "Run" section).',
-      'Use sample data', () => toggleSample(true));
+      ...errActs());
   } else if (status === 404) {
     setBanner('b-err', 'API unreachable', 'API unreachable — ' + API + ' returned 404.',
       'The route is not mounted on this server yet.',
-      'Use sample data', () => toggleSample(true));
+      ...errActs());
   } else {
     setBanner('b-err', 'API unreachable', 'API unreachable — unexpected response (HTTP ' + status + ').',
       detail || 'Expected 200 from ' + API + '.',
-      'Use sample data', () => toggleSample(true));
+      ...errActs());
   }
   render();
 }
