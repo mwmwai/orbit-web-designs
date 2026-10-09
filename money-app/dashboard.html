@@ -534,6 +534,7 @@ function toggleSample(force) {
       'Sample rows shown for UI verification — this is NOT real money.',
       'Export is disabled and the live API is not being read.',
       'Turn off', () => toggleSample(false));
+    $('upd').textContent = '· sample mode — not live data';
   } else {
     rows = []; apiSummary = null; apiTotal = null; latestBalance = null;
     syncSampleButton();
