@@ -35,7 +35,7 @@ POSTs with no token → API returns 400 (`api/supabase/submit.ts:130`).
 **Blocked:** `supabase/dashboard-schema.sql` has never been run and no owner user exists — no ledger
 row can be read or written; `money-app/health.log` reports the same 7 missing keys every 10 minutes.
 
-1. Supabase → **SQL Editor → New query** → paste the FULL contents of `supabase/dashboard-schema.sql` (read it from disk: the strict-RLS + amount≤10M edits are **uncommitted**, so git/HEAD copy is stale) → **Run**.
+1. Supabase → **SQL Editor → New query** → paste the FULL contents of `supabase/dashboard-schema.sql` (disk and git HEAD are both current as of commit `8d85de5`, Oct 9 — the strict-RLS + amount≤10M edits are committed) → **Run**.
 2. **Authentication → Add user** (owner email + password) → copy the user UUID → SQL Editor, run the template in the file's section 0:
    `insert into profiles (id, is_owner) values ('<UUID>', true) on conflict (id) do update set is_owner = true;`
 3. **Authentication → Providers → Email → turn OFF "Allow new users to sign up"** (schema's own SECURITY note — strict RLS is the backstop, this is the front door).
