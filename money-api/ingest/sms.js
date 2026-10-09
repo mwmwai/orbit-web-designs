@@ -6,7 +6,7 @@
 // mpesa_code. Owner does nothing: phone auto-forwards SMS to this endpoint.
 // Payer phone is masked in the visible note; the full SMS stays in raw.
 
-import { parseShopMap, insertDeduped, parseMpesaSms, maskPhone } from '../_lib/shop-ingest.js';
+import { parseShopMap, insertDeduped, parseMpesaSms, maskPhone, shaEq } from '../_lib/shop-ingest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
   const secret = String(body.secret || '');
   const expected = process.env.INGEST_SECRET || '';
-  if (!expected || secret !== expected) {
+  if (!expected || !shaEq(secret, expected)) {
     res.status(401).json({ ok: false, error: 'Unauthorized' });
     return;
   }

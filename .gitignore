@@ -37,3 +37,10 @@ skills-lock.json
 .agents/skills/higgsfield-*/
 .agents/
 astro-dev.log
+
+# money-app local runner logs (never commit)
+money-app/health.log
+money-app/probe-*.log
+money-app/watchdog.log
+crew/logs/*.log
+shop-tracker/server.log

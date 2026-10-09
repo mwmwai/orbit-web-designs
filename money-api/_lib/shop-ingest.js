@@ -61,7 +61,7 @@ export function callbackTokenStatus(req) {
 
 // Constant-time compare on SHA-256 digests (equal length by construction,
 // so timingSafeEqual never throws and length leaks nothing).
-function shaEq(a, b) {
+export function shaEq(a, b) {
   try {
     const ha = createHash('sha256').update(String(a)).digest();
     const hb = createHash('sha256').update(String(b)).digest();
