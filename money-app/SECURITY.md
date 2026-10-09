@@ -12,7 +12,7 @@ Trust boundary: loopback. Anyone/anything on THIS machine can reach the runner.
 |---|---|---|
 | Other processes / local users on this machine | Full — 127.0.0.1 is not auth | Can hit `/health` (env key names + set/missing, never values), POST fake confirmations |
 | Drive-by browser page (owner visits malicious site) | Simple `text/plain` POST to `127.0.0.1:8390` is sent without CORS preflight | **Conditional:** could ingest a fake sale row ONLY if `MPESA_CALLBACK_TOKEN` unset AND Supabase env set. Today both unset → `ConfigError` → 503, nothing written. Mitigation: set `MPESA_CALLBACK_TOKEN` in `.env` BEFORE setting Supabase keys. |
-| Remote internet | None — `server.listen(PORT, '127.0.0.1')` (server.mjs:133) | No public surface |
+| Remote internet | None — `server.listen(PORT, '127.0.0.1')` (server.mjs:137) | No public surface |
 | Browser JS reading responses cross-origin | Blocked — shim sends no CORS headers, preflights fail | Responses unreadable off-origin |
 
 **If the domain re-enabled:** loopback protection vanishes; the drive-by row
@@ -27,12 +27,14 @@ signature). That is why token-gate + RLS must be live before any public route.
 | `POST /api/mpesa/c2b/validation` (validation.js:23-35) | log-only by design (writes nothing) | 200 always | warn + 200 | warn-once + 200 | 200 (env never touched) | always 200 ResultCode 0 |
 | `POST /api/ingest/sms` (sms.js:26-31) | `INGEST_SECRET` in body, **fail-closed**, timing-safe compare via `shaEq` (sms.js:28) | correct → proceed | 401 | **401 for every request** (unset = reject all) | after gate → 503 generic (line 70-73) | unparseable → 400; store fail → 500 fixed string |
 | `GET/POST /api/transactions` (transactions.js:22-34) | Supabase Auth JWT | authenticated → 200 | 401 | n/a | `authEnvMissing` → 503 generic (line 27) | 400/409/500 fixed strings; GET strips `raw` (line 64) |
-| `GET /health` (server.mjs:102-106) | none (localhost) | returns key names + set/missing only — never values | | | | |
+| `GET /health` (server.mjs:106-110) | none (localhost) | returns key names + set/missing only — never values | | | | |
 | `GET /` | none (localhost) | static shop-tracker UI | | | | |
 
-Adapter safety net (server.mjs:89-92): if a handler throws, the runner logs
+Adapter safety net (server.mjs:93-96): if a handler throws, the runner logs
 the stack to console only and answers a fixed `{ok:false, error:"Internal
 server error"}` — raw error messages are never echoed to the client.
+`res.setHeader` is honored (server.mjs:87), so handler-set headers such as
+`Cache-Control: no-store` on /api/transactions actually reach the client.
 
 Phone masking: visible `note` masks MSISDN (confirmation.js:83, sms.js:63 →
 `maskPhone`, shop-ingest.js:76-80). Full number lives only in `raw` jsonb,

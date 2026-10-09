@@ -67,12 +67,16 @@ function adapt(handler, req, res, url) {
       body: ['GET', 'HEAD'].includes(req.method) ? undefined : await rawBody(req),
     };
     let code = 200, payload = null, sent = false;
+    const outHeaders = {};
     dbg('adapt r.body type=', typeof r.body, 'value=', typeof r.body === 'string' ? JSON.stringify(r.body.slice(0, 200)) : r.body);
     const send = () => {
       if (sent) return; sent = true;
       dbg('adapt respond', code, typeof payload === 'string' ? payload.slice(0, 200) : JSON.stringify(payload));
-      const body = payload === null ? '' : (typeof payload === 'string' ? payload : JSON.stringify(payload));
-      res.writeHead(code, { 'Content-Type': typeof payload === 'string' ? 'text/plain; charset=utf-8' : 'application/json; charset=utf-8' });
+      const body = payload === null || payload === undefined ? '' : (typeof payload === 'string' ? payload : JSON.stringify(payload));
+      if (!('Content-Type' in outHeaders)) {
+        outHeaders['Content-Type'] = typeof payload === 'string' ? 'text/plain; charset=utf-8' : 'application/json; charset=utf-8';
+      }
+      res.writeHead(code, outHeaders);
       res.end(body);
       resolve();
     };
@@ -80,7 +84,7 @@ function adapt(handler, req, res, url) {
       status(c) { code = c; return rv; },
       json(o) { payload = o; send(); return rv; },
       send(o) { payload = o; send(); return rv; },
-      setHeader() {},
+      setHeader(k, v) { if (k && v !== undefined) outHeaders[String(k)] = v; },
       end() { send(); },
     };
     try {
