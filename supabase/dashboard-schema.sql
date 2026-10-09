@@ -5,10 +5,9 @@
 -- (Vercel env, never exposed). The anon key can do NOTHING on these tables.
 
 -- 0. Owner allowlist -----------------------------------------------------------
--- Simplest approach (per spec): ONE owner user in Supabase Auth; RLS policies
--- below restrict all row access to `authenticated` (anon gets nothing).
--- Optional hardening (multi-user later): track owners here and switch the
--- shop_transactions policies to the strict variants (commented below).
+-- ONE owner user in Supabase Auth, flagged profiles.is_owner = true.
+-- RLS below restricts row access to that owner; anon AND any non-owner
+-- authenticated user get NOTHING (see the SECURITY block in section 1).
 create table if not exists profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   is_owner boolean not null default false,
@@ -55,19 +54,34 @@ create index if not exists shop_transactions_category_idx
 
 alter table shop_transactions enable row level security;
 
--- Authenticated owner: full access. No anon policy = anon gets NOTHING
--- (no SELECT, no INSERT — ingest writes use service_role server-side,
--- which bypasses RLS entirely).
+-- SECURITY (Oct 6): the previous "owner full access" policy used
+-- `using (true)` for EVERY authenticated user - anyone allowed to sign up
+-- (Supabase public signups are ON by default) could read the whole ledger
+-- straight from PostgREST. The strict is_owner policies are now ACTIVE.
+-- Dashboard/API impact: NONE - /api/transactions reads and writes with
+-- service_role, which bypasses RLS, so the dashboard works even before the
+-- profiles row is inserted. Strict RLS only blocks direct table access.
+-- Also do: Authentication -> Providers -> Email -> turn OFF "Allow new users
+-- to sign up" (or keep signups, but then this policy is what saves you).
 drop policy if exists "owner full access" on shop_transactions;
-create policy "owner full access"
+drop policy if exists "owner full access (strict)" on shop_transactions;
+create policy "owner full access (strict)"
   on shop_transactions for all to authenticated
-  using (true)
-  with check (true);
+  using (exists (select 1 from profiles where profiles.id = auth.uid() and profiles.is_owner = true))
+  with check (exists (select 1 from profiles where profiles.id = auth.uid() and profiles.is_owner = true));
 
--- STRICT variants (enable when profiles.is_owner is maintained, then drop
--- "owner full access" above):
---   using (exists (select 1 from profiles where profiles.id = auth.uid() and profiles.is_owner = true))
---   with check (exists (select 1 from profiles where profiles.id = auth.uid() and profiles.is_owner = true))
+-- LOOSE variant (do NOT re-enable unless multi-user is intentional):
+--   drop policy if exists "owner full access (strict)" on shop_transactions;
+--   create policy "owner full access" on shop_transactions for all to authenticated
+--     using (true) with check (true);
+
+-- Amount sanity: numeric(12,2) alone allows ~1e10, which a forged or buggy
+-- callback could use to wreck dashboard totals. 10,000,000 KES is far above
+-- any real transaction (M-Pesa per-tx cap is 250,000) yet blocks garbage.
+-- Idempotent: safe to re-run; existing rows below the cap are untouched.
+alter table shop_transactions drop constraint if exists shop_transactions_amount_sane;
+alter table shop_transactions add constraint shop_transactions_amount_sane
+  check (amount > 0 and amount <= 10000000);
 
 -- 2. Verify -------------------------------------------------------------------
 --   select shop, type, count(*), sum(amount) from shop_transactions group by 1, 2;
