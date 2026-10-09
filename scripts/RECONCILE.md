@@ -1,6 +1,6 @@
 # Friday money ops — reconcile, P&L, deal log
 
-One chain, every Friday. ~15 minutes. All zero-dependency Node, Windows-safe, exit 0 always (read the stdout counts — never the exit code).
+One chain, every Friday. ~15 minutes. All zero-dependency Node, Windows-safe. `reconcile-pochi.mjs` and `pnl.mjs` always exit 0 (read the stdout counts — never the exit code); `deal-summary.mjs` exits 1 only if `deal-log.csv` is missing or its header is broken.
 
 ## Exact run order
 
