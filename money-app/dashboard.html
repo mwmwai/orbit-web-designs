@@ -457,13 +457,15 @@ function sampleRows() {
 }
 
 /* ---------- data load: maps every backend state to a banner ---------- */
-async function load() {
+async function load(quiet) {
   if (sampleMode) { render(); return; }
   if (loading) return;
   loading = true;
-  $('refreshBtn').disabled = true;
-  $('refreshBtn').textContent = 'Loading…';
-  showLoading();
+  if (!quiet) {
+    $('refreshBtn').disabled = true;
+    $('refreshBtn').textContent = 'Loading…';
+    showLoading();
+  }
 
   let res = null, body = null, netErr = '';
   try {
@@ -475,8 +477,12 @@ async function load() {
   }
 
   loading = false;
-  $('refreshBtn').disabled = false;
-  $('refreshBtn').textContent = 'Refresh';
+  if (!quiet) {
+    $('refreshBtn').disabled = false;
+    $('refreshBtn').textContent = 'Refresh';
+  }
+  // user switched to SAMPLE while this fetch was in flight — their choice wins
+  if (sampleMode) { syncSampleButton(); render(); return; }
   const status = res ? res.status : 0;
   $('upd').textContent = netErr
     ? '· last check failed at ' + nowStamp()
@@ -580,6 +586,8 @@ syncSampleButton();
 showLoading();
 render();
 load();
+// keep the live view fresh without a manual click (never runs in sample mode / while loading / when tab hidden)
+setInterval(() => { if (!sampleMode && !loading && !document.hidden) load(true); }, 30000);
 </script>
 </body>
 </html>
