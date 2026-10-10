@@ -393,10 +393,10 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   L.push(table(
     ['Bucket', 'Count', 'KES'],
     [
-      ['Matched', String(matched.length), kes(matchedKes)],
+      ['**MATCHED** (statement ↔ ledger agree)', String(matched.length), kes(matchedKes)],
       ['**UNRECORDED** (statement only — lost revenue)', String(unrec.length), kes(unrecKes)],
       ['**GHOST** (ledger only)', String(ghost.length), kes(ghostKes)],
-      ['Amount mismatch', String(mismatch.length), `stmt ${mismatch.length ? kes(sum(mismatch.map((m) => m.s.amount))) : '0'} / ledger ${mismatch.length ? kes(sum(mismatch.map((m) => m.l.amount))) : '0'}`],
+      ['**AMOUNT MISMATCH** (same code, different KES)', String(mismatch.length), `stmt ${mismatch.length ? kes(sum(mismatch.map((m) => m.s.amount))) : '0'} / ledger ${mismatch.length ? kes(sum(mismatch.map((m) => m.l.amount))) : '0'}`],
     ],
   ));
   L.push('');
