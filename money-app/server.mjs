@@ -45,6 +45,7 @@ function rawBody(req) {
     let data = '';
     let done = false;
     const finish = (why) => { if (!done) { done = true; dbg('rawBody finish via', why, 'len=', data.length); resolve(data); } };
+    if (req.readableEnded || req.destroyed) { dbg('rawBody already-ended complete=', req.complete); resolve(''); return; }
     req.on('data', (c) => { dbg('rawBody data', c.length); if (data.length < 1_000_000) data += c; });
     req.on('end', () => finish('end'));
     // Client aborts / socket errors mid-upload must not strand the adapter
