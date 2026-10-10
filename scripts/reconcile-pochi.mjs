@@ -421,7 +421,7 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   ));
   L.push('');
 
-  L.push('## Amount mismatch — same M-Pesa code, different KES');
+  L.push('## AMOUNT MISMATCH — same M-Pesa code, different KES');
   L.push('');
   if (!mismatch.length) L.push('_None._');
   else L.push(table(
@@ -430,7 +430,7 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   ));
   L.push('');
 
-  L.push(`## Matched (${matched.length})`);
+  L.push(`## MATCHED (${matched.length})`);
   L.push('');
   if (!matched.length) L.push('_None._');
   else L.push(table(
