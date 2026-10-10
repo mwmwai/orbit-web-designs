@@ -44,3 +44,4 @@ money-app/probe-*.log
 money-app/watchdog.log
 crew/logs/*.log
 shop-tracker/server.log
+money-app/dbg-*.log

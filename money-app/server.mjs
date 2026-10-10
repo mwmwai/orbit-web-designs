@@ -103,7 +103,14 @@ function heartbeat(ok, detail) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, 'http://127.0.0.1');
+  let url;
+  try {
+    url = new URL(req.url, 'http://127.0.0.1');
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'invalid request target' }));
+    return;
+  }
   if (url.pathname === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, app: 'orbit-money-local', uptime_s: Math.round(process.uptime()), env: envReport(), routes: ROUTES.map(([m, p]) => m + ' ' + p) }, null, 2));
@@ -128,7 +135,20 @@ const server = http.createServer(async (req, res) => {
   const route = ROUTES.find(([, p]) => p === url.pathname);
   if (route) {
     if (!route[0].split(',').includes(req.method)) { res.writeHead(405, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'Method not allowed' })); return; }
-    await adapt(handlers[url.pathname], req, res, url);
+    // An adapter-level rejection must never escape this callback: an unhandled
+    // rejection terminates the process (money POSTs would be lost mid-flight).
+    // Fail closed with 500 instead; the handler's own errors are caught inside adapt().
+    try {
+      await adapt(handlers[url.pathname], req, res, url);
+    } catch (e) {
+      console.error('runner dispatch error:', e?.stack || e);
+      if (!res.headersSent) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, error: 'Internal server error' }));
+      } else if (!res.writableEnded) {
+        res.end();
+      }
+    }
     return;
   }
   res.writeHead(404, { 'Content-Type': 'application/json' });
