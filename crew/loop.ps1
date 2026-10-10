@@ -57,10 +57,20 @@ while ($true) {
     } -ArgumentList $oc, $Repo, $mission
     $done = Wait-Job -Job $job -Timeout $RoundTimeoutSec
     if (-not $done) {
+      # Capture whatever output the seat produced before dying (diagnosis aid).
+      $partial = Receive-Job -Job $job -ErrorAction SilentlyContinue
       Stop-Job -Job $job -ErrorAction SilentlyContinue
       Remove-Job -Job $job -Force -ErrorAction SilentlyContinue
-      Log "round=$i seat=$seat TIMEOUT after ${RoundTimeoutSec}s - killed, rotating"
-      Start-Sleep -Seconds $DelaySec
+      # Reap orphaned seat runs: Stop-Job kills the job shell but opencode.exe
+      # can SURVIVE and hold the session DB lock, wedging every following seat
+      # for its full timeout (the foreman/sre r-after-timeout pattern). This
+      # loop is the only producer of `run --auto` processes.
+      Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -like 'opencode*' -and $_.CommandLine -like '*run --auto*' } |
+        ForEach-Object { try { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue; Log ("round={0} seat={1} reaped-orphan pid={2}" -f $i, $seat, $_.ProcessId) } catch {} }
+      $partial | ForEach-Object { try { Add-Content -Path $seatLog -Value ('{0} TIMEOUT-PARTIAL {1}' -f (Get-Date -Format 's'), $_) -Encoding UTF8 } catch {} }
+      Log "round=$i seat=$seat TIMEOUT after ${RoundTimeoutSec}s - killed (orphans reaped), rotating"
+      Start-Sleep -Seconds ($DelaySec + 15)
       continue
     }
     $output = Receive-Job -Job $job -ErrorAction SilentlyContinue
