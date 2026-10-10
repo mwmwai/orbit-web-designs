@@ -563,6 +563,7 @@ function syncSampleButton() {
   $('sampleBtn').textContent = sampleMode ? 'SAMPLE DATA: on' : 'SAMPLE DATA: off';
   $('sampleBtn').classList.toggle('on', sampleMode);
   $('exportBtn').disabled = sampleMode;
+  $('exportBtn').title = sampleMode ? 'Export disabled while SAMPLE DATA is on' : 'Download the filtered rows as CSV';
 }
 
 /* ---------- wiring ---------- */
