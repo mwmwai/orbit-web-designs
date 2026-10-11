@@ -386,7 +386,11 @@ function exportCsv() {
   if (sampleMode) { toast('Export disabled while SAMPLE DATA is on'); return; }
   const list = tableRows();
   if (!list.length) { toast('Nothing to export'); return; }
-  const cell = v => { const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const cell = v => {
+    let s = String(v == null ? '' : v);
+    if (/^[=+\-@\t]/.test(s)) s = "'" + s; // neutralize spreadsheet formula injection
+    return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
   const head = ['date', 'shop', 'type', 'amount', 'method', 'category', 'note', 'mpesa_code'];
   const lines = [head.join(',')].concat(list.map(r => [
     r.date, r.shop, r.type, r.amount, r.method, r.category, r.note, r.mpesa_code
