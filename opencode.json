@@ -3,5 +3,24 @@
   "share": "manual",
   "permission": "allow",
   "model": "opencode/mimo-v2.6-flash-free",
-  "instructions": ["AGENTS.md"]
+  "instructions": ["AGENTS.md"],
+  "provider": {
+    "freebuff": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Freebuff (free)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8787/v1",
+        "apiKey": "sk-local-opencode"
+      },
+      "models": {
+        "z-ai/glm-5.3-flash": { "name": "GLM 5.3 Flash (Freebuff)" },
+        "deepseek/deepseek-v4.1-flash": { "name": "DeepSeek V4.1 Flash (Freebuff)" },
+        "mimo/mimo-v2.5": { "name": "MiMo 2.5 (Freebuff)" },
+        "minimax/minimax-m3": { "name": "MiniMax M3 (Freebuff)" },
+        "openai/gpt-6-luna": { "name": "GPT-6 Luna (Freebuff)" },
+        "z-ai/glm-5.3": { "name": "GLM 5.3 (Freebuff)" },
+        "deepseek/deepseek-v4-pro": { "name": "DeepSeek V4 Pro (Freebuff)" }
+      }
+    }
+  }
 }
