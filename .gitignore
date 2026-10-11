@@ -45,3 +45,6 @@ money-app/watchdog.log
 crew/logs/*.log
 shop-tracker/server.log
 money-app/dbg-*.log
+# never-commit user work / logs (crew standing rules, dated variants + root log)
+flick-output-*/
+render-log.txt
