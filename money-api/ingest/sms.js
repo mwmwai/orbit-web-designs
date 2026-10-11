@@ -1,6 +1,9 @@
 // POST /api/ingest/sms — Pochi la Biashara + fallback SMS forwarder ingest.
 // Body: { secret, text, phone }. secret must equal INGEST_SECRET — fail-closed:
 // if INGEST_SECRET is unset in the env, EVERY request is rejected (401).
+// The secret may also travel as the x-ingest-secret header; both paths use
+// the same constant-time compare (shaEq). Header-only is CSRF-friendlier:
+// a cross-origin page cannot set a custom header without a CORS preflight.
 // Parses standard Safaricom M-Pesa SMS (received / sent / paid variants),
 // maps forwarding phone -> shop via POCHI_SHOP_MAP env JSON, dedupes on
 // mpesa_code. Owner does nothing: phone auto-forwards SMS to this endpoint.
@@ -23,7 +26,8 @@ export default async function handler(req, res) {
   }
   if (!body || typeof body !== 'object' || Array.isArray(body)) body = {};
 
-  const secret = String(body.secret || '');
+  const headerSecret = String(req.headers?.['x-ingest-secret'] ?? '');
+  const secret = headerSecret || String(body.secret || '');
   const expected = process.env.INGEST_SECRET || '';
   if (!expected || !shaEq(secret, expected)) {
     res.status(401).json({ ok: false, error: 'Unauthorized' });

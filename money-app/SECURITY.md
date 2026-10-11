@@ -25,7 +25,7 @@ signature). That is why token-gate + RLS must be live before any public route.
 |---|---|---|---|---|---|---|
 | `POST /api/mpesa/c2b/confirmation` (confirmation.js:34-43) | `MPESA_CALLBACK_TOKEN` via `?token=` or `x-callback-token`, timing-safe (shop-ingest.js:47-72) | 200 ResultCode 0, row written/deduped | **401, nothing written** (line 37) | accepted + warn-once (line 40-43) | `ConfigError` → **503** retryable, generic msg (line 90-95) | malformed/over-KES1M → 200 ack, not recorded; never 500, no stack |
 | `POST /api/mpesa/c2b/validation` (validation.js:23-35) | log-only by design (writes nothing) | 200 always | warn + 200 | warn-once + 200 | 200 (env never touched) | always 200 ResultCode 0 |
-| `POST /api/ingest/sms` (sms.js:26-31) | `INGEST_SECRET` in body, **fail-closed**, timing-safe compare via `shaEq` (sms.js:28) | correct → proceed | 401 | **401 for every request** (unset = reject all) | after gate → 503 generic (line 70-73) | unparseable → 400; store fail → 500 fixed string |
+| `POST /api/ingest/sms` (sms.js:29-35) | `INGEST_SECRET` in body **or** `x-ingest-secret` header, **fail-closed**, timing-safe compare via `shaEq` (sms.js:32) | correct → proceed | 401 | **401 for every request** (unset = reject all) | after gate → 503 generic (line 74-77) | unparseable → 400; store fail → 500 fixed string |
 | `GET/POST /api/transactions` (transactions.js:22-34) | Supabase Auth JWT | authenticated → 200 | 401 | n/a | `authEnvMissing` → 503 generic (line 27) | 400/409/500 fixed strings; GET strips `raw` (line 64) |
 | `GET /health` (server.mjs:114-118) | none (localhost) | returns key names + set/missing only — never values | | | | |
 | `GET /` | none (localhost) | static shop-tracker UI | | | | |
@@ -40,7 +40,7 @@ a raw error.
 `res.setHeader` is honored (server.mjs:88), so handler-set headers such as
 `Cache-Control: no-store` on /api/transactions actually reach the client.
 
-Phone masking: visible `note` masks MSISDN (confirmation.js:83, sms.js:63 →
+Phone masking: visible `note` masks MSISDN (confirmation.js:83, sms.js:67 →
 `maskPhone`, shop-ingest.js:76-80). Full number lives only in `raw` jsonb,
 which no GET endpoint returns.
 
