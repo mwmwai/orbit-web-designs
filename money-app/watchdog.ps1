@@ -164,6 +164,29 @@ function Invoke-Restart {
         }
     }
 
+    # Zombie reap (Oct 11 outage class): a money-app\server.mjs node PID that is
+    # ALIVE while owning NO TCP listener anywhere. Reap only when it is a node
+    # process (CommandLine alone false-positives on shells quoting this path,
+    # e.g. an agent process carrying the mission text) and only when it holds
+    # no LISTENING socket on any port (a healthy test instance on another port
+    # is left alone).
+    foreach ($p in $procs) {
+        $candPid = 0
+        try { $candPid = [int]$p.ProcessId } catch { continue }
+        if ($ownerPid -ne $null -and $candPid -eq [int]$ownerPid) { continue }
+        $isNode = $false
+        try { $isNode = ((Get-Process -Id $candPid -ErrorAction Stop).ProcessName -eq 'node') } catch { continue }
+        if (-not $isNode) { continue }
+        $listens = $false
+        try { $listens = [bool](Get-NetTCPConnection -OwningProcess $candPid -State Listen -ErrorAction Stop | Select-Object -First 1) } catch { }
+        if (-not $listens) {
+            try {
+                Stop-Process -Id $candPid -Force -ErrorAction Stop
+                Write-WdLine 'restarting' "zombie-reaped pid=$candPid (alive-no-listener)"
+            } catch { }
+        }
+    }
+
     # Required gate: re-detect live PIDs (Win32_Process CommandLine match).
     $procs = Get-ServerProcesses
     $ownerPid = Get-ListenerPid -LocalPort $Port
