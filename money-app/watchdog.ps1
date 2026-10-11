@@ -47,8 +47,11 @@ if (-not $AppDir) { $AppDir = Split-Path -Parent $MyInvocation.MyCommand.Definit
 $ServerScript = Join-Path $AppDir 'server.mjs'
 $WatchdogLog  = Join-Path $AppDir 'watchdog.log'
 $HealthUri    = "http://127.0.0.1:$Port/health"
-# Required detection pattern: money-app\server.mjs (slash or backslash).
-$ProcPattern  = 'money-app[\\/]server\.mjs'
+# Required detection pattern: money-app\server.mjs (slash or backslash), plus a
+# node process invoked with a bare `server.mjs` argument (e.g. `node server.mjs`
+# from inside money-app\ -- the live listener was found in exactly that form on
+# Oct 11, and the narrow pattern could not own it, so a wedge would go unhealed).
+$ProcPattern  = 'money-app[\\/]server\.mjs|node(?:\.exe)?"?\s+.*server\.mjs'
 $StopWatchdog = $false
 
 # --- logging: exactly one line per check interval ----------------------------
