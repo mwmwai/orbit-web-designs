@@ -188,6 +188,7 @@ let apiLimit = null;
 let latestBalance = null;
 let sampleMode = false;
 let loading = false;
+let lastOkAt = null;
 let sortKey = 'date', sortDir = 'desc';
 
 function toast(m) {
@@ -488,9 +489,11 @@ async function load(quiet) {
   // user switched to SAMPLE while this fetch was in flight — their choice wins
   if (sampleMode) { syncSampleButton(); render(); return; }
   const status = res ? res.status : 0;
-  $('upd').textContent = netErr
-    ? '· last check failed at ' + nowStamp()
-    : '· last fetch ' + nowStamp() + ' (HTTP ' + status + ')';
+  const ok = !netErr && status === 200 && body && body.ok !== false;
+  if (ok) lastOkAt = nowStamp();
+  $('upd').textContent = ok
+    ? '· last fetch ' + lastOkAt + ' (HTTP 200)'
+    : '· last good fetch ' + (lastOkAt || 'never') + ' · check failed at ' + nowStamp() + (netErr ? '' : ' (HTTP ' + status + ')');
 
   if (netErr) {
     rows = []; apiSummary = null; apiTotal = null; apiLimit = null; latestBalance = null;
