@@ -298,9 +298,14 @@ function renderKpis() {
   setWindow('k30', windowSum(w30));
 
   const total = (apiTotal === null || apiTotal === undefined) ? rows.length : apiTotal;
-  $('kCount').textContent = Number(total).toLocaleString('en-KE');
-  $('kCountSub').textContent = rows.length + ' rows loaded' + (apiLimit ? ' (limit ' + apiLimit + ')' : '') +
-    (apiTotal !== null && apiTotal > rows.length ? ' of ' + Number(apiTotal).toLocaleString('en-KE') + ' total' : '');
+  if (!rows.length && apiTotal === null) {
+    $('kCount').textContent = '—';
+    $('kCountSub').textContent = 'no ledger data loaded — see status banner above';
+  } else {
+    $('kCount').textContent = Number(total).toLocaleString('en-KE');
+    $('kCountSub').textContent = rows.length + ' rows loaded' + (apiLimit ? ' (limit ' + apiLimit + ')' : '') +
+      (apiTotal !== null && apiTotal > rows.length ? ' of ' + Number(apiTotal).toLocaleString('en-KE') + ' total' : '');
+  }
 
   $('kBal').textContent = latestBalance === null || latestBalance === undefined ? '—' : fmt(latestBalance);
   $('kBalSub').textContent = latestBalance === null || latestBalance === undefined
