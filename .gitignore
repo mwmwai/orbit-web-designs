@@ -48,3 +48,7 @@ money-app/dbg-*.log
 # never-commit user work / logs (crew standing rules, dated variants + root log)
 flick-output-*/
 render-log.txt
+
+# env variants hold the same secrets as .env (.env.local, .env.production.local...)
+.env.*
+!.env.example
