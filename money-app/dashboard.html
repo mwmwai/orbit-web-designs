@@ -274,6 +274,11 @@ function buildSummary(list) {
 
 /* ---------- KPI render ---------- */
 function setWindow(id, s) {
+  if (!rows.length && apiTotal === null) {
+    $(id + 'In').textContent = '—';
+    $(id + 'Sub').textContent = 'no ledger data loaded — see status banner above';
+    return;
+  }
   $(id + 'In').textContent = fmt(s.i);
   $(id + 'Sub').textContent = 'out ' + fmt(s.o) + ' · net ' + fmt(s.p) + ' · ' + s.n + ' txns';
 }
