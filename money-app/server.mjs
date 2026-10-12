@@ -44,7 +44,18 @@ function rawBody(req) {
   return new Promise((resolve) => {
     let data = '';
     let done = false;
-    const finish = (why) => { if (!done) { done = true; dbg('rawBody finish via', why, 'len=', data.length); resolve(data); } };
+    // Regression tripwire: a POST whose body never arrives was the original
+    // adapter bug (handlers saw "" -> malformed-ack). Always shout about it.
+    const expected = Number(req.headers['content-length']);
+    const finish = (why) => {
+      if (done) return;
+      done = true;
+      dbg('rawBody finish via', why, 'len=', data.length);
+      if (Number.isFinite(expected) && expected > 0 && Buffer.byteLength(data, 'utf8') < expected) {
+        console.warn(`rawBody TRUNCATED ${req.method} ${req.url}: got ${Buffer.byteLength(data, 'utf8')} of ${expected} bytes (${why})`);
+      }
+      resolve(data);
+    };
     if (req.readableEnded || req.destroyed) { dbg('rawBody already-ended complete=', req.complete); resolve(''); return; }
     req.on('data', (c) => { dbg('rawBody data', c.length); if (data.length < 1_000_000) data += c; });
     req.on('end', () => finish('end'));
@@ -101,6 +112,14 @@ function adapt(handler, req, res, url) {
 function heartbeat(ok, detail) {
   try { fs.appendFileSync(LOG, `${new Date().toISOString()} ok=${ok} ${detail}\n`); } catch {}
 }
+
+// Availability guard: Node's default for unhandledRejection is to throw, which
+// kills the listener mid-flight and loses in-flight money POSTs. Handlers are
+// per-request and stateless, so log + keep serving instead of crashing.
+process.on('unhandledRejection', (e) => {
+  console.error('unhandledRejection:', (e && e.stack) || e);
+  heartbeat(false, 'unhandledRejection ' + ((e && e.message) || String(e)));
+});
 
 const server = http.createServer(async (req, res) => {
   let url;
