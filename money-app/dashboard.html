@@ -587,6 +587,7 @@ function syncSampleButton() {
 /* ---------- wiring ---------- */
 $('refreshBtn').onclick = () => {
   if (sampleMode) { render(); toast('Sample mode on — turn it off to read the live API'); return; }
+  if (loading) { toast('Refresh already in progress…'); return; }
   load();
 };
 $('exportBtn').onclick = exportCsv;
