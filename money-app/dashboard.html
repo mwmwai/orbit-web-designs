@@ -300,7 +300,7 @@ function renderKpis() {
   $('kBal').textContent = latestBalance === null || latestBalance === undefined ? '—' : fmt(latestBalance);
   $('kBalSub').textContent = latestBalance === null || latestBalance === undefined
     ? 'no balance recorded in range'
-    : 'newest M-Pesa balance seen by the ledger';
+    : (sampleMode ? 'sample value — not from the ledger' : 'newest M-Pesa balance seen by the ledger');
 
   // per-shop breakdown: prefer the API's uncapped aggregate, else derive from loaded rows
   const summary = apiSummary && Object.keys(apiSummary).length ? apiSummary : buildSummary(rows);
