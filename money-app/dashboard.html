@@ -558,8 +558,9 @@ function toggleSample(force) {
       'Turn off', () => toggleSample(false));
     $('upd').textContent = '· sample mode — not live data';
   } else {
-    rows = []; apiSummary = null; apiTotal = null; latestBalance = null;
+    rows = []; apiSummary = null; apiTotal = null; apiLimit = null; latestBalance = null;
     syncSampleButton();
+    render();
     load();
     return;
   }
