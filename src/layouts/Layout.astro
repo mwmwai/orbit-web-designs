@@ -11,6 +11,8 @@ interface Props {
 	description?: string;
 	noindex?: boolean;
 	breadcrumbs?: Array<{ name: string; url: string }>;
+	ogImage?: string;
+	speakable?: boolean;
 }
 
 const {
@@ -18,6 +20,8 @@ const {
 	description = "Orbit designs fast websites that get businesses found, trusted and paid. Custom builds from KES 28,999 — worldwide, fully remote.",
 	noindex = false,
 	breadcrumbs,
+	ogImage,
+	speakable = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
@@ -151,7 +155,7 @@ if (Astro.url.pathname === "/") {
 		inLanguage: "en-KE",
 		potentialAction: {
 			"@type": "SearchAction",
-			target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/search?q={search_term_string}` },
+			target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/guides?q={search_term_string}` },
 			"query-input": "required name=search_term_string",
 		},
 	});
@@ -221,6 +225,13 @@ const breadcrumbLd = effectiveCrumbs
 if (breadcrumbLd) {
 	jsonLd.push(breadcrumbLd);
 }
+if (speakable) {
+	jsonLd.push({
+		"@context": "https://schema.org",
+		"@type": "SpeakableSpecification",
+		cssSelector: ["article h1", "article h2", "article p:first-of-type"],
+	});
+}
 ---
 
 <!doctype html>
@@ -258,16 +269,16 @@ if (breadcrumbLd) {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
-		<meta property="og:image" content={new URL("/logo.webp", SITE_URL).href} />
+		<meta property="og:image" content={ogImage ? new URL(ogImage, SITE_URL).href : new URL("/logo.webp", SITE_URL).href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="655" />
-		<meta property="og:image:alt" content="Orbit Web Designs & Marketing logo" />
+		<meta property="og:image:alt" content={ogImage ? "Orbit guide image" : "Orbit Web Designs & Marketing logo"} />
 		<meta property="og:image:type" content="image/webp" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={new URL("/logo.webp", SITE_URL).href} />
-		<meta name="twitter:image:alt" content="Orbit Web Designs & Marketing logo" />
+		<meta name="twitter:image" content={ogImage ? new URL(ogImage, SITE_URL).href : new URL("/logo.webp", SITE_URL).href} />
+		<meta name="twitter:image:alt" content={ogImage ? "Orbit guide image" : "Orbit Web Designs & Marketing logo"} />
 		<meta name="twitter:site" content="@orbitwebdesigns" />
 		<meta name="twitter:creator" content="@mwmwai" />
 		<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
@@ -313,6 +324,21 @@ if (breadcrumbLd) {
 	</head>
 	<body class="bg-ink text-slate-200 antialiased">
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+		{effectiveCrumbs && effectiveCrumbs.length > 1 && (
+			<nav class="mx-auto max-w-7xl px-5 py-3" aria-label="Breadcrumb">
+				<ol class="flex flex-wrap items-center gap-2 text-sm" role="list">
+					{effectiveCrumbs.map((b, i) => (
+						<li class="flex items-center gap-2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+							{i > 0 && <span aria-hidden="true" class="text-slate-500">/</span>}
+							<a href={b.url} itemprop="item" class="text-slate-400 hover:text-electric transition">
+								<span itemprop="name">{b.name}</span>
+							</a>
+							<meta itemprop="position" content={i + 1} />
+						</li>
+					))}
+				</ol>
+			</nav>
+		)}
 		<div id="scroll-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-electric to-neon" aria-hidden="true"></div>
 		<div id="cursor-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2.5 w-2.5 rounded-full bg-electric shadow-[0_0_14px_4px_rgba(0,200,255,0.45)] lg:block" aria-hidden="true"></div>
 		<div id="cursor-ring" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-9 w-9 rounded-full border border-electric/40 lg:block" aria-hidden="true"></div>

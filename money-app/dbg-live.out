@@ -1,0 +1,6 @@
+orbit-money-local on http://127.0.0.1:8391 (UI /, dashboard /dashboard, health /health, api /api/*)
+[dbg] rawBody start POST /api/mpesa/c2b/confirmation complete= false readableEnded= false
+[dbg] rawBody data 73
+[dbg] rawBody finish via end len= 73
+[dbg] adapt r.body type= string value= "{TransID:T1,TransAmount:100,BusinessShortCode:1,TransTime:20261008120000}"
+[dbg] adapt respond 200 {"ResultCode":0,"ResultDesc":"Success"}

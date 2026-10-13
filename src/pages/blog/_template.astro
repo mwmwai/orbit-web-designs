@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
+import { SITE_URL, SITE_NAME } from "../../config";
+
+const posts = [
+	{
+		slug: "website-cost-kenya",
+		title: "How much does a website cost in Kenya?",
+		blurb: "Market range 5k–250k, breakdown table + hidden-cost checklist.",
+		date: "2026-09-11",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "website-care-kenya",
+		title: "Website care in Kenya: DIY vs managed",
+		blurb: "30-min/month DIY routine + what Orbit Care 4,999–9,999 covers.",
+		date: "2026-09-18",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "ecommerce-kenya-guide",
+		title: "E-commerce in Kenya: launch checklist",
+		blurb: "4 systems + margin math + pre-launch checklist.",
+		date: "2026-09-25",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "seo-small-business-kenya",
+		title: "SEO for small businesses: 30-day plan",
+		blurb: "Business Profile, buyer keywords, speed and reviews — weekly plan.",
+		date: "2026-10-02",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "best-web-designer-kenya",
+		title: "How to choose a web designer: scorecard",
+		blurb: "Neutral 6-question scorecard + red flags.",
+		date: "2026-09-11",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "mpesa-till-vs-paybill",
+		title: "M-Pesa Till vs Paybill: pick right once",
+		blurb: "Decision tree + fee table — walk-in vs tracked money.",
+		date: "2026-09-20",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "whatsapp-business-kenya",
+		title: "Turn WhatsApp into your best salesperson",
+		blurb: "Profile, greeting/away, quick replies (/price) and wa.me link.",
+		date: "2026-10-01",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "web-design-kenya-guide",
+		title: "Web Design Kenya: The Complete Guide",
+		blurb: "3000+ word definitive guide: pricing, process, M-Pesa, SEO.",
+		date: "2026-09-28",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "choose-web-designer-kenya",
+		title: "How to Choose a Web Designer in Kenya",
+		blurb: "Decision framework with scoring rubric.",
+		date: "2026-09-15",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "orbit-vs-competitors",
+		title: "Orbit vs Competitors: Honest Comparison",
+		blurb: "Head-to-head vs freelancers, agencies, DIY.",
+		date: "2026-10-04",
+		updated: "2026-10-04",
+	},
+	{
+		slug: "mpesa-daraja-website-kenya",
+		title: "M-Pesa Daraja on Your Site: Till + Paybill + Cards",
+		blurb: "STK flow, fees and limits, setup timeline.",
+		date: "2026-09-22",
+		updated: "2026-10-03",
+	},
+	{
+		slug: "business-not-showing-google-maps-kenya",
+		title: "Why Your Business Isn't on Google Maps",
+		blurb: "1-day diagnostic: claim, verify, category, duplicates.",
+		date: "2026-10-05",
+		updated: "2026-10-05",
+	},
+];
+
+function getRelated(currentSlug: string, limit = 3) {
+	return posts.filter((p) => p.slug !== currentSlug).slice(0, limit);
+}
+
+const breadcrumbs = [
+	{ name: "Home", url: "/" },
+	{ name: "Guides", url: "/blog/" },
+];
+
+const speakableLd = {
+	"@context": "https://schema.org",
+	"@type": "SpeakableSpecification",
+	cssSelector: ["article h1", "article h2", "article p:first-of-type"],
+};
+---
+
+<Layout
+	title="Blog Post Template — SEO Meta"
+	description=""
+	breadcrumbs={breadcrumbs}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(speakableLd)} />
+	<Navbar />
+	<BreadcrumbSchema items={breadcrumbs} />
+	<main id="main">
+		<article>
+			{/* Template — replace with actual post content */}
+		</article>
+		<aside class="mt-16">
+			<h2 class="text-xl font-bold text-white mb-4">Related guides</h2>
+			<div class="grid gap-4 md:grid-cols-3">
+				{/* Related posts will be injected per post */}
+			</div>
+		</aside>
+	</main>
+	<Footer />
+</Layout>

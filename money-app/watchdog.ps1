@@ -4,9 +4,12 @@
 
 .DESCRIPTION
   Loops forever ($true):
-    (a) probes http://127.0.0.1:<Port>/health with a 3s timeout (try/catch: a
-        transient probe error never kills the loop),
-    (b) two consecutive failed probes => restart server.mjs hidden, with node
+    (a) UP requires BOTH a TCP listener on <Port> (netstat/Get-NetTCPConnection)
+        AND a 200 from http://127.0.0.1:<Port>/health (3s timeout). Process
+        existence alone never counts as "up" -- Oct 10 outage: server.mjs alive
+        while NOT listening. try/catch: a transient probe error never kills
+        the loop,
+    (b) two consecutive failed checks => restart server.mjs hidden, with node
         resolved via Get-Command node,
     (c) heartbeat to money-app\watchdog.log at most ONE line per check interval
         (status changes log immediately; otherwise a heartbeat line every 10 min),
@@ -107,6 +110,13 @@ function Get-ListenerPid {
         }
     } catch { }
     return $null
+}
+
+# Zombie guard (Oct 10 outage): a server.mjs PID can be ALIVE while owning no
+# listener. "Up" therefore needs an explicit TCP listener check on THIS port --
+# never process existence, never health alone.
+function Test-PortListening {
+    return ($null -ne (Get-ListenerPid -LocalPort $Port))
 }
 
 # --- start server.mjs hidden, node resolved via Get-Command ------------------
@@ -220,7 +230,8 @@ try {
         $status = 'unknown'
         $detail = ''
         try {
-            if (Test-AppHealth) {
+            $listening = Test-PortListening
+            if ($listening -and (Test-AppHealth)) {
                 $script:FailStreak = 0
                 $status = 'up'
             } else {
@@ -229,10 +240,14 @@ try {
                     $rr = Invoke-Restart
                     $status = $rr.Status
                     $detail = $rr.Detail
-                    $script:FailStreak = 0     # pace retries: 2 failed probes per attempt
+                    $script:FailStreak = 0     # pace retries: 2 failed checks per attempt
                 } else {
                     $status = 'down'
-                    $detail = "probe-failed streak=$($script:FailStreak) (restart on 2)"
+                    $detail = if (-not $listening) {
+                        "no-listener port=$Port (zombie guard) streak=$($script:FailStreak) (restart on 2)"
+                    } else {
+                        "probe-failed streak=$($script:FailStreak) (restart on 2)"
+                    }
                 }
             }
         } catch {

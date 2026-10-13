@@ -1,0 +1,1 @@
+[mpesa-c2b] MPESA_CALLBACK_TOKEN is NOT set — confirmation accepts any POST (Daraja sends no signature). Set the env and add ?token=... to both Safaricom URLs.

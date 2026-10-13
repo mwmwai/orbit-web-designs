@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple App</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1117;
+      --card: #1a1d27;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .card {
+      width: min(420px, 92vw);
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+    p.sub { margin: 0 0 1.5rem; color: var(--muted); font-size: 0.9rem; }
+    .counter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+    }
+    .counter span { font-size: 2rem; font-weight: 700; color: var(--accent-hover); }
+    .counter-group { display: flex; gap: 0.5rem; }
+    form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    input {
+      flex: 1;
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+    input:focus { border-color: var(--accent); }
+    button {
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: var(--accent-hover); }
+    button.ghost {
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 500;
+    }
+    button.ghost:hover { background: rgba(255, 255, 255, 0.15); }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+    }
+    li.done span { text-decoration: line-through; color: var(--muted); }
+    li span { cursor: pointer; flex: 1; }
+    .empty { color: var(--muted); text-align: center; padding: 1rem 0; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Simple App</h1>
+    <p class="sub">A tiny todo app running on localhost 🚀</p>
+
+    <div class="counter">
+      <small style="color: var(--muted)">Completed</small>
+      <div class="counter-group">
+        <span id="count">0</span>
+        <button class="ghost" id="reset">Reset</button>
+      </div>
+    </div>
+
+    <form id="form">
+      <input id="input" placeholder="Add a task..." autocomplete="off" required />
+      <button type="submit">Add</button>
+    </form>
+
+    <ul id="list"></ul>
+    <p class="empty" id="empty">No tasks yet — add one above!</p>
+  </main>
+
+  <script>
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const list = document.getElementById('list');
+    const count = document.getElementById('count');
+    const empty = document.getElementById('empty');
+    const reset = document.getElementById('reset');
+
+    let tasks = [];
+
+    function render() {
+      list.innerHTML = '';
+      for (const task of tasks) {
+        const li = document.createElement('li');
+        if (task.done) li.classList.add('done');
+
+        const span = document.createElement('span');
+        span.textContent = task.text;
+        span.onclick = () => {
+          task.done = !task.done;
+          render();
+        };
+
+        const del = document.createElement('button');
+        del.className = 'ghost';
+        del.textContent = '✕';
+        del.onclick = () => {
+          tasks = tasks.filter((t) => t.id !== task.id);
+          render();
+        };
+
+        li.append(span, del);
+        list.appendChild(li);
+      }
+      count.textContent = tasks.filter((t) => t.done).length;
+      empty.style.display = tasks.length ? 'none' : 'block';
+    }
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      tasks.push({ id: Date.now(), text, done: false });
+      input.value = '';
+      render();
+    };
+
+    reset.onclick = () => {
+      tasks = tasks.map((t) => ({ ...t, done: false }));
+      render();
+    };
+
+    render();
+  </script>
+</body>
+</html>
