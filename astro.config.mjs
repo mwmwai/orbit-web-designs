@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
-const now = new Date();
 const CHANGEFREQ = {
 	'/': 'weekly',
 	'/packages': 'weekly',
@@ -36,6 +35,31 @@ function getPriority(url) {
 	return 0.6;
 }
 
+const LASTMOD = {
+	'/blog/website-cost-kenya': '2026-10-13',
+	'/blog/website-care-kenya': '2026-10-13',
+	'/blog/ecommerce-kenya-guide': '2026-10-13',
+	'/blog/seo-small-business-kenya': '2026-10-13',
+	'/blog/best-web-designer-kenya': '2026-10-13',
+	'/blog/mpesa-till-vs-paybill': '2026-10-13',
+	'/blog/whatsapp-business-kenya': '2026-10-13',
+	'/blog/web-design-kenya-guide': '2026-10-13',
+	'/blog/choose-web-designer-kenya': '2026-10-13',
+	'/blog/orbit-vs-competitors': '2026-10-13',
+	'/blog/mpesa-daraja-website-kenya': '2026-10-13',
+	'/blog/business-not-showing-google-maps-kenya': '2026-10-13',
+	'/blog/': '2026-10-13',
+	'/reviews': '2026-10-13',
+	'/': '2026-10-13',
+};
+function getLastmod(url) {
+	let path = new URL(url).pathname;
+	if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);
+	if (LASTMOD[path]) return LASTMOD[path];
+	if (LASTMOD[path + '/']) return LASTMOD[path + '/'];
+	return '2026-10-05';
+}
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://www.orbitwebdesigns.co.ke',
@@ -56,7 +80,7 @@ export default defineConfig({
 				...item,
 				changefreq: getChangefreq(item.url),
 				priority: getPriority(item.url),
-				lastmod: now.toISOString(),
+				lastmod: getLastmod(item.url),
 				img: images.length > 0 ? images : undefined,
 			};
 		},
