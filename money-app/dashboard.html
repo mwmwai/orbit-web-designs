@@ -608,6 +608,8 @@ render();
 load();
 // keep the live view fresh without a manual click (never runs in sample mode / while loading / when tab hidden)
 setInterval(() => { if (!sampleMode && !loading && !document.hidden) load(true); }, 30000);
+// a hidden tab skips the interval above — catch up as soon as it is visible again
+document.addEventListener('visibilitychange', () => { if (!document.hidden && !sampleMode && !loading) load(true); });
 </script>
 </body>
 </html>
