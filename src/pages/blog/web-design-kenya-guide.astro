@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
@@ -63,6 +64,14 @@ const articleJsonLd = {
 <Layout
 	title="Web Design Kenya: The Complete Guide for Businesses (2026) | Orbit"
 	description="The definitive guide to web design in Kenya: pricing, process, M-Pesa integration, SEO, and how to choose the right designer. 3000+ words."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "Web Design Kenya Guide", url: "/blog/web-design-kenya-guide" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -237,6 +246,7 @@ const articleJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a web designer</a> · <a href="/web-design-nairobi" class="text-electric hover:underline">web design Nairobi</a></p>
 		</div>
+		<RelatedPosts currentSlug="web-design-kenya-guide" />
 		<Comments slug="web-design-kenya-guide" />
 		<CtaBand title="Your business deserves to be found." text="Let's build you a website that works as hard as you do." />
 	</main>

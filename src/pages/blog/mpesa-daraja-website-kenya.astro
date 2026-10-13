@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
@@ -52,6 +53,14 @@ const articleJsonLd = {
 <Layout
 	title="M-Pesa Daraja on Your Site: Till + Paybill + Cards (Kenya Guide) | Orbit"
 	description="How to accept M-Pesa payments on your website with Daraja in Kenya: STK Push flow, Till vs Paybill vs cards, 2026 fees and limits, setup steps."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "M-Pesa Daraja", url: "/blog/mpesa-daraja-website-kenya" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -138,6 +147,7 @@ const articleJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce Kenya</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/packages" class="text-electric hover:underline">website packages & pricing</a></p>
 		</div>
+		<RelatedPosts currentSlug="mpesa-daraja-website-kenya" />
 		<Comments slug="mpesa-daraja-website-kenya" />
 		<CtaBand title="Selling without M-Pesa checkout?" text="Tell us your Till or Paybill number — we'll map the fastest path to live STK payments." />
 	</main>

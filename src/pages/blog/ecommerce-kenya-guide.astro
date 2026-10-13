@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const articleLd = {
@@ -39,6 +40,14 @@ const faqJsonLd = {
 <Layout
 	title="E-commerce in Kenya: Launch Checklist (M-Pesa, Stock, Orders) | Orbit"
 	description="Checklist to launch an online store in Kenya: M-Pesa, inventory, WhatsApp orders and SEO — with margin math."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "E-commerce Launch Checklist", url: "/blog/ecommerce-kenya-guide" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -127,6 +136,7 @@ const faqJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/blog/mpesa-till-vs-paybill" class="text-electric hover:underline">Till vs Paybill</a></p>
 		</div>
+		<RelatedPosts currentSlug="ecommerce-kenya-guide" />
 		<Comments slug="ecommerce-kenya-guide" />
 		<CtaBand title="Ready to sell while you sleep?" text="Tell us what you sell — we reply with package, timeline and honest price." />
 	</main>

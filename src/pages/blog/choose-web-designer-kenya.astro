@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
@@ -59,6 +60,14 @@ const articleJsonLd = {
 <Layout
 	title="How to Choose a Web Designer in Kenya: Decision Framework (2026) | Orbit"
 	description="A step-by-step decision framework for choosing a web designer in Kenya. Budget, timeline, M-Pesa, ownership, support — with scoring rubric."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "How to Choose a Web Designer", url: "/blog/choose-web-designer-kenya" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -172,6 +181,7 @@ const articleJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/web-design-kenya-guide" class="text-electric hover:underline">web design Kenya guide</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">designer scorecard</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a></p>
 		</div>
+		<RelatedPosts currentSlug="choose-web-designer-kenya" />
 		<Comments slug="choose-web-designer-kenya" />
 		<CtaBand title="Still comparing?" text="Send any quote — we'll tell you if you're overpaying, even if it means not hiring us." />
 	</main>

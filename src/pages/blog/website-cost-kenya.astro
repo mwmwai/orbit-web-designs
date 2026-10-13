@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
@@ -47,6 +48,14 @@ const articleJsonLd = {
 <Layout
 	title="How Much Does a Website Cost in Kenya? (2026 Prices) | Orbit"
 	description="Market website prices in Kenya 2026: from KES 5k templates to 50k+ pro builds. Breakdown, hidden-cost checklist and honest comparison."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "Website Cost", url: "/blog/website-cost-kenya" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -136,6 +145,7 @@ const articleJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/blog/best-web-designer-kenya" class="text-electric hover:underline">choosing a designer</a></p>
 		</div>
+		<RelatedPosts currentSlug="website-cost-kenya" />
 		<Comments slug="website-cost-kenya" />
 		<CtaBand title="Still comparing?" text="Send any quote — we'll tell you if you're overpaying, even if it means not hiring us." />
 	</main>

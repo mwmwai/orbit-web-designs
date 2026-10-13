@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { whatsappLink, SITE_URL } from "../../config";
 
 const faqs = [
@@ -52,6 +53,14 @@ const articleJsonLd = {
 <Layout
 	title="Why Your Business Isn't on Google Maps (Kenya Fix in 1 Day) | Orbit"
 	description="Business not showing on Google Maps in Kenya? Run this 1-day diagnostic: claim, verify, category, duplicates, reviews — and the website fix that holds rankings."
+
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "Why Business Isn't on Google Maps", url: "/blog/business-not-showing-google-maps-kenya" },
+	]}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -140,6 +149,7 @@ const articleJsonLd = {
 		<div class="mx-auto max-w-3xl px-5 pb-4">
 			<p class="text-sm text-slate-400">Related: <a href="/seo-services-kenya" class="text-electric hover:underline">SEO services Kenya</a> · <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a></p>
 		</div>
+		<RelatedPosts currentSlug="business-not-showing-google-maps-kenya" />
 		<Comments slug="business-not-showing-google-maps-kenya" />
 		<CtaBand title="Still invisible on Maps?" text="Send your business name on WhatsApp — we'll tell you the exact blocker within a day." />
 	</main>

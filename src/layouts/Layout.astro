@@ -40,6 +40,14 @@ const jsonLd = [
 		url: SITE_URL,
 		description,
 		inLanguage: "en-KE",
+		...(speakable
+			? {
+					speakable: {
+						"@type": "SpeakableSpecification",
+						cssSelector: ["h1", "article h2", "article p"],
+					},
+				}
+			: {}),
 		publisher: {
 			"@type": "Organization",
 			"@id": `${SITE_URL}#organization`,
@@ -225,13 +233,6 @@ const breadcrumbLd = effectiveCrumbs
 if (breadcrumbLd) {
 	jsonLd.push(breadcrumbLd);
 }
-if (speakable) {
-	jsonLd.push({
-		"@context": "https://schema.org",
-		"@type": "SpeakableSpecification",
-		cssSelector: ["article h1", "article h2", "article p:first-of-type"],
-	});
-}
 ---
 
 <!doctype html>
@@ -256,6 +257,7 @@ if (speakable) {
 		<link rel="alternate" hreflang="en-KE" href={canonical} />
 		<link rel="alternate" hreflang="x-default" href={SITE_URL} />
 		<link rel="llms.txt" type="text/plain" href={`${SITE_URL}/llms.txt`} />
+		<link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} Blog`} href={`${SITE_URL}/rss.xml`} />
 		<meta name="theme-color" content="#080B14" media="(prefers-color-scheme: dark)" />
 		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 		<meta name="color-scheme" content="dark light" />
