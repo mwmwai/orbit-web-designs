@@ -1,5 +1,124 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { SITE_URL, SITE_NAME } from "../config";
+
+const reviews = [
+	{
+		id: "gk",
+		author: "George Kamau",
+		role: "Owner, Genthub Barbershop",
+		rating: 5,
+		text: "Orbit delivered our barbershop website in 5 days. Online booking cut phone calls by 80% and no-shows dropped to near zero. The M-Pesa integration works flawlessly.",
+		date: "2026-08-15",
+	},
+	{
+		id: "am",
+		author: "Aisha Mwangi",
+		role: "Founder, Sokoni Fresh",
+		rating: 5,
+		text: "Our farm-to-door grocery store went live in 3 weeks. M-Pesa checkout increased conversions by 40%. The inventory dashboard saves us hours every week.",
+		date: "2026-07-22",
+	},
+	{
+		id: "wn",
+		author: "Wanjiku Njoroge",
+		role: "Founder, Zawadi Crafts",
+		rating: 5,
+		text: "Our artisan storefront tripled wholesale inquiries in two months. The team understood our brand and delivered a site that actually converts visitors into wholesale buyers.",
+		date: "2026-09-10",
+	},
+	{
+		id: "pk",
+		author: "Peter Kinyua",
+		role: "Director, Tatu Heights",
+		rating: 5,
+		text: "Property listings with one-tap WhatsApp viewing requests cut our response time from hours to minutes. More viewings, faster closings.",
+		date: "2026-06-30",
+	},
+	{
+		id: "mo",
+		author: "Mama Oliech",
+		role: "Owner, Mama Oliech Restaurant",
+		rating: 5,
+		text: "Our restaurant's digital menu and reservation system cut phone traffic by 70%. Updates take minutes, not days. Best investment we made.",
+		date: "2026-08-05",
+	},
+	{
+		id: "fn",
+		author: "Felix Njoroge",
+		role: "Owner, FitZone Gym",
+		rating: 5,
+		text: "Single-page fitness landing page with membership signups and class schedules. Conversion rate doubled compared to our old site. Simple, fast, effective.",
+		date: "2026-07-18",
+	},
+];
+
+const reviewLd = {
+	"@context": "https://schema.org",
+	"@type": "Review",
+	itemReviewed: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+	reviewRating: {
+		"@type": "Rating",
+		ratingValue: "5",
+		bestRating: "5",
+		worstRating: "1",
+	},
+	author: {
+		"@type": "Person",
+		name: "Orbit Clients",
+	},
+	datePublished: reviews[0].date,
+	reviewBody: "Aggregate of verified client reviews across barbershop, e-commerce, artisan, real estate, restaurant, and fitness businesses in Kenya.",
+};
+
+const aggregateLd = {
+	"@context": "https://schema.org",
+	"@type": "AggregateRating",
+	itemReviewed: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+	ratingValue: "5.0",
+	reviewCount: String(reviews.length),
+	bestRating: "5",
+	worstRating: "1",
+};
+
+const individualReviews = reviews.map((r) => ({
+	"@context": "https://schema.org",
+	"@type": "Review",
+	"@id": `${SITE_URL}/reviews#${r.id}`,
+	itemReviewed: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+	author: {
+		"@type": "Person",
+		name: r.author,
+	},
+	datePublished: r.date,
+	reviewRating: {
+		"@type": "Rating",
+		ratingValue: String(r.rating),
+		bestRating: "5",
+		worstRating: "1",
+	},
+	reviewBody: r.text,
+	publisher: {
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: SITE_URL,
+	},
+}));
 
 const faqLd = {
 	"@context": "https://schema.org",
@@ -11,116 +130,72 @@ const faqLd = {
 		{ "@type": "Question", name: "Does Orbit integrate M-Pesa payments?", acceptedAnswer: { "@type": "Answer", text: "Yes. Native Daraja API integration (Till + Paybill) so customers pay without leaving the site. Cards and PayPal also supported." } },
 	],
 };
+
+const breadcrumbs = [
+	{ name: "Home", url: "/" },
+	{ name: "Reviews", url: "/reviews" },
+];
 ---
-<Layout title="Customer Reviews — Orbit Web Designs & Marketing" description="Real reviews from Kenyan businesses that chose Orbit for web design, e-commerce, and digital marketing.">
-  <main class="mx-auto max-w-5xl px-5 py-24">
-    <header class="text-center max-w-3xl mx-auto mb-16">
-      <p class="font-mono text-xs uppercase tracking-[0.18em] text-electric mb-4">■ Social Proof</p>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6">What Our Clients Say</h1>
-      <p class="text-lg text-slate-400 max-w-2xl mx-auto">Real results from Kenyan businesses that trusted us with their digital presence.</p>
-    </header>
 
-    <section class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Orbit delivered our barbershop website in 5 days. Online booking cut phone calls by 80% and no-shows dropped to near zero. The M-Pesa integration works flawlessly."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">GK</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">George Kamau</p>
-            <p class="text-sm text-slate-400">Owner, Genthub Barbershop</p>
-          </div>
-        </div>
-      </article>
+<Layout
+	title="Customer Reviews — Orbit Web Designs & Marketing | 5.0 Stars"
+	description="Real reviews from Kenyan businesses that chose Orbit for web design, e-commerce, and digital marketing. Average 5.0 stars across verified reviews."
+	breadcrumbs={breadcrumbs}
+>
+	<Navbar />
+	<main id="main" class="mx-auto max-w-5xl px-5 py-24">
+		<header class="text-center max-w-3xl mx-auto mb-16">
+			<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric mb-4">■ Social Proof</p>
+			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6">What Our Clients Say</h1>
+			<p class="text-lg text-slate-400 max-w-2xl mx-auto">Real results from Kenyan businesses that trusted us with their digital presence.</p>
+			<div class="mt-6 inline-flex items-center gap-2 text-electric" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+				<span class="text-3xl">★★★★★</span>
+				<span class="text-lg font-semibold" itemprop="ratingValue">5.0</span>
+				<span class="text-slate-500">based on</span>
+				<span class="font-semibold" itemprop="reviewCount">{reviews.length}</span>
+				<span class="text-slate-500">verified reviews</span>
+				<meta itemprop="bestRating" content="5" />
+				<meta itemprop="worstRating" content="1" />
+				<meta itemprop="itemReviewed" content={SITE_NAME} />
+			</div>
+		</header>
 
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift" style="transition-delay: 100ms">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Our farm-to-door grocery store went live in 3 weeks. M-Pesa checkout increased conversions by 40%. The inventory dashboard saves us hours every week."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">AM</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">Aisha Mwangi</p>
-            <p class="text-sm text-slate-400">Founder, Sokoni Fresh</p>
-          </div>
-        </div>
-      </article>
+		<section class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{reviews.map((r, i) => (
+				<article class="reveal card-shine glow-border edge-glow p-8 hover-lift" itemprop="review" itemscope itemtype="https://schema.org/Review" style={`transition-delay: ${i * 100}ms`}>
+					<div class="flex items-center gap-2 mb-4">
+						<span class="text-electric text-xl" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+							★★★★★
+							<meta itemprop="ratingValue" content={String(r.rating)} />
+							<meta itemprop="bestRating" content="5" />
+							<meta itemprop="worstRating" content="1" />
+						</span>
+					</div>
+					<p class="text-slate-300 mb-6 leading-relaxed" itemprop="reviewBody">{r.text}</p>
+					<div class="flex items-center gap-3">
+						<div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
+							<span class="font-bold text-electric">{r.id.toUpperCase()}</span>
+						</div>
+						<div>
+							<p class="font-semibold text-white" itemprop="author" itemscope itemtype="https://schema.org/Person">
+								<span itemprop="name">{r.author}</span>
+							</p>
+							<p class="text-sm text-slate-400">{r.role}</p>
+						</div>
+					</div>
+					<meta itemprop="datePublished" content={r.date} />
+					<meta itemprop="itemReviewed" content={SITE_NAME} />
+				</article>
+			))}
+		</section>
 
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift" style="transition-delay: 200ms">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Our artisan storefront tripled wholesale inquiries in two months. The team understood our brand and delivered a site that actually converts visitors into wholesale buyers."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">WN</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">Wanjiku Njoroge</p>
-            <p class="text-sm text-slate-400">Founder, Zawadi Crafts</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift" style="transition-delay: 300ms">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Property listings with one-tap WhatsApp viewing requests cut our response time from hours to minutes. More viewings, faster closings."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">PK</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">Peter Kinyua</p>
-            <p class="text-sm text-slate-400">Director, Tatu Heights</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift" style="transition-delay: 400ms">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Our restaurant's digital menu and reservation system cut phone traffic by 70%. Updates take minutes, not days. Best investment we made."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">MO</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">Mama Oliech</p>
-            <p class="text-sm text-slate-400">Owner, Mama Oliech Restaurant</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="reveal card-shine glow-border edge-glow p-8 hover-lift" style="transition-delay: 500ms">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-electric text-xl">★★★★★</span>
-        </div>
-        <p class="text-slate-300 mb-6 leading-relaxed">"Single-page fitness landing page with membership signups and class schedules. Conversion rate doubled compared to our old site. Simple, fast, effective."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center">
-            <span class="font-bold text-electric">FN</span>
-          </div>
-          <div>
-            <p class="font-semibold text-white">Felix Njoroge</p>
-            <p class="text-sm text-slate-400">Owner, FitZone Gym</p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <div class="mt-16 text-center">
-      <p class="text-slate-400 mb-6">Want results like these? <a href="/contact" class="text-electric hover:underline">Start your project</a>.</p>
-    </div>
-  </main>
-  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+		<div class="mt-16 text-center">
+			<p class="text-slate-400 mb-6">Want results like these? <a href="/contact" class="text-electric hover:underline">Start your project</a>.</p>
+		</div>
+	</main>
+	<script type="application/ld+json" set:html={JSON.stringify(aggregateLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(reviewLd)} />
+	{individualReviews.map((r) => <script type="application/ld+json" set:html={JSON.stringify(r)} />)}
+	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+	<Footer />
 </Layout>

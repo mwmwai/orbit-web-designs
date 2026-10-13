@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import { SITE_URL, SITE_NAME } from "../../config";
 import rss from "@astrojs/rss";
 
@@ -183,6 +184,7 @@ const breadcrumbs = [
 		</section>
 
 		<CtaBand title="Rather just have it done?" text="Read the guides or hand the whole job to us — reply in minutes, Mon–Sat." />
+		<RelatedPosts currentSlug="index" />
 	</main>
 	<script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />

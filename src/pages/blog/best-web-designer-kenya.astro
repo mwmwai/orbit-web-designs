@@ -4,7 +4,8 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Comments from "../../components/Comments.astro";
-import { whatsappLink, SITE_URL } from "../../config";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import { whatsappLink, SITE_URL, SITE_NAME } from "../../config";
 
 const articleLd = {
 	"@context": "https://schema.org",
@@ -18,7 +19,56 @@ const articleLd = {
 	datePublished: "2026-09-11",
 	dateModified: "2026-10-03",
 	mainEntityOfPage: `${SITE_URL}/blog/best-web-designer-kenya`,
+	keywords: ["web designer Kenya", "website cost Kenya", "M-Pesa integration", "choose web designer", "web design scorecard"],
+	articleSection: "Choosing",
 };
+
+const howToLd = {
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	name: "How to choose a web designer in Kenya using the 6-question scorecard",
+	description: "Score any designer on 6 objective questions. Each question scores 0–2. Total 10–12 = hire, 7–9 = ask more, <7 = walk away.",
+	totalTime: "PT5M",
+	step: [
+		{
+			"@type": "HowToStep",
+			name: "Exact price in writing?",
+			text: "0 = \"it depends on your requirements\", 1 = a range (\"25k–50k\"), 2 = fixed KES line-item with exactly what's included. Demand the same transparency from anyone.",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-1`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "Live date, not range?",
+			text: "0 = \"2–4 weeks\", 1 = \"about a week\", 2 = \"3–5 days Starter / 1 week Business / 2 weeks Master\" with a written approval gate before launch. Ask: \"What specific date will my site go live, and what do I need to deliver by when?\"",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-2`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "M-Pesa native or plugin?",
+			text: "0 = \"we'll add M-Pesa later\" or \"use Paystack\", 1 = WooCommerce plugin, 2 = native Daraja API wiring (Till + Paybill) you can see in your own Safaricom portal. Ask to screen-share a test KES 10 payment.",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-3`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "Speed on cheap phone data?",
+			text: "0 = \"fast\", no number, 1 = 70–89 PageSpeed, 2 = 90+ on pagespeed.web.dev mobile. Most Kenyans browse on 3G/4G. Ask for a live site URL to test yourself.",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-4`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "Who owns what?",
+			text: "0 = \"we host it for you\" (they own your site), 1 = \"you own the domain\", 2 = your domain + content + files + full license + M-Pesa credentials in your name. Read the terms before paying.",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-5`,
+		},
+		{
+			"@type": "HowToStep",
+			name: "What happens after launch?",
+			text: "0 = \"good luck\", 1 = \"we're available if you need us\", 2 = monthly care plan listed with hosting/security/backups/support and a reply-time SLA. Ours: 4,999–9,999/mo, cancel anytime.",
+			url: `${SITE_URL}/blog/best-web-designer-kenya#step-6`,
+		},
+	],
+};
+
 const faqs = [
 	{ q: "Who is the best web designer in Kenya?", a: "Shortlist by scorecard, not slogans: fixed KES price with exact deliverables, 5-day-to-2-week timeline in writing, M-Pesa wired natively, SEO + Google Business Profile included, you own domain and files day one. Score any quote — including ours — on a 6-question rubric." },
 	{ q: "How much should I pay a web designer in Kenya?", a: "DIY templates 5k-15k cost your time; freelancer pro range 25k-60k; Orbit sits at 28,999/39,999/49,999 fixed; agencies 80k+. Cheapest over 24 months beats cheapest today — count lost leads from a slow invisible site." },
@@ -34,13 +84,23 @@ const faqJsonLd = {
 		acceptedAnswer: { "@type": "Answer", text: f.a },
 	})),
 };
+
+const breadcrumbs = [
+	{ name: "Home", url: "/" },
+	{ name: "Guides", url: "/blog/" },
+	{ name: "How to Choose a Web Designer", url: "/blog/best-web-designer-kenya" },
+];
 ---
 
 <Layout
 	title="How to Choose a Web Designer in Kenya: Scorecard (2026) | Orbit"
 	description="Neutral scorecard to pick a web designer in Kenya: price, timeline, M-Pesa, speed, ownership, support — works on any quote."
+	breadcrumbs={breadcrumbs}
+	ogImage="/logo.webp"
+	speakable
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(howToLd)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 	<Navbar />
 	<main id="main">
@@ -61,34 +121,34 @@ const faqJsonLd = {
 			<p class="text-sm leading-relaxed text-slate-400">Choosing a web designer in Kenya is hard — everyone promises the same thing and prices range from KES 5k to 250k+. This scorecard gives you 6 objective questions to ask any designer (including us). Score each 0-2, then add up. Takes 5 minutes, saves you months of regret.</p>
 
 			<div class="mt-8 grid gap-4">
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-1">
 					<h2 class="text-lg font-bold text-white">1. Exact price in writing?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "it depends on your requirements", 1 = a range ("25k–50k"), 2 = fixed KES line-item with exactly what's included. A fixed price means they've done this before and know the work. A range means they'll surprise you later. Our prices: 28,999 / 39,999 / 49,999 — each with an exact deliverable list. Demand the same transparency from anyone.</p>
 				</div>
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-2">
 					<h2 class="text-lg font-bold text-white">2. Live date, not range?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "2–4 weeks", 1 = "about a week", 2 = "3–5 days Starter / 1 week Business / 2 weeks Master" with a written approval gate before launch. A date means they control their process. A range means they're guessing or juggling too many clients. Ask: "What specific date will my site go live, and what do I need to deliver by when?"</p>
 				</div>
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-3">
 					<h2 class="text-lg font-bold text-white">3. M-Pesa native or plugin?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "we'll add M-Pesa later" or "use Paystack", 1 = WooCommerce plugin, 2 = native Daraja API wiring (Till + Paybill) you can see in your own Safaricom portal. Plugin checkouts break on update, feel slow, and you don't own the flow. Ask to screen-share a test KES 10 payment — if they can't, they haven't built one.</p>
 				</div>
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-4">
 					<h2 class="text-lg font-bold text-white">4. Speed on cheap phone data?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "fast", no number, 1 = 70–89 PageSpeed, 2 = 90+ on <a href="https://pagespeed.web.dev" class="text-electric hover:underline">pagespeed.web.dev</a> mobile. Most Kenyans browse on 3G/4G, not fibre. A site that loads in 5 seconds loses 53% of mobile visitors. Ask for a live site URL to test yourself — never trust a screenshot.</p>
 				</div>
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-5">
 					<h2 class="text-lg font-bold text-white">5. Who owns what?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "we host it for you" (they own your site), 1 = "you own the domain", 2 = your domain + content + files + full license + M-Pesa credentials in your name. Read the terms before paying — some designers hold your site hostage when you leave. See our <a href="/terms-of-service" class="text-electric hover:underline">Terms</a> for an example of what fair looks like.</p>
 				</div>
-				<div class="glow-border rounded-2xl p-6">
+				<div class="glow-border rounded-2xl p-6" id="step-6">
 					<h2 class="text-lg font-bold text-white">6. What happens after launch?</h2>
 					<p class="mt-2 text-sm text-slate-400">0 = "good luck", 1 = "we're available if you need us", 2 = monthly care plan listed with hosting/security/backups/support and a reply-time SLA. A site without care rots — plugins go unpatched, SSL expires, speed decays. Ours: 4,999–9,999/mo, cancel anytime. Or DIY with the checklist in our <a href="/blog/website-care-kenya" class="text-electric hover:underline">Care guide</a>.</p>
 				</div>
 			</div>
 
 			<div class="mt-8 rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 text-sm text-slate-300">
-				<p class="font-semibold text-white">Score: 10–12 = hire, 7–9 = ask more questions, &lt;7 = walk away.</p>
+				<p class="font-semibold text-white">Score: 10–12 = hire, 7–9 = ask more questions, <7 = walk away.</p>
 				<p class="mt-2 text-slate-400">Red flags: won't put price/date in writing, no PageSpeed number, "lifetime hosting free" (nobody gives free hosting forever), won't let you own domain/files, no post-launch support.</p>
 			</div>
 
@@ -117,14 +177,9 @@ const faqJsonLd = {
 			</div>
 		</section>
 
-		<div class="mx-auto max-w-3xl px-5 pb-4">
-			<p class="text-sm text-slate-400">Related: <a href="/packages" class="text-electric hover:underline">website packages & pricing</a> · <a href="/blog/website-cost-kenya" class="text-electric hover:underline">website cost in Kenya</a> · <a href="/blog/website-care-kenya" class="text-electric hover:underline">website care guide</a></p>
-		</div>
+		<RelatedPosts currentSlug="best-web-designer-kenya" />
 		<Comments slug="best-web-designer-kenya" />
 		<CtaBand title="Compare us live." text="No pitch — just numbers, side by side." />
 	</main>
 	<Footer />
 </Layout>
-
-
-

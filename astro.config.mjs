@@ -43,11 +43,20 @@ export default defineConfig({
 	integrations: [react(), sitemap({
 		filter: (page) => !page.includes('/card') && !page.includes('/business-card'),
 		serialize(item) {
+			const images = [];
+			if (item.url === 'https://www.orbitwebdesigns.co.ke/') {
+				images.push({ loc: 'https://www.orbitwebdesigns.co.ke/logo.webp', title: 'Orbit Web Designs & Marketing', caption: 'Professional web design and marketing for Kenyan businesses' });
+			} else if (item.url.includes('/blog/')) {
+				images.push({ loc: 'https://www.orbitwebdesigns.co.ke/logo.webp', title: 'Orbit Guides', caption: 'Free guides for Kenyan SMEs' });
+			} else if (item.url.includes('/packages')) {
+				images.push({ loc: 'https://www.orbitwebdesigns.co.ke/logo.webp', title: 'Website Packages', caption: 'Starter 28,999 | Business 39,999 | Master 49,999 KES' });
+			}
 			return {
 				...item,
 				changefreq: getChangefreq(item.url),
 				priority: getPriority(item.url),
 				lastmod: now.toISOString(),
+				img: images.length > 0 ? images : undefined,
 			};
 		},
 	})],
