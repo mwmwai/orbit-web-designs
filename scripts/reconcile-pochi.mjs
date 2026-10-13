@@ -403,7 +403,7 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   L.push(`Statement credits **KES ${kes(stmtTotal)}** · Ledger in **KES ${kes(ledTotal)}** · Gap (statement − ledger) **KES ${kes(stmtTotal - ledTotal)}**`);
   L.push('');
 
-  L.push('## UNRECORDED — money received, not in the ledger (append these rows)');
+  L.push(`## UNRECORDED (${unrec.length}) — money received, not in the ledger (append these rows)`);
   L.push('');
   if (!unrec.length) L.push('_None._');
   else L.push(table(
@@ -412,7 +412,7 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   ));
   L.push('');
 
-  L.push('## GHOST — in the ledger, no statement line (verify or void)');
+  L.push(`## GHOST (${ghost.length}) — in the ledger, no statement line (verify or void)`);
   L.push('');
   if (!ghost.length) L.push('_None._');
   else L.push(table(
@@ -421,7 +421,7 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
   ));
   L.push('');
 
-  L.push('## AMOUNT MISMATCH — same M-Pesa code, different KES');
+  L.push(`## AMOUNT MISMATCH (${mismatch.length}) — same M-Pesa code, different KES`);
   L.push('');
   if (!mismatch.length) L.push('_None._');
   else L.push(table(
