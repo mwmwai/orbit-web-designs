@@ -21,8 +21,17 @@ const CHANGEFREQ = {
 };
 
 function getChangefreq(url) {
-	for (const [path, freq] of Object.entries(CHANGEFREQ)) {
-		if (url.startsWith(path)) return freq;
+	let path = new URL(url).pathname;
+	if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);
+	const entries = Object.entries(CHANGEFREQ)
+		.map(([p, freq]) => [p.replace(/\/$/, '') || '/', freq])
+		.sort((a, b) => b[0].length - a[0].length);
+	for (const [key, freq] of entries) {
+		if (key === '/') {
+			if (path === '/') return freq;
+			continue;
+		}
+		if (path === key || path.startsWith(key + '/')) return freq;
 	}
 	return 'monthly';
 }

@@ -85,6 +85,17 @@ const jsonLd = [
 		description,
 		areaServed: ["Kenya", "Worldwide"],
 		priceRange: "KES 14,999 - KES 49,999",
+		...(Astro.url.pathname === "/"
+			? {
+					aggregateRating: {
+						"@type": "AggregateRating",
+						ratingValue: "5.0",
+						reviewCount: "6",
+						bestRating: "5",
+						worstRating: "1",
+					},
+				}
+			: {}),
 		knowsAbout: ["Web Design Kenya", "M-Pesa Daraja Integration", "Website Cost Kenya", "SEO Kenya", "WhatsApp Business Kenya"],
 		currenciesAccepted: "KES",
 		paymentAccepted: "Cash, Credit Card, M-Pesa, PayPal, Bank Transfer",
