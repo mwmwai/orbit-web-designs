@@ -91,7 +91,7 @@ const posts = [
 export async function GET() {
 	return rss({
 		title: `${SITE_NAME} Guides`,
-		description: "Free guides for Kenyan SMEs: website pricing, SEO basics, M-Pesa selling and growth tactics.",
+		description: "Free guides for small businesses: website pricing, SEO basics, M-Pesa selling and growth tactics.",
 		site: SITE_URL,
 		items: posts.map((p) => ({
 			title: p.title,
