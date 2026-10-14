@@ -13,13 +13,27 @@ const startFaqLd = {
 		{ "@type": "Question", name: "What's the monthly cost after launch?", acceptedAnswer: { "@type": "Answer", text: "Orbit Care keeps it alive: 4,999/mo Starter, 7,999 Business, 9,999 Master — hosting, security, updates, backups, WhatsApp support. Cancel anytime, site stays yours." } },
 	],
 };
----
 
+const howToLd = {
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	name: "How to Get a Business Website Live in 5 Days",
+	description: "Four steps from first message to a live, M-Pesa-ready website with Orbit.",
+	totalTime: "P5D",
+	step: [
+		{ "@type": "HowToStep", name: "Find your package", text: "Message Orbit on WhatsApp with what your business does — get an honest package recommendation and fixed price the same day.", url: `${"https://www.orbitwebdesigns.co.ke"}/start` },
+		{ "@type": "HowToStep", name: "Send your materials", text: "Provide photos, text about your services, and your logo. 50% deposit starts the build — date in writing." },
+		{ "@type": "HowToStep", name: "Approve the design", text: "Review the live preview. Revisions are included until you're happy — nothing goes live without your approval." },
+		{ "@type": "HowToStep", name: "Go live", text: "Launch in 5 days (Starter), 1 week (Business) or 2 weeks (Master). Domain, SSL and analytics wired. Pay the balance on go-live." },
+	],
+};
+---
 <Layout
 	title="Get a Website That Gets You Paid — From 28,999 | Orbit"
 	description="Fast, modern websites from KES 28,999. M-Pesa native, mobile-first, live in days."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(startFaqLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(howToLd)} />
 	<Navbar />
 	<main id="main">
 		<!-- HERO — single CTA -->

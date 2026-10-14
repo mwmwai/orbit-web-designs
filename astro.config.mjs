@@ -44,21 +44,37 @@ function getPriority(url) {
 }
 
 const LASTMOD = {
-	'/blog/website-cost-kenya': '2026-10-13',
-	'/blog/website-care-kenya': '2026-10-13',
-	'/blog/ecommerce-kenya-guide': '2026-10-13',
-	'/blog/seo-small-business-kenya': '2026-10-13',
-	'/blog/best-web-designer-kenya': '2026-10-13',
-	'/blog/mpesa-till-vs-paybill': '2026-10-13',
-	'/blog/whatsapp-business-kenya': '2026-10-13',
-	'/blog/web-design-kenya-guide': '2026-10-13',
-	'/blog/choose-web-designer-kenya': '2026-10-13',
-	'/blog/orbit-vs-competitors': '2026-10-13',
-	'/blog/mpesa-daraja-website-kenya': '2026-10-13',
-	'/blog/business-not-showing-google-maps-kenya': '2026-10-13',
-	'/blog/': '2026-10-13',
-	'/reviews': '2026-10-13',
-	'/': '2026-10-13',
+	'/blog/website-cost-kenya': '2026-10-14',
+	'/blog/website-care-kenya': '2026-10-14',
+	'/blog/ecommerce-kenya-guide': '2026-10-14',
+	'/blog/seo-small-business-kenya': '2026-10-14',
+	'/blog/best-web-designer-kenya': '2026-10-14',
+	'/blog/mpesa-till-vs-paybill': '2026-10-14',
+	'/blog/whatsapp-business-kenya': '2026-10-14',
+	'/blog/web-design-kenya-guide': '2026-10-14',
+	'/blog/choose-web-designer-kenya': '2026-10-14',
+	'/blog/orbit-vs-competitors': '2026-10-14',
+	'/blog/mpesa-daraja-website-kenya': '2026-10-14',
+	'/blog/business-not-showing-google-maps-kenya': '2026-10-14',
+	'/blog/': '2026-10-14',
+	'/reviews': '2026-10-14',
+	'/': '2026-10-14',
+	'/about': '2026-10-14',
+	'/faq': '2026-10-14',
+	'/packages': '2026-10-14',
+	'/guides': '2026-10-14',
+	'/review': '2026-10-14',
+	'/saas': '2026-10-14',
+	'/automation': '2026-10-14',
+	'/dashboards': '2026-10-14',
+	'/start': '2026-10-14',
+	'/services': '2026-10-14',
+	'/contact': '2026-10-14',
+	'/care': '2026-10-14',
+	'/cases/law-firm-nairobi': '2026-10-14',
+	'/mpesa-ecommerce-kenya': '2026-10-14',
+	'/seo-services-kenya': '2026-10-14',
+	'/web-design-nairobi': '2026-10-14',
 };
 function getLastmod(url) {
 	let path = new URL(url).pathname;
@@ -78,9 +94,9 @@ export default defineConfig({
 			const images = [];
 			const logoUrl = 'https://www.orbitwebdesigns.co.ke/logo.webp';
 			if (item.url === 'https://www.orbitwebdesigns.co.ke/') {
-				images.push({ url: logoUrl, title: 'Orbit Web Designs & Marketing', caption: 'Professional web design and marketing for Kenyan businesses' });
+				images.push({ url: logoUrl, title: 'Orbit Web Designs & Marketing', caption: 'Professional web design and marketing for growing businesses' });
 			} else if (item.url.includes('/blog/')) {
-				images.push({ url: logoUrl, title: 'Orbit Guides', caption: 'Free guides for Kenyan SMEs' });
+				images.push({ url: logoUrl, title: 'Orbit Guides', caption: 'Free guides for small businesses' });
 			} else if (item.url.includes('/packages')) {
 				images.push({ url: logoUrl, title: 'Website Packages', caption: 'Starter 28,999 | Business 39,999 | Master 49,999 KES' });
 			}
