@@ -52,3 +52,6 @@ render-log.txt
 # env variants hold the same secrets as .env (.env.local, .env.production.local...)
 .env.*
 !.env.example
+
+money-app/dbg-*.err
+money-app/dbg-*.out
