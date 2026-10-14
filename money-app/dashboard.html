@@ -605,6 +605,7 @@ document.querySelector('thead').addEventListener('click', e => {
 syncSampleButton();
 showLoading();
 render();
+$('upd').textContent = '· page loaded ' + nowStamp() + ' — awaiting first fetch';
 load();
 // keep the live view fresh without a manual click (never runs in sample mode / while loading / when tab hidden)
 setInterval(() => { if (!sampleMode && !loading && !document.hidden) load(true); }, 30000);
