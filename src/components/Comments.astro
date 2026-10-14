@@ -120,7 +120,7 @@ const { slug } = Astro.props;
 				});
 				msg.textContent = res.ok
 					? "Thanks! Your comment appears after a quick review."
-					: "Couldn't post — try WhatsApp instead, we reply in minutes.";
+					: "Couldn't post — try WhatsApp instead.";
 				if (res.ok) {
 					form.reset();
 					turnstileToken = "";
@@ -129,7 +129,7 @@ const { slug } = Astro.props;
 					}
 				}
 			} catch {
-				msg.textContent = "Couldn't post — try WhatsApp instead, we reply in minutes.";
+				msg.textContent = "Couldn't post — try WhatsApp instead.";
 			}
 		});
 
