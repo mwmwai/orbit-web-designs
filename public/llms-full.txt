@@ -47,14 +47,6 @@ Your idea as a real app: auth, dashboards, M-Pesa payments — deployed, documen
 - M-Pesa, card & PayPal payments
 - Deployed & handed over with training
 
-### Graphic Design
-Logos, brand kits and marketing creatives — from single logos to full identity systems.
-
-- Custom logos
-- Social media kits
-- Full brand identity systems
-- Flyers & marketing creatives
-
 ### Custom AI Agent
 A tireless teammate that lives inside your Workplace: answers instantly, qualifies leads, books jobs — then hands the hot ones to you.
 
@@ -80,7 +72,6 @@ Your whole business on one screen: live sales, M-Pesa till feed, bookings — op
 
 ### Other Services
 - **Custom SaaS App** — from KES 49,999
-- **Graphic Design** — from KES 14,999
 - **Custom AI Agent** — KES 49,999
 - **Business Dashboard** — KES 27,999
 - **Orbit Care** — KES 4,999–9,999/month (hosting, security, updates, support)

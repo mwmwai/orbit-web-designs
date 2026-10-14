@@ -91,24 +91,6 @@ const 	allPlans = [
 		featured: false,
 	},
 	{
-		name: "Graphic Design",
-		price: "KES 14,999+",
-		usd: "≈ $138+",
-		eur: "≈ €127+",
-		blurb: "Logos to full brand kits — 14,999 to 24,999, you own it.",
-		features: [
-			"Logos from KES 14,999 — 3 concepts, unlimited polish",
-			"Social kits that actually match your site",
-			"Full brand identity up to KES 24,999",
-			"Marketing creatives & flyers that convert",
-			"Source files + brand guideline sheet",
-			"Print-ready + social-ready exports",
-			"Fast turnaround, revisions included",
-		],
-		cta: "Get started",
-		featured: false,
-	},
-	{
 		name: "Custom AI Agent",
 		price: "KES 49,999",
 		usd: "≈ $462",
@@ -147,7 +129,6 @@ function linkForPlan(p: typeof allPlans[number]) {
 	if (p.name === "Custom AI Agent") return whatsappLink(`Hi Orbit! I want a Custom AI Agent (KES 49,999). My business needs...`);
 	if (p.name === "Custom SaaS App") return whatsappLink(`Hi Orbit! I want a Custom SaaS App (from KES 49,999). My idea is...`);
 	if (p.name === "Business Dashboard") return whatsappLink(`Hi Orbit! I want a business dashboard (KES 27,999 Standalone). My business does...`);
-	if (p.name === "Graphic Design") return "/design";
 	return "/contact";
 }
 

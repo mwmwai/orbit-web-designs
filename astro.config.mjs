@@ -10,7 +10,6 @@ const CHANGEFREQ = {
 	'/services': 'monthly',
 	'/care': 'monthly',
 	'/automation': 'monthly',
-	'/design': 'monthly',
 	'/saas': 'monthly',
 	'/dashboards': 'monthly',
 	'/faq': 'monthly',
@@ -39,7 +38,7 @@ function getPriority(url) {
 	if (url === 'https://www.orbitwebdesigns.co.ke/') return 1.0;
 	if (url.includes('/packages') || url.includes('/services') || url.includes('/care')) return 0.9;
 	if (url.includes('/blog/') || url.includes('/cases/')) return 0.8;
-	if (url.includes('/automation') || url.includes('/design') || url.includes('/saas') || url.includes('/dashboards')) return 0.8;
+	if (url.includes('/automation') || url.includes('/saas') || url.includes('/dashboards')) return 0.8;
 	if (url.includes('/faq') || url.includes('/contact') || url.includes('/about')) return 0.7;
 	return 0.6;
 }

@@ -1,6 +1,6 @@
 # Orbit Web Designs & Marketing
 
-> Orbit Web Designs and Marketing is a Nairobi, Kenya web design company building mobile-first, M-Pesa-ready websites, SaaS apps, AI agents, dashboards and brand design for Kenyan businesses, live in 5-14 days from KES 28,999 via WhatsApp +254 741 992 308.
+> Orbit Web Designs and Marketing is a Nairobi, Kenya web design company building modern websites, SaaS apps, AI agents and dashboards for Kenyan businesses, live in 5-14 days via WhatsApp +254 741 992 308.
 
 ## Contact
 
@@ -18,7 +18,6 @@
 - **Master Website — KES 49,999:** 15+ pages or full store, M-Pesa Till + Paybill + cards via Daraja, inventory sync, automations, training. Live in 2 weeks.
 - **Orbit Care — KES 4,999 / 7,999 / 9,999 per month:** Starter 4,999 / Business 7,999 / Master 9,999. Hosting, SSL, backups, security, updates, WhatsApp support. Cancel anytime, site stays yours.
 - **Custom SaaS App — from KES 49,999:** Auth, roles, dashboards, M-Pesa + cards, deployed + documented + training.
-- **Graphic Design — from KES 14,999, brand kits KES 24,999:** Logos 14,999 (3 concepts), full kits 24,999 (logo + colors + fonts + social kit + guidelines). Source files yours.
 - **Custom AI Agent — KES 49,999:** WhatsApp / site / email agent, trained on your business, qualifies leads + books jobs, 1 month tuning. AI API usage billed separately (few $/mo).
 - **WhatsApp Responder — KES 27,999:** Greeting + away + quick replies, catalog + labels, click-to-chat, Meta setup. One-time.
 - **Business Dashboard — KES 14,999 / 27,999:** Add-on 14,999 (plugs into your Orbit site) / Standalone 27,999 (own login, 3 sources, staff roles, CSV export). Live M-Pesa feed, bookings, stock.
@@ -31,14 +30,13 @@
 - **Custom SaaS Development** — Auth, roles, admin + user dashboards, payments, deployment.
 - **AI Agents** — Custom Agent 49,999 + Responder 27,999. No monthly lock-in.
 - **Business Dashboards** — Add-on 14,999 / Standalone 27,999. M-Pesa, bookings, stock on one phone screen.
-- **Graphic Design** — Logos from 14,999, kits 24,999, social + print creatives.
 - **SEO + Google Business Profile** — Bundled at entry, not upsold. Maps setup, titles, schema.
 - **Orbit Care** — 4,999 / 7,999 / 9,999/mo. Hosting, security, backups, support.
 
 ## Key Pages
 
-- [Home](https://www.orbitwebdesigns.co.ke/) — M-Pesa websites from KES 28,999, live in 5 days
-- [Services](https://www.orbitwebdesigns.co.ke/services) — Web design, SEO, e-commerce, SaaS, AI agents, dashboards, design
+- [Home](https://www.orbitwebdesigns.co.ke/) — Websites for Kenyan businesses, live in days
+- [Services](https://www.orbitwebdesigns.co.ke/services) — Web design, SEO, e-commerce, SaaS, AI agents, dashboards
 - [Packages](https://www.orbitwebdesigns.co.ke/packages) — Starter 28,999 / Business 39,999 / Master 49,999
 - [FAQ](https://www.orbitwebdesigns.co.ke/faq) — Pricing, timelines, payments, support
 - [About](https://www.orbitwebdesigns.co.ke/about) — Founder story, Nairobi-built
@@ -48,7 +46,6 @@
 - [Orbit Care](https://www.orbitwebdesigns.co.ke/care) — Care 4,999 / 7,999 / 9,999/mo
 - [AI Agents](https://www.orbitwebdesigns.co.ke/automation) — Custom Agent 49,999, Responder 27,999
 - [Dashboards](https://www.orbitwebdesigns.co.ke/dashboards) — Add-on 14,999 / Standalone 27,999
-- [Graphic Design](https://www.orbitwebdesigns.co.ke/design) — From 14,999, kits 24,999
 - [Custom SaaS](https://www.orbitwebdesigns.co.ke/saas) — From 49,999
 - [M-Pesa Fee Calculator](https://www.orbitwebdesigns.co.ke/mpesa-fee-calculator) — Live Safaricom bands
 - [Web Design Nairobi](https://www.orbitwebdesigns.co.ke/web-design-nairobi) — Nairobi service page
