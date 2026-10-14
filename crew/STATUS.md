@@ -122,6 +122,8 @@ Verified only paths + env key names, per mission — every reference resolves at
 
 *Context, no action:* `e1c0a6d` (Oct 14 21:40:52, 20 files — Graphic Design service removal, deleted `src/pages/design.astro`) landed mid-security-round from a concurrent session; site work, no money paths, already on origin. Finance correctly left it alone at 21:26.
 
+*Mid-edit at final ship check (22:04:36):* ` M src/components/FloatingActions.astro`, ` M src/pages/about.astro`, ` M src/pages/blog/index.astro`, ` M src/pages/start.astro` — a concurrent session (tone-pass work following `e521c4b`) is actively editing right now. Not crew paths → **skipped, not committed, left for that session** (report-only).
+
 ---
 
 ## Shipped this round (chief, ship duty)
