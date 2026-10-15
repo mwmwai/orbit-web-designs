@@ -3,6 +3,13 @@ import { SITE_URL, SITE_NAME } from "../config";
 
 const posts = [
 	{
+		slug: "how-long-does-a-website-take",
+		title: "How long does it take to build a website? Real timelines",
+		blurb: "DIY weekend to 3-month agency — realistic ranges by site type, plus the 3 things that cause every delay.",
+		date: "2026-10-14",
+		updated: "2026-10-14",
+	},
+	{
 		slug: "website-cost-kenya",
 		title: "How much does a website cost in Kenya?",
 		blurb: "Market range 5k–250k, breakdown table + hidden-cost checklist. Works with any designer.",

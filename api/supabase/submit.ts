@@ -19,6 +19,9 @@ const KNOWN_COMMENT_SLUGS = new Set([
   'website-care-kenya',
   'orbit-vs-competitors',
   'web-design-kenya-guide',
+  'mpesa-daraja-website-kenya',
+  'business-not-showing-google-maps-kenya',
+  'how-long-does-a-website-take',
 ]);
 
 function getClientIP(request: Request): string {

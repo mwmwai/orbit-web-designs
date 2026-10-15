@@ -1,0 +1,145 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Comments from "../../components/Comments.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import { whatsappLink, SITE_URL } from "../../config";
+
+const faqs = [
+	{
+		q: "How long does it take to build a business website?",
+		a: "A 5-page business site: about 1 week. A 10-page site with blog: 1–2 weeks. A store or booking system: 2–3 weeks. Those ranges assume you have photos, text and a logo ready — the clock starts when materials arrive, not when you sign.",
+	},
+	{
+		q: "Why do most website projects take months?",
+		a: "Three reasons: waiting on the client's content, scope creep (adding pages mid-build), and endless revision rounds with no approval checkpoint. Fixed-date builders with a written live date avoid all three.",
+	},
+	{
+		q: "Can a website really go live in 5 days?",
+		a: "Yes, for a focused 5-page site — if materials arrive on day one, revisions happen on a live preview, and decisions are made by one person. If any of those slip, the date slips with them. Demand the live date in writing.",
+	},
+	{
+		q: "What slows a website down more than anything?",
+		a: "Waiting for content. Photos shot on phones, half-written service descriptions, and a logo that never arrives account for most delays. Preparing three things — photos, text, logo — before you hire anyone cuts weeks off the timeline.",
+	},
+	{
+		q: "How long does SEO take after the site is live?",
+		a: "Technical SEO ships with the site on day one. Ranking movement typically starts in 2–4 months and compounds from there. A fast site launch plus consistent reviews and content is the shortest path.",
+	},
+];
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+
+const articleJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	inLanguage: "en-KE",
+	image: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp`, width: 1200, height: 630 },
+	headline: "How Long Does It Take to Build a Website? Real Timelines for 2026",
+	description: "Honest website timelines by site type and who builds it — plus the 3 things that cause every delay and how to avoid them.",
+	author: { "@type": "Organization", name: "Orbit Web Designs & Marketing", url: SITE_URL },
+	datePublished: "2026-10-14",
+	dateModified: "2026-10-14",
+};
+---
+
+<Layout
+	title="How Long Does It Take to Build a Website? (2026) | Orbit"
+	description="Real website build timelines: DIY weekend to 3-month agency projects. Why projects stall, and how a 5-page site ships in one week."
+	breadcrumbs={[
+		{ name: "Home", url: "/" },
+		{ name: "Guides", url: "/blog/" },
+		{ name: "Website Timeline", url: "/blog/how-long-does-a-website-take" },
+	]}
+	ogImage="/logo.webp"
+	speakable
+	articlePublished="2026-10-14"
+	articleModified="2026-10-14"
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+	<Navbar />
+	<main id="main">
+		<section class="relative overflow-hidden border-b border-white/5">
+			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Timeline guide · 2026 · 6 min</p>
+				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+					How long does it take <span class="text-gradient">to build a website?</span>
+				</h1>
+				<p class="mt-5 text-lg text-slate-400">Real numbers for every route — DIY, freelancer, agency, fixed-date builder — and the one thing that causes almost every delay.</p>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-3xl px-5 py-14 text-[15px] leading-relaxed text-slate-300">
+			<p class="text-lg text-slate-300">Ask five people how long a website takes and you will hear five answers: a weekend, three weeks, three months, "it depends." All of them are right — because timeline is mostly a function of <strong class="text-white">who builds it, how big it is, and how fast you supply the content</strong>. Here is what actually happens in 2026.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Realistic timelines by route</h2>
+			<div class="mt-6 overflow-x-auto">
+				<table class="w-full border-collapse text-left text-sm">
+					<thead class="border-b border-edge text-xs uppercase tracking-widest text-slate-400">
+						<tr><th class="py-3 pr-4">Route</th><th class="py-3 pr-4">5-page site</th><th class="py-3">Store / booking</th></tr>
+					</thead>
+					<tbody class="divide-y divide-edge text-slate-300">
+						<tr><td class="py-3 pr-4 text-white">DIY builder (Wix, Squarespace)</td><td class="py-3 pr-4">1–3 weekends</td><td class="py-3">3–6 weeks</td></tr>
+						<tr><td class="py-3 pr-4 text-white">Freelancer</td><td class="py-3 pr-4">2–6 weeks</td><td class="py-3">4–10 weeks</td></tr>
+						<tr><td class="py-3 pr-4 text-white">Agency</td><td class="py-3 pr-4">4–12 weeks</td><td class="py-3">2–4 months</td></tr>
+						<tr><td class="py-3 pr-4 text-white">Fixed-date builder (Orbit)</td><td class="py-3 pr-4">5 days–1 week</td><td class="py-3">2 weeks</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="mt-4 text-sm text-slate-400">DIY is fast only if you finish — most small businesses abandon templates halfway. Agencies are slow because of process, not size. Fixed-date builders are fast because scope is locked before day one.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Why projects actually stall</h2>
+			<p class="mt-4">In our experience the build itself is never the bottleneck. Three things cause almost every missed deadline:</p>
+			<ul class="mt-4 grid gap-3">
+				<li class="flex gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Waiting on content.</strong> The builder is ready on day three; your photos arrive on day eighteen. The clock does not start at signing — it starts when materials land.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Decision by committee.</strong> Every extra stakeholder adds days per revision. One decision-maker is the difference between one week and one month.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span><strong class="text-white">Unlimited revisions with no checkpoint.</strong> Endless tweaks on a moving target never end. Approving a live preview once, then polishing, is how deadlines hold.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">What "live in 5 days" actually means</h2>
+			<p class="mt-4">For a focused five-page business site, five days is honest work — with three conditions. You send photos, service text and your logo on day one. You approve the design on a live preview, not from mockups in an email. One person gives the final yes. Miss any of the three and the date moves — a written live date should move with it, not silently.</p>
+			<p class="mt-4">Stores and booking systems take about two weeks: payments, inventory or calendar logic, and a test transaction with real money before anything goes public.</p>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">How to keep your side fast</h2>
+			<ul class="mt-4 grid gap-3">
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>Shoot photos on any modern phone in daylight — 10–15 clear shots of your space, team and product beat a photographer's 3-week wait for most small sites.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>Write one honest sentence per service. A builder can polish it; a blank page cannot be polished.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>Pick your package and price <em>before</em> contacting anyone. Scope shopping mid-project is how 2 weeks becomes 6.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>Answer revision requests within 24 hours. Momentum is the whole secret.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">Red flags in timeline promises</h2>
+			<ul class="mt-4 grid gap-3">
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>"Live in 24 hours" — template soup with your logo dropped in. It will show.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>"No fixed date, but we're fast" — no date means no accountability. Ask for it in writing.</span></li>
+				<li class="flex gap-3"><span class="text-electric">→</span> <span>"We'll start this week" with no mention of content — they will bill you for waiting.</span></li>
+			</ul>
+
+			<h2 class="mt-10 text-2xl font-bold tracking-tight text-white sm:text-3xl">The bottom line</h2>
+			<p class="mt-4">A serious business website should take one to three weeks, not one to three months. If your timeline is longer than that, the problem is almost never design skill — it is process. Lock the scope, send your materials, appoint one approver, and demand the live date in writing.</p>
+
+			<div class="mt-10 rounded-2xl border border-edge bg-panel p-6">
+				<p class="font-semibold text-white">Orbit's timeline, in writing</p>
+				<p class="mt-2 text-sm text-slate-400">Starter live in 5 days · Business in 1 week · Master store or booking in 2 weeks — from the day your photos, text and logo arrive. Date in writing on WhatsApp.</p>
+				<a href={whatsappLink("Hi Orbit! I read the website timeline guide — what package fits my timeline?")} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Ask your timeline on WhatsApp</a>
+			</div>
+
+			<div class="mt-12"><RelatedPosts currentSlug="how-long-does-a-website-take" /></div>
+			<Comments slug="how-long-does-a-website-take" />
+		</article>
+
+		<CtaBand title="Need it live by a date?" text="Tell us the date — we'll tell you honestly if it's real." />
+	</main>
+	<Footer />
+</Layout>

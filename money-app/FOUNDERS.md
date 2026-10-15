@@ -23,7 +23,7 @@ POSTs with no token → API returns 400 (`api/supabase/submit.ts:130`).
    - Correcting drift: the name is `PUBLIC_TURNSTILE_SITE_KEY` (underscore before `KEY`), read at `Footer.astro:5`, `src/components/react/ContactForm.tsx:4`, `Comments.astro:56`.
    - Do **not** touch `TURNSTILE_SECRET_KEY` — already set in prod (dummy token → 403, not 503).
 3. Vercel → **Deployments → ⋯ → Redeploy** the latest production deployment. (Vite inlines the key at build; saving the var alone changes nothing.)
-4. Verify: view-source `https://orbitwebdesigns.co.ke/contact` → contains `0x` sitekey and the    `challenges.cloudflare.com/turnstile/v0/api.js` script (`Layout.astro:344-346`).
+4. Verify: view-source `https://orbitwebdesigns.co.ke/contact` → contains `0x` sitekey and the    `challenges.cloudflare.com/turnstile/v0/api.js` script (`Layout.astro:342-344`).
 
 **Done when:** /contact shows the Turnstile box and one test enquiry returns success (row in Supabase `leads`); footer newsletter Join shows "You're in — check your inbox" (API 200, not 400).
 **Rollback:** delete the var + redeploy → back to today's WhatsApp-failover state. No data risk.
