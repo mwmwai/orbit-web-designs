@@ -533,11 +533,11 @@ async function load(quiet) {
 
   if (status === 401) {
     setBanner('b-warn', 'Sign-in required', 'Owner sign-in required.',
-      (detail || 'Login required') + ' — sign in as the ledger owner, then hit Refresh.',
+      (detail || 'Login required') + ' — sign in as the ledger owner, then hit Refresh. (HTTP 401)',
       ...errActs());
   } else if (status === 503) {
     setBanner('b-warn', 'Not configured', 'Backend not configured — fill .env (money-app/README.md).',
-      detail || 'Supabase env missing (see README "Run" section).',
+      (detail || 'Supabase env missing (see README "Run" section).') + ' (HTTP 503)',
       ...errActs());
   } else if (status === 404) {
     setBanner('b-err', 'API unreachable', 'API unreachable — ' + API + ' returned 404.',
