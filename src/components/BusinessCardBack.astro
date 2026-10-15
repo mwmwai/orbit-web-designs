@@ -1,4 +1,4 @@
----
+﻿---
 import { SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_DISPLAY } from "../config";
 
 interface Props {
@@ -51,7 +51,7 @@ const { class: className = "" } = Astro.props;
 		justify-content: space-between;
 		height: 100%;
 		padding: 0.22in 0.26in;
-		gap: 0.18in;
+		gap: 0.12in;
 	}
 
 	.left-section {
@@ -60,6 +60,7 @@ const { class: className = "" } = Astro.props;
 		align-items: flex-start;
 		justify-content: center;
 		min-width: 0;
+		flex: none;
 	}
 
 	.logo-small {
@@ -69,27 +70,28 @@ const { class: className = "" } = Astro.props;
 
 	.right-section {
 		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		justify-content: center;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
 		min-width: 0;
 		flex: 1;
+		gap: 0.08in;
 	}
 
 	.contact-grid {
 		display: flex;
 		flex-direction: column;
-		gap: 0.105in;
-		width: 100%;
-		max-width: 2.1in;
+		gap: 0.09in;
+		width: auto;
+		max-width: none;
 	}
 
 	.headline {
-		font-size: 10.5pt;
+		font-size: 9pt;
 		font-weight: 800;
 		line-height: 1.15;
 		color: #FFFFFF;
-		margin-bottom: 0.075in;
+		margin-bottom: 0.06in;
 		letter-spacing: 0.01em;
 		text-align: right;
 	}
@@ -104,14 +106,15 @@ const { class: className = "" } = Astro.props;
 	.contact-row {
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
-		gap: 0.11in;
+		justify-content: flex-start;
+		gap: 0.1in;
+		width: 100%;
 	}
 
 	.contact-row .ico {
 		flex: none;
-		width: 0.20in;
-		height: 0.20in;
+		width: 0.18in;
+		height: 0.18in;
 		border-radius: 0.05in;
 		display: flex;
 		align-items: center;
@@ -121,8 +124,8 @@ const { class: className = "" } = Astro.props;
 	}
 
 	.contact-row .ico svg {
-		width: 0.12in;
-		height: 0.12in;
+		width: 0.11in;
+		height: 0.11in;
 		stroke: #00C8FF;
 		fill: none;
 		stroke-width: 2;
@@ -131,10 +134,11 @@ const { class: className = "" } = Astro.props;
 	}
 
 	.contact-row .txt {
-		font-size: 7.6pt;
+		font-size: 7pt;
 		color: #CBD5E1;
 		white-space: nowrap;
 		text-align: right;
+		flex: 1;
 	}
 
 	.contact-row .txt b {
@@ -151,11 +155,11 @@ const { class: className = "" } = Astro.props;
 	}
 
 	.qr-tile {
-		width: 0.72in;
-		height: 0.72in;
+		width: 0.64in;
+		height: 0.64in;
 		background: #FFFFFF;
 		border-radius: 0.07in;
-		padding: 0.045in;
+		padding: 0.04in;
 		box-shadow:
 			0 0 0 1px rgba(0, 200, 255, 0.35),
 			0 4px 14px rgba(0, 200, 255, 0.15);

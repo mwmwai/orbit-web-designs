@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+	html, body { margin: 0; padding: 0; }
+	body { width: 3.5in; height: 2in; overflow: hidden; background: transparent; font-family: "Segoe UI", Arial, sans-serif; }
+	.card-front {
+		width: 3.5in;
+		height: 2in;
+		position: relative;
+		overflow: hidden;
+		background: #0A0F1D;
+		color: #E7E9F2;
+	}
+	.card-front::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		opacity: 0.04;
+		background-image:
+			linear-gradient(to right, #23233a 1px, transparent 1px),
+			linear-gradient(to bottom, #23233a 1px, transparent 1px);
+		background-size: 0.28in 0.28in;
+		pointer-events: none;
+	}
+	.card-front::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse at 50% 30%, transparent 40%, rgba(10, 15, 29, 0.9) 100%);
+		pointer-events: none;
+	}
+	.content {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		text-align: center;
+		padding: 0.25in;
+	}
+	.logo-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+</style>
+</head>
+<body>
+	<div class="card-front">
+		<div class="content">
+			<div class="logo-wrapper">
+				<img src="../public/logo-lockup-cropped.webp" width="320" alt="" style="mix-blend-mode:screen;max-width:80%;height:auto" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
