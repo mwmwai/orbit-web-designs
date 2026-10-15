@@ -4,7 +4,7 @@ const path = Astro.url.pathname;
 ---
 
 <div id="orbit-assistant" class="fixed bottom-6 right-6 z-[110] flex flex-col items-end gap-3" client:load data-page={path}>
-	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 backdrop-blur md:w-96">
+	<div id="oa-panel" role="dialog" aria-modal="false" aria-label="Chat with Orbit AI" class="hidden w-[22rem] max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-2xl border border-edge bg-panel/95 shadow-2xl shadow-black/60 md:w-96">
 		<div class="border-b border-white/5 bg-gradient-to-r from-electric/15 to-neon/10 px-5 py-4">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex items-center gap-2">

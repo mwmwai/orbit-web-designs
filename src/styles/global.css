@@ -58,7 +58,6 @@ body {
 .aurora span {
 	position: absolute;
 	border-radius: 9999px;
-	filter: blur(120px);
 	opacity: 0.5;
 }
 .aurora span:nth-child(1) {
@@ -154,17 +153,14 @@ body {
 	0% {
 		opacity: 1;
 		transform: perspective(1200px) rotateX(0deg) scale(1) translateY(0);
-		filter: blur(0px) brightness(1) saturate(1);
 	}
 	55% {
 		opacity: 0.5;
 		transform: perspective(1200px) rotateX(3deg) scale(1.03) translateY(-6px);
-		filter: blur(3px) brightness(0.9) saturate(1.1);
 	}
 	100% {
 		opacity: 0;
 		transform: perspective(1200px) rotateX(6deg) scale(1.07) translateY(-14px);
-		filter: blur(10px) brightness(0.6) saturate(0.8);
 	}
 }
 
@@ -172,22 +168,18 @@ body {
 	0% {
 		opacity: 0;
 		transform: perspective(1200px) rotateX(-5deg) scale(0.96) translateY(26px);
-		filter: blur(10px) brightness(0.6) saturate(0.8);
 	}
 	45% {
 		opacity: 0.4;
 		transform: perspective(1200px) rotateX(-2deg) scale(0.985) translateY(10px);
-		filter: blur(5px) brightness(0.9) saturate(0.95);
 	}
 	75% {
 		opacity: 0.9;
 		transform: perspective(1200px) rotateX(-0.5deg) scale(1.001) translateY(-2px);
-		filter: blur(1px) brightness(1.02) saturate(1.05);
 	}
 	100% {
 		opacity: 1;
 		transform: perspective(1200px) rotateX(0deg) scale(1) translateY(0);
-		filter: blur(0) brightness(1) saturate(1);
 	}
 }
 
@@ -369,7 +361,7 @@ html[data-astro-transition] body::after {
 	50% { opacity: 1; transform: translateX(10%) rotate(-6deg); }
 }
 .motion-blur {
-	filter: blur(0.3px);
+	filter: none;
 }
 @media (prefers-reduced-motion: reduce) {
 	.film-grain, .light-streak { display: none; }
@@ -468,16 +460,13 @@ html[data-astro-transition] body::after {
 
 .text-reveal {
 	opacity: 0;
-	filter: blur(10px);
 	transform: translateY(14px);
 	transition:
 		opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-		filter 0.8s cubic-bezier(0.22, 1, 0.36, 1),
 		transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .text-reveal.is-visible {
 	opacity: 1;
-	filter: blur(0);
 	transform: none;
 }
 
