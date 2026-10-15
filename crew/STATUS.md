@@ -1,98 +1,100 @@
 # crew/STATUS.md — single source of truth (owner: chief seat)
 
-Rebuilt 2026-10-15T20:22 local by chief, session pid=1188 round=6 (loop-start 2026-10-15T18:44:18; this round started 20:17:28). Sources: tails of all seven `crew/logs/*.log`, `loop.log` full parse, `git status --porcelain` + `git log`, live probes (`8390/health`, scheduled tasks), FOUNDERS.md accuracy pass. HEAD=`6ee984d` (= origin/main, clean tree at 20:17; was `1730289` at the 17:46 rebuild). Per-section timestamps below.
+Rebuilt 2026-10-15T21:45 local by chief, session pid=1188 round=12 (loop-start 2026-10-15T18:44:18; this round started 21:41:12). Sources: tails of all seven `crew/logs/*.log`, `loop.log` full parse, `git status --porcelain` + `git log`, FOUNDERS.md accuracy pass, live `8390/health` probe, scheduled tasks. HEAD=`d8f2df8` (**ahead of origin/main by 1** — the founder's own unpushed business-card commit; see Drift (c)). Prior chief rebuild: `70a9e9c` at 20:26. Per-section timestamps below.
 
-**Headline: the all-seat API wedge broke after the 18:44 loop restart — 5 of 6 seats just completed clean, substantive rounds with REPORTs. Only foreman is still wedged.**
+**Headline: five seats are green with back-to-back clean rounds; foreman timed out a second time (r7) and is now on 19 straight failing turns. A new local commit by the founder (`d8f2df8`) sits unpushed ahead of origin.**
 
 ---
 
-## Loop health — 2026-10-15T20:21
+## Loop health — 2026-10-15T21:43
 
-**Rounds advancing.** All-time: **293 starts / 209 Completed / 70 TIMEOUT** across 14 loop-start sessions. Last start = this chief round (pid1188 r6, 20:17:28, in flight). New session **pid=1188** (18:44:18) replaced pid1080 (whose final round, chief r102, never resolved — see L2). Both scheduled tasks **Running** (`OrbitCrew`, `OrbitMoneyAppWatchdog`). `8390/health` → **200** `ok:true` at 20:21 (uptime 2063s, same 7 `env_missing` keys).
+**Rounds advancing.** All-time: **299 starts / 214 Completed / 71 TIMEOUT** across 14 loop-start sessions (was 293/209/70 at 20:22; +6 starts, +5 Completed, +1 TIMEOUT). Last start = this chief round (pid1188 r12, 21:41:12, in flight). Both scheduled tasks **Running** (`OrbitCrew`, `OrbitMoneyAppWatchdog`). `8390/health` → **200** `ok:true` at 21:43 (uptime 4324s, same 7 `env_missing` keys, health.log heartbeat fresh at 18:41Z).
 
-**pid1188 rounds — recovery is real:**
+**pid1188 rounds — recovery holding, foreman excepted:**
 
 | Round | Seat | Result | REPORT? |
 |---|---|---|---|
 | r1 | foreman | **TIMEOUT 2400s, zero output** (18:44:56→19:52:23) | no |
-| r2 | sre | Completed 423s, full infra sweep | **yes** 20:00:07 |
-| r3 | finance | Completed 357s, script suite + fixture reconcile green | **yes** 20:06:15 |
-| r4 | dashboard | Completed 257s, probes + audit, **shipped `4d55932`** | **yes** 20:10:43 |
-| r5 | security | Completed 384s, secret sweep + live gate probes | **yes** 20:17:18 |
-| r6 | chief | this round, in flight | pending |
+| r2–r6 | sre/finance/dashboard/security/chief | all Completed, all REPORTs (chief shipped `70a9e9c` at 20:26) | yes |
+| r7 | foreman | **TIMEOUT 2400s, zero output again** (20:26:28→21:06:39) | no |
+| r8 | sre | Completed 620s — all-green infra sweep | **yes** 21:17:27 |
+| r9 | finance | Completed 170s — script suite + fixture run green | **yes** 21:20:27 |
+| r10 | dashboard | Completed 120s — probes + static audit, no edits | **yes** 21:22:38 |
+| r11 | security | Completed 1094s — secret sweep + live gate probes | **yes** 21:41:02 |
+| r12 | chief | this round, in flight | pending |
 
-**3-in-a-row check — five seats cleared their strikes this session; foreman did not:**
+**3-in-a-row check — no seat other than foreman is on a failing streak:**
 
-| Seat | Consecutive failing turns (old session) | pid1188 | Streak | Last clean REPORT |
-|---|---|---|---|---|
-| foreman | 17 (13 API-error + 2 TIMEOUT + …) | r1 TIMEOUT, zero output, **no API banner even** | **still wedged (18)** | 2026-10-09T13:29:39 |
-| sre | 14 | r2 real work | cleared | **2026-10-15T20:00:07** |
-| finance | 14 | r3 real work | cleared | **2026-10-15T20:06:15** |
-| dashboard | 13 | r4 real work + ship | cleared | **2026-10-15T20:10:43** |
-| security | 14 | r5 real work | cleared | **2026-10-15T20:17:18** |
-| chief | 13 | r6 in flight (working) | pending this round | 2026-10-14T22:05:53 |
+| Seat | Streak | This session | Last clean REPORT |
+|---|---|---|---|
+| foreman | **19 consecutive failing turns** (2 in pid1188, both zero-output TIMEOUTs) | r1 + r7 TIMEOUT | 2026-10-09T13:29:39 |
+| sre | 0 | r2 + r8 clean | **2026-10-15T21:17:27** |
+| finance | 0 | r3 + r9 clean | **2026-10-15T21:20:27** |
+| dashboard | 0 | r4 + r10 clean | **2026-10-15T21:22:38** |
+| security | 0 | r5 + r11 clean | **2026-10-15T21:41:02** |
+| chief | 0 | r6 done (shipped `70a9e9c`), r12 in flight | 2026-10-15T20:26:17 |
 
-The old uniform `Cannot connect to API` signature has not appeared once in pid1188. Foreman's new failure mode is different: it **hung 2400s with no output at all** (no error banner in `foreman.log` for the 18:44 window — last line is still the 17:17:39 API error). Escalation 1 narrows to a single-seat problem.
+Foreman's failure signature is unchanged across both attempts this session: **full 2400s hang, zero output, no API-error banner** in `foreman.log` (last line there is still the 17:17:39 `Cannot connect to API` from the old session). No other seat has produced a `Cannot connect to API` line since the 18:44 restart.
 
-**L1 — timeout path still loses all seat output: 70/70 zero-output (was 69/69).** New window: foreman r1 pid1188 (18:44:56→19:52:23) — seat log shows nothing in the window, 0 `TIMEOUT-PARTIAL` captures. **Escalation 3.**
+**L1 — timeout path still loses all seat output: 71/71 zero-output.** New window: foreman r7 pid1188 (20:26:28→21:06:39) — nothing in the seat log for the window. **Escalation 3.**
 
-**L2 silent loop deaths — now 13 orphaned starts (was 12).** pid1080's round-102 chief start (17:25:21) never resolved and the session was replaced at 18:44 — exactly 1 unresolved start in each of the 14 sessions. **Escalation 4.**
+**L2 silent loop deaths — 14 orphaned starts, unchanged** (still exactly one unresolved chief start per session; pid1188's r12 is in flight, not yet orphaned). **Escalation 4.**
 
 **Escalations (report-only; `loop.ps1` and other seats' missions untouched):**
-1. **Foreman wedge (top).** 18 consecutive failing turns since Oct 9; this session it hung the full 2400s timeout with zero output. It is the only seat still red. Its fix-only mission (no build/push) stands; a loop-side look at why that one seat hangs is the ask — not a mission edit from here.
-2. ~~False-green telemetry~~ — partially retired: the restart fixed the false-`Completed` pattern for five seats; still note that pid1080 recorded ~81 zero-output turns as `Completed`, and r1's TIMEOUT is the loop working correctly.
-3. **L1** — 70/70 zero-output timeout windows, 0 partial captures.
-4. **L2** — 13 orphaned starts (one per session).
-5. **Owner decisions — see Drift (c)** (`6e99a30` never-commit sweep still the big one).
-6. **Sweep-commit pattern** — no recurrence this round (tree was clean at arrival); the prior round's instance (`1730289` absorbing crew files) stands as recorded. Owner call remains open.
+1. **Foreman wedge (top).** 19 consecutive failing turns; two consecutive silent 2400s hangs this session. Only red seat. A loop-side investigation of why that one seat never emits output is the ask — not a mission edit from here.
+2. ~~False-green telemetry~~ — retired for live rounds; historical note stands (pid1080 recorded zero-output turns as `Completed`).
+3. **L1** — 71/71 zero-output timeout windows, 0 partial captures.
+4. **L2** — 14 orphaned starts (one per session).
+5. **Owner decisions — see Drift (c)** (`6e99a30` never-commit sweep; unpushed `d8f2df8`).
+6. **Sweep-commit pattern** — no recurrence; note the founder's `98d00fb` absorbed the prior round's FOUNDERS edits (content verified live; benign).
 
 ---
 
 ## Seats
 
-### foreman — 2026-10-15T20:22
-- **Last round:** session pid1188 r1, **TIMEOUT after 2400s** (18:44:56→19:52:23) — zero output, no REPORT, not even an API-error banner (a behavior change from its old fast-fail signature). 18th straight failing turn; last clean REPORT **Oct 9 13:29:39**.
-- **State: RED — wedged (only remaining red seat).** Fix-only mission stands.
-- **Open items:** next turn must emit output + REPORT; adapter-body bug (mission 1) and `/dashboard` mount state now **verified by others** (dashboard seat: `GET /dashboard` 200 at 20:10, committed `4d55932`) so foreman should read-before-re-do. Its dbg leftovers `money-app/adapter-probe.mjs` still **tracked** → owner call, drift (c)2.
-- **Blocked on founder:** no for its own work (env keys fold into Gate 2).
+### foreman — 2026-10-15T21:45
+- **Last round:** session pid1188 r7, **TIMEOUT after 2400s** (20:26:28→21:06:39) — zero output, no REPORT, no API banner; identical signature to its r1 hang. 19th straight failing turn; last clean REPORT **Oct 9 13:29:39**.
+- **State: RED — wedged (only red seat).** Fix-only mission stands.
+- **Open items:** next turn must emit output + REPORT; read-before-re-do: dashboard mount and banner fixes already verified/shipped by the dashboard seat; its dbg leftover `money-app/adapter-probe.mjs` still **tracked** → owner call, drift (c).
+- **Blocked on founder:** no for its own work (env escalation folds into Gate 2).
 
-### sre — 2026-10-15T20:22
-- **Last round:** session pid1188 r2, `Completed` 423s, **REPORT 20:00:07** — full sweep: money-app `/health` 200, PID 4352 sole listener, zombie guard verified in `watchdog.ps1:233-234` (already patched, no edit per idempotency), watchdog + OrbitCrew Running, EADDRINUSE-log recommendation parked as cosmetic.
-- **State: GREEN — streak cleared (14→0).**
-- **Open items:** none blocking; parked recommendation noted above.
-- **Blocked on founder:** no (7 `env_missing` = expected Gate 2 state, re-confirmed live 20:21 by this seat).
+### sre — 2026-10-15T21:45
+- **Last round:** session pid1188 r8, `Completed` 620s, **REPORT 21:17:27** — `/health` 200 (uptime 2220s), PID 10904 sole listener on :8390, watchdog PID 3180 running current code (zombie guard `watchdog.ps1:233` port+health, verified loaded), fresh heartbeat 18:11:20Z, OrbitCrew+OrbitMoneyAppWatchdog Running; server.mjs failure paths reviewed fail-closed, no changes.
+- **State: GREEN.**
+- **Open items:** none blocking.
+- **Blocked on founder:** no (7 `env_missing` = expected Gate 2 state, re-confirmed live 21:43).
 
-### finance — 2026-10-15T20:22
-- **Last round:** session pid1188 r3, `Completed` 357s, **REPORT 20:06:15** — `node --check` ×3 green; fixture reconcile MATCHED1/UNRECORDED1/GHOST1/MISMATCH1 exit 0 in TEMP (repo untouched); RECONCILE.md flags verified no drift; `deal-log.csv` / `costs.csv` remain header-only.
-- **State: GREEN — streak cleared (14→0).**
+### finance — 2026-10-15T21:45
+- **Last round:** session pid1188 r9, `Completed` 170s, **REPORT 21:20:27** — `node --check` ×3 green; reconcile fixtures MATCHED1/UNRECORDED2/GHOST1/MISMATCH1 exit 0 in TEMP (cleaned); P&L fixtures + no-data paths exit 0; RECONCILE.md flags verified no drift; `deal-log.csv` / `costs.csv` remain header-only; left the unrelated `BusinessCardFront.astro` edit untouched.
+- **State: GREEN.**
 - **Open items:** nothing until real statement data lands.
 - **Blocked on founder:** **Gate 4** (Pochi CSV — only path to a real cash number) + **Gate 2** (schema + env before any ledger row).
 
-### dashboard — 2026-10-15T20:22
-- **Last round:** session pid1188 r4, `Completed` 257s, **REPORT 20:10:43** — `/dashboard` 200 (mounted), `/api/transactions` 503→banner path correct, static audit + `node --check` clean, **shipped `4d55932`** (HTTP status appended to 401/503 banner details; build passed; explicit-path commit, exactly per its mission).
-- **State: GREEN — streak cleared (13→0).**
-- **Open items:** none blocking; re-verify banner copy next cadence round.
+### dashboard — 2026-10-15T21:45
+- **Last round:** session pid1188 r10, `Completed` 120s, **REPORT 21:22:38** — `/dashboard` 200, `/api/transactions` 503 → banner branch correct, `/health` 200; static audit of `money-app/dashboard.html` clean (all `$('id')` targets present, CSV escaping + formula-injection guards intact, extracted script passes `node --check`); no edits.
+- **State: GREEN.**
+- **Open items:** none blocking; next cadence round re-verifies.
 - **Blocked on founder:** **Gate 2** (`/api/transactions` 503 path stands until schema + env).
 
-### security — 2026-10-15T20:22
-- **Last round:** session pid1188 r5, `Completed` 384s, **REPORT 20:17:18** — secret sweep clean (47 false positives enumerated, no real secrets); `.gitignore` hygiene all-pass; live gate probes exact-contract (SMS no-secret 401 / C2B empty 200-ack / C2B valid-unconfigured 503); timing-safe `shaEq` + fixed-string adapter errors already in place; **zero code changed**.
-- **State: GREEN — streak cleared (14→0), perimeter green.**
+### security — 2026-10-15T21:45
+- **Last round:** session pid1188 r11, `Completed` 1094s, **REPORT 21:41:02** — secret sweep clean (all hits false positives); `.gitignore` hygiene all-pass; live gate probes exact-contract (SMS no-secret 401 / confirmation token-unset 503 after warn-once / validation 200 Accepted / health 200); timing-safe `shaEq` + fixed-string adapter errors confirmed in place; **zero code changed**.
+- **State: GREEN.**
 - **Open items:** next cadence sweep on its own schedule.
 - **Blocked on founder:** no for its own work; **Gates 2/3** remain the standing arming condition for money go-live.
 
-### chief — 2026-10-15T20:22
-- **Last completed round:** prior session pid1080 r102 start (17:25:21) **never resolved** — session died silently, counted in L2; no REPORT from it.
-- **This round:** session pid1188 **r6 in flight** (start 20:17:28, past the API call — working). Deliverables: STATUS.md rebuilt (recovery picture, foreman-only wedge, L1=70, L2=13), drift re-classified (porcelain clean at arrival), FOUNDERS accuracy pass (2 citation fixes), ship duty on the two files this round changed.
+### chief — 2026-10-15T21:45
+- **Last completed round:** pid1188 r6, Completed 527s, **REPORT 20:26:17** — shipped `70a9e9c` (STATUS rebuild; FOUNDERS citation fixes verified live after being swept into the founder's `98d00fb`), build PASS 43 pages, pushed.
+- **This round:** pid1188 **r12 in flight** (start 21:41:12). Deliverables: STATUS.md rebuilt (foreman second timeout, 299/214/71), drift re-classified, FOUNDERS accuracy pass (zero drift this time), ship duty on STATUS.md only.
 - **State: IN PROGRESS** → green on build + commit + REPORT line.
 - **Open items:** see Escalations.
 - **Blocked on founder:** no.
 
 ---
 
-## Founder gates (top-3 mirror — full doc: [`money-app/FOUNDERS.md`](../money-app/FOUNDERS.md)) — 2026-10-15T20:22
+## Founder gates (top-3 mirror — full doc: [`money-app/FOUNDERS.md`](../money-app/FOUNDERS.md)) — 2026-10-15T21:45
 
 1. **Gate 1 — Turnstile sitekey** (`PUBLIC_TURNSTILE_SITE_KEY` → Vercel → redeploy): restores live inbound — contact-form leads + newsletter (fail-closed 400 at `api/supabase/submit.ts:132-137`).
-2. **Gate 2 — Supabase schema + owner user** (FOUNDERS steps 1–3): unlocks every data call; money-app `/health` probed live **20:21** still reports the same 7 `env_missing` keys.
+2. **Gate 2 — Supabase schema + owner user** (FOUNDERS steps 1–3): unlocks every data call; money-app `/health` probed live **21:43** still reports the same 7 `env_missing` keys.
 3. **Gate 4 — Pochi statement export** (steps 1–2 → Finance): the only path to a real cash number; no financial number may be stated until it lands.
 
 Also in the doc: Gate 3 (Daraja C2B URLs, gated on step 0 + Gate 2), Gate 5 (push approval — standing, used for this round's ship). Sequencing per FOUNDERS: 1 and 2 parallel, 4 needs nothing, 3 needs 2 + step 0. **Do not duplicate the doc — read it.**
@@ -101,39 +103,40 @@ Also in the doc: Gate 3 (Daraja C2B URLs, gated on step 0 + Gate 2), Gate 5 (pus
 
 ---
 
-## FOUNDERS.md accuracy pass — 2026-10-15T20:20 (two citation fixes, no steps added)
+## FOUNDERS.md accuracy pass — 2026-10-15T21:44 (zero fixes needed)
 
-Verified only paths + env key names, per mission — all resolve at HEAD=`6ee984d`:
-- `PUBLIC_TURNSTILE_SITE_KEY` spelling intact at every cited site: `src/components/Footer.astro:5`, `src/components/react/ContactForm.tsx:4`, `src/components/Comments.astro:56`. `TURNSTILE_SECRET_KEY` untouched (`api/generate.mjs:1`, `api/supabase/submit.ts:7`), as claimed.
-- **Drift fixed (1):** the missing-token 400 check moved — Gate 1 intro cited `api/supabase/submit.ts:130`, but :130 is now inside the unset-secret **503** block; the 400 (`turnstile_token` missing) is **:132-137**. Citation updated. **No steps added or changed.**
-- **Drift fixed (2):** Gate 1 step 4 cited `Layout.astro:342-344` — the file **moved `src/components/` → `src/layouts/`** in `6ee984d` (today's OG-card commit). Gating block is still exactly 342-344 at the new path. Citation updated to `src/layouts/Layout.astro:342-344` with the move noted. **No steps added or changed.**
-- `supabase/dashboard-schema.sql` exists; last commit touching it still **`8d85de5`** — matches the doc. Commits `1e7a6c4`, `998f404`, `8d85de5`, `2334766` all resolve; `git show 1e7a6c4^:src/pages/dashboard.astro` still recovers (exit 0 — Gate 3 step 0 restore path works); archive copy `money-app/pages/dashboard.astro` present, `src/pages/dashboard.astro` absent (correct — money stays off the public domain).
+Verified only paths + env key names, per mission — all resolve at HEAD=`d8f2df8`:
+- `PUBLIC_TURNSTILE_SITE_KEY` spelling intact at every cited site: `src/components/Footer.astro:5`, `src/components/react/ContactForm.tsx:4`, `src/components/Comments.astro:56`. `TURNSTILE_SECRET_KEY` untouched as claimed.
+- The two citations fixed last round still hold: missing-token 400 is `api/supabase/submit.ts:132-137` (the unset-secret 503 sits just above at :126-130); Turnstile gating block is `src/layouts/Layout.astro:342-344` (verified on disk).
+- `supabase/dashboard-schema.sql` exists; last commit touching it still **`8d85de5`** — matches the doc. Commits `1e7a6c4`, `998f404`, `8d85de5`, `2334766` all resolve; `git show 1e7a6c4^:src/pages/dashboard.astro` recovers (exit 0 — Gate 3 step 0 restore path works); archive copy `money-app/pages/dashboard.astro` present, `src/pages/dashboard.astro` absent (money stays off the public domain).
 - `.env.example` lists exactly the eight named keys; `MPESA_CALLBACK_TOKEN` still absent from it (as claimed) and still read at `money-api/_lib/shop-ingest.js:48`, `money-api/mpesa/c2b/{validation,confirmation}.js`, `money-app/server.mjs:33`.
 - All seven Gate 4 scripts exist under `scripts/`. Gate 3 refs (`money-api/`, `api/`, `api/generate.mjs`, `money-app/{server.mjs,README.md,health.log}`, `DARAJA-SETUP.md`, `deal-log.md`, `shop-tracker/index.html`, `scripts/RECONCILE.md`) all resolve.
+- **No edits made** — nothing drifted since last round's two citation fixes.
 
 ---
 
-## Drift check — `git status --porcelain` @ 2026-10-15T20:17 (HEAD=`6ee984d`, in sync with origin 0/0, **tree clean**)
+## Drift check — `git status --porcelain` @ 2026-10-15T21:42 (HEAD=`d8f2df8`, **ahead of origin/main by 1**)
 
-**(a) crew/ours — 0.** All crew-owned tracked paths (`money-app/**`, `scripts/*.mjs`, `costs.csv`, `deal-log.*`, `supabase/dashboard-schema.sql`, `crew/**`, `opencode.json`, `.gitignore`) clean at `6ee984d`. (`M crew/STATUS.md` + `M money-app/FOUNDERS.md` appear only after this rebuild and ship below.)
+**(a) crew/ours — 0** at arrival (all crew-owned tracked paths clean: `money-app/**`, `scripts/*.mjs`, `costs.csv`, `deal-log.*`, `supabase/dashboard-schema.sql`, `crew/**`, `opencode.json`, `.gitignore`). (`M crew/STATUS.md` appears only after this rebuild and ships below.)
 
 **(b) untracked user work — 0 in porcelain; never-commit perimeter intact.** All listed paths exist on disk and stay out of commits:
 - Present: `flick-output/`, `hermes-exec/`, `scenes/`, `src/memory/`, `render-log.txt`, `unified_executive_brief.md`, `shop-tracker/server.log`. `shop-tracker/` holds **no CSVs**.
-- The `public/og-card.png` finance saw mid-round was committed by its author (`6ee984d`), not by any seat's sweep.
 
-**(c) needs owner decision — 2 (was 3; concurrent-session item resolved):**
-1. **`6e99a30` (Oct 13, on origin/main) committed never-commit user work:** `hermes-exec/` (16 files), `scenes/` (4), `src/memory/` (2), `unified_executive_brief.md` — still tracked (re-verified `git ls-files` 20:18). Violates the CONTEXT standing rule and is already pushed. Founder call: (i) leave it, (ii) untrack + future-ignore, (iii) full history purge (rewrites origin/main).
-2. **Same commit tracked the three leftovers:** `playground/` (2 files), `money-app/adapter-probe.mjs` (foreman dbg leftover, still on disk), `crew/missions/dash-audit.cjs` (dashboard's harness). Keep tracked, or untrack + ignore.
+**(c) needs owner decision — 4:**
+1. **`M src/components/BusinessCardFront.astro`** — modified tracked file, **not crew-owned**; multiple seats saw it mid-round and correctly left it alone. Looks like the founder editing right now → do not commit; owner/founder to commit when ready.
+2. **`d8f2df8` is committed locally but unpushed** (author mwmwai, "Business card: fix back-side layout overflow… 300dpi print exports"). My ship push will carry it to origin/main (and Vercel) — normal branch push, Gate 5 covers it; flagging because it is user work riding along.
+3. **`6e99a30` (Oct 13) committed never-commit user work:** `hermes-exec/` (16 files), `scenes/` (4), `src/memory/` (2), `unified_executive_brief.md` — still tracked (re-verified `git ls-files` 21:44). Violates the CONTEXT standing rule and is already pushed. Founder call: (i) leave it, (ii) untrack + future-ignore, (iii) full history purge (rewrites origin/main).
+4. **Same commit tracked the three leftovers:** `playground/` (2 files), `money-app/adapter-probe.mjs` (foreman dbg leftover, still on disk), `crew/missions/dash-audit.cjs` (dashboard's harness). Keep tracked, or untrack + ignore.
 
-*Context, no action:* 5 commits landed since the last rebuild (`1730289` → `6ee984d`: hero stat drop, timeline-guide links, FAQ copy, dashboard banner HTTP codes `4d55932` by the dashboard seat itself, international OG card). Two touch `money-app/**`/site scope; all coherent, no money routes/pages added, explicit-path discipline held where seats shipped.
+*Context, no action:* 1 commit landed since the last rebuild (`70a9e9c` → `d8f2df8`), by the founder, site/business-card scope only — no money routes/pages, no crew files involved.
 
 ---
 
-## Shipped this round (chief, ship duty) — 2026-10-15T20:22
+## Shipped this round (chief, ship duty) — 2026-10-15T21:45
 
-Porcelain was clean at arrival — no other seat's work in flight (only round running = chief r6, this session; foreman killed at 19:52). My two edits are the only crew changes: this STATUS rebuild + the two FOUNDERS citation fixes.
+Porcelain held only the founder's in-flight `BusinessCardFront.astro` edit — no other seat's work in flight (all other seats completed their rounds; only round running = chief r12, this session). My only edit is this STATUS rebuild; FOUNDERS.md needed nothing.
 
-- Will run `npm run build` before any commit; commit **explicit paths only**: `crew/STATUS.md`, `money-app/FOUNDERS.md`.
-- Never-commit perimeter held: `flick-output/`, `render-log.txt`, `shop-tracker/server.log` untracked/ignored; `hermes-exec/`, `scenes/`, `src/memory/`, `unified_executive_brief.md` tracked only via owner-call item (c)1 — nothing new committed by me.
+- Running `npm run build` before commit; commit **explicit path only**: `crew/STATUS.md`.
+- Push will also carry the founder's already-committed `d8f2df8` (see Drift (c)2). Never-commit perimeter held: nothing new committed by me.
 
-REPORT: chief status=done evidence=crew/STATUS.md (rebuilt), money-app/FOUNDERS.md (2 citation fixes: submit.ts:132-137, src/layouts/Layout.astro:342-344), loop.log 293/209/70 + pid1188 r1-r6 parse (5/6 seats clean REPORTs; foreman-only wedge), L1 70/70 zero-output, L2=13 orphans, git status clean @6ee984d (origin 0/0), curl 8390/health=200 (7 env_missing), scheduled tasks Running, FOUNDERS paths/env-keys all resolve
+REPORT: chief status=done evidence=crew/STATUS.md (rebuilt), money-app/FOUNDERS.md (accuracy pass: zero drift at d8f2df8), loop.log 299/214/71 + pid1188 r1–r12 (5 seats green back-to-back; foreman r1+r7 zero-output TIMEOUTs, 19-turn streak), L1 71/71, L2=14 orphans, git porcelain: only M BusinessCardFront.astro + ahead-1 (founder's d8f2df8), curl 8390/health=200 (7 env_missing), scheduled tasks Running, FOUNDERS paths/env-keys all resolve
