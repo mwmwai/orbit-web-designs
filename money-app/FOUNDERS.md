@@ -16,14 +16,14 @@ Env var names below are exact — copy/paste, never retype.
 
 **Blocked:** `PUBLIC_TURNSTILE_SITE_KEY` is missing from the build (secret IS set, verified Oct 6),
 so no widget renders: /contact is WhatsApp-failover only (no `leads` rows) and the footer newsletter
-POSTs with no token → API returns 400 (`api/supabase/submit.ts:130`).
+POSTs with no token → API returns 400 (`api/supabase/submit.ts:132-137`).
 
 1. Cloudflare dashboard → Turnstile → Sites → add site `orbitwebdesigns.co.ke` (or open the existing one) → copy the **Site key** (starts `0x`). *(Navigation is generic — confirm in provider dashboard.)*
 2. Vercel → project → **Settings → Environment Variables** → add `PUBLIC_TURNSTILE_SITE_KEY` = the `0x…` key, scoped **Production + Preview + Development** → Save.
    - Correcting drift: the name is `PUBLIC_TURNSTILE_SITE_KEY` (underscore before `KEY`), read at `Footer.astro:5`, `src/components/react/ContactForm.tsx:4`, `Comments.astro:56`.
    - Do **not** touch `TURNSTILE_SECRET_KEY` — already set in prod (dummy token → 403, not 503).
 3. Vercel → **Deployments → ⋯ → Redeploy** the latest production deployment. (Vite inlines the key at build; saving the var alone changes nothing.)
-4. Verify: view-source `https://orbitwebdesigns.co.ke/contact` → contains `0x` sitekey and the    `challenges.cloudflare.com/turnstile/v0/api.js` script (`Layout.astro:342-344`).
+4. Verify: view-source `https://orbitwebdesigns.co.ke/contact` → contains `0x` sitekey and the    `challenges.cloudflare.com/turnstile/v0/api.js` script (`src/layouts/Layout.astro:342-344` — moved from `src/components/` in `6ee984d`).
 
 **Done when:** /contact shows the Turnstile box and one test enquiry returns success (row in Supabase `leads`); footer newsletter Join shows "You're in — check your inbox" (API 200, not 400).
 **Rollback:** delete the var + redeploy → back to today's WhatsApp-failover state. No data risk.
