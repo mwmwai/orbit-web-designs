@@ -1,6 +1,6 @@
 # crew/STATUS.md — single source of truth (owner: chief seat)
 
-Rebuilt 2026-10-15T17:46 local by chief, session pid=1080 round=102 (loop-start 2026-10-14T20:45:58; this round started 17:25:21). Sources: tails of all seven `crew/logs/*.log`, full `loop.log` parse (session-paired), `git status --porcelain` + `git log`, live probes (`8390/health`, scheduled tasks), FOUNDERS.md accuracy pass. HEAD=`7ec5305`, in sync with origin/main (0/0) at 17:35. Per-section timestamps below.
+Rebuilt 2026-10-15T17:46 local by chief, session pid=1080 round=102 (loop-start 2026-10-14T20:45:58; this round started 17:25:21). Sources: tails of all seven `crew/logs/*.log`, full `loop.log` parse (session-paired), `git status --porcelain` + `git log`, live probes (`8390/health`, scheduled tasks), FOUNDERS.md accuracy pass. HEAD=`1730289` (= origin/main, 0/0 at 17:50; was `7ec5305` at the 17:35 check). Per-section timestamps below.
 
 ---
 
@@ -33,6 +33,7 @@ Error signature is uniform: `Error: Cannot connect to API: Was there a typo…/U
 3. **L1** — 69/69 zero-output timeout windows, 0 partial captures, patch `2334766` not effective.
 4. **L2** — 12 orphaned starts (list unchanged from the Oct 14 audit).
 5. **Owner decisions — see Drift (c)** (never-commit sweep `6e99a30` still the big one).
+6. **Sweep commits now hit crew-owned files** — the concurrent session's `1730289` committed `crew/STATUS.md` + `money-app/FOUNDERS.md` (and `api/supabase/submit.ts`) as part of unrelated blog work instead of explicit paths. Content landed correct, but the pattern (`6e99a30` → `1730289`) means "commit only your own paths" is not being observed by that session. Owner call: keep whole-tree commits (founder's prerogative) or scope them.
 
 ---
 
@@ -119,8 +120,12 @@ Verified only paths + env key names, per mission — all resolve at HEAD=`7ec530
 
 ---
 
-## Shipped this round (chief, ship duty)
+## Shipped this round (chief, ship duty) — 2026-10-15T17:56
 
-Crew-owned tracked files dirty at ship time: only this round's own edits — `npm run build` → commit + push **explicit paths only**: `crew/STATUS.md`, `money-app/FOUNDERS.md` (the `Layout.astro:342-344` citation fix). The four ` M` site files and one `??` blog post above are a concurrent session's mid-edit → **skipped, left uncommitted**; never-commit perimeter respected; drift (c) items untouched (owner calls). No seat is mid-edit on `crew/STATUS.md` or `money-app/FOUNDERS.md` (only round in flight is chief r102 = this session).
+My two edits (`crew/STATUS.md`, `money-app/FOUNDERS.md` citation fix) were **swept into the concurrent session's commit `1730289`** (17:48:53, blog-post work + `api/supabase/submit.ts`) before I could commit them — it committed-and-pushed the whole tree rather than explicit paths. Verified `origin/main == HEAD == 1730289` (0/0) and the `Layout.astro:342-344` citation is at HEAD, so the deliverables are live; **my** commit this round carries only this STATUS correction. New escalation 6: crew-owned files landed in an unrelated founder commit (same sweeping pattern as `6e99a30`, this time hitting `crew/**` + `money-app/**` — owner hygiene call, content is correct).
 
-REPORT: chief status=done evidence=crew/STATUS.md (rebuilt), money-app/FOUNDERS.md (Layout.astro:342-344 fix), loop.log 287/205/69 + session r1–r102 parse (all-six ≥13-strike table), L1 69/69 zero-output, L2=12 orphans, 81 Oct-15 API-error turn-ends, git status --porcelain (crew paths clean @7ec5305), curl 8390/health=200 (7 env_missing), scheduled tasks Running, npm run build PASS, git push <sha>
+- `npm run build` **PASS (43 pages, 17:49:06)** before any of it was committed.
+- Never-commit perimeter held on my side: `flick-output/`, `render-log.txt`, `shop-tracker/server.log` untracked/ignored, `hermes-exec/`, `scenes/`, `src/memory/`, `unified_executive_brief.md` tracked only via owner-call item (c)1 — nothing new committed by me.
+- No seat was mid-edit on `crew/STATUS.md` or `money-app/FOUNDERS.md` (only round in flight = chief r102, this session); the five mid-edit site files at 17:44 were committed by their own author, not by me.
+
+REPORT: chief status=done evidence=crew/STATUS.md (rebuilt, committed), money-app/FOUNDERS.md (Layout.astro:342-344 fix, at HEAD in 1730289), loop.log 287/205/69 + session r1–r102 parse (all-six ≥13-strike table), L1 69/69 zero-output, L2=12 orphans, 81 Oct-15 API-error turn-ends, git status --porcelain clean @1730289 (origin 0/0), curl 8390/health=200 (7 env_missing), scheduled tasks Running, npm run build PASS 43 pages
