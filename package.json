@@ -31,5 +31,8 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "indexnow": "^0.1.0"
+  },
+  "overrides": {
+    "http-cache-semantics": "^4.3.0"
   }
 }

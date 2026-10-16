@@ -134,7 +134,8 @@ export default async function handler(req, res) {
 			}
 		}
 		res.status(202).json({ status: "timeout", request_id: submitted.request_id, status_url: submitted.status_url });
-	} catch (err) {
-		res.status(500).json({ error: err.message });
+	} catch {
+		// Never leak upstream error details (keys, URLs, stack) to the client.
+		res.status(500).json({ error: "Generation failed. Try again later." });
 	}
 }

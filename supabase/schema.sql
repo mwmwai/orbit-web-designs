@@ -52,10 +52,13 @@ create table if not exists comments (
 
 alter table comments enable row level security;
 
+-- SECURITY: anon may insert, but NEVER with approved=true — otherwise anyone
+-- holding the public anon key could bypass Turnstile + the /api/supabase/submit
+-- allowlist and publish comments directly. Approval stays founder-only.
 drop policy if exists "anon insert comments" on comments;
 create policy "anon insert comments"
   on comments for insert to anon
-  with check (true);
+  with check (approved is not true);
 
 drop policy if exists "public read approved comments" on comments;
 create policy "public read approved comments"

@@ -1,8 +1,4 @@
-Contact: security@orbitwebdesigns.co.ke
+Contact: mailto:mwmwai@gmail.com
+Expires: 2027-04-16T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://www.orbitwebdesigns.co.ke/.well-known/security.txt
-Policy: https://www.orbitwebdesigns.co.ke/security-policy
-Acknowledgments: https://www.orbitwebdesigns.co.ke/security-policy#acknowledgments
-Preferred-Contact: email
-Hiring: https://www.orbitwebdesigns.co.ke/contact
-Expires: 2027-01-01T00:00:00.000Z
+Policy: https://www.orbitwebdesigns.co.ke/security-policy/
