@@ -152,14 +152,16 @@ const serviceLd = {
 				<div class="mt-6 grid gap-6 lg:grid-cols-5">
 					<div class="glow-border rounded-2xl p-6 lg:col-span-3">
 						<h3 class="font-semibold text-white">Revenue by day</h3>
-						<div class="mt-6 flex h-40 items-end gap-2 sm:gap-3" aria-hidden="true">
-							{week.map((d) => (
-								<div class="flex flex-1 flex-col items-center gap-2">
+					<div class="mt-6 flex h-40 items-end gap-2 sm:gap-3" aria-hidden="true">
+						{week.map((d) => (
+							<div class="flex flex-1 flex-col items-center gap-2">
+								<div class="flex h-32 w-full items-end">
 									<div class="w-full rounded-t-md bg-gradient-to-t from-neon/40 to-electric" style={`height:${Math.round((d.v / max) * 100)}%`}></div>
-									<span class="font-mono text-[10px] uppercase text-slate-500">{d.d}</span>
 								</div>
-							))}
-						</div>
+								<span class="font-mono text-[10px] uppercase text-slate-500">{d.d}</span>
+							</div>
+						))}
+					</div>
 					</div>
 					<div class="glow-border rounded-2xl p-6 lg:col-span-2">
 						<h3 class="font-semibold text-white">Live M-Pesa Till feed</h3>
