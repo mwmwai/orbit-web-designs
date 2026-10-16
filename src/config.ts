@@ -29,8 +29,6 @@ export const MORE_LINKS = [
 	{ href: "/mpesa-ecommerce-kenya", label: "M-Pesa Stores" },
 	{ href: "/seo-services-kenya", label: "SEO Services" },
 	{ href: "/reviews", label: "Reviews" },
-	{ href: "/faq", label: "FAQ" },
-	{ href: "/about", label: "About" },
 ];
 
 

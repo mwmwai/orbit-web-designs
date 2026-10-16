@@ -361,8 +361,8 @@ if (breadcrumbLd) {
 			</nav>
 		)}
 		<div id="scroll-progress" class="fixed left-0 top-0 z-[90] h-[2px] w-0 bg-gradient-to-r from-electric to-neon" aria-hidden="true"></div>
-		<div id="cursor-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2.5 w-2.5 rounded-full bg-electric shadow-[0_0_14px_4px_rgba(0,200,255,0.45)] lg:block" aria-hidden="true"></div>
-		<div id="cursor-ring" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-9 w-9 rounded-full border border-electric/40 lg:block" aria-hidden="true"></div>
+		<div id="cursor-dot" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-2.5 w-2.5 rounded-full bg-electric opacity-0 shadow-[0_0_14px_4px_rgba(0,200,255,0.45)] lg:block" aria-hidden="true"></div>
+		<div id="cursor-ring" class="pointer-events-none fixed left-0 top-0 z-[95] hidden h-9 w-9 rounded-full border border-electric/40 opacity-0 lg:block" aria-hidden="true"></div>
 		<div class="aurora" aria-hidden="true"><span></span><span></span></div>
 		<ScrollIndicator />
 		<slot />
@@ -429,7 +429,7 @@ if (breadcrumbLd) {
 					},
 					{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
 				);
-				document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+				document.querySelectorAll(".reveal, .text-reveal").forEach((el) => io.observe(el));
 			}
 			function initCounters() {
 				document.querySelectorAll("[data-counter]").forEach((el) => {
