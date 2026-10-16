@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
@@ -21,9 +21,9 @@ const articleLd = {
 	mainEntityOfPage: `${SITE_URL}/blog/mpesa-till-vs-paybill`,
 };
 const faqs = [
-	{ q: "Should I use Till or Paybill for my business in Kenya?", a: "Till (Buy Goods) for walk-in counter sales â€” no account number, instant float. Paybill for tracked online orders, invoices and anything needing an account reference. Most stores run Till at the counter + Paybill online." },
-	{ q: "What are M-Pesa transaction limits?", a: "KES 250,000 per transaction, 500,000 per day, 500,000 max balance. Confirm exact fees on the payment screen â€” Safaricom updates bands. Price margins with our M-Pesa fee calculator." },
-	{ q: "Can my website accept both Till and Paybill?", a: "Yes â€” Master (49,999) wires both natively via Daraja plus cards, tested with KES 10 both ways, credentials in your name. Show both clearly at checkout so buyers never ask where to pay." },
+	{ q: "Should I use Till or Paybill for my business in Kenya?", a: "Till (Buy Goods) for walk-in counter sales — no account number, instant float. Paybill for tracked online orders, invoices and anything needing an account reference. Most stores run Till at the counter + Paybill online." },
+	{ q: "What are M-Pesa transaction limits?", a: "KES 250,000 per transaction, 500,000 per day, 500,000 max balance. Confirm exact fees on the payment screen — Safaricom updates bands. Price margins with our M-Pesa fee calculator." },
+	{ q: "Can my website accept both Till and Paybill?", a: "Yes — Master (49,999) wires both natively via Daraja plus cards, tested with KES 10 both ways, credentials in your name. Show both clearly at checkout so buyers never ask where to pay." },
 ];
 
 const faqJsonLd = {
@@ -60,7 +60,7 @@ const faqJsonLd = {
 				<div class="absolute -top-40 left-1/3 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-electric/15 blur-[80px] transform-gpu will-change-transform"></div>
 			</div>
 			<div class="relative mx-auto max-w-3xl px-5 pb-14 pt-20 md:pt-28">
-				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">â–  Guides Â· M-Pesa Â· 4 min</p>
+				<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Guides · M-Pesa · 4 min</p>
 				<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
 					Till vs Paybill: <span class="text-gradient">pick right once.</span>
 				</h1>
@@ -69,29 +69,29 @@ const faqJsonLd = {
 		</section>
 
 		<article class="mx-auto max-w-3xl px-5 py-16">
-			<p class="text-sm leading-relaxed text-slate-400">M-Pesa is how Kenya pays â€” but choosing between Till and Paybill locks you into a workflow for years. Pick wrong and you'll fight reconciliation nightmares, miss online sales, or bleed fees unnecessarily. Here's the real difference, with numbers.</p>
+			<p class="text-sm leading-relaxed text-slate-400">M-Pesa is how Kenya pays — but choosing between Till and Paybill locks you into a workflow for years. Pick wrong and you'll fight reconciliation nightmares, miss online sales, or bleed fees unnecessarily. Here's the real difference, with numbers.</p>
 
 			<div class="mt-8 grid gap-6 md:grid-cols-2">
 				<div class="glow-border rounded-2xl p-8">
-					<h2 class="text-xl font-bold text-white">Till â€” walk-in</h2>
-					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer pays to your store number in person â€” no account number needed. Money lands in your M-Pesa float instantly. Best for shops, salons, eateries, counters, market stalls.</p>
+					<h2 class="text-xl font-bold text-white">Till — walk-in</h2>
+					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer pays to your store number in person — no account number needed. Money lands in your M-Pesa float instantly. Best for shops, salons, eateries, counters, market stalls.</p>
 					<ul class="mt-4 grid gap-2 text-xs text-slate-300">
-						<li>â†’ No account field = faster checkout (3 seconds vs 10)</li>
-						<li>â†’ Staff sees payment instantly on their phone</li>
-						<li>â†’ Works with STK Push (you initiate from your phone)</li>
-						<li>â†’ No auto-matching â€” you reconcile manually or by amount</li>
-						<li>â†’ Lower fees for in-person transactions</li>
+						<li>→ No account field = faster checkout (3 seconds vs 10)</li>
+						<li>→ Staff sees payment instantly on their phone</li>
+						<li>→ Works with STK Push (you initiate from your phone)</li>
+						<li>→ No auto-matching — you reconcile manually or by amount</li>
+						<li>→ Lower fees for in-person transactions</li>
 					</ul>
 				</div>
 				<div class="glow-border rounded-2xl p-8">
-					<h2 class="text-xl font-bold text-white">Paybill â€” tracked</h2>
-					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer enters your business number + an account reference (invoice #, phone, name). That field auto-matches payments to orders â€” gold for online stores, invoices, subscriptions, retainer clients.</p>
+					<h2 class="text-xl font-bold text-white">Paybill — tracked</h2>
+					<p class="mt-3 text-sm leading-relaxed text-slate-400">Customer enters your business number + an account reference (invoice #, phone, name). That field auto-matches payments to orders — gold for online stores, invoices, subscriptions, retainer clients.</p>
 					<ul class="mt-4 grid gap-2 text-xs text-slate-300">
-						<li>â†’ Account field = automatic reconciliation</li>
-						<li>â†’ Needed for website checkout via Daraja API</li>
-						<li>â†’ C2B callback sends payment data to your system in real-time</li>
-						<li>â†’ Supports business-to-business bulk payments</li>
-						<li>â†’ Slightly higher fees but saves hours of admin</li>
+						<li>→ Account field = automatic reconciliation</li>
+						<li>→ Needed for website checkout via Daraja API</li>
+						<li>→ C2B callback sends payment data to your system in real-time</li>
+						<li>→ Supports business-to-business bulk payments</li>
+						<li>→ Slightly higher fees but saves hours of admin</li>
 					</ul>
 				</div>
 			</div>
@@ -99,34 +99,34 @@ const faqJsonLd = {
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<h3 class="font-mono text-xs uppercase tracking-widest text-electric">Decision tree</h3>
 				<ol class="mt-4 grid gap-3 text-sm text-slate-300 list-decimal list-inside">
-					<li>Payment happens <strong class="text-white">face-to-face</strong> with no need to track who paid? â†’ <strong class="text-electric">Till</strong></li>
-					<li>Payment happens <strong class="text-white">online or via invoice</strong> and you need to know WHO paid? â†’ <strong class="text-electric">Paybill</strong></li>
-					<li><strong class="text-white">Both?</strong> â†’ Run both: Till at counter, Paybill on website/API. Most of our Master stores wire both â€” they complement each other.</li>
+					<li>Payment happens <strong class="text-white">face-to-face</strong> with no need to track who paid? → <strong class="text-electric">Till</strong></li>
+					<li>Payment happens <strong class="text-white">online or via invoice</strong> and you need to know WHO paid? → <strong class="text-electric">Paybill</strong></li>
+					<li><strong class="text-white">Both?</strong> → Run both: Till at counter, Paybill on website/API. Most of our Master stores wire both — they complement each other.</li>
 				</ol>
 			</div>
 
 			<h2 class="mt-10 text-2xl font-bold text-white">Fee math (do before choosing)</h2>
-			<p class="mt-3 text-sm text-slate-400">Safaricom fees change regularly â€” don't trust a blog screenshot from 2024. Use live math with our calculator, which pulls current published bands:</p>
+			<p class="mt-3 text-sm text-slate-400">Safaricom fees change regularly — don't trust a blog screenshot from 2024. Use live math with our calculator, which pulls current published bands:</p>
 			<div class="mt-4 flex flex-wrap gap-3">
-				<a href="/mpesa-fee-calculator" class="inline-flex rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Open M-Pesa fee calculator â†’</a>
-				<span class="inline-flex items-center text-xs text-slate-400">Try: Till 1,500 vs Paybill 1,500 â†’ see what you actually keep</span>
+				<a href="/mpesa-fee-calculator" class="inline-flex rounded-full btn-gradient px-6 py-2.5 text-sm font-semibold text-white">Open M-Pesa fee calculator →</a>
+				<span class="inline-flex items-center text-xs text-slate-400">Try: Till 1,500 vs Paybill 1,500 → see what you actually keep</span>
 			</div>
 			<div class="mt-6 overflow-hidden rounded-xl border border-edge">
 				<table class="w-full text-left text-sm"><thead class="bg-panel text-xs uppercase tracking-widest text-slate-400"><tr><th class="px-4 py-2">Example sale</th><th class="px-4 py-2">Fee range*</th><th class="px-4 py-2">You keep</th></tr></thead>
-				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">KES 500</td><td class="px-4 py-2">~ 7â€“12</td><td class="px-4 py-2">488â€“493</td></tr><tr><td class="px-4 py-2">KES 1,000</td><td class="px-4 py-2">~ 10â€“20</td><td class="px-4 py-2">980â€“990</td></tr><tr><td class="px-4 py-2">KES 2,500</td><td class="px-4 py-2">~ 25â€“40</td><td class="px-4 py-2">2,460â€“2,475</td></tr><tr><td class="px-4 py-2">KES 5,000</td><td class="px-4 py-2">~ 45â€“65</td><td class="px-4 py-2">4,935â€“4,955</td></tr><tr><td class="px-4 py-2">KES 10,000</td><td class="px-4 py-2">~ 80â€“110</td><td class="px-4 py-2">9,890â€“9,920</td></tr></tbody></table>
+				<tbody class="divide-y divide-edge text-slate-300"><tr><td class="px-4 py-2">KES 500</td><td class="px-4 py-2">~ 7–12</td><td class="px-4 py-2">488–493</td></tr><tr><td class="px-4 py-2">KES 1,000</td><td class="px-4 py-2">~ 10–20</td><td class="px-4 py-2">980–990</td></tr><tr><td class="px-4 py-2">KES 2,500</td><td class="px-4 py-2">~ 25–40</td><td class="px-4 py-2">2,460–2,475</td></tr><tr><td class="px-4 py-2">KES 5,000</td><td class="px-4 py-2">~ 45–65</td><td class="px-4 py-2">4,935–4,955</td></tr><tr><td class="px-4 py-2">KES 10,000</td><td class="px-4 py-2">~ 80–110</td><td class="px-4 py-2">9,890–9,920</td></tr></tbody></table>
 			</div>
 			<p class="mt-2 text-xs text-slate-500">*Calculator uses Safaricom's published 2026 bands. Till fees are typically lower for in-person; Paybill fees are higher but save reconciliation time. Always confirm before pricing products.</p>
 
 			<h2 class="mt-10 text-2xl font-bold text-white">How each wires to a website</h2>
 			<ul class="mt-4 grid gap-3 text-sm text-slate-300">
-				<li class="flex gap-2"><span class="text-electric">â†’</span> Till via STK Push works on a website â€” you initiate from your phone after order. But there's no account reference for auto-matching orders, so you reconcile manually.</li>
-				<li class="flex gap-2"><span class="text-electric">â†’</span> Paybill via Daraja C2B gives you account ref = order ID. Payment arrives, your system auto-matches it to the order, marks it paid, and sends confirmation. Fully automated.</li>
-				<li class="flex gap-2"><span class="text-electric">â†’</span> Both: our Master stores wire Till (counter) + Paybill (website) via separate Daraja connections. Customer chooses at checkout.</li>
+				<li class="flex gap-2"><span class="text-electric">→</span> Till via STK Push works on a website — you initiate from your phone after order. But there's no account reference for auto-matching orders, so you reconcile manually.</li>
+				<li class="flex gap-2"><span class="text-electric">→</span> Paybill via Daraja C2B gives you account ref = order ID. Payment arrives, your system auto-matches it to the order, marks it paid, and sends confirmation. Fully automated.</li>
+				<li class="flex gap-2"><span class="text-electric">→</span> Both: our Master stores wire Till (counter) + Paybill (website) via separate Daraja connections. Customer chooses at checkout.</li>
 			</ul>
 
 			<div class="mt-8 rounded-2xl border border-edge bg-panel p-6">
 				<p class="text-sm font-semibold text-white">Where Orbit fits</p>
-				<p class="mt-1 text-sm text-slate-400">We connect either/both to your store with STK + callback, test on Till & Paybill, and hand over credentials in your name. <a href={whatsappLink("Hi Orbit! I need help choosing Till vs Paybill for my business.")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Ask free on WhatsApp â†’</a></p>
+				<p class="mt-1 text-sm text-slate-400">We connect either/both to your store with STK + callback, test on Till & Paybill, and hand over credentials in your name. <a href={whatsappLink("Hi Orbit! I need help choosing Till vs Paybill for my business.")} target="_blank" rel="noopener noreferrer" class="text-electric hover:underline">Ask free on WhatsApp →</a></p>
 			</div>
 		</article>
 
@@ -143,11 +143,11 @@ const faqJsonLd = {
 		</section>
 
 		<div class="mx-auto max-w-3xl px-5 pb-4">
-			<p class="text-sm text-slate-400">Related: <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> Â· <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> Â· <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">store launch checklist</a></p>
+			<p class="text-sm text-slate-400">Related: <a href="/mpesa-fee-calculator" class="text-electric hover:underline">M-Pesa fee calculator</a> · <a href="/mpesa-ecommerce-kenya" class="text-electric hover:underline">M-Pesa e-commerce stores</a> · <a href="/blog/ecommerce-kenya-guide" class="text-electric hover:underline">store launch checklist</a></p>
 		</div>
 		<RelatedPosts currentSlug="mpesa-till-vs-paybill" />
 		<Comments slug="mpesa-till-vs-paybill" />
-		<CtaBand title="Selling online or at the counter?" text="We wire both â€” tell us what you sell." />
+		<CtaBand title="Selling online or at the counter?" text="We wire both — tell us what you sell." />
 	</main>
 	<Footer />
 </Layout>
