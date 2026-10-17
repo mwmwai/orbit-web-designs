@@ -55,3 +55,5 @@ render-log.txt
 
 money-app/dbg-*.err
 money-app/dbg-*.out
+money-app/server.stderr.log
+money-app/server.stdout.log
