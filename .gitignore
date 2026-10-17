@@ -57,3 +57,6 @@ money-app/dbg-*.err
 money-app/dbg-*.out
 money-app/server.stderr.log
 money-app/server.stdout.log
+# test-only port 8391 leftovers (crew rules: clean up, never commit)
+money-app/test8391.*
+money-app/test8395.*
