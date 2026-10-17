@@ -192,10 +192,19 @@ function parseWhen(value) {
 }
 
 // --------------------------------------------------- tolerant header match
+// Per-candidate priority: for each candidate (in priority order) accept an
+// exact header match first, then an includes match, before moving on. This
+// way a high-priority candidate like "receipt" (Receipt No. — the M-Pesa
+// code) beats a lower-priority exact match such as "transactionreference"
+// (the AG… bank reference) on a real Safaricom export header.
 function detectCol(header, candidates) {
   const h = header.map(norm);
-  for (const c of candidates) { const i = h.indexOf(c); if (i >= 0) return i; }
-  for (const c of candidates) { const i = h.findIndex((x) => x && x.includes(c)); if (i >= 0) return i; }
+  for (const c of candidates) {
+    const exact = h.indexOf(c);
+    if (exact >= 0) return exact;
+    const inc = h.findIndex((x) => x && x.includes(c));
+    if (inc >= 0) return inc;
+  }
   return -1;
 }
 
