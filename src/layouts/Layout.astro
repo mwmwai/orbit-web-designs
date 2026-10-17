@@ -267,7 +267,7 @@ if (breadcrumbLd) {
 		<link rel="dns-prefetch" href="https://connect.facebook.net" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<link rel="canonical" href={canonical} />
+		{!noindex && <link rel="canonical" href={canonical} />}
 		<link rel="llms.txt" type="text/plain" href={`${SITE_URL}/llms.txt`} />
 		<link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} Blog`} href={`${SITE_URL}/rss.xml`} />
 		<meta name="theme-color" content="#080B14" media="(prefers-color-scheme: dark)" />
@@ -289,7 +289,7 @@ if (breadcrumbLd) {
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonical} />
+		{!noindex && <meta property="og:url" content={canonical} />}
 		<meta property="og:image" content={ogImage ? new URL(ogImage, SITE_URL).href : new URL("/og-card.png", SITE_URL).href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
