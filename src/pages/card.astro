@@ -1,6 +1,8 @@
 ---
 import { SITE_NAME, SITE_URL, SITE_EMAIL, SITE_PHONE_DISPLAY, WHATSAPP_NUMBER } from "../config";
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 
 const telHref = `tel:+${WHATSAPP_NUMBER}`;
 const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -10,7 +12,8 @@ const mailHref = `mailto:${SITE_EMAIL}`;
 ---
 
 <Layout noindex title={`${SITE_NAME} — Digital Business Card`} description="Save our contact details — web design & digital marketing that grows your business.">
-	<main class="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-14">
+	<Navbar />
+	<main id="main" class="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-14">
 		<div class="pointer-events-none absolute inset-0" aria-hidden="true">
 			<div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(70% 60% at 50% 30%, black, transparent 75%)"></div>
 			<div class="absolute -top-40 left-1/2 h-[420px] w-[620px] -translate-x-1/2 rounded-full bg-electric/20 blur-[130px]" style="animation: floaty 10s ease-in-out infinite"></div>
@@ -62,6 +65,7 @@ const mailHref = `mailto:${SITE_EMAIL}`;
 			<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98m-.01-10.98-6.82 3.98"/></svg>
 		</button>
 	</main>
+	<Footer />
 
 	<script>
 		const btn = document.getElementById("share-btn");

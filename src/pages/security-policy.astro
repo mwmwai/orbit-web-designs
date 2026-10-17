@@ -1,7 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 ---
 <Layout title="Security Policy — Orbit Web Designs & Marketing" description="How Orbit protects this site and handles vulnerability reports.">
+	<Navbar />
 	<main id="main" class="mx-auto max-w-3xl px-5 py-24">
 		<p class="font-mono text-xs uppercase tracking-[0.18em] text-electric">■ Security</p>
 		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Security <span class="text-gradient">policy.</span></h1>
@@ -12,4 +15,5 @@ import Layout from "../layouts/Layout.astro";
 			<div class="glow-border rounded-2xl p-6"><p class="font-semibold text-white">Client data</p><p class="mt-2">No client data is stored on this public site. Project credentials live in environment variables only — never in code.</p></div>
 		</div>
 	</main>
+	<Footer />
 </Layout>

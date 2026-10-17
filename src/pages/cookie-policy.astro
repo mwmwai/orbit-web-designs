@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 ---
 <Layout title="Cookie Policy — Orbit Web Designs & Marketing" description="Orbit Web Designs & Marketing Cookie Policy — how we use cookies and tracking technologies.">
-  <main class="mx-auto max-w-3xl px-5 py-24">
+  <Navbar />
+  <main id="main" class="mx-auto max-w-3xl px-5 py-24">
     <h1 class="text-3xl font-extrabold tracking-tight text-white mb-8">Cookie Policy</h1>
     <p class="text-slate-400 mb-8">Last updated: September 2026</p>
 
@@ -85,4 +88,5 @@ import Layout from "../layouts/Layout.astro";
       </section>
     </section>
   </main>
+  <Footer />
 </Layout>
