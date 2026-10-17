@@ -8,14 +8,11 @@
 		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		const indicator = document.querySelector(".scroll-indicator");
 		if (!indicator) return;
-		const main = document.getElementById("main");
-		if (!main) return;
-		const io = new IntersectionObserver(
-			([entry]) => {
-				indicator.classList.toggle("visible", !entry.isIntersecting);
-			},
-			{ threshold: 0.15, rootMargin: "0px 0px -80% 0px" }
-		);
-		io.observe(main);
+		const update = () => indicator.classList.toggle("visible", window.scrollY < 140);
+		if (!indicator.dataset.bound) {
+			indicator.dataset.bound = "1";
+			window.addEventListener("scroll", update, { passive: true });
+		}
+		update();
 	});
 </script>

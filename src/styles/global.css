@@ -606,7 +606,7 @@ footer :where(p, li, td) a.text-electric {
 .scroll-indicator {
 	position: fixed;
 	right: 1.5rem;
-	bottom: 1.5rem;
+	bottom: 5.5rem;
 	z-index: 50;
 	display: flex;
 	flex-direction: column;
@@ -615,6 +615,9 @@ footer :where(p, li, td) a.text-electric {
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.3s ease;
+}
+@media (max-width: 767px) {
+	.scroll-indicator { display: none; }
 }
 .scroll-indicator.visible { opacity: 1; }
 .scroll-indicator__dot {

@@ -19,7 +19,7 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label="Chat on WhatsApp"
-		class="group relative grid h-14 w-14 scale-0 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/30 transition-all duration-500 hover:scale-110"
+		class="group relative grid h-14 w-14 opacity-0 translate-y-4 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/30 transition-all duration-500 hover:scale-110"
 		style="animation: waIn 0.6s cubic-bezier(0.22,1,0.36,1) 1.2s forwards"
 	>
 		<span class="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-20" aria-hidden="true"></span>
@@ -34,12 +34,21 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 
 <style>
 	@keyframes waIn {
-		from { transform: scale(0); }
-		to { transform: scale(1); }
+		from { opacity: 0; translate: 0 1rem; }
+		to { opacity: 1; translate: 0 0; }
+	}
+	#floating-actions {
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+	#floating-actions.show {
+		opacity: 1;
+		pointer-events: auto;
 	}
 	#to-top.show {
 		opacity: 1;
-		transform: translateY(0);
+		translate: 0 0;
 	}
 </style>
 
@@ -52,8 +61,13 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		}
 	}
 	function onScroll() {
+		const nav = document.getElementById("floating-actions");
+		if (nav) nav.classList.toggle("show", window.scrollY > 600);
 		const top = document.getElementById("to-top");
-		if (top) top.classList.toggle("show", window.scrollY > 600);
+		if (top) {
+			const nearBottom = window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 340;
+			top.classList.toggle("show", window.scrollY > 600 && !nearBottom);
+		}
 		const bar = document.getElementById("scroll-progress");
 		if (bar) {
 			const h = document.documentElement;
