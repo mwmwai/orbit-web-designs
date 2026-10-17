@@ -42,7 +42,8 @@ function dbg(...a) { if (DEBUG) console.log('[dbg]', ...a); }
 
 function rawBody(req) {
   return new Promise((resolve) => {
-    let data = '';
+    const chunks = [];
+    let size = 0;
     let done = false;
     // Regression tripwire: a POST whose body never arrives was the original
     // adapter bug (handlers saw "" -> malformed-ack). Always shout about it.
@@ -50,6 +51,9 @@ function rawBody(req) {
     const finish = (why) => {
       if (done) return;
       done = true;
+      // Concat as Buffers then decode once: `data += c` used to decode each
+      // chunk separately, corrupting multi-byte UTF-8 split across chunks.
+      const data = Buffer.concat(chunks).toString('utf8');
       dbg('rawBody finish via', why, 'len=', data.length);
       if (Number.isFinite(expected) && expected > 0 && Buffer.byteLength(data, 'utf8') < expected) {
         console.warn(`rawBody TRUNCATED ${req.method} ${req.url}: got ${Buffer.byteLength(data, 'utf8')} of ${expected} bytes (${why})`);
@@ -57,7 +61,7 @@ function rawBody(req) {
       resolve(data);
     };
     if (req.readableEnded || req.destroyed) { dbg('rawBody already-ended complete=', req.complete); resolve(''); return; }
-    req.on('data', (c) => { dbg('rawBody data', c.length); if (data.length < 1_000_000) data += c; });
+    req.on('data', (c) => { dbg('rawBody data', c.length); if (size < 1_000_000) { chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)); size += c.length; } });
     req.on('end', () => finish('end'));
     // Client aborts / socket errors mid-upload must not strand the adapter
     // promise (would leak the request and never answer the client).
@@ -177,6 +181,15 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, '127.0.0.1', () => {
   console.log(`orbit-money-local on http://127.0.0.1:${PORT} (UI /, dashboard /dashboard, health /health, api /api/*)`);
   heartbeat(true, 'server-start port=' + PORT);
+});
+
+// Port-busy (EADDRINUSE) and other listen errors: crash fast with a clear
+// heartbeat instead of a raw uncaught stack — the watchdog sees the dead
+// process and owns the retry loop.
+server.on('error', (e) => {
+  console.error('server error:', (e && e.stack) || e);
+  heartbeat(false, 'server-error ' + ((e && e.code) || (e && e.message) || String(e)));
+  process.exit(1);
 });
 
 // Autonomous self-monitor: probe own health every 10 min, heartbeat to health.log.
