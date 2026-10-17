@@ -9,6 +9,7 @@
 	--color-neon: #2f7bff;
 	--color-stone: #8a8fa3;
 	--color-metal: #c9d2e0;
+	--color-slate-500: #7c8ba3;
 	--font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -284,6 +285,14 @@ html[data-astro-transition] body::after {
 .nav-link:hover::after,
 .nav-link.is-active::after {
 	transform: scaleX(1);
+}
+
+a.link-underline,
+main :where(p, li, td) a.text-electric,
+footer :where(p, li, td) a.text-electric {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
 }
 
 .btn-gradient {

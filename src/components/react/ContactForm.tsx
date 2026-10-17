@@ -155,7 +155,7 @@ export default function ContactForm() {
 						href={whatsappLink(buildMessage())}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="rounded-full bg-[#25D366] px-6 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+						className="rounded-full bg-[#25D366] px-6 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110"
 					>
 						Send via WhatsApp
 					</a>
