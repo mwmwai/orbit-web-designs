@@ -381,7 +381,7 @@ const path = Astro.url.pathname;
 		document.addEventListener("keydown", (e) => {
 			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setOpen(true); }
 			if (e.key === "/" && !["INPUT","TEXTAREA"].includes((document.activeElement as HTMLElement)?.tagName)) { e.preventDefault(); setOpen(true); }
-			if (e.key === "Escape") { setOpen(false); (toggle as HTMLElement).focus(); }
+			if (e.key === "Escape" && !panel.classList.contains("hidden")) { setOpen(false); (toggle as HTMLElement).focus(); }
 		});
 		if (!mem.visits || mem.visits <= 1) {
 			setTimeout(() => { if (panel.classList.contains("hidden") && !localStorage.getItem("orbit_ai_prompted")) { setOpen(true); localStorage.setItem("orbit_ai_prompted","1"); } }, 10000);

@@ -78,7 +78,7 @@ body {
 	to { transform: translate(-8vw, -6vh) scale(0.92); }
 }
 @media (prefers-reduced-motion: reduce) {
-	.aurora span { animation: none; }
+	.aurora span { animation: none !important; }
 }
 
 .glow-border {
@@ -302,7 +302,8 @@ footer :where(p, li, td) a.text-electric {
 	transition:
 		background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1),
 		box-shadow 0.4s ease,
-		transform 0.2s ease;
+		transform 0.2s ease,
+		translate 0.2s ease;
 }
 
 .btn-gradient:hover {
@@ -521,7 +522,11 @@ footer :where(p, li, td) a.text-electric {
 }
 
 .magnetic {
-	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+	transition:
+		transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+		translate 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+		background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.4s ease;
 }
 .magnetic:active { transition-duration: 0.1s; }
 
@@ -545,7 +550,10 @@ footer :where(p, li, td) a.text-electric {
 .stagger.is-visible > * { opacity: 1; transform: none; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 
 .hover-lift {
-	transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	transition:
+		transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+		translate 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .hover-lift:hover {
 	transform: translateY(-6px);
@@ -660,6 +668,17 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	/* Universal guard: every CSS + inline animation finishes instantly
+	   (specificity cannot lose, inline styles cannot win) */
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-delay: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0s !important;
+	}
 	.page-reveal,
 	.stagger > *,
 	.hover-lift,

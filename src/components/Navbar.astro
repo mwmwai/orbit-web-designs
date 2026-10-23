@@ -45,19 +45,20 @@ const wa = whatsappLink(DEFAULT_WA_MESSAGE);
 			btn.dataset.bound = "1";
 			const openI = document.getElementById("nav-icon-open");
 			const closeI = document.getElementById("nav-icon-close");
-			btn.addEventListener("click", () => {
-				const closed = menu.classList.toggle("hidden");
-				btn.setAttribute("aria-expanded", String(!closed));
-				if (openI) openI.classList.toggle("hidden", !closed);
-				if (closeI) closeI.classList.toggle("hidden", closed);
+			const setOpen = (open) => {
+				menu.classList.toggle("hidden", !open);
+				btn.setAttribute("aria-expanded", String(open));
+				if (openI) openI.classList.toggle("hidden", open);
+				if (closeI) closeI.classList.toggle("hidden", !open);
+			};
+			btn.addEventListener("click", () => setOpen(menu.classList.contains("hidden")));
+			document.addEventListener("keydown", (e) => {
+				if (e.key !== "Escape" || menu.classList.contains("hidden")) return;
+				setOpen(false);
+				btn.focus();
 			});
 			menu.querySelectorAll("a[href^='/']").forEach((a) => {
-				a.addEventListener("click", () => {
-					menu.classList.add("hidden");
-					btn.setAttribute("aria-expanded", "false");
-					if (openI) openI.classList.remove("hidden");
-					if (closeI) closeI.classList.add("hidden");
-				});
+				a.addEventListener("click", () => setOpen(false));
 			});
 		}
 		if (document.readyState === "loading") {

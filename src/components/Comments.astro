@@ -96,6 +96,11 @@ const { slug } = Astro.props;
 
 		form.addEventListener("submit", async (e) => {
 			e.preventDefault();
+			if (!TURNSTILE_SITE_KEY) {
+				msg.textContent = "Comments are waking up — meanwhile, WhatsApp us your thought instead.";
+				msg.classList.remove("hidden");
+				return;
+			}
 			if (!turnstileToken) {
 				msg.textContent = "Please complete the security check";
 				msg.classList.remove("hidden");

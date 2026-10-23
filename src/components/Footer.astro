@@ -64,12 +64,14 @@ const TS_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefi
 						e.preventDefault();
 						const email = input.value.trim();
 						if (!email) return;
-						if (widget && !token) {
-							msg.classList.remove("hidden");
-							msg.textContent = "One quick human check first — tick the box above, then Join.";
-							boot();
-							return;
-						}
+					if (!token) {
+						msg.classList.remove("hidden");
+						msg.textContent = widget
+							? "One quick human check first — tick the box above, then Join."
+							: "The human check is offline right now — tap the green bubble and we'll add you on WhatsApp.";
+						boot();
+						return;
+					}
 						msg.classList.remove("hidden");
 						msg.textContent = "Joining…";
 						try {
