@@ -136,10 +136,10 @@ export default function ContactForm() {
 					className={`${inputCls} resize-y`}
 				/>
 			</label>
-			<label className="sm:col-span-2">
+			<div className="sm:col-span-2">
 				<div id="cf-turnstile" />
 				{submitError && <p role="alert" className="mt-2 text-sm text-red-400">{submitError}</p>}
-			</label>
+			</div>
 		<button
 			type="submit"
 			disabled={submitting}

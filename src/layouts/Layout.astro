@@ -338,7 +338,6 @@ if (breadcrumbLd) {
 				window.loadOrbitAnalytics = loadAnalytics;
 			})();
 		</script>
-		<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1397340971942619&ev=PageView&noscript=1" /></noscript>
 		{import.meta.env.PUBLIC_TURNSTILE_SITE_KEY && (
 			<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
 		)}
@@ -347,7 +346,7 @@ if (breadcrumbLd) {
 		<a href="#main" class="sr-only z-[110] rounded-lg border border-electric bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 		{effectiveCrumbs && effectiveCrumbs.length > 1 && (
 			<nav class="mx-auto max-w-7xl px-5 py-3" aria-label="Breadcrumb">
-				<ol class="flex flex-wrap items-center gap-2 text-sm" role="list">
+				<ol class="flex flex-wrap items-center gap-2 text-sm" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
 					{effectiveCrumbs.map((b, i) => (
 						<li class="flex items-center gap-2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
 							{i > 0 && <span aria-hidden="true" class="text-slate-500">/</span>}
