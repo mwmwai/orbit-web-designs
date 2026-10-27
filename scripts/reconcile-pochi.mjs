@@ -409,7 +409,12 @@ function buildReport({ statementPath, ledgerPath, st, lg, res }) {
     ],
   ));
   L.push('');
-  L.push(`Statement credits **KES ${kes(stmtTotal)}** · Ledger in **KES ${kes(ledTotal)}** · Gap (statement − ledger) **KES ${kes(stmtTotal - ledTotal)}**`);
+  const gap = round2(stmtTotal - ledTotal);
+  const mismatchDelta = round2(sum(mismatch.map((m) => m.s.amount)) - sum(mismatch.map((m) => m.l.amount)));
+  const explained = round2(unrecKes - ghostKes + mismatchDelta);
+  L.push(`Statement credits **KES ${kes(stmtTotal)}** · Ledger in **KES ${kes(ledTotal)}** · Gap (statement − ledger) **KES ${kes(gap)}**`);
+  L.push('');
+  L.push(`Gap check: UNRECORDED ${kes(unrecKes)} − GHOST ${kes(ghostKes)} + mismatch delta ${kes(mismatchDelta)} = **KES ${kes(explained)}** — ${explained === gap ? 'ties out' : `does NOT tie out (Gap is KES ${kes(gap)})`}`);
   L.push('');
 
   L.push(`## UNRECORDED (${unrec.length}) — money received, not in the ledger (append these rows)`);

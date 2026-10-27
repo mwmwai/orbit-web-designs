@@ -60,7 +60,7 @@ Required: a `date` column and an `amount` column. Recognised (all optional): `sh
 | **GHOST** | booked in the ledger, no statement line | check it is not an out-row/typo; if truly not received, void it with a reason (ledger is append-only: post the opposite type + reason) |
 | **AMOUNT MISMATCH** | same M-Pesa code, different KES | one line to the founder the same day: date, amount, ref, which side is wrong; fix the wrong side |
 
-Matching order: M-Pesa code first (full or ≥4-char suffix — a code match with a different amount lands in AMOUNT MISMATCH, never in MATCHED), then same amount within **±10 minutes** (nearest wins; if either side has no time-of-day, same Nairobi calendar day instead). Everything else falls into UNRECORDED / GHOST. The Gap line = statement credits − ledger in: it should be ~0 once the buckets are cleared.
+Matching order: M-Pesa code first (full or ≥4-char suffix — a code match with a different amount lands in AMOUNT MISMATCH, never in MATCHED), then same amount within **±10 minutes** (nearest wins; if either side has no time-of-day, same Nairobi calendar day instead). Everything else falls into UNRECORDED / GHOST. The Gap line = statement credits − ledger in: it should be ~0 once the buckets are cleared. The **Gap check** line under it recomputes the Gap as UNRECORDED − GHOST + mismatch delta and must read *ties out* — if it does not, the report is inconsistent and the run needs investigating before you touch any rows.
 
 ## KPI definitions (same as deal-log.md — computed, never guessed)
 
