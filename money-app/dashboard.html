@@ -112,7 +112,7 @@ footer{text-align:center;color:var(--sub);font-size:12px;margin:18px 0 8px}
     <div><b>Pesa Admin</b><small>Aggmart &amp; Trade Star Shop · KES ledger</small></div>
   </div>
   <div class="spacer"></div>
-  <button class="hbtn" id="sampleBtn" title="Render clearly-labelled sample rows to verify the UI without a backend">SAMPLE DATA: off</button>
+  <button class="hbtn" id="sampleBtn" aria-pressed="false" title="Render clearly-labelled sample rows to verify the UI without a backend">SAMPLE DATA: off</button>
   <button class="hbtn" id="exportBtn">Export CSV</button>
   <button class="hbtn green" id="refreshBtn">Refresh</button>
 </header>
@@ -582,6 +582,7 @@ function toggleSample(force) {
 function syncSampleButton() {
   $('sampleBtn').textContent = sampleMode ? 'SAMPLE DATA: on' : 'SAMPLE DATA: off';
   $('sampleBtn').classList.toggle('on', sampleMode);
+  $('sampleBtn').setAttribute('aria-pressed', String(sampleMode));
   $('exportBtn').disabled = sampleMode;
   $('exportBtn').title = sampleMode ? 'Export disabled while SAMPLE DATA is on' : 'Download the filtered rows as CSV';
 }
