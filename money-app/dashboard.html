@@ -361,6 +361,7 @@ function renderSortIndicators() {
   for (const th of ths) {
     const on = th.dataset.k === sortKey;
     th.classList.toggle('sorted', on);
+    th.setAttribute('aria-sort', on ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none');
     th.querySelector('.ar').textContent = on ? (sortDir === 'asc' ? '▲' : '▼') : '';
   }
 }
