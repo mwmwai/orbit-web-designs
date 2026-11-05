@@ -14,7 +14,6 @@ const CHANGEFREQ = {
 	'/dashboards': 'monthly',
 	'/faq': 'monthly',
 	'/contact': 'yearly',
-	'/about': 'yearly',
 	'/blog/': 'weekly',
 	'/cases/': 'monthly',
 };
@@ -39,7 +38,7 @@ function getPriority(url) {
 	if (url.includes('/packages') || url.includes('/services') || url.includes('/care')) return 0.9;
 	if (url.includes('/blog/') || url.includes('/cases/')) return 0.8;
 	if (url.includes('/automation') || url.includes('/saas') || url.includes('/dashboards')) return 0.8;
-	if (url.includes('/faq') || url.includes('/contact') || url.includes('/about')) return 0.7;
+	if (url.includes('/faq') || url.includes('/contact')) return 0.7;
 	return 0.6;
 }
 
@@ -59,7 +58,6 @@ const LASTMOD = {
 	'/blog/': '2026-10-14',
 	'/reviews': '2026-10-14',
 	'/': '2026-10-14',
-	'/about': '2026-10-14',
 	'/faq': '2026-10-14',
 	'/packages': '2026-10-14',
 	'/guides': '2026-10-14',
