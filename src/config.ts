@@ -27,6 +27,9 @@ export const MORE_LINKS = [
 	{ href: "/mpesa-fee-calculator", label: "M-Pesa Calculator" },
 	{ href: "/mpesa-ecommerce-kenya", label: "M-Pesa Stores" },
 	{ href: "/seo-services-kenya", label: "SEO Services" },
+	{ href: "/web-design-nairobi", label: "Web Design Nairobi" },
+	{ href: "/saas", label: "Custom SaaS" },
+	{ href: "/start", label: "Get Started" },
 	{ href: "/reviews", label: "Reviews" },
 ];
 
