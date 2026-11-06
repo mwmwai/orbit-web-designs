@@ -8,9 +8,6 @@ Allow: /
 Disallow: /api/
 Disallow: /card/
 Disallow: /business-card/
-Disallow: /_astro/
-Disallow: /fonts/
-Disallow: /images/
 Crawl-delay: 10
 
 # Google
