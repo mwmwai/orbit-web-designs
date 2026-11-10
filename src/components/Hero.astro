@@ -2,184 +2,55 @@
 import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 ---
 
-<section id="top" class="relative overflow-hidden">
-	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
-		<div class="absolute inset-0 opacity-[0.09]" style="background-image: linear-gradient(to right, #23233a 1px, transparent 1px), linear-gradient(to bottom, #23233a 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(70% 60% at 20% 30%, black, transparent 75%)"></div>
-		<div class="absolute -top-40 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-electric/25 blur-[80px] will-change-transform transform-gpu" style="animation: floaty 10s ease-in-out infinite"></div>
-		<div class="absolute top-40 right-0 h-[400px] w-[400px] rounded-full bg-neon/20 blur-[80px] will-change-transform transform-gpu" style="animation: floaty 12s ease-in-out 2s infinite reverse"></div>
-		<div class="film-grain"></div>
-		<div class="vignette"></div>
-		<div class="light-streak"></div>
-		<canvas id="hero-stars" class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
-	</div>
-
-	<div class="hero-orbit pointer-events-none absolute left-0 top-1/2 hidden h-[640px] w-[640px] -translate-y-1/2 opacity-100 md:block" aria-hidden="true" style="left: -12%">
-		<div class="absolute inset-0" style="transform-style: preserve-3d; animation: floaty 10s ease-in-out infinite">
-			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: rotateX(68deg)"></div>
-			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: rotateX(68deg) rotateZ(28deg)"></div>
-			<div class="hero-orbit-ring h-[380px] w-[560px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: rotateX(68deg) rotateZ(-28deg); border-color: rgb(47 123 255 / 0.14)"></div>
-			<div class="hero-orbit-ring h-[300px] w-[460px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: rotateX(68deg) rotateZ(56deg); border-color: rgb(139 92 246 / 0.16)"></div>
-			<div class="hero-orbit-ring h-[440px] w-[620px] -translate-x-1/2 -translate-y-1/2 scale-[0.6] md:scale-100" style="transform: rotateX(68deg) rotateZ(-56deg); border-color: rgb(0 200 255 / 0.07)"></div>
-			<div class="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/25 blur-[50px]"></div>
-			<span class="glow-dot" style="--radius: 280px; --dur: 18s; top: 50%; left: 50%"></span>
-			<span class="glow-dot" style="--radius: 200px; --dur: 26s; top: 50%; left: 50%; animation-delay: -8s"></span>
-			<span class="glow-dot" style="--radius: 230px; --dur: 22s; top: 50%; left: 50%; animation-delay: -14s"></span>
+<section id="top" class="relative overflow-hidden bg-ink py-20 lg:py-28">
+	<div class="relative mx-auto max-w-7xl px-4 md:px-5">
+		<div class="inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300 mb-6">
+			<span class="h-2 w-2 rounded-full bg-electric"></span>
+			Web Design & M-Pesa Integration in Kenya
 		</div>
-	</div>
 
-	<div class="relative mx-auto max-w-7xl px-4 pb-24 pt-24 md:px-5 md:pb-32 md:pt-32 lg:pt-40">
-		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
-			<span class="relative flex h-2 w-2">
-				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-60"></span>
-				<span class="relative inline-flex h-2 w-2 rounded-full bg-electric"></span>
-			</span>
-			Global Standards · M-Pesa Powered
-		</p>
-
-		<h1 class="display-1 max-w-4xl font-extrabold text-white">
-			<span class="word-reveal" style="--i:0">Build</span>
-			<span class="word-reveal" style="--i:0.3">a</span>
-			<span class="word-reveal" style="--i:0.6">High-Performance</span>
-			<span class="word-reveal" style="--i:0.9">Digital</span>
-			<span class="word-reveal text-gradient" style="--i:1.2">Brand</span>
-			<span class="word-reveal" style="--i:1.5">that</span>
-			<span class="word-reveal text-gradient" style="--i:1.8">Converts.</span>
+		<h1 class="max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
+			Websites that actually bring you <span class="text-gradient">customers in Kenya.</span>
 		</h1>
 
-		<p class="hero-anim mt-8 max-w-2xl text-xl leading-relaxed text-slate-400" style="animation-delay:200ms">
-			High-performance websites built to turn visitors into customers — fast, reliable, and M-Pesa ready.
-		</p>
-		<p class="hero-anim mt-3 max-w-2xl text-sm text-slate-500" style="animation-delay:250ms">
-			Orbit Web Designs builds professional business websites with native Kenyan payment integration.
+		<p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+			No fluff, no complicated templates. We build fast, professional business websites with direct M-Pesa checkout — live in days, not months.
 		</p>
 
-		<div class="hero-anim mt-10 flex flex-col sm:flex-row gap-4" style="animation-delay:300ms">
+		<div class="mt-10 flex flex-col sm:flex-row gap-4">
 			<a
-				href={whatsappLink(DEFAULT_WA_MESSAGE)}
+				href={whatsappLink("Hi Orbit! I want a website for my business. Let's talk.")}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-8 py-4 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple w-full sm:w-auto text-center"
+				class="rounded-xl btn-gradient px-8 py-4 font-semibold text-white shadow-xl shadow-electric/20 hover:opacity-95 text-center transition"
 			>
-				Start a project
+				Chat with us on WhatsApp
 			</a>
 			<a
 				href="/packages"
-				class="rounded-full border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-electric/60 hover:bg-white/10 magnetic ripple w-full sm:w-auto text-center"
+				class="rounded-xl border border-edge bg-panel px-8 py-4 font-semibold text-slate-200 transition hover:border-electric/50 text-center"
 			>
-				View pricing
+				See packages & prices
 			</a>
 		</div>
 
-		<dl class="hero-anim mt-16 grid grid-cols-2 gap-6 sm:grid-cols-4" style="animation-delay:420ms">
-			{
-				[
-					["50+", "Websites shipped"],
-					["M-Pesa", "Native Checkout UX"],
-					["14d", "Fastest Launch"],
-					["5.0", "Verified reviews"],
-				].map(([value, label]) => (
-					<div data-tilt class="glow-border edge-glow card-shine hover-lift rounded-xl px-6 py-6 transition duration-300">
-						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
-						<dd class="mt-2 text-sm text-slate-400">{label}</dd>
-					</div>
-				))
-			}
-		</dl>
-
-		<div class="hero-anim mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4" style="animation-delay:500ms">
-			{
-				[["100", "SEO"], ["100", "Best Practices"], ["95+", "PageSpeed"], ["5d", "Fastest Launch"]].map(([v, l]) => (
-					<div class="border border-edge/70 bg-charcoal/60 px-3 py-2 text-center">
-						<p class="text-gradient text-lg font-extrabold sm:text-xl">{v}</p>
-						<p class="font-mono text-[9px] uppercase tracking-widest text-slate-400">{l}</p>
-					</div>
-				))
-			}
+		<div class="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-edge pt-12">
+			<div>
+				<p class="text-3xl font-extrabold text-white">50+</p>
+				<p class="mt-1 text-sm text-slate-400">Websites launched</p>
+			</div>
+			<div>
+				<p class="text-3xl font-extrabold text-white">M-Pesa</p>
+				<p class="mt-1 text-sm text-slate-400">Direct till/paybill setup</p>
+			</div>
+			<div>
+				<p class="text-3xl font-extrabold text-white">5-7 Days</p>
+				<p class="mt-1 text-sm text-slate-400">Average turnaround</p>
+			</div>
+			<div>
+				<p class="text-3xl font-extrabold text-white">100%</p>
+				<p class="mt-1 text-sm text-slate-400">You own everything</p>
+			</div>
 		</div>
 	</div>
 </section>
-
-<div class="marquee border-y border-white/5 bg-charcoal/40" aria-hidden="true">
-	<div class="marquee-track font-mono text-xs uppercase tracking-[0.25em] text-slate-400">
-		<span>50+ sites shipped</span><span class="text-electric">·</span><span>M-Pesa native</span><span class="text-electric">·</span><span>Live in days, not months</span><span class="text-electric">·</span><span>You own everything</span><span class="text-electric">·</span>
-		<span>50+ sites shipped</span><span class="text-electric">·</span><span>M-Pesa native</span><span class="text-electric">·</span><span>Live in days, not months</span><span class="text-electric">·</span><span>You own everything</span><span class="text-electric">·</span>
-		<span aria-hidden="true">50+ sites shipped</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">M-Pesa native</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">Live in days, not months</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">You own everything</span><span class="text-electric" aria-hidden="true">·</span>
-		<span aria-hidden="true">50+ sites shipped</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">M-Pesa native</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">Live in days, not months</span><span class="text-electric" aria-hidden="true">·</span><span aria-hidden="true">You own everything</span><span class="text-electric" aria-hidden="true">·</span>
-	</div>
-</div>
-
-<script>
-	(() => {
-		// Lightweight 2D starfield: ~110 drifting, twinkling dots. No libraries,
-		// DPR-capped, pauses offscreen and in background tabs.
-		function initStars() {
-			const canvas = document.getElementById("hero-stars");
-			if (!canvas || canvas.dataset.bound) return;
-			canvas.dataset.bound = "1";
-			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-			const ctx = canvas.getContext("2d");
-			if (!ctx) return;
-			const isMobile = window.matchMedia("(max-width: 768px)").matches;
-			const N = isMobile ? 45 : 110;
-			const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
-			const COLORS = ["0,200,255", "189,243,255", "139,92,246", "255,255,255"];
-			let w = 0, h = 0, stars = [], running = false, t = Math.random() * 10;
-			function resize() {
-				const r = canvas.getBoundingClientRect();
-				w = r.width; h = r.height;
-				canvas.width = Math.max(1, Math.floor(w * dpr));
-				canvas.height = Math.max(1, Math.floor(h * dpr));
-				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-			}
-			function seed() {
-				stars = Array.from({ length: N }, () => ({
-					x: Math.random() * w,
-					y: Math.random() * h,
-					r: 0.4 + Math.random() * 1.4,
-					c: COLORS[(Math.random() * COLORS.length) | 0],
-					p: Math.random() * 6.2832,
-					s: 0.6 + Math.random() * 1.8,
-					vx: (Math.random() - 0.5) * 0.12,
-					vy: (Math.random() - 0.5) * 0.12,
-				}));
-			}
-			function frame() {
-				if (!running) return;
-				t += 0.016;
-				ctx.clearRect(0, 0, w, h);
-				for (const st of stars) {
-					st.x = (st.x + st.vx + w) % w;
-					st.y = (st.y + st.vy + h) % h;
-					const a = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(t * st.s + st.p));
-					ctx.beginPath();
-					ctx.arc(st.x, st.y, st.r, 0, 6.2832);
-					ctx.fillStyle = "rgba(" + st.c + "," + a.toFixed(3) + ")";
-					ctx.fill();
-				}
-				requestAnimationFrame(frame);
-			}
-			function play() {
-				if (!running && !document.hidden) {
-					running = true;
-					requestAnimationFrame(frame);
-				}
-			}
-			function pause() { running = false; }
-			resize(); seed();
-			new IntersectionObserver((es) => {
-				if (es[0].isIntersecting) play(); else pause();
-			}).observe(canvas);
-			document.addEventListener("visibilitychange", () => {
-				if (document.hidden) pause();
-			});
-			window.addEventListener("resize", () => { resize(); seed(); }, { passive: true });
-			play();
-		}
-		if (document.readyState === "loading") {
-			document.addEventListener("DOMContentLoaded", initStars, { once: true });
-		} else {
-			initStars();
-		}
-		document.addEventListener("astro:page-load", initStars);
-	})();
-</script>
