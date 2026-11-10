@@ -226,6 +226,55 @@ export default async function handler(request: Request): Promise<Response> {
       }
     }
 
+    // Fire-and-forget new lead notification to the agency team
+    if (table === 'leads') {
+      const resendKey = process.env.RESEND_API_KEY;
+      const from = process.env.FROM_EMAIL || 'Orbit Web Designs <hello@orbitwebdesigns.co.ke>';
+      const notifyEmail = process.env.NOTIFY_EMAIL || 'hello@orbitwebdesigns.co.ke';
+      if (resendKey) {
+        fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from,
+            to: notifyEmail,
+            subject: `🔥 New Lead Alert: ${row.name}`,
+            html: `
+              <h2>You have a new lead from the contact form!</h2>
+              <p>Here are the client details:</p>
+              <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
+                <tr style="background-color: #f2f2f2;">
+                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Name</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">${row.name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Email</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">${row.email || 'N/A'}</td>
+                </tr>
+                <tr style="background-color: #f2f2f2;">
+                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Phone</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">${row.phone || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Project Details</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">${row.details || 'N/A'}</td>
+                </tr>
+                <tr style="background-color: #f2f2f2;">
+                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Source</td>
+                  <td style="padding: 8px; border: 1px solid #ddd;">${row.source}</td>
+                </tr>
+              </table>
+              <br/>
+              <p>— Orbit Web Designs Automated System</p>
+            `,
+          }),
+        }).catch((e) => console.error('Lead notification failed:', e));
+      }
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
