@@ -27,60 +27,60 @@ import { DEFAULT_WA_MESSAGE, whatsappLink } from "../config";
 		</div>
 	</div>
 
-	<div class="relative mx-auto max-w-7xl px-4 pb-16 pt-16 md:px-5 md:pb-24 md:pt-24 lg:pt-36">
+	<div class="relative mx-auto max-w-7xl px-4 pb-24 pt-24 md:px-5 md:pb-32 md:pt-32 lg:pt-40">
 		<p class="hero-anim mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-4 py-1.5 text-xs font-medium text-slate-300" style="animation-delay:0ms">
 			<span class="relative flex h-2 w-2">
 				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-60"></span>
 				<span class="relative inline-flex h-2 w-2 rounded-full bg-electric"></span>
 			</span>
-			Web design studio · Worldwide
+			Global Standards · M-Pesa Powered
 		</p>
 
-		<h1 class="display-1 max-w-3xl font-extrabold text-white">
-			<span class="word-reveal" style="--i:0">We</span>
-			<span class="word-reveal" style="--i:0.3">Build</span>
+		<h1 class="display-1 max-w-4xl font-extrabold text-white">
+			<span class="word-reveal" style="--i:0">Build</span>
+			<span class="word-reveal" style="--i:0.3">a</span>
 			<span class="word-reveal" style="--i:0.6">High-Performance</span>
-			<span class="word-reveal" style="--i:0.9">Websites</span>
-			<span class="word-reveal text-gradient" style="--i:1.2">&amp;&nbsp;Drive</span>
-			<span class="word-reveal text-gradient" style="--i:1.5">Real</span>
-			<span class="word-reveal text-gradient" style="--i:1.8">Growth.</span>
+			<span class="word-reveal" style="--i:0.9">Digital</span>
+			<span class="word-reveal text-gradient" style="--i:1.2">Brand</span>
+			<span class="word-reveal" style="--i:1.5">that</span>
+			<span class="word-reveal text-gradient" style="--i:1.8">Converts.</span>
 		</h1>
 
-		<p class="hero-anim mt-6 max-w-2xl text-lg leading-relaxed text-slate-400" style="animation-delay:200ms">
-			High-performance websites built to convert visitors into customers — fast, reliable, ready to sell.
+		<p class="hero-anim mt-8 max-w-2xl text-xl leading-relaxed text-slate-400" style="animation-delay:200ms">
+			High-performance websites built to turn visitors into customers — fast, reliable, and M-Pesa ready.
 		</p>
 		<p class="hero-anim mt-3 max-w-2xl text-sm text-slate-500" style="animation-delay:250ms">
-			Orbit Web Designs & Marketing builds fast, mobile-first business websites — live in days.
+			Orbit Web Designs builds professional business websites with native Kenyan payment integration.
 		</p>
 
-		<div class="hero-anim mt-8 flex flex-col sm:flex-row gap-4" style="animation-delay:300ms">
+		<div class="hero-anim mt-10 flex flex-col sm:flex-row gap-4" style="animation-delay:300ms">
 			<a
 				href={whatsappLink(DEFAULT_WA_MESSAGE)}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="rounded-full btn-gradient px-6 py-3.5 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple w-full sm:w-auto text-center"
+				class="rounded-full btn-gradient px-8 py-4 font-semibold text-white shadow-xl shadow-electric/30 hover:-translate-y-0.5 hover:shadow-electric/50 magnetic ripple w-full sm:w-auto text-center"
 			>
 				Start a project
 			</a>
 			<a
 				href="/packages"
-				class="rounded-full border border-edge bg-panel px-6 py-3.5 font-semibold text-slate-200 transition hover:border-electric/60 hover:text-white magnetic ripple w-full sm:w-auto text-center"
+				class="rounded-full border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-electric/60 hover:bg-white/10 magnetic ripple w-full sm:w-auto text-center"
 			>
 				View pricing
 			</a>
 		</div>
 
-		<dl class="hero-anim mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4" style="animation-delay:420ms">
+		<dl class="hero-anim mt-16 grid grid-cols-2 gap-6 sm:grid-cols-4" style="animation-delay:420ms">
 			{
 				[
 					["50+", "Websites shipped"],
-					["25+", "M-Pesa stores"],
-					["10+", "Industries"],
+					["M-Pesa", "Native Checkout UX"],
+					["14d", "Fastest Launch"],
 					["5.0", "Verified reviews"],
 				].map(([value, label]) => (
-					<div data-tilt class="glow-border edge-glow hover-lift rounded-xl px-4 py-4 transition duration-300">
-						<dt class="text-gradient counter-num text-xl font-extrabold sm:text-2xl" data-counter>{value}</dt>
-						<dd class="mt-1 text-xs sm:text-sm text-slate-400">{label}</dd>
+					<div data-tilt class="glow-border edge-glow card-shine hover-lift rounded-xl px-6 py-6 transition duration-300">
+						<dt class="text-gradient counter-num text-2xl font-extrabold sm:text-3xl" data-counter>{value}</dt>
+						<dd class="mt-2 text-sm text-slate-400">{label}</dd>
 					</div>
 				))
 			}
